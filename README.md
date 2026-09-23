@@ -11,10 +11,10 @@ privacy policy at a public URL, and because a paid app needs somewhere to explai
 | `support.html` | Contact, backups, moving phones, subscription questions |
 | `style.css` | Shared styling |
 
-## Before publishing
+## Contact address
 
-Replace `YOUR_EMAIL_HERE` (it appears in privacy, terms and support) with the address you want
-people to write to. Play also asks for a contact email in the Console; it can be the same one.
+The pages point at **support.overload@gmail.com**. Use the same address for the contact email in
+the Play Console listing, so people always land in one inbox.
 
 ## Publishing on GitHub Pages
 
