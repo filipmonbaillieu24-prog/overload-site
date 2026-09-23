@@ -251,3 +251,42 @@ footer a:hover { color: var(--ink); }
   .shots { grid-template-columns: 1fr; gap: 34px; }
   section { padding: 56px 0; }
 }
+
+/* ---- testers wanted ---------------------------------------------------- */
+
+.banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px 14px;
+  padding: 11px 20px;
+  background: linear-gradient(90deg, rgba(214, 255, 62, .16), rgba(214, 255, 62, .08));
+  border-bottom: 1px solid rgba(214, 255, 62, .26);
+  color: var(--ink2);
+  text-decoration: none;
+  font-size: 14px;
+  text-align: center;
+}
+
+.banner:hover { background: rgba(214, 255, 62, .2); }
+
+.banner-tag {
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: 7px;
+}
+
+.banner-go { color: var(--accent); font-weight: 600; white-space: nowrap; }
+
+ol { padding-left: 20px; }
+ol li { margin: 10px 0; }
+
+@media (max-width: 620px) {
+  .banner { font-size: 13px; padding: 10px 16px; }
+}
