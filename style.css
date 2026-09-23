@@ -136,6 +136,9 @@ section:first-of-type { border-top: 0; }
 .phone {
   width: 100%;
   max-width: 286px;
+  height: auto;
+  aspect-ratio: 572 / 1244;
+  object-fit: contain;
   border-radius: 30px;
   border: 1px solid var(--hair);
   background: var(--card-soft);
