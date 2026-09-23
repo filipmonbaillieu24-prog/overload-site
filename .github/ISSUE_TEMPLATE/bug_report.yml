@@ -1,0 +1,38 @@
+name: Bug report
+description: Something in Overload behaves wrongly
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time. Overload is in early access and reports like this are how it
+        gets better. Please don't paste anything you'd rather keep private — issues are public.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what happened, and what you expected instead.
+      placeholder: |
+        1. Started Upper A
+        2. Logged the first set at 8 reps, 2 RIR
+        3. The next set still showed the old weight
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: App version
+      description: You → the bottom of the screen, or the Play Store listing.
+      placeholder: "1.0"
+  - type: input
+    id: device
+    attributes:
+      label: Phone and Android version
+      placeholder: "Pixel 7, Android 15"
+  - type: textarea
+    id: extra
+    attributes:
+      label: Screenshot or export
+      description: >
+        A screenshot usually explains it. If the problem involves your training data,
+        You → Data → Export file and attach the JSON — but only if you're happy for it to be public.

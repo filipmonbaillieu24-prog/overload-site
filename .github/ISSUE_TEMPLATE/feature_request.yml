@@ -1,0 +1,21 @@
+name: Idea or request
+description: Something Overload should do
+labels: ["idea"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Ideas are welcome, especially ones that come from a real session that went badly.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: The situation in the gym, not the feature. That usually leads somewhere better.
+      placeholder: "My gym only has fixed dumbbells, so the jump from 22.5 to 25 is too big on curls."
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What did you have in mind?
+      description: Optional. A rough shape is fine.

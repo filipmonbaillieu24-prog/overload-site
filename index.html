@@ -3,58 +3,262 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Overload · a training log that stays on your phone</title>
-<meta name="description" content="Overload is a weight-training log with a progression engine that tells you what to lift next. No accounts, no ads, no servers.">
+<title>Overload — the training log that tells you what to lift next</title>
+<meta name="description" content="Overload logs your sets and proposes the next weight from your reps and reps in reserve, with its reasoning attached. No accounts, no ads, everything stays on your phone.">
+<meta property="og:title" content="Overload — the training log that tells you what to lift next">
+<meta property="og:description" content="A progression engine in your pocket. No accounts, no ads, your data stays on your phone.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/today.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108 108'><rect width='108' height='108' rx='24' fill='%230b0c0b'/><circle cx='54' cy='54' r='18' fill='none' stroke='%23d6ff3e' stroke-width='7.2'/><rect y='49' width='108' height='10' fill='%230b0c0b'/><rect y='52.2' width='108' height='3.6' fill='%23d6ff3e'/></svg>">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <a class="mark" href="./">Overload</a>
-  <nav>
-    <a href="./" aria-current="page">Home</a>
-    <a href="privacy.html">Privacy</a>
-    <a href="terms.html">Terms</a>
-    <a href="support.html">Support</a>
-  </nav>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="./">
+      <svg width="26" height="26" viewBox="0 0 108 108" aria-hidden="true">
+        <rect width="108" height="108" rx="24" fill="#161917"/>
+        <circle cx="54" cy="54" r="18" fill="none" stroke="#d6ff3e" stroke-width="7.2"/>
+        <rect y="49" width="108" height="10" fill="#161917"/>
+        <rect y="52.2" width="108" height="3.6" fill="#d6ff3e"/>
+      </svg>
+      Overload
+    </a>
+    <nav>
+      <a href="#what">Features</a>
+      <a href="#engine">The engine</a>
+      <a href="#price">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="support.html">Support</a>
+    </nav>
+  </div>
 </header>
 
 <main>
-  <h1>A training log that tells you what to lift next</h1>
-  <p class="sub">Overload watches your reps and your reps in reserve, and proposes the next weight
-  with its reasoning attached. It runs on your phone, with no account and no server.</p>
 
-  <div class="card">
-    <h2>Early access</h2>
-    <p>Overload is in early access. It is a real training app doing real work — the progression
-    engine, the logging and the stats are what I use myself — but it is young, it will change, and
-    you may meet a rough edge. <a href="support.html">Tell me</a> and it gets fixed.</p>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="kicker">Early access · Android</p>
+      <h1>The training log that tells you what to lift next.</h1>
+      <p class="lead">Most apps remember what you did. Overload reads it — your reps, your reps in
+      reserve, your last four sessions — and proposes the next weight, with the reasoning written
+      underneath. You still decide. You just stop guessing.</p>
+      <div class="btns">
+        <a class="btn btn-primary" href="#price">What it costs</a>
+        <a class="btn btn-ghost" href="#what">See what it does</a>
+      </div>
+      <p class="note">No account. No ads. Your data never leaves your phone.</p>
+    </div>
+    <div class="hero-shot">
+      <img class="phone" src="images/today.png" alt="The Today screen: last week's debrief, the week strip, and the next workout with its lifts and targets." loading="eager" width="804" height="1748">
+    </div>
   </div>
+</section>
 
-  <h2>What it does</h2>
-  <ul>
-    <li>Proposes each lift's weight from your logged reps and RIR, and says why.</li>
-    <li>Templates, programs and mesocycle blocks, with the week following your training rather than the calendar.</li>
-    <li>A rest timer that reacts to how the set went, on the lock screen and in a notification.</li>
-    <li>Charts, records and a weekly breakdown of hard sets per muscle.</li>
-    <li>Guides for 1,577 exercises, bundled in the app — no network needed.</li>
-    <li>Export, import and automatic backups to a folder you choose.</li>
-  </ul>
+<section id="what">
+  <div class="wrap">
+    <p class="kicker">What it does</p>
+    <h2>Everything a session needs, and nothing it doesn't.</h2>
+    <p class="lead narrow">Built for the gym floor: big numbers, one thumb, and no menu-diving
+    between sets.</p>
 
-  <h2>What it costs</h2>
-  <p>Free for the first month, then €1 a month. Cancel any time in Google Play. Without a
-  subscription Overload keeps working: you can train, log every set and use the progression engine,
-  with up to 3 templates and 1 program, and without the charts and notes. Nothing you make is ever
-  deleted.</p>
-  <p>Every subscription goes back into building the app — new features, fixes, no ads, no accounts.</p>
+    <div class="shots">
+      <div class="shot">
+        <img class="phone" src="images/live.png" alt="The live workout screen with weight and reps in large numerals and a reps-in-reserve selector." loading="lazy" width="804" height="1748">
+        <h3>A workout screen you can read mid-set</h3>
+        <p>Weight and reps in huge type, the set rail across the top, and one button to log. Rest starts itself.</p>
+      </div>
+      <div class="shot">
+        <img class="phone" src="images/lift.png" alt="A lift page showing how to do the exercise, an estimated 1RM chart and rep records." loading="lazy" width="804" height="1748">
+        <h3>Every lift, explained and charted</h3>
+        <p>Estimated 1RM over your last sessions, rep records, percentages — and step-by-step form notes for 1,577 exercises, bundled in the app.</p>
+      </div>
+      <div class="shot">
+        <img class="phone" src="images/stats.png" alt="The stats screen with a weekly debrief, tonnage chart and hard sets per muscle." loading="lazy" width="804" height="1748">
+        <h3>A week you can actually read</h3>
+        <p>Hard sets per muscle against a target, weekly tonnage, and a plain-English debrief that names the one thing worth fixing.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <h2>Your data</h2>
-  <p>Everything stays in one file on your phone. There is no account to make and no server to send
-  it to. See the <a href="privacy.html">privacy policy</a>.</p>
+<section id="engine">
+  <div class="wrap split">
+    <div class="split-copy">
+      <p class="kicker">The engine</p>
+      <h2>It watches effort, not just numbers.</h2>
+      <p>After each set you say how many reps you had left. Overload uses that the way a coach
+      would: clear the rep ceiling or leave reps in the tank and the weight goes up; grind through
+      two sessions under target and it proposes a step back before you stall.</p>
+      <p class="quote">"2 RIR average against a target of 0. Two steps, capped there."</p>
+      <p>Every proposal shows its reason, so you always know why the number changed — and you can
+      overrule it in one tap.</p>
+      <ul>
+        <li><strong>Mesocycle blocks</strong> that get harder week by week, then deload — and the week only turns once you've done every workout in it.</li>
+        <li><strong>First time on a lift?</strong> It finds your working weight in a couple of test sets instead of making you guess.</li>
+        <li><strong>Warm-ups</strong> that ramp to the day's weight, and shrink when the muscle is already warm.</li>
+        <li><strong>Supersets, drop sets, rest-pause, AMRAP, top set plus back-offs</strong> — all counted correctly.</li>
+      </ul>
+    </div>
+    <div>
+      <img class="phone" src="images/summary.png" alt="The post-workout summary with highlights, volume by muscle and the next session's proposed weights." loading="lazy" width="804" height="1748" style="margin: 0 auto;">
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split flip">
+    <div class="split-copy">
+      <p class="kicker">Plans</p>
+      <h2>Templates and programs that follow your week.</h2>
+      <p>Build a template from your lifts with sets, rep range and target RIR. Group templates into
+      a program and Overload pins the next one on Today, tracks the rotation, and tells you what the
+      week still owes.</p>
+      <ul>
+        <li>Rest timers per lift, adaptive to how the set went.</li>
+        <li>Blocks on a whole program, not just one workout.</li>
+        <li>An empty workout when you'd rather improvise.</li>
+        <li>Swap a lift when a machine is taken; your history follows.</li>
+      </ul>
+    </div>
+    <div>
+      <img class="phone" src="images/plans.png" alt="The plans screen showing an active program with its week strip and the list of templates." loading="lazy" width="804" height="1748" style="margin: 0 auto;">
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="kicker">Your data</p>
+    <h2>It stays on your phone. All of it.</h2>
+    <div class="cards">
+      <div class="card">
+        <p class="mark">No account</p>
+        <h3>Nothing to sign up for</h3>
+        <p>Install it and start training. There is no login, no profile and no server holding your training history.</p>
+      </div>
+      <div class="card">
+        <p class="mark">No tracking</p>
+        <h3>No analytics, no ads</h3>
+        <p>The app contains no advertising or analytics code. Nothing about how you train is sent anywhere.</p>
+      </div>
+      <div class="card">
+        <p class="mark">Yours to take</p>
+        <h3>Export whenever</h3>
+        <p>One tap exports everything as JSON or CSV, and automatic backups can write to a folder you choose.</p>
+      </div>
+    </div>
+    <p class="note">Read the <a href="privacy.html">privacy policy</a> — it is short, and it says the same thing.</p>
+  </div>
+</section>
+
+<section id="price">
+  <div class="wrap narrow">
+    <p class="kicker">Pricing</p>
+    <h2>Free for a month, then €1.</h2>
+    <p class="lead">One euro a month, cancel any time in Google Play. Without a subscription
+    Overload keeps working — it just gets smaller.</p>
+
+    <table>
+      <thead>
+        <tr><th>&nbsp;</th><th>Free plan</th><th>Overload</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Training, logging and the progression engine</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><td>Exercise guides, rest timers, export and backups</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><td>Templates</td><td class="no">3</td><td class="yes">Unlimited</td></tr>
+        <tr><td>Programs</td><td class="no">1</td><td class="yes">Unlimited</td></tr>
+        <tr><td>Charts, records and weekly stats</td><td class="no">—</td><td class="yes">Yes</td></tr>
+        <tr><td>Notes on lifts and templates</td><td class="no">—</td><td class="yes">Yes</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card highlight" style="margin-top: 30px;">
+      <h3>Nothing you make is ever deleted</h3>
+      <p>If a subscription ends, every template, program and session stays in the app. The three
+      templates you trained most recently and your most recent program stay trainable; the rest wait,
+      greyed out, until you subscribe again.</p>
+    </div>
+
+    <p class="note">What you pay goes straight back into building the app: new features, fixes, and
+    keeping it free of ads and accounts.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap narrow">
+    <p class="kicker">Early access</p>
+    <h2>Being built in the open.</h2>
+    <p>Overload is in early access. It is a real training app doing real work — the engine, the
+    logging and the stats are what I use myself — but it is young, it will change, and you may meet
+    a rough edge.</p>
+    <p>If something breaks or a number looks wrong, tell me. Bug reports and ideas go to
+    <a href="https://github.com/filipmonbaillieu24-prog/overload-site/issues">GitHub issues</a>, or
+    by mail to <a href="mailto:support.overload@gmail.com">support.overload@gmail.com</a> if you'd
+    rather not have a GitHub account.</p>
+    <div class="btns">
+      <a class="btn btn-primary" href="https://github.com/filipmonbaillieu24-prog/overload-site/issues/new/choose">Report a bug</a>
+      <a class="btn btn-ghost" href="support.html">Support &amp; backups</a>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap narrow">
+    <p class="kicker">FAQ</p>
+    <h2>Questions worth answering.</h2>
+    <div class="faq">
+      <details>
+        <summary>Does it work offline?</summary>
+        <p>Entirely. The only thing that needs a connection is checking your subscription with
+        Google Play, and the last answer is remembered — so training in a basement gym is fine.</p>
+      </details>
+      <details>
+        <summary>Do I have to log reps in reserve?</summary>
+        <p>It is one tap per set and it is what makes the proposals good. If you'd rather not, the
+        double-progression and linear rules work from reps alone.</p>
+      </details>
+      <details>
+        <summary>Can I bring my history from another app?</summary>
+        <p>Yes — Strong and Hevy CSV exports import, and Overload matches them to your lifts. You can
+        also import a previous Overload export.</p>
+      </details>
+      <details>
+        <summary>What happens to my data if I stop paying?</summary>
+        <p>Nothing is deleted or hidden. You keep training on the free plan, and everything is still
+        there — and still exportable — if you come back.</p>
+      </details>
+      <details>
+        <summary>iPhone?</summary>
+        <p>Not yet. Overload is Android only.</p>
+      </details>
+      <details>
+        <summary>Where do the exercise guides come from?</summary>
+        <p>Two open datasets — the Free Exercise DB (public domain) and exercises-dataset (MIT) —
+        bundled as text at build time, with the sources credited in the app. No images are shipped
+        and no network requests are made for them.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <footer>
-  Overload · early access · your data stays on your phone ·
-  <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="support.html">Support</a>
+  <div class="wrap">
+    <div>Overload · early access · your data stays on your phone</div>
+    <nav>
+      <a href="./">Home</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="support.html">Support</a>
+      <a href="https://github.com/filipmonbaillieu24-prog/overload-site/issues">Issues</a>
+      <a href="mailto:support.overload@gmail.com">support.overload@gmail.com</a>
+    </nav>
+  </div>
 </footer>
+
 </body>
 </html>

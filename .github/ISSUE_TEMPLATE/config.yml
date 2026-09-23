@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Email instead
+    url: mailto:support.overload@gmail.com
+    about: Prefer not to use GitHub, or have something private to send? Write to me directly.
+  - name: Privacy, terms and support pages
+    url: https://filipmonbaillieu24-prog.github.io/overload-site/support.html
+    about: Backups, moving phones, subscriptions and the rest.
