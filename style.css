@@ -131,20 +131,42 @@ section:first-of-type { border-top: 0; }
 
 .note { color: var(--muted); font-size: 13px; margin-top: 14px; }
 
-/* ---- phone frames ---------------------------------------------------- */
+/* ---- phone frames ----------------------------------------------------- */
 
-.phone {
-  width: 100%;
-  max-width: 286px;
-  height: auto;
-  aspect-ratio: 572 / 1244;
-  object-fit: contain;
+/* A screenshot sits in a fixed-height window so a row of them lines up, and
+   fades out at the bottom rather than being cut off. */
+.frame {
+  position: relative;
+  width: 286px;
+  max-width: 100%;
+  margin: 0 auto;
   border-radius: 30px;
   border: 1px solid var(--hair);
   background: var(--card-soft);
   box-shadow: 0 30px 70px -40px rgba(0, 0, 0, .95);
-  display: block;
+  overflow: hidden;
 }
+
+.frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.frame::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 96px;
+  background: linear-gradient(to bottom, rgba(11, 12, 11, 0), var(--page));
+  pointer-events: none;
+}
+
+.frame-hero { height: 430px; }
+.frame-tile { height: 380px; }
+.frame-side { height: 420px; }
 
 .shots {
   display: grid;
@@ -154,7 +176,7 @@ section:first-of-type { border-top: 0; }
 }
 
 .shot { text-align: center; }
-.shot .phone { margin: 0 auto 14px; }
+.shot .frame { margin-bottom: 16px; }
 .shot h3 { font-size: 15px; margin-bottom: 4px; }
 .shot p { font-size: 13.5px; color: var(--ink4); margin: 0; }
 
