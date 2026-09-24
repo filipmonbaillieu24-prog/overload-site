@@ -52,6 +52,13 @@
     <ul class="issues" data-empty="Nothing in progress this minute — the lists below say what is next."></ul>
   </section>
 
+  <section class="road" id="road-planned">
+    <h2>Planned</h2>
+    <p class="note">Decided on, not started. Each one has a comment saying what it is waiting for —
+    usually that something else matters more this month.</p>
+    <ul class="issues" data-empty="Nothing queued up yet."></ul>
+  </section>
+
   <section class="road" id="road-bugs">
     <h2>Known problems</h2>
     <p class="note">Confirmed means I have reproduced it. The rest are waiting on a reply from
@@ -79,6 +86,9 @@
       you get an email, and answering it is usually what makes the fix possible.</li>
     <li><strong>Once reproduced</strong> it is marked confirmed and given a severity: does it stop you
       training, is it annoying, or is it cosmetic. That is the order things get fixed in.</li>
+    <li><strong>If it is agreed but not soon</strong> it goes under Planned, with a comment saying
+      what it is waiting for. That is a real answer, not a polite no — a polite no gets said as one,
+      on the issue.</li>
     <li><strong>When it ships</strong> the issue closes, it appears above, and the change is in the
       next Play update.</li>
   </ol>
@@ -148,6 +158,9 @@
     return has(issue, 'in-progress') || (issue.assignees || []).length > 0;
   }
 
+  // Planned is a promise, not activity: it must not also show up as a bug or a request.
+  function spoken(issue) { return busy(issue) || has(issue, 'planned'); }
+
   function row(issue, tail) {
     var li = el('li', 'issue');
     var a = el('a', 'issue-title', issue.title);
@@ -156,6 +169,7 @@
     li.appendChild(a);
     var meta = el('div', 'issue-meta');
     if (busy(issue)) meta.appendChild(el('span', 'chip', 'in progress'));
+    else if (has(issue, 'planned')) meta.appendChild(el('span', 'chip', 'planned'));
     else if (has(issue, 'confirmed')) meta.appendChild(el('span', 'chip', 'confirmed'));
     meta.appendChild(el('span', null, tail));
     li.appendChild(meta);
@@ -178,14 +192,20 @@
       var open = issues.filter(function (i) { return i.state === 'open'; });
 
       var building = open.filter(busy);
-      var bugs = open.filter(function (i) { return has(i, 'bug') && !busy(i); })
+      var planned = open.filter(function (i) { return has(i, 'planned') && !busy(i); })
+        .sort(function (a, b) { return votes(b) - votes(a); });
+      var bugs = open.filter(function (i) { return has(i, 'bug') && !spoken(i); })
         .sort(function (a, b) { return (has(b, 'confirmed') ? 1 : 0) - (has(a, 'confirmed') ? 1 : 0); });
-      var ideas = open.filter(function (i) { return has(i, 'idea') && !busy(i); })
+      var ideas = open.filter(function (i) { return has(i, 'idea') && !spoken(i); })
         .sort(function (a, b) { return votes(b) - votes(a); });
       var shipped = issues.filter(function (i) { return i.state === 'closed' && !has(i, 'declined'); })
         .sort(function (a, b) { return new Date(b.closed_at) - new Date(a.closed_at); });
 
       fill('road-building', building, function (i) { return 'since ' + ago(i.updated_at); });
+      fill('road-planned', planned, function (i) {
+        var v = votes(i);
+        return v ? v + (v === 1 ? ' vote' : ' votes') : 'agreed ' + ago(i.updated_at);
+      });
       fill('road-bugs', bugs, function (i) { return 'reported ' + ago(i.created_at); });
       fill('road-ideas', ideas, function (i) {
         var v = votes(i);
