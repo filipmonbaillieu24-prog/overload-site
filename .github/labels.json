@@ -1,0 +1,10 @@
+[
+  {"name": "bug",          "color": "d73a4a", "description": "Something behaves wrongly"},
+  {"name": "idea",         "color": "a2eeef", "description": "A request or a suggestion"},
+  {"name": "needs-info",   "color": "d4c5f9", "description": "Waiting on the reporter"},
+  {"name": "confirmed",    "color": "e99695", "description": "Reproduced — it is real"},
+  {"name": "in-progress",  "color": "fbca04", "description": "Being worked on now"},
+  {"name": "shipped",      "color": "0e8a16", "description": "Fixed or built, in a released version"},
+  {"name": "declined",     "color": "cfd3d7", "description": "Not going to happen, with a reason"},
+  {"name": "early-access", "color": "d6ff3e", "description": "Only matters while Overload is in early access"}
+]

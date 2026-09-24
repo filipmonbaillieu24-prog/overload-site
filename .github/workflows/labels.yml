@@ -1,0 +1,35 @@
+# Keeps the repository's labels equal to .github/labels.json.
+# Run it from the Actions tab, or let it run when the file changes.
+name: Sync labels
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/labels.json']
+
+permissions:
+  issues: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create or update every label
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          jq -c '.[]' .github/labels.json | while read -r row; do
+            name=$(jq -r '.name' <<<"$row")
+            color=$(jq -r '.color' <<<"$row")
+            desc=$(jq -r '.description' <<<"$row")
+            if gh label list --repo "$REPO" --limit 200 --json name --jq '.[].name' | grep -qx "$name"; then
+              gh label edit "$name" --repo "$REPO" --color "$color" --description "$desc"
+              echo "updated $name"
+            else
+              gh label create "$name" --repo "$REPO" --color "$color" --description "$desc"
+              echo "created $name"
+            fi
+          done
