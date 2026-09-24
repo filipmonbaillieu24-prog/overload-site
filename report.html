@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Report a bug or ask for something · Overload</title>
+<meta name="description" content="Fill this in and it opens a ready-made GitHub issue, or sends the same thing by email.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108 108'><rect width='108' height='108' rx='24' fill='%230b0c0b'/><circle cx='54' cy='54' r='18' fill='none' stroke='%23d6ff3e' stroke-width='7.2'/><rect y='49' width='108' height='10' fill='%230b0c0b'/><rect y='52.2' width='108' height='3.6' fill='%23d6ff3e'/></svg>">
+<link rel="stylesheet" href="style.css?v=4">
+</head>
+<body>
+
+<a class="banner" href="testing.html">
+  <span class="banner-tag">Testers wanted</span>
+  <span>Train with Overload before it launches — everything unlocked, free, while the test runs.</span>
+  <span class="banner-go">Join the test &rsaquo;</span>
+</a>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="./">
+      <svg width="26" height="26" viewBox="0 0 108 108" aria-hidden="true">
+        <rect width="108" height="108" rx="24" fill="#161917"/>
+        <circle cx="54" cy="54" r="18" fill="none" stroke="#d6ff3e" stroke-width="7.2"/>
+        <rect y="49" width="108" height="10" fill="#161917"/>
+        <rect y="52.2" width="108" height="3.6" fill="#d6ff3e"/>
+      </svg>
+      Overload
+    </a>
+    <nav>
+      <a href="./">Home</a>
+      <a href="testing.html">Join the test</a>
+      <a href="report.html" aria-current="page">Report</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="support.html">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap narrow doc">
+  <p class="kicker">Bugs and ideas</p>
+  <h1>Tell me what's wrong.</h1>
+  <p class="lead">Fill this in and press the button. It opens a ready-made issue on GitHub with
+  everything already written — you just press Submit there. No GitHub account? The second button
+  sends the same thing by email.</p>
+
+  <div class="tabs" role="tablist">
+    <button class="tab is-on" id="tab-bug" role="tab" aria-selected="true" aria-controls="form-bug">Something is broken</button>
+    <button class="tab" id="tab-idea" role="tab" aria-selected="false" aria-controls="form-idea">I have an idea</button>
+  </div>
+
+  <!-- ---- bug ---- -->
+  <form class="report" id="form-bug" role="tabpanel" aria-labelledby="tab-bug">
+    <label>
+      <span>One line: what went wrong</span>
+      <input name="title" maxlength="90" placeholder="The rest timer doesn't start after a drop set" required>
+    </label>
+    <label>
+      <span>What happened, and what you expected</span>
+      <textarea name="what" rows="5" placeholder="1. Started Upper A&#10;2. Logged the first set at 8 reps, 2 RIR&#10;3. The next set still showed the old weight&#10;&#10;I expected it to go up by one step." required></textarea>
+    </label>
+    <div class="row">
+      <label>
+        <span>App version <em>(You, at the bottom)</em></span>
+        <input name="version" maxlength="20" placeholder="1.0">
+      </label>
+      <label>
+        <span>Phone and Android version</span>
+        <input name="device" maxlength="60" placeholder="Pixel 7, Android 15">
+      </label>
+    </div>
+    <label>
+      <span>Anything else <em>(optional)</em></span>
+      <textarea name="extra" rows="2" placeholder="Happens every time. Screenshot to follow."></textarea>
+    </label>
+    <p class="note">Issues are public, so don't paste anything you'd rather keep private. Screenshots
+    can be dragged onto the issue once it opens.</p>
+    <div class="btns">
+      <button class="btn btn-primary" type="submit">Open the issue on GitHub</button>
+      <button class="btn btn-ghost" type="button" data-mail>Send it by email instead</button>
+    </div>
+  </form>
+
+  <!-- ---- idea ---- -->
+  <form class="report hidden" id="form-idea" role="tabpanel" aria-labelledby="tab-idea">
+    <label>
+      <span>One line: what you want</span>
+      <input name="title" maxlength="90" placeholder="Smaller jumps on fixed dumbbells" required>
+    </label>
+    <label>
+      <span>What are you trying to do?</span>
+      <textarea name="problem" rows="5" placeholder="My gym only has fixed dumbbells, so the jump from 22.5 to 25 is too big on curls and the engine keeps telling me to go up." required></textarea>
+    </label>
+    <label>
+      <span>What did you have in mind? <em>(optional)</em></span>
+      <textarea name="idea" rows="3" placeholder="A rough shape is fine."></textarea>
+    </label>
+    <p class="note">The situation in the gym is more useful than the feature — it usually leads
+    somewhere better.</p>
+    <div class="btns">
+      <button class="btn btn-primary" type="submit">Open the issue on GitHub</button>
+      <button class="btn btn-ghost" type="button" data-mail>Send it by email instead</button>
+    </div>
+  </form>
+
+  <h2>Why it works like this</h2>
+  <p>This page is plain HTML on GitHub Pages — there is no server behind it, and there never will
+  be, for the same reason the app has no account: nothing to run, nothing to leak. So the form
+  writes your issue and hands it to GitHub, where your own account posts it. One extra click, and
+  the thread stays yours: you get notified when it's fixed.</p>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Overload · early access · your data stays on your phone</div>
+    <nav>
+      <a href="./">Home</a>
+      <a href="testing.html">Join the test</a>
+      <a href="report.html">Report</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="support.html">Support</a>
+      <a href="https://github.com/filipmonbaillieu24-prog/overload-site/issues">Issues</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var REPO = 'https://github.com/filipmonbaillieu24-prog/overload-site';
+  var MAIL = 'support.overload@gmail.com';
+
+  var forms = {bug: document.getElementById('form-bug'), idea: document.getElementById('form-idea')};
+  var tabs = {bug: document.getElementById('tab-bug'), idea: document.getElementById('tab-idea')};
+
+  Object.keys(tabs).forEach(function (key) {
+    tabs[key].addEventListener('click', function () {
+      Object.keys(tabs).forEach(function (k) {
+        var on = k === key;
+        tabs[k].classList.toggle('is-on', on);
+        tabs[k].setAttribute('aria-selected', String(on));
+        forms[k].classList.toggle('hidden', !on);
+      });
+    });
+  });
+
+  function values(form) {
+    var out = {};
+    Array.prototype.forEach.call(form.elements, function (el) {
+      if (el.name) out[el.name] = (el.value || '').trim();
+    });
+    return out;
+  }
+
+  // GitHub pre-fills an issue form from query parameters named after each field's id,
+  // so what is typed here lands in the right box on the issue.
+  function githubUrl(kind, v) {
+    var template = kind === 'bug' ? 'bug_report.yml' : 'feature_request.yml';
+    var p = new URLSearchParams({template: template, title: v.title || ''});
+    if (kind === 'bug') {
+      p.set('what', v.what || '');
+      if (v.version) p.set('version', v.version);
+      if (v.device) p.set('device', v.device);
+      if (v.extra) p.set('extra', v.extra);
+    } else {
+      p.set('problem', v.problem || '');
+      if (v.idea) p.set('idea', v.idea);
+    }
+    return REPO + '/issues/new?' + p.toString();
+  }
+
+  function mailUrl(kind, v) {
+    var body = kind === 'bug'
+      ? 'What happened:\n' + (v.what || '') +
+        '\n\nApp version: ' + (v.version || '') +
+        '\nPhone: ' + (v.device || '') +
+        (v.extra ? '\n\nAlso:\n' + v.extra : '')
+      : 'What I am trying to do:\n' + (v.problem || '') +
+        (v.idea ? '\n\nWhat I had in mind:\n' + v.idea : '');
+    return 'mailto:' + MAIL +
+      '?subject=' + encodeURIComponent((kind === 'bug' ? 'Bug: ' : 'Idea: ') + (v.title || '')) +
+      '&body=' + encodeURIComponent(body);
+  }
+
+  Object.keys(forms).forEach(function (kind) {
+    var form = forms[kind];
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      window.open(githubUrl(kind, values(form)), '_blank', 'noopener');
+    });
+    form.querySelector('[data-mail]').addEventListener('click', function () {
+      if (!form.reportValidity()) return;
+      window.location.href = mailUrl(kind, values(form));
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

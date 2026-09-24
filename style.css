@@ -290,3 +290,47 @@ ol li { margin: 10px 0; }
 @media (max-width: 620px) {
   .banner { font-size: 13px; padding: 10px 16px; }
 }
+
+/* ---- report form ------------------------------------------------------- */
+
+.tabs { display: flex; gap: 6px; margin: 30px 0 22px; background: var(--card-soft); border: 1px solid var(--hair); border-radius: 14px; padding: 5px; }
+
+.tab {
+  flex: 1;
+  padding: 11px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ink4);
+  font: 500 14px/1.2 inherit;
+  cursor: pointer;
+}
+
+.tab.is-on { background: var(--card); color: var(--ink); }
+
+.report { display: grid; gap: 16px; }
+.report.hidden { display: none; }
+.report label { display: grid; gap: 6px; }
+.report label > span { font-size: 13.5px; color: var(--ink3); }
+.report label em { color: var(--ink4); font-style: normal; }
+.report .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.report input, .report textarea {
+  width: 100%;
+  background: var(--card-soft);
+  border: 1px solid var(--hair);
+  border-radius: 12px;
+  padding: 12px 13px;
+  color: var(--ink);
+  font: 400 15px/1.5 inherit;
+  resize: vertical;
+}
+
+.report input::placeholder, .report textarea::placeholder { color: #6f756b; }
+.report input:focus, .report textarea:focus { outline: none; border-color: rgba(214, 255, 62, .55); }
+.report .btns { margin-top: 4px; }
+.report button.btn { cursor: pointer; font-family: inherit; }
+
+@media (max-width: 620px) {
+  .report .row { grid-template-columns: 1fr; }
+}
