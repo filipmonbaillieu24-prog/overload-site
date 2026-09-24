@@ -334,3 +334,39 @@ ol li { margin: 10px 0; }
 @media (max-width: 620px) {
   .report .row { grid-template-columns: 1fr; }
 }
+
+/* ---- roadmap ---- */
+.road { margin-top: 38px; }
+.road h2 { margin-bottom: 6px; }
+.road .note { margin-top: 0; margin-bottom: 14px; }
+
+.issues { list-style: none; margin: 14px 0 0; padding: 0; }
+
+.issue {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px;
+  padding: 13px 0; border-top: 1px solid var(--hair-soft);
+}
+.issue:last-child { border-bottom: 1px solid var(--hair-soft); }
+
+.issue-title { flex: 1 1 260px; color: var(--ink2); font-size: 15.5px; text-decoration: none; }
+.issue-title:hover { color: var(--accent); }
+
+.issue-meta {
+  display: flex; align-items: center; gap: 8px;
+  color: var(--muted); font-size: 12.5px; white-space: nowrap;
+}
+
+.chip {
+  padding: 2px 8px; border-radius: 999px;
+  border: 1px solid var(--hair); background: var(--card-soft);
+  color: var(--ink4); font-size: 11.5px; letter-spacing: .02em; text-transform: lowercase;
+}
+.chip:first-child { border-color: rgba(214, 255, 62, .28); color: var(--accent); }
+
+.issue.is-empty { display: block; color: var(--muted); font-size: 14px; }
+.issue.is-empty a { color: var(--ink3); }
+
+@media (max-width: 560px) {
+  .issue { gap: 2px; }
+  .issue-title { flex: 1 1 100%; }
+}

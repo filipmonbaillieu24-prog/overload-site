@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roadmap · Overload</title>
+<meta name="description" content="What is broken, what is being built, and what shipped — straight from the issue tracker.">
+<meta property="og:title" content="Overload roadmap">
+<meta property="og:description" content="Every tester report, in the open. What is broken, what is being built, what shipped.">
+<meta property="og:image" content="images/today.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108 108'><rect width='108' height='108' rx='24' fill='%230b0c0b'/><circle cx='54' cy='54' r='18' fill='none' stroke='%23d6ff3e' stroke-width='7.2'/><rect y='49' width='108' height='10' fill='%230b0c0b'/><rect y='52.2' width='108' height='3.6' fill='%23d6ff3e'/></svg>">
+<link rel="stylesheet" href="style.css?v=5">
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="./">
+      <svg width="26" height="26" viewBox="0 0 108 108" aria-hidden="true">
+        <rect width="108" height="108" rx="24" fill="#161917"/>
+        <circle cx="54" cy="54" r="18" fill="none" stroke="#d6ff3e" stroke-width="7.2"/>
+        <rect y="49" width="108" height="10" fill="#161917"/>
+        <rect y="52.2" width="108" height="3.6" fill="#d6ff3e"/>
+      </svg>
+      Overload
+    </a>
+    <nav>
+      <a href="./">Home</a>
+      <a href="testing.html">Join the test</a>
+      <a href="roadmap.html" aria-current="page">Roadmap</a>
+      <a href="report.html">Report</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="support.html">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap narrow doc">
+  <p class="kicker">In the open</p>
+  <h1>What's being built.</h1>
+  <p class="lead">Overload is one person working through a list, and the list is public. Everything
+  below comes straight out of the issue tracker — nothing is curated for this page. If you report
+  something, this is where it turns up.</p>
+
+  <div class="btns">
+    <a class="btn btn-primary" href="report.html">Report a bug or ask for something</a>
+    <a class="btn btn-ghost" href="https://github.com/filipmonbaillieu24-prog/overload-site/issues">Open the tracker</a>
+  </div>
+
+  <section class="road" id="road-building">
+    <h2>Being worked on</h2>
+    <ul class="issues" data-empty="Nothing in progress this minute — the lists below say what is next."></ul>
+  </section>
+
+  <section class="road" id="road-bugs">
+    <h2>Known problems</h2>
+    <p class="note">Confirmed means I have reproduced it. The rest are waiting on a reply from
+    whoever reported them.</p>
+    <ul class="issues" data-empty="No open bug reports. That will not last."></ul>
+  </section>
+
+  <section class="road" id="road-ideas">
+    <h2>Asked for</h2>
+    <p class="note">Ordered by votes. Give an issue a thumbs-up on GitHub and it climbs this list —
+    that is genuinely how the next thing gets picked.</p>
+    <ul class="issues" data-empty="Nothing requested yet. Be the first."></ul>
+  </section>
+
+  <section class="road" id="road-shipped">
+    <h2>Shipped</h2>
+    <ul class="issues" data-empty="Nothing closed yet."></ul>
+  </section>
+
+  <h2>What happens to something you report</h2>
+  <ol>
+    <li><strong>You file it</strong> from the <a href="report.html">report form</a>, which writes the
+      issue for you.</li>
+    <li><strong>I try to reproduce it.</strong> If I cannot, I will ask you a question on the issue —
+      you get an email, and answering it is usually what makes the fix possible.</li>
+    <li><strong>Once reproduced</strong> it is marked confirmed and given a severity: does it stop you
+      training, is it annoying, or is it cosmetic. That is the order things get fixed in.</li>
+    <li><strong>When it ships</strong> the issue closes, it appears above, and the change is in the
+      next Play update.</li>
+  </ol>
+
+  <h2>Not on the list</h2>
+  <p>A few things are settled rather than open questions, so nobody spends a request on them.
+  Overload will not get an account system, ads, or a server that holds your training. It is
+  Android-only for now. And the engine will keep explaining itself — no suggestion will ever be a
+  number with no reason attached.</p>
+
+  <p class="note">This page reads the public issue tracker from your browser when you open it, so it
+  is never out of date. If GitHub is unreachable, or you block third-party requests, the lists stay
+  empty and the links still work.</p>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Overload · early access · your data stays on your phone</div>
+    <nav>
+      <a href="./">Home</a>
+      <a href="testing.html">Join the test</a>
+      <a href="roadmap.html">Roadmap</a>
+      <a href="report.html">Report</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="support.html">Support</a>
+      <a href="https://github.com/filipmonbaillieu24-prog/overload-site/issues">Issues</a>
+      <a href="mailto:support.overload@gmail.com">support.overload@gmail.com</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var REPO = 'filipmonbaillieu24-prog/overload-site';
+  var API = 'https://api.github.com/repos/' + REPO + '/issues?state=all&per_page=100&sort=updated';
+
+  // textContent everywhere, never innerHTML: issue titles are written by the public.
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  function ago(iso) {
+    var days = Math.floor((Date.now() - new Date(iso)) / 86400000);
+    if (days <= 0) return 'today';
+    if (days === 1) return 'yesterday';
+    if (days < 30) return days + ' days ago';
+    var months = Math.round(days / 30);
+    return months + (months === 1 ? ' month ago' : ' months ago');
+  }
+
+  function labels(issue) {
+    return (issue.labels || []).map(function (l) { return typeof l === 'string' ? l : l.name; });
+  }
+
+  function has(issue, label) { return labels(issue).indexOf(label) >= 0; }
+  function votes(issue) { return (issue.reactions && issue.reactions['+1']) || 0; }
+
+  function row(issue, tail) {
+    var li = el('li', 'issue');
+    var a = el('a', 'issue-title', issue.title);
+    a.href = issue.html_url;
+    a.rel = 'noopener';
+    li.appendChild(a);
+    var meta = el('div', 'issue-meta');
+    ['confirmed', 'in-progress'].forEach(function (name) {
+      if (has(issue, name)) meta.appendChild(el('span', 'chip', name.replace('-', ' ')));
+    });
+    meta.appendChild(el('span', null, tail));
+    li.appendChild(meta);
+    return li;
+  }
+
+  function fill(id, issues, tail) {
+    var list = document.querySelector('#' + id + ' .issues');
+    if (!issues.length) {
+      list.appendChild(el('li', 'issue is-empty', list.getAttribute('data-empty')));
+      return;
+    }
+    issues.slice(0, 8).forEach(function (issue) { list.appendChild(row(issue, tail(issue))); });
+  }
+
+  fetch(API, {headers: {Accept: 'application/vnd.github+json'}})
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function (all) {
+      var issues = all.filter(function (i) { return !i.pull_request; });
+      var open = issues.filter(function (i) { return i.state === 'open'; });
+
+      var building = open.filter(function (i) { return has(i, 'in-progress'); });
+      var bugs = open.filter(function (i) { return has(i, 'bug') && !has(i, 'in-progress'); })
+        .sort(function (a, b) { return (has(b, 'confirmed') ? 1 : 0) - (has(a, 'confirmed') ? 1 : 0); });
+      var ideas = open.filter(function (i) { return has(i, 'idea') && !has(i, 'in-progress'); })
+        .sort(function (a, b) { return votes(b) - votes(a); });
+      var shipped = issues.filter(function (i) { return i.state === 'closed' && !has(i, 'declined'); })
+        .sort(function (a, b) { return new Date(b.closed_at) - new Date(a.closed_at); });
+
+      fill('road-building', building, function (i) { return 'since ' + ago(i.updated_at); });
+      fill('road-bugs', bugs, function (i) { return 'reported ' + ago(i.created_at); });
+      fill('road-ideas', ideas, function (i) {
+        var v = votes(i);
+        return v ? v + (v === 1 ? ' vote' : ' votes') : 'no votes yet';
+      });
+      fill('road-shipped', shipped, function (i) { return 'closed ' + ago(i.closed_at); });
+    })
+    .catch(function () {
+      Array.prototype.forEach.call(document.querySelectorAll('.issues'), function (list) {
+        var li = el('li', 'issue is-empty', 'Could not reach GitHub just now. ');
+        var a = el('a', null, 'Open the tracker instead');
+        a.href = 'https://github.com/' + REPO + '/issues';
+        li.appendChild(a);
+        list.appendChild(li);
+      });
+    });
+})();
+</script>
+
+</body>
+</html>
