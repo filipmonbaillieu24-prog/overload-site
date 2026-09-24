@@ -1,0 +1,31 @@
+# Keeps the in-progress label in step with who an issue is assigned to, so the tracker
+# says the same thing as the board without anything having to sync the two.
+name: In-progress label
+
+on:
+  issues:
+    types: [assigned, unassigned, closed, reopened]
+
+permissions:
+  issues: write
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add or remove in-progress
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.issue.number }}
+          ACTION: ${{ github.event.action }}
+          ASSIGNEES: ${{ toJson(github.event.issue.assignees) }}
+        run: |
+          count=$(jq 'length' <<<"$ASSIGNEES")
+          if [ "$ACTION" = "closed" ] || [ "$count" -eq 0 ]; then
+            gh issue edit "$NUMBER" --repo "$REPO" --remove-label in-progress || true
+            echo "in-progress removed (action=$ACTION, assignees=$count)"
+          else
+            gh issue edit "$NUMBER" --repo "$REPO" --add-label in-progress
+            echo "in-progress added (assignees=$count)"
+          fi

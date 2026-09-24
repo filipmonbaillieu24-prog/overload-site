@@ -142,6 +142,12 @@
   function has(issue, label) { return labels(issue).indexOf(label) >= 0; }
   function votes(issue) { return (issue.reactions && issue.reactions['+1']) || 0; }
 
+  // Being worked on = assigned to me, or labelled in-progress. Assigning is one click on the
+  // board card, so the board and this page stay in step without anything syncing them.
+  function busy(issue) {
+    return has(issue, 'in-progress') || (issue.assignees || []).length > 0;
+  }
+
   function row(issue, tail) {
     var li = el('li', 'issue');
     var a = el('a', 'issue-title', issue.title);
@@ -149,9 +155,8 @@
     a.rel = 'noopener';
     li.appendChild(a);
     var meta = el('div', 'issue-meta');
-    ['confirmed', 'in-progress'].forEach(function (name) {
-      if (has(issue, name)) meta.appendChild(el('span', 'chip', name.replace('-', ' ')));
-    });
+    if (busy(issue)) meta.appendChild(el('span', 'chip', 'in progress'));
+    else if (has(issue, 'confirmed')) meta.appendChild(el('span', 'chip', 'confirmed'));
     meta.appendChild(el('span', null, tail));
     li.appendChild(meta);
     return li;
@@ -172,10 +177,10 @@
       var issues = all.filter(function (i) { return !i.pull_request; });
       var open = issues.filter(function (i) { return i.state === 'open'; });
 
-      var building = open.filter(function (i) { return has(i, 'in-progress'); });
-      var bugs = open.filter(function (i) { return has(i, 'bug') && !has(i, 'in-progress'); })
+      var building = open.filter(busy);
+      var bugs = open.filter(function (i) { return has(i, 'bug') && !busy(i); })
         .sort(function (a, b) { return (has(b, 'confirmed') ? 1 : 0) - (has(a, 'confirmed') ? 1 : 0); });
-      var ideas = open.filter(function (i) { return has(i, 'idea') && !has(i, 'in-progress'); })
+      var ideas = open.filter(function (i) { return has(i, 'idea') && !busy(i); })
         .sort(function (a, b) { return votes(b) - votes(a); });
       var shipped = issues.filter(function (i) { return i.state === 'closed' && !has(i, 'declined'); })
         .sort(function (a, b) { return new Date(b.closed_at) - new Date(a.closed_at); });
