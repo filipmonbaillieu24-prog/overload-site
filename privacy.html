@@ -50,11 +50,13 @@
   </div>
 
   <h2>What Overload stores, and where</h2>
-  <p>Everything you enter — exercises, templates, programs, logged sets, notes, settings — lives in
-  one file inside the app's private storage on your phone. Other apps cannot read it. I cannot read
-  it. Uninstalling the app removes it from the phone.</p>
+  <p>Everything you enter — lifts, templates, programs, logged sets, notes, settings — lives in
+  one file inside the app's private storage on your phone. Overload also keeps the copy that file
+  replaced at the last save, so that a file damaged mid-write can be recovered instead of lost.
+  Other apps cannot read either of them. I cannot read them. Uninstalling the app removes both from
+  the phone.</p>
   <p>One qualification, because it is the kind of thing a privacy policy should not leave out:
-  if you have Google's backup switched on for your device, Android includes that file in your own
+  if you have Google's backup switched on for your device, Android includes the main file in your own
   encrypted Google backup, the same way it does for other apps. That copy lives in your Google
   account, not mine, and it is what lets your training reappear when you set up a new phone. If you
   would rather it did not happen, turn off backup for Overload in Android's <em>Settings →
@@ -80,8 +82,11 @@
 
   <h3>Health Connect (off by default)</h3>
   <p>If you turn on Health Connect in the app, each finished workout is written to Health Connect on
-  your phone as an exercise session. You choose whether to grant that permission, and you can revoke
-  it or have Overload delete everything it wrote, at any time, from the app's settings.</p>
+  your phone as an exercise session: its name, when it started and ended, and a note listing the
+  lifts and the working sets you did. Overload only writes; it never reads anything out of Health
+  Connect. You choose whether to grant that permission, and you can revoke it or have Overload
+  delete everything it wrote, at any time, from the app's settings. Once a workout is in Health
+  Connect, what happens to it is between you and the other apps you have given access there.</p>
 
   <h3>Export and backups (only when you ask)</h3>
   <p>You can export your data as a JSON file, copy it as text, export a CSV, or pick a folder for
@@ -104,8 +109,10 @@
   nothing from anyone.</p>
 
   <h2>Deleting your data</h2>
-  <p>You can wipe everything from the app under <em>You → Delete everything</em>, or uninstall
-  Overload, which removes its storage. If you turned on Health Connect, use
+  <p>You can wipe everything from the app under <em>You → Delete everything</em>, which leaves you
+  with an empty app. The spare copy described above still holds what was there until Overload next
+  saves over it, so if you want every trace gone at once, uninstall the app — that removes its
+  storage entirely. If you turned on Health Connect, use
   <em>You → Health Connect → Remove from Health Connect</em> first to delete what Overload wrote
   there. Because I hold no copy of your data, there is nothing for you to request from me and
   nothing for me to delete on your behalf.</p>
