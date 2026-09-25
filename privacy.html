@@ -40,7 +40,7 @@
 <main class="wrap narrow doc">
   <h1>Privacy policy</h1>
   <p class="sub">Overload is a training log that keeps your data on your phone.</p>
-  <p class="date">Last updated 23 September 2026</p>
+  <p class="date">Last updated 25 September 2026</p>
 
   <div class="card">
     <h2>The short version</h2>
@@ -52,11 +52,22 @@
   <h2>What Overload stores, and where</h2>
   <p>Everything you enter — exercises, templates, programs, logged sets, notes, settings — lives in
   one file inside the app's private storage on your phone. Other apps cannot read it. I cannot read
-  it. It is removed when you uninstall the app.</p>
+  it. Uninstalling the app removes it from the phone.</p>
+  <p>One qualification, because it is the kind of thing a privacy policy should not leave out:
+  if you have Google's backup switched on for your device, Android includes that file in your own
+  encrypted Google backup, the same way it does for other apps. That copy lives in your Google
+  account, not mine, and it is what lets your training reappear when you set up a new phone. If you
+  would rather it did not happen, turn off backup for Overload in Android's <em>Settings →
+  System → Backup</em>. Nothing about that copy passes through me.</p>
 
   <h2>Who I share it with</h2>
-  <p>Nobody. Overload contains no analytics, crash-reporting or advertising libraries, and sends no
-  copy of your data anywhere.</p>
+  <p>Nobody. Overload adds no analytics, no crash reporting and no advertising of its own, and
+  sends no copy of your training anywhere.</p>
+  <p>To be precise about what is in the app rather than only about what I added: the Google Play
+  Billing library, which handles the subscription, brings Google's own diagnostics transport with
+  it, as it does in every app that sells anything on Play. It starts when the app starts, so that
+  Overload knows whether you are subscribed without asking you. It reports on billing only,
+  never on your training, and it cannot see the file your data lives in.</p>
 
   <h2>The three places data can leave the app, all of them yours to start</h2>
 
@@ -83,7 +94,7 @@
     <li><strong>Notifications</strong> — the rest timer and the workout notification on your lock screen.</li>
     <li><strong>Vibration, wake lock, foreground service</strong> — so the rest timer is accurate and the workout keeps running with the screen off.</li>
     <li><strong>Draw over other apps</strong> — only if you turn on the floating rest bubble.</li>
-    <li><strong>Run at startup</strong> — to restore a workout in progress after a restart.</li>
+    <li><strong>Run at startup</strong> — to re-arm the inactivity reminder after your phone restarts, so a reminder you asked for does not quietly stop happening. If the reminder is off, nothing is scheduled.</li>
     <li><strong>Internet and network state</strong> — added by the Google Play Billing library so it can reach Play. Overload makes no network requests of its own.</li>
     <li><strong>Health Connect (write exercise)</strong> — only if you turn on the Health Connect option.</li>
   </ul>
