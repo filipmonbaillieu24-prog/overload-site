@@ -345,7 +345,8 @@ export function view(s, set, variant) {
       lifts: sess.items.map(it => { const l = lift(it.lift), p = sess.rx && sess.rx[it.lift] || rxOf(it.lift);
         return { name: l.name, unit: l.unit, chips: it.sets.map((t, i) => ({ txt: `${fmt(t.w)} × ${t.r} @${rirTxt(t.rir)}${t.k && t.k !== 'normal' ? ' · ' + kindName(t.k) : ''}`,
           tap: () => upd(() => ({ sheet: 'editset', editSet: { src: 'session', sid: sess.id, lift: it.lift, idx: i } })) })),
-        rows: it.sets.map((t, i) => ({ n: t.k === 'warm' ? 'WARM' : `SET ${it.sets.slice(0, i + 1).filter(z => z.k !== 'warm').length}`, wr: `${fmt(t.w)} ${l.unit} × ${t.r}`, kind: t.k && t.k !== 'normal' && t.k !== 'warm' ? kindName(t.k) : '', pr: it.prIdx.has(i), noPr: !it.prIdx.has(i), rir: t.rir === 0 ? 'to failure' : `${rirTxt(t.rir)} in reserve` })), setsTxt: it.sets.map(t => `${fmt(t.w)}×${t.r} @${rirTxt(t.rir)}`).join(' · '), top: `${fmt(it.sets[0].w)} ${l.unit}`, ...(o => ({ ...o, nextLine: `Next time: ${o.nw}${o.up ? ` (${o.d})` : ', same weight'}` }))(outlook(l, p, it.sets, true)) }; }),
+        rows: it.sets.map((t, i) => ({ n: t.k === 'warm' ? 'WARM' : `SET ${it.sets.slice(0, i + 1).filter(z => z.k !== 'warm').length}`, wr: `${fmt(t.w)} ${l.unit} × ${t.r}`, kind: t.k && t.k !== 'normal' && t.k !== 'warm' ? kindName(t.k) : '', pr: it.prIdx.has(i), noPr: !it.prIdx.has(i), rir: t.rir === 0 ? 'to failure' : `${rirTxt(t.rir)} in reserve`,
+          tap: () => upd(() => ({ sheet: 'editset', editSet: { src: 'session', sid: sess.id, lift: it.lift, idx: i } })) })), setsTxt: it.sets.map(t => `${fmt(t.w)}×${t.r} @${rirTxt(t.rir)}`).join(' · '), top: `${fmt(it.sets[0].w)} ${l.unit}`, ...(o => ({ ...o, nextLine: `Next time: ${o.nw}${o.up ? ` (${o.d})` : ', same weight'}` }))(outlook(l, p, it.sets, true)) }; }),
       vol: Object.entries(vol).map(([name, v]) => ({ name, sets: fmt(v), pct: Math.round(v / vmax * 100) })), fresh, past: !fresh };
   };
   let sm = {};
@@ -469,7 +470,11 @@ export function view(s, set, variant) {
       logLabel: it ? `Log ${fmt(cw)} ${l.unit} × ${cr} @ ${rirTxt(crir)}` : '', logLabel2: it ? `Log set ${si + 1} · ${fmt(cw)} ${l.unit} × ${cr}` : '',
       log: () => { if (!it) return; if (s.set.logKind !== 'none') playSound(s.set.logKind, s.set.volume / 100); if (s.set.haptic && navigator.vibrate) navigator.vibrate(15); updL(x => { const n = it.logged.length + 1, rest0 = it.rest ?? s.set.rest;
         const rest = s.set.adaptive ? Math.max(45, Math.min(300, rest0 + (crir === 0 ? 30 : crir >= it.rir + 2 ? -30 : 0))) : rest0;
-        return { items: x.items.map(y => y.lift === it.lift ? { ...y, extra: y.extra + ((x.pend.k || 'normal') === 'warm' ? 1 : 0), logged: [...y.logged, { w: cw, r: cr, rir: crir, k: x.pend.k || 'normal' }] } : y), pend: {}, rest, restTotal: rest, restWho: `${l.name}, set ${n} logged` }; }); },
+        const items = x.items.map(y => y.lift === it.lift ? { ...y, extra: y.extra + ((x.pend.k || 'normal') === 'warm' ? 1 : 0), logged: [...y.logged, { w: cw, r: cr, rir: crir, k: x.pend.k || 'normal' }] } : y);
+        // Rest is for the set that comes next. On the last set of the workout there is none, and
+        // the dock's job is to offer Finish rather than count down two minutes.
+        const more = items.some(y => y.logged.length < total(y));
+        return { items, pend: {}, rest: more ? rest : 0, restTotal: more ? rest : 0, restWho: more ? `${l.name}, set ${n} logged` : '' }; }); },
       restTxt: mmss(lvS.rest), restWho: lvS.restWho, restPct: Math.round(lvS.rest / Math.max(1, lvS.restTotal) * 100),
       nextLine: it ? `Next: ${l.name}, set ${si + 1} · ${fmt(cw)} ${l.unit} × ${cr}` : '',
       plus30: () => updL(x => ({ rest: x.rest + 30, restTotal: x.restTotal + 30 })), skip: () => updL(() => ({ rest: 0 })),

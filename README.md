@@ -28,3 +28,18 @@ project page like `/overload-site/`. `try.html` already declares the same five f
 same family names, and the mounted app inherits them.
 
 If the app file is re-synced from the design project, strip its `@font-face` block again.
+
+## Changes made to the prototype files here
+
+`app/overload-core.js` and `app/Overload App.dc.html` come from the design project, so a re-sync
+will overwrite them. Three changes were made after the handoff and need re-applying if that
+happens (they are also in `design_handoff_overload_site/site/app/`):
+
+1. **No `@font-face` in the app file** — see above.
+2. **No rest timer after the last set.** `log:` set `rest` unconditionally, including on the set
+   that ends the workout. It now only starts rest when a set is still unlogged.
+3. **Edit mode keeps the set rows.** The session screen dropped to wrapped chips while editing,
+   and a chip has no room for the NEW BEST badge — so correcting a typo hid the records. Edit mode
+   now rings the same rows and adds a pencil. `rows` gained the `tap` the chips had.
+
+Changes 2 and 3 match the Android app (1.4, versionCode 13), which is the source of truth.
