@@ -6,15 +6,39 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./app/support.js"></script>
+<script>
+/* The five faces, with absolute URLs.
+   The component runtime re-resolves a mounted component's relative URLs against the origin root
+   rather than this page, so a static @font-face with "fonts/x.ttf" is fetched twice: once
+   correctly for the page and once as /fonts/x.ttf, which 404s on a project page. Resolving
+   against document.baseURI here gives one absolute URL that survives re-resolution, and keeps
+   working if the site ever moves to its own domain. */
+(function () {
+  var f = [
+    ['Barlow', 400, 'barlow_regular'],
+    ['Barlow', 500, 'barlow_medium'],
+    ['Barlow', 600, 'barlow_semibold'],
+    ['Barlow Condensed', 600, 'barlow_condensed_semibold'],
+    ['Barlow Condensed', 700, 'barlow_condensed_bold']
+  ];
+  var css = f.map(function (x) {
+    var u = new URL('fonts/' + x[2] + '.ttf', document.baseURI).href;
+    return "@font-face{font-family:'" + x[0] + "';src:url(" + u + ");font-weight:" + x[1] + ";font-display:swap}";
+  }).join('');
+  var el = document.createElement('style');
+  el.textContent = css;
+  document.head.appendChild(el);
+})();
+</script>
 </head>
 <body>
 <x-dc>
 <helmet><style>
-@font-face{font-family:Barlow;src:url(fonts/barlow_regular.ttf);font-weight:400}
-@font-face{font-family:Barlow;src:url(fonts/barlow_medium.ttf);font-weight:500}
-@font-face{font-family:Barlow;src:url(fonts/barlow_semibold.ttf);font-weight:600}
-@font-face{font-family:'Barlow Condensed';src:url(fonts/barlow_condensed_semibold.ttf);font-weight:600}
-@font-face{font-family:'Barlow Condensed';src:url(fonts/barlow_condensed_bold.ttf);font-weight:700}
+
+
+
+
+
 html{scroll-behavior:smooth}body{margin:0;background:#0B0C0B;-webkit-font-smoothing:antialiased}
 a{color:#D6FF3E;text-underline-offset:3px}a:hover{color:#E6FF7A}
 summary::-webkit-details-marker{display:none}
