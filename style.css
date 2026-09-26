@@ -1,3 +1,8 @@
+@font-face{font-family:Barlow;src:url(fonts/barlow_regular.ttf);font-weight:400}
+@font-face{font-family:Barlow;src:url(fonts/barlow_medium.ttf);font-weight:500}
+@font-face{font-family:Barlow;src:url(fonts/barlow_semibold.ttf);font-weight:600}
+@font-face{font-family:'Barlow Condensed';src:url(fonts/barlow_condensed_semibold.ttf);font-weight:600}
+@font-face{font-family:'Barlow Condensed';src:url(fonts/barlow_condensed_bold.ttf);font-weight:700}
 :root {
   --page: #0b0c0b;
   --card: #161917;
@@ -22,7 +27,7 @@ body {
   margin: 0;
   background: var(--page);
   color: var(--ink3);
-  font: 400 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font: 400 16px/1.65 Barlow, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
 }
@@ -370,3 +375,50 @@ ol li { margin: 10px 0; }
   .issue { gap: 2px; }
   .issue-title { flex: 1 1 100%; }
 }
+
+/* ---- Rework overrides: Barlow, bigger type, flat page, engine-block highlights ---- */
+body{font:400 17px/1.6 Barlow,system-ui,sans-serif;color:var(--ink3)}
+.wrap{max-width:1120px;padding:0 24px}.narrow{max-width:760px}
+.brand{font:700 24px/1 'Barlow Condensed';letter-spacing:0;text-transform:none}
+.site-head{background:rgba(11,12,11,.86);border-bottom-color:rgba(255,255,255,.06)}
+.site-head nav a{font:500 15px/1 Barlow;padding:10px 0}
+h1{font:700 clamp(44px,6.5vw,76px)/.95 'Barlow Condensed';letter-spacing:-.01em;text-wrap:balance;margin:0 0 20px}
+h2{font:700 clamp(32px,4.4vw,48px)/1 'Barlow Condensed';text-wrap:balance;margin:0 0 14px}
+h3{font:700 22px/1.15 'Barlow Condensed';margin:0 0 8px}
+.lead{font-size:19px;line-height:1.6}
+.kicker{font:500 13px/1 Barlow;letter-spacing:.16em}
+.sub{font-size:18px;color:var(--ink4)}.date{font-size:14px}
+.note{font-size:15px;color:var(--ink4)}
+.btn{height:56px;padding:0 24px;border-radius:18px;font:600 17px/1 Barlow;display:inline-flex;align-items:center;white-space:nowrap;border:0}
+.btn-primary{box-shadow:0 6px 20px rgba(214,255,62,.22)}
+.btn-ghost{background:#1F2320;color:var(--ink2);font-weight:500}
+.btn-ghost:hover{background:#262A26;filter:none}
+.card{background:transparent;border:0;border-top:1px solid rgba(255,255,255,.06);border-radius:0;padding:24px 0}
+.card p{font-size:16px;color:var(--ink3)}
+.highlight{background:#202419;border:1px solid #3A4520;border-radius:20px;padding:24px 26px}
+.highlight p{color:var(--ink2)}
+.doc{padding:64px 24px 32px}
+.doc h2{font-size:30px;margin:44px 0 12px}.doc h3{font-size:22px;margin:30px 0 8px}
+.doc .card{margin:28px 0}
+.doc li,.doc p{font-size:17px}
+.quote{border:0;background:#202419;border:1px solid #3A4520;border-radius:18px;padding:18px 20px;color:var(--ink2)}
+.faq details{border-bottom:0;border-top:1px solid rgba(255,255,255,.06);padding:18px 0}
+.faq summary{font:500 19px/1.3 Barlow}
+.faq summary::marker{color:var(--accent)}
+.faq p{font-size:17px}
+th{font:500 12px/1.3 Barlow;letter-spacing:.12em}
+td{font-size:16px}
+footer{font-size:15px;border-top-color:rgba(255,255,255,.06)}
+footer a{font-size:15px}
+.banner{background:#1E2317;border-bottom:1px solid #3A4520;font:400 15px/1.4 Barlow}
+.banner:hover{background:#232A1A}
+.banner-tag{border-radius:6px;padding:5px 7px;font-weight:600;white-space:nowrap}
+.tabs{background:#131513;border:0;border-radius:16px;padding:4px;gap:4px}
+.tab{height:44px;font:500 15px/1 Barlow;border-radius:12px}
+.tab.is-on{background:#262A26;font-weight:600}
+.report label>span{font-size:14px}
+.report input,.report textarea{background:#161917;border:0;border-radius:16px;padding:14px 16px;font:400 16px/1.5 Barlow}
+.report input:focus,.report textarea:focus{box-shadow:inset 0 0 0 1.5px #6E822C}
+.issue-title{font-size:17px}.issue-meta{font-size:13px}
+.chip{border-radius:6px;border:0;background:#1F2320;text-transform:none}
+.chip:first-child{background:#202419;color:var(--accent)}
