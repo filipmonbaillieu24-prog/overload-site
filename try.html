@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Try Overload in your browser</title>
-<meta name="description" content="The whole Overload app running in your browser, with a guided tour and the rules the progression engine follows.">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Try the Overload gym log in your browser</title>
+<link rel="canonical" href="https://overload.icu/try.html">
+<meta name="description" content="The whole Overload app running in your browser, with a guided tour and every rule the progressive overload engine follows. Nothing to install, no account.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Overload">
+<meta property="og:url" content="https://overload.icu/try.html">
+<meta property="og:title" content="Try the Overload gym log in your browser">
+<meta property="og:description" content="The whole Overload app running in your browser, with a guided tour and every rule the progressive overload engine follows. Nothing to install, no account.">
+<meta property="og:image" content="https://overload.icu/images/today.png">
+<meta property="og:image:alt" content="The Overload app showing the next working weight proposed from your reps and reps in reserve.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108 108'><rect width='108' height='108' rx='24' fill='%230b0c0b'/><circle cx='54' cy='54' r='18' fill='none' stroke='%23d6ff3e' stroke-width='7.2'/><rect y='49' width='108' height='10' fill='%230b0c0b'/><rect y='52.2' width='108' height='3.6' fill='%23d6ff3e'/></svg>">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <script src="./app/support.js"></script>
 <script>
 /* The five faces, with absolute URLs.
@@ -29,6 +40,44 @@
   el.textContent = css;
   document.head.appendChild(el);
 })();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://overload.icu/try.html#webpage",
+      "url": "https://overload.icu/try.html",
+      "name": "Try the Overload gym log in your browser",
+      "description": "The whole Overload app running in your browser, with a guided tour and every rule the progressive overload engine follows.",
+      "isPartOf": { "@id": "https://overload.icu/#website" },
+      "about": { "@id": "https://overload.icu/#app" },
+      "inLanguage": "en",
+      "mainEntity": { "@id": "https://overload.icu/try.html#demo" }
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://overload.icu/try.html#demo",
+      "name": "Overload in your browser",
+      "url": "https://overload.icu/try.html",
+      "description": "A browser demo of Overload with twelve weeks of invented training behind it. Nothing is saved, and it has no lock-screen controls, notifications, Health Connect, import or export.",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript",
+      "isAccessibleForFree": true,
+      "inLanguage": "en",
+      "author": { "@id": "https://overload.icu/#developer" },
+      "isBasedOn": { "@id": "https://overload.icu/#app" },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+  ]
+}
 </script>
 </head>
 <body>
@@ -63,7 +112,7 @@ summary::-webkit-details-marker{display:none}
 <div style="display:flex;gap:18px;padding:22px 0;border-top:1px solid rgba(255,255,255,.06)"><span style="width:36px;flex:none;font:700 28px/1 'Barlow Condensed';color:#8E948A">{{ s.n }}</span><div style="flex:1;display:flex;flex-direction:column;gap:8px;min-width:0"><h3 style="margin:0;font:700 24px/1.1 'Barlow Condensed';color:#F2F4EE">{{ s.title }}</h3><p style="margin:0;font:400 17px/1.55 Barlow;color:#C9CEC2;text-wrap:pretty" dangerouslySetInnerHTML="{{ s.html }}"></p><div onClick="{{ s.go }}" style="align-self:flex-start;height:44px;padding:0 6px 0 14px;border-radius:14px;background:#202419;border:1px solid #3A4520;display:flex;align-items:center;gap:4px;font:600 15px/1 Barlow;color:#D6FF3E;cursor:pointer;margin-top:4px" style-hover="background:#262D1C">Show me<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div></div></div>
 </sc-for>
 </div>
-<div style="display:flex;flex-direction:column;gap:10px;padding-top:24px"><span style="font:500 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">How it works</span><h2 style="margin:0;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'">The rules the engine follows.</h2><p style="margin:0;font:400 17px/1.55 Barlow;color:#9AA093">Everything the app does with your numbers, in one place.</p></div>
+<div style="display:flex;flex-direction:column;gap:10px;padding-top:24px"><span style="font:500 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">How it works</span><h2 style="margin:0;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'">The rules the engine follows.</h2><p style="margin:0;font:400 17px/1.55 Barlow;color:#9AA093">Every rule the progressive overload engine follows, in one place.</p></div>
 <div style="display:flex;flex-direction:column">
 <details style="border-top:1px solid rgba(255,255,255,.06);padding:4px 0"><summary style="cursor:pointer;padding:18px 0;font:500 19px/1.3 Barlow;color:#F2F4EE;list-style:none;display:flex;justify-content:space-between;gap:16px">Reps in reserve (RIR)<span style="color:#9AA093;font-weight:400">+</span></summary><p style="margin:0 0 20px;font:400 17px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">How many more reps you could have done when you stopped. 0 is failure, 2 means two left. It is one tap per set and it is what makes the proposals good. Skip it and the set is recorded at the target you planned.</p></details><details style="border-top:1px solid rgba(255,255,255,.06);padding:4px 0"><summary style="cursor:pointer;padding:18px 0;font:500 19px/1.3 Barlow;color:#F2F4EE;list-style:none;display:flex;justify-content:space-between;gap:16px">How the next weight is chosen<span style="color:#9AA093;font-weight:400">+</span></summary><p style="margin:0 0 20px;font:400 17px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">With the RIR-gated rule the engine compares how much you had left in reserve with what you were aiming for. More than planned earns weight. How far the weight moves comes from your own sets rather than from a fixed step: the engine works out what they imply you could lift, and will not take a step that would drop your reps out of their range. This is why one easy session on a 10 kg dumbbell is never answered with 12.5 kg. Clearing the top of your rep range is the exception, and earns the weight on its own: once you are past the range there is no rep left to add. Less left in reserve than planned holds the weight, and two sessions in a row under target propose a deload. A session you cut short, or a lift you have not touched for three weeks, holds rather than advances, and says which it is. Double progression adds reps first, then weight. Linear adds a step every session you complete.</p></details><details style="border-top:1px solid rgba(255,255,255,.06);padding:4px 0"><summary style="cursor:pointer;padding:18px 0;font:500 19px/1.3 Barlow;color:#F2F4EE;list-style:none;display:flex;justify-content:space-between;gap:16px">Set types<span style="color:#9AA093;font-weight:400">+</span></summary><p style="margin:0 0 20px;font:400 17px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">Normal sets drive progression. Warm-ups never count. Drop sets and rest-pause sets are logged but do not move the weight. AMRAP counts, and a big number there is the fastest way to a step up.</p></details><details style="border-top:1px solid rgba(255,255,255,.06);padding:4px 0"><summary style="cursor:pointer;padding:18px 0;font:500 19px/1.3 Barlow;color:#F2F4EE;list-style:none;display:flex;justify-content:space-between;gap:16px">Templates, programs and blocks<span style="color:#9AA093;font-weight:400">+</span></summary><p style="margin:0 0 20px;font:400 17px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">A template is one workout. A program is an ordered rotation of templates; Today pins the next one. A block is a mesocycle: the target RIR gets one harder every other week, then a deload week. The week only turns once every template in the block has been trained.</p></details><details style="border-top:1px solid rgba(255,255,255,.06);padding:4px 0"><summary style="cursor:pointer;padding:18px 0;font:500 19px/1.3 Barlow;color:#F2F4EE;list-style:none;display:flex;justify-content:space-between;gap:16px">First time on a lift<span style="color:#9AA093;font-weight:400">+</span></summary><p style="margin:0 0 20px;font:400 17px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">No history means no proposal, so the first session finds your weight: aim for the middle of the rep range at the target RIR and log honestly. Sets that miss become test sets, and the next one is aimed from your answer.</p></details><details style="border-top:1px solid rgba(255,255,255,.06);padding:4px 0"><summary style="cursor:pointer;padding:18px 0;font:500 19px/1.3 Barlow;color:#F2F4EE;list-style:none;display:flex;justify-content:space-between;gap:16px">Stalls and deloads<span style="color:#9AA093;font-weight:400">+</span></summary><p style="margin:0 0 20px;font:400 17px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">No new estimated 1RM or top weight across four sessions over at least two weeks counts as a stall. The lift page and the Lifts list offer a deload next time (about 90%), a wider rep range, or a swap.</p></details><details style="border-top:1px solid rgba(255,255,255,.06);padding:4px 0"><summary style="cursor:pointer;padding:18px 0;font:500 19px/1.3 Barlow;color:#F2F4EE;list-style:none;display:flex;justify-content:space-between;gap:16px">Your data<span style="color:#9AA093;font-weight:400">+</span></summary><p style="margin:0 0 20px;font:400 17px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">No account and no server. One JSON file on the phone, exported or backed up whenever you like, importable from Strong and Hevy CSVs. The web version here keeps nothing at all: reload the page and it starts fresh.</p></details>
 </div>

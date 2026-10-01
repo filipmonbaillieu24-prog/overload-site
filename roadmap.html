@@ -4,12 +4,32 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Roadmap · Overload</title>
-<meta name="description" content="What is broken, what is being built, and what shipped, straight from the issue tracker.">
+<link rel="canonical" href="https://overload.icu/roadmap.html">
+<meta name="description" content="What is broken, what is being built, and what shipped in the Overload gym log, straight from the public issue tracker.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Overload">
+<meta property="og:url" content="https://overload.icu/roadmap.html">
 <meta property="og:title" content="Overload roadmap">
 <meta property="og:description" content="Every tester report, in the open. What is broken, what is being built, what shipped.">
-<meta property="og:image" content="images/today.png">
+<meta property="og:image" content="https://overload.icu/images/today.png">
+<meta property="og:image:alt" content="The Overload app showing the next working weight proposed from your reps and reps in reserve.">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108 108'><rect width='108' height='108' rx='24' fill='%230b0c0b'/><circle cx='54' cy='54' r='18' fill='none' stroke='%23d6ff3e' stroke-width='7.2'/><rect y='49' width='108' height='10' fill='%230b0c0b'/><rect y='52.2' width='108' height='3.6' fill='%23d6ff3e'/></svg>">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css?v=6">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["WebPage", "CollectionPage"],
+  "@id": "https://overload.icu/roadmap.html#webpage",
+  "url": "https://overload.icu/roadmap.html",
+  "name": "Roadmap",
+  "description": "What is broken, what is being built, and what shipped, straight from the issue tracker.",
+  "isPartOf": { "@id": "https://overload.icu/#website" },
+  "about": { "@id": "https://overload.icu/#app" },
+  "inLanguage": "en"
+}
+</script>
 </head>
 <body>
 
@@ -50,33 +70,33 @@
 
   <section class="road" id="road-building">
     <h2>Being worked on</h2>
-    <ul class="issues" data-empty="Nothing in progress this minute. The lists below say what is next."></ul>
+    <ul class="issues" data-empty="Nothing in progress this minute. The lists below say what is next."><li class="issue is-empty">Read from the issue tracker when this page opens. Not showing? <a href="https://github.com/filipmonbaillieu24-prog/overload-site/issues" rel="noopener">Open the tracker</a>.</li></ul>
   </section>
 
   <section class="road" id="road-planned">
     <h2>Planned</h2>
     <p class="note">Decided on, not started. Each one has a comment saying what it is waiting for,
     usually that something else matters more this month.</p>
-    <ul class="issues" data-empty="Nothing queued up yet."></ul>
+    <ul class="issues" data-empty="Nothing queued up yet."><li class="issue is-empty">Read from the issue tracker when this page opens. Not showing? <a href="https://github.com/filipmonbaillieu24-prog/overload-site/issues" rel="noopener">Open the tracker</a>.</li></ul>
   </section>
 
   <section class="road" id="road-bugs">
     <h2>Known problems</h2>
     <p class="note">Confirmed means I have reproduced it. The rest are waiting on a reply from
     whoever reported them.</p>
-    <ul class="issues" data-empty="No open bug reports. That will not last."></ul>
+    <ul class="issues" data-empty="No open bug reports. That will not last."><li class="issue is-empty">Read from the issue tracker when this page opens. Not showing? <a href="https://github.com/filipmonbaillieu24-prog/overload-site/issues" rel="noopener">Open the tracker</a>.</li></ul>
   </section>
 
   <section class="road" id="road-ideas">
     <h2>Asked for</h2>
     <p class="note">Ordered by votes. Give an issue a thumbs-up on GitHub and it climbs this list.
     That is genuinely how the next thing gets picked.</p>
-    <ul class="issues" data-empty="Nothing requested yet. Be the first."></ul>
+    <ul class="issues" data-empty="Nothing requested yet. Be the first."><li class="issue is-empty">Read from the issue tracker when this page opens. Not showing? <a href="https://github.com/filipmonbaillieu24-prog/overload-site/issues" rel="noopener">Open the tracker</a>.</li></ul>
   </section>
 
   <section class="road" id="road-shipped">
     <h2>Shipped</h2>
-    <ul class="issues" data-empty="Nothing closed yet."></ul>
+    <ul class="issues" data-empty="Nothing closed yet."><li class="issue is-empty">Read from the issue tracker when this page opens. Not showing? <a href="https://github.com/filipmonbaillieu24-prog/overload-site/issues" rel="noopener">Open the tracker</a>.</li></ul>
   </section>
 
   <h2>What happens to something you report</h2>
@@ -181,6 +201,7 @@
 
   function fill(id, issues, tail) {
     var list = document.querySelector('#' + id + ' .issues');
+    list.textContent = '';
     if (!issues.length) {
       list.appendChild(el('li', 'issue is-empty', list.getAttribute('data-empty')));
       return;
@@ -218,6 +239,7 @@
     })
     .catch(function () {
       Array.prototype.forEach.call(document.querySelectorAll('.issues'), function (list) {
+        list.textContent = '';
         var li = el('li', 'issue is-empty', 'Could not reach GitHub just now. ');
         var a = el('a', null, 'Open the tracker instead');
         a.href = 'https://github.com/' + REPO + '/issues';

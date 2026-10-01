@@ -3,13 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Overload: the training log that tells you what weight to lift next</title>
-<meta name="description" content="Overload logs your sets and proposes the next weight from your reps and reps in reserve, with its reasoning attached. Free for everyone until 2027. No accounts, no ads, everything stays on your phone.">
-<meta property="og:title" content="Overload: the training log that tells you what weight to lift next">
-<meta property="og:description" content="A progression engine in your pocket. Free while it is in early access. No accounts, no ads, your data stays on your phone.">
+<title>Overload: the gym log that tells you what weight to lift next</title>
+<link rel="canonical" href="https://overload.icu/">
+<meta name="description" content="A gym log that does progressive overload for you: log your reps and reps in reserve and it proposes the next weight, with its reasoning. Free until 2027.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="images/today.png">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108 108'><rect width='108' height='108' rx='24' fill='%230b0c0b'/><circle cx='54' cy='54' r='18' fill='none' stroke='%23d6ff3e' stroke-width='7.2'/><rect y='49' width='108' height='10' fill='%230b0c0b'/><rect y='52.2' width='108' height='3.6' fill='%23d6ff3e'/></svg>">
+<meta property="og:site_name" content="Overload">
+<meta property="og:url" content="https://overload.icu/">
+<meta property="og:title" content="Overload: the gym log that tells you what weight to lift next">
+<meta property="og:description" content="A gym log that does progressive overload for you. Free while it is in early access. No accounts, no ads, your data stays on your phone.">
+<meta property="og:image" content="https://overload.icu/images/today.png">
+<meta property="og:image:alt" content="The Overload app showing the next working weight proposed from your reps and reps in reserve.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <style>
 @font-face{font-family:Barlow;src:url(fonts/barlow_regular.ttf);font-weight:400}
 @font-face{font-family:Barlow;src:url(fonts/barlow_medium.ttf);font-weight:500}
@@ -20,6 +25,181 @@ html{scroll-behavior:smooth}body{margin:0;background:#0B0C0B;-webkit-font-smooth
 a{color:#D6FF3E;text-underline-offset:3px}a:hover{color:#E6FF7A}
 summary::-webkit-details-marker{display:none}details[open] summary span{transform:rotate(45deg)}
 .hv1:hover{color:#F2F4EE}.hv2:hover{color:#F2F4EE}.hv3:hover{color:#F2F4EE}.hv4:hover{color:#F2F4EE}.hv5:hover{color:#F2F4EE}.hv6:hover{color:#F2F4EE}.hv7:hover{opacity:.88}.hv8:hover{background:#262A26}.hv9:hover{opacity:.88}.hv10:hover{opacity:.88}.hv11:hover{background:#262A26}.hv12:hover{color:#F2F4EE}.hv13:hover{color:#F2F4EE}.hv14:hover{color:#F2F4EE}.hv15:hover{color:#F2F4EE}.hv16:hover{color:#F2F4EE}.hv17:hover{color:#F2F4EE}.hv18:hover{color:#F2F4EE}.hv19:hover{color:#F2F4EE}.hv20:hover{color:#F2F4EE}.hv21:hover{color:#F2F4EE}.hvp:hover{opacity:.88}.hvg:hover{background:#262A26}</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://overload.icu/#website",
+      "url": "https://overload.icu/",
+      "name": "Overload",
+      "description": "The site for Overload, an Android gym log that proposes your next weight from your reps and your reps in reserve.",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://overload.icu/#developer" },
+      "about": { "@id": "https://overload.icu/#app" }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://overload.icu/#developer",
+      "name": "Overload",
+      "url": "https://overload.icu/",
+      "email": "support.overload@gmail.com",
+      "sameAs": [
+        "https://github.com/filipmonbaillieu24-prog"
+      ]
+    },
+    {
+      "@type": ["SoftwareApplication", "MobileApplication"],
+      "@id": "https://overload.icu/#app",
+      "name": "Overload",
+      "url": "https://overload.icu/",
+      "description": "Overload is an Android gym log that reads your reps and your reps in reserve and proposes the next weight, with its reasoning shown underneath. It does progressive overload for you. No account, no ads, no analytics, and it works offline.",
+      "applicationCategory": "HealthApplication",
+      "applicationSubCategory": "Strength training",
+      "operatingSystem": "Android 8.0 and up",
+      "softwareVersion": "1.5",
+      "inLanguage": "en",
+      "author": { "@id": "https://overload.icu/#developer" },
+      "publisher": { "@id": "https://overload.icu/#developer" },
+      "downloadUrl": "https://play.google.com/apps/testing/app.overload",
+      "image": "https://overload.icu/images/today.png",
+      "screenshot": [
+        "https://overload.icu/images/today.png",
+        "https://overload.icu/images/live.png",
+        "https://overload.icu/images/lift.png",
+        "https://overload.icu/images/summary.png",
+        "https://overload.icu/images/plans.png",
+        "https://overload.icu/images/stats.png"
+      ],
+      "permissions": "Notifications, vibration, display over other apps for the rest timer, and Health Connect, which is optional and off by default",
+      "isAccessibleForFree": true,
+      "featureList": [
+        "Proposes your next weight from your logged reps and your reps in reserve, with the reasoning shown",
+        "RIR-gated, double and linear progression, set per template or per lift",
+        "Steps sized from your own sets rather than a fixed increment",
+        "Stall detection across four workouts, offering a deload, a wider rep range or a lift swap",
+        "Warm-up sets that ramp to the working weight and shrink when the muscle is already warm",
+        "Supersets, drop sets, rest-pause, AMRAP and top set plus back-offs, all counted correctly",
+        "Templates with sets, rep range and target reps in reserve, grouped into programs that rotate",
+        "Training blocks that get harder week by week and end in a deload",
+        "Estimated 1RM over recent workouts, rep records and percentage tables per lift",
+        "Hard sets per muscle against a weekly target, weekly tonnage and a plain-English weekly debrief",
+        "1,577 exercise guides with step-by-step instructions, bundled in the app",
+        "Rest timers per lift that adapt to how the set went",
+        "Imports Strong and Hevy CSV exports",
+        "Exports everything as JSON or CSV, with automatic backups to a folder you choose",
+        "No account, no ads and no analytics, and it works offline"
+      ],
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Early access",
+          "description": "Every feature unlocked for everyone through 31 December 2026. No subscription, no payment details, nothing to redeem. The app is in closed testing, so access is by joining the tester group.",
+          "price": "0",
+          "priceCurrency": "EUR",
+          "priceValidUntil": "2026-12-31",
+          "availability": "https://schema.org/LimitedAvailability",
+          "url": "https://overload.icu/#price",
+          "seller": { "@id": "https://overload.icu/#developer" }
+        },
+        {
+          "@type": "Offer",
+          "name": "Subscription",
+          "description": "From 1 January 2027, a monthly subscription at EUR 1.99, with the first month free for new subscribers, billed by Google Play and cancellable any time. Without it the app keeps working on a free plan that keeps 3 templates and 1 program.",
+          "category": "Subscription",
+          "price": "1.99",
+          "priceCurrency": "EUR",
+          "validFrom": "2027-01-01",
+          "availability": "https://schema.org/InStock",
+          "url": "https://overload.icu/#price",
+          "seller": { "@id": "https://overload.icu/#developer" },
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": 1.99,
+            "priceCurrency": "EUR",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitCode": "MON",
+              "unitText": "month"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": ["WebPage", "FAQPage"],
+      "@id": "https://overload.icu/#webpage",
+      "url": "https://overload.icu/",
+      "name": "Overload: the gym log that tells you what weight to lift next",
+      "description": "A gym log that does progressive overload for you: log your reps and reps in reserve and it proposes the next weight, with its reasoning. Free until 2027.",
+      "isPartOf": { "@id": "https://overload.icu/#website" },
+      "about": { "@id": "https://overload.icu/#app" },
+      "primaryImageOfPage": "https://overload.icu/images/today.png",
+      "inLanguage": "en",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does it work offline?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Entirely. The only thing that needs a connection is checking your subscription with Google Play, and the last answer is remembered, so training in a basement gym is fine."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I have to log reps in reserve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is one tap per set, and it is what makes the proposals good. Skip it and the set is recorded at the target you planned for it, so the engine reads the workout as on plan. The honest tap is what earns you an accurate next weight. The linear rule ignores it either way, and sets imported from another app without an effort reading are progressed from reps alone."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I bring my history from another app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Strong and Hevy CSV exports import, and Overload matches them to your lifts. You can also import a previous Overload export. Here is how to import a CSV from another app."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a catch to it being free right now?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Early access is free for everyone until 31 December 2026. The app does not ask for a subscription or a payment method before then, and you are not signed up to anything that starts charging later. From 2027 the app falls back to the free plan unless you subscribe, and nothing you made is deleted either way."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens to my data if I stop paying?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nothing is deleted or hidden. You keep training on the free plan, and everything is still there, and still exportable, if you come back."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "iPhone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not yet. Overload is Android only."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where do the lift guides come from?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Two open datasets, the Free Exercise DB (public domain) and exercises-dataset (MIT), bundled as text at build time, with the sources credited in the app. No images are shipped and no network requests are made for them."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <div style="background:#0B0C0B;color:#F2F4EE;font-family:Barlow;min-height:100vh">
@@ -30,26 +210,26 @@ summary::-webkit-details-marker{display:none}details[open] summary span{transfor
 <main>
 <section style="padding:clamp(48px,7vw,96px) 24px clamp(64px,8vw,110px)"><div style="max-width:1120px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:56px;align-items:center">
 <div style="display:flex;flex-direction:column;gap:26px"><span style="font:500 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">Early access · Android</span>
-<h1 style="margin:0;font:700 clamp(48px,7vw,84px)/.95 'Barlow Condensed';letter-spacing:-.01em;text-wrap:balance">The training log that tells you what weight to lift next.</h1>
-<p style="margin:0;font:400 18px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty;font-size:19px">Most apps remember what you did. Overload reads it: your reps, and your reps in reserve (RIR), from your last workout. Then it proposes the next weight, with the reasoning written underneath. You still decide. You just stop guessing.</p>
+<h1 style="margin:0;font:700 clamp(48px,7vw,84px)/.95 'Barlow Condensed';letter-spacing:-.01em;text-wrap:balance">The gym log that tells you what weight to lift next.</h1>
+<p style="margin:0;font:400 18px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty;font-size:19px">Most workout trackers remember what you did. Overload reads it: your reps, and your reps in reserve (RIR), from your last workout. Then it proposes the next weight, with the reasoning written underneath. You still decide. You just stop guessing.</p>
 <div style="display:flex;flex-wrap:wrap;gap:10px"><a href="try.html" style="height:56px;padding:0 26px;border-radius:18px;background:#D6FF3E;color:#0C0E0B;font:600 17px/1 Barlow;display:inline-flex;align-items:center;text-decoration:none;box-shadow:0 6px 20px rgba(214,255,62,.22);white-space:nowrap" class="hvp">Try it in your browser</a><a href="#price" style="height:56px;padding:0 26px;border-radius:18px;background:#D6FF3E;color:#0C0E0B;font:600 17px/1 Barlow;display:inline-flex;align-items:center;text-decoration:none;white-space:nowrap;box-shadow:0 6px 20px rgba(214,255,62,.22)" class="hv7">What it costs</a><a href="#what" style="height:56px;padding:0 24px;border-radius:18px;background:#1F2320;color:#E4E8DC;font:500 17px/1 Barlow;display:inline-flex;align-items:center;text-decoration:none;white-space:nowrap" class="hv8">See what it does</a></div>
 <p style="margin:0;font:400 15px/1.5 Barlow;color:#9AA093">Free for everyone until 2027. No account. No ads. Your data never leaves your phone.</p></div>
-<div style="display:flex;flex-direction:column;align-items:center;gap:18px"><img src="images/today.png" alt="Overload: today screen" width="361" height="780" loading="eager" style="display:block;width:361px;max-width:100%;height:auto;border-radius:31px;box-shadow:0 0 0 7px #1c1d1c,0 30px 80px rgba(0,0,0,.55)"><span style="font:400 14px/1.4 Barlow;color:#8E948A;text-align:center">Want to try it first? <a href="try.html">Run the app in your browser</a>.</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:18px"><img src="images/today.webp" alt="The Overload Today screen, with the next workout and the weight proposed for each lift" width="361" height="780" loading="eager" fetchpriority="high" style="display:block;width:361px;max-width:100%;height:auto;border-radius:31px;box-shadow:0 0 0 7px #1c1d1c,0 30px 80px rgba(0,0,0,.55)"><span style="font:400 14px/1.4 Barlow;color:#8E948A;text-align:center">Want to try it first? <a href="try.html">Run the app in your browser</a>.</span></div>
 </div></section>
 <section style="padding:clamp(64px,9vw,120px) 24px;border-top:1px solid rgba(255,255,255,.06);border-top:0;padding-top:0"><div style="max-width:1120px;margin:0 auto"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:24px 48px;align-items:center;background:#202419;border:1px solid #3A4520;border-radius:24px;padding:clamp(24px,4vw,44px)"><div style="display:flex;flex-direction:column;gap:14px"><span style="font:500 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">Testers wanted</span><h2 style="margin:0;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'">Try it before it launches, free.</h2></div><div style="display:flex;flex-direction:column;gap:20px;align-items:flex-start"><p style="margin:0;font:400 18px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty;font-size:17px">Overload is in closed testing. Testers get every feature unlocked at no cost while the test runs, in exchange for training with it for a couple of weeks and telling me what breaks.</p><a href="testing.html" style="height:56px;padding:0 26px;border-radius:18px;background:#D6FF3E;color:#0C0E0B;font:600 17px/1 Barlow;display:inline-flex;align-items:center;text-decoration:none;white-space:nowrap;box-shadow:0 6px 20px rgba(214,255,62,.22)" class="hv9">Join the test</a></div></div></div></section>
 <section id="what" style="padding:clamp(64px,9vw,120px) 24px;border-top:1px solid rgba(255,255,255,.06);"><div style="max-width:1120px;margin:0 auto"><div style="display:flex;flex-direction:column;gap:18px;max-width:760px"><span style="font:500 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">What it does</span><h2 style="margin:0;font:700 clamp(36px,5vw,56px)/1 'Barlow Condensed';color:#F2F4EE;text-wrap:balance">Everything a workout needs, and nothing it doesn’t.</h2><p style="margin:0;font:400 18px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty;">Built for the gym floor: big numbers, one thumb, and no menu-diving between sets.</p></div>
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:56px 40px;margin-top:56px">
-<div style="display:flex;flex-direction:column;gap:22px;align-items:flex-start;min-width:0"><div style="align-self:center"><img src="images/live.png" alt="Overload: live screen" width="282" height="611" loading="lazy" style="display:block;width:282px;max-width:100%;height:auto;border-radius:24px;box-shadow:0 0 0 6px #1c1d1c,0 30px 80px rgba(0,0,0,.55)"></div><div style="display:flex;flex-direction:column;gap:10px"><h3 style="margin:0;font:700 26px/1.1 'Barlow Condensed';color:#F2F4EE">A workout screen you can read mid-set</h3><p style="margin:0;font:400 18px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty;font-size:16px">Weight and reps in huge type, the set rail across the top, and one button to log. Rest starts itself.</p></div></div>
-<div style="display:flex;flex-direction:column;gap:22px;align-items:flex-start;min-width:0"><div style="align-self:center"><img src="images/lift.png" alt="Overload: lift screen" width="282" height="611" loading="lazy" style="display:block;width:282px;max-width:100%;height:auto;border-radius:24px;box-shadow:0 0 0 6px #1c1d1c,0 30px 80px rgba(0,0,0,.55)"></div><div style="display:flex;flex-direction:column;gap:10px"><h3 style="margin:0;font:700 26px/1.1 'Barlow Condensed';color:#F2F4EE">Every lift, explained and charted</h3><p style="margin:0;font:400 18px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty;font-size:16px">Estimated 1RM over your last workouts, rep records, percentages, and step-by-step form notes for 1,577 lifts, bundled in the app.</p></div></div>
-<div style="display:flex;flex-direction:column;gap:22px;align-items:flex-start;min-width:0"><div style="align-self:center"><img src="images/stats.png" alt="Overload: stats screen" width="282" height="611" loading="lazy" style="display:block;width:282px;max-width:100%;height:auto;border-radius:24px;box-shadow:0 0 0 6px #1c1d1c,0 30px 80px rgba(0,0,0,.55)"></div><div style="display:flex;flex-direction:column;gap:10px"><h3 style="margin:0;font:700 26px/1.1 'Barlow Condensed';color:#F2F4EE">A week you can actually read</h3><p style="margin:0;font:400 18px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty;font-size:16px">Hard sets per muscle against a target, weekly tonnage, and a plain-English debrief that names the one thing worth fixing.</p></div></div>
+<div style="display:flex;flex-direction:column;gap:22px;align-items:flex-start;min-width:0"><div style="align-self:center"><img src="images/live.webp" alt="The Overload workout screen mid-set, with weight and reps in large type" width="282" height="611" loading="lazy" style="display:block;width:282px;max-width:100%;height:auto;border-radius:24px;box-shadow:0 0 0 6px #1c1d1c,0 30px 80px rgba(0,0,0,.55)"></div><div style="display:flex;flex-direction:column;gap:10px"><h3 style="margin:0;font:700 26px/1.1 'Barlow Condensed';color:#F2F4EE">A workout screen you can read mid-set</h3><p style="margin:0;font:400 18px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty;font-size:16px">Weight and reps in huge type, the set rail across the top, and one button to log. Rest starts itself.</p></div></div>
+<div style="display:flex;flex-direction:column;gap:22px;align-items:flex-start;min-width:0"><div style="align-self:center"><img src="images/lift.webp" alt="Estimated 1RM chart and rep records for one lift in Overload" width="282" height="611" loading="lazy" style="display:block;width:282px;max-width:100%;height:auto;border-radius:24px;box-shadow:0 0 0 6px #1c1d1c,0 30px 80px rgba(0,0,0,.55)"></div><div style="display:flex;flex-direction:column;gap:10px"><h3 style="margin:0;font:700 26px/1.1 'Barlow Condensed';color:#F2F4EE">Every lift, explained and charted</h3><p style="margin:0;font:400 18px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty;font-size:16px">Estimated 1RM over your last workouts, rep records, percentages, and step-by-step form notes for 1,577 lifts, bundled in the app.</p></div></div>
+<div style="display:flex;flex-direction:column;gap:22px;align-items:flex-start;min-width:0"><div style="align-self:center"><img src="images/stats.webp" alt="Weekly hard sets per muscle against a target in Overload" width="282" height="611" loading="lazy" style="display:block;width:282px;max-width:100%;height:auto;border-radius:24px;box-shadow:0 0 0 6px #1c1d1c,0 30px 80px rgba(0,0,0,.55)"></div><div style="display:flex;flex-direction:column;gap:10px"><h3 style="margin:0;font:700 26px/1.1 'Barlow Condensed';color:#F2F4EE">A week you can actually read</h3><p style="margin:0;font:400 18px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty;font-size:16px">Hard sets per muscle against a target, weekly tonnage, and a plain-English debrief that names the one thing worth fixing.</p></div></div>
 </div></div></section>
-<section id="engine" style="padding:clamp(64px,9vw,120px) 24px;border-top:1px solid rgba(255,255,255,.06);"><div style="max-width:1120px;margin:0 auto"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:56px;align-items:center"><div style="display:flex;flex-direction:column;gap:22px"><span style="font:500 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">The engine</span><h2 style="margin:0;font:700 clamp(36px,5vw,56px)/1 'Barlow Condensed';color:#F2F4EE;text-wrap:balance">It watches effort, not just numbers.</h2>
-<p style="margin:0;font:400 18px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty;">After each set you say how many reps you had left: your reps in reserve. Overload uses that the way a coach would: clear the rep ceiling or leave reps in reserve and the weight goes up; grind through two workouts under target and it proposes a step back before you stall.</p>
+<section id="engine" style="padding:clamp(64px,9vw,120px) 24px;border-top:1px solid rgba(255,255,255,.06);"><div style="max-width:1120px;margin:0 auto"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:56px;align-items:center"><div style="display:flex;flex-direction:column;gap:22px"><span style="font:500 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">Progressive overload</span><h2 style="margin:0;font:700 clamp(36px,5vw,56px)/1 'Barlow Condensed';color:#F2F4EE;text-wrap:balance">It watches effort, not just numbers.</h2>
+<p style="margin:0;font:400 18px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty;">After each set you say how many reps you had left: your reps in reserve. Overload turns that into progressive overload: clear the rep ceiling or leave reps in reserve and the weight goes up; grind through two workouts under target and it proposes a step back before you stall.</p>
 <div style="background:#202419;border:1px solid #3A4520;border-radius:18px;padding:18px 20px;display:flex;flex-direction:column;gap:10px"><div style="display:flex;align-items:center;gap:8px"><div style="width:7px;height:7px;border-radius:2px;background:#D6FF3E"></div><span style="flex:1;font:500 12px/1 Barlow;letter-spacing:.14em;color:#D6FF3E">NEXT TIME</span><span style="font:700 26px/1 'Barlow Condensed'">60 kg</span><span style="font:500 12px/1 Barlow;color:#C9CEC2;background:#1F2320;border-radius:6px;padding:4px 7px">holds</span></div><span style="font:400 17px/1.5 Barlow;color:#E4E8DC">Holds at 60 kg next time. Clear 11 reps on every set, or finish them at 3 in reserve, and it’s 62.5 kg.</span></div>
 <p style="margin:0;font:400 18px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty;">Every proposal shows its reason, so you always know why the number changed, and you can overrule it in one tap.</p>
 <div><div style="display:flex;gap:14px;padding:16px 0;border-top:1px solid rgba(255,255,255,.06)"><div style="width:7px;height:7px;border-radius:2px;background:#D6FF3E;margin-top:10px;flex:none"></div><p style="margin:0;font:400 17px/1.55 Barlow;color:#C9CEC2"><strong style="color:#F2F4EE;font-weight:600">Training blocks</strong> that get harder week by week, then deload, and the week only turns once you’ve done every workout in it.</p></div><div style="display:flex;gap:14px;padding:16px 0;border-top:1px solid rgba(255,255,255,.06)"><div style="width:7px;height:7px;border-radius:2px;background:#D6FF3E;margin-top:10px;flex:none"></div><p style="margin:0;font:400 17px/1.55 Barlow;color:#C9CEC2"><strong style="color:#F2F4EE;font-weight:600">First time on a lift?</strong> It finds your working weight in a few test sets instead of making you guess.</p></div><div style="display:flex;gap:14px;padding:16px 0;border-top:1px solid rgba(255,255,255,.06)"><div style="width:7px;height:7px;border-radius:2px;background:#D6FF3E;margin-top:10px;flex:none"></div><p style="margin:0;font:400 17px/1.55 Barlow;color:#C9CEC2"><strong style="color:#F2F4EE;font-weight:600">Warm-ups</strong> that ramp to the day’s weight, and shrink when the muscle is already warm.</p></div><div style="display:flex;gap:14px;padding:16px 0;border-top:1px solid rgba(255,255,255,.06)"><div style="width:7px;height:7px;border-radius:2px;background:#D6FF3E;margin-top:10px;flex:none"></div><p style="margin:0;font:400 17px/1.55 Barlow;color:#C9CEC2"><strong style="color:#F2F4EE;font-weight:600">Stall detection</strong> that watches four workouts back: no new estimated 1RM or top weight, and it offers a deload, a wider rep range, or a swap.</p></div><div style="display:flex;gap:14px;padding:16px 0;border-top:1px solid rgba(255,255,255,.06)"><div style="width:7px;height:7px;border-radius:2px;background:#D6FF3E;margin-top:10px;flex:none"></div><p style="margin:0;font:400 17px/1.55 Barlow;color:#C9CEC2"><strong style="color:#F2F4EE;font-weight:600">Supersets, drop sets, rest-pause, AMRAP, top set plus back-offs</strong>: all counted correctly.</p></div></div></div>
-<div style="display:flex;justify-content:center"><img src="images/summary.png" alt="Overload: summary screen" width="337" height="729" loading="lazy" style="display:block;width:337px;max-width:100%;height:auto;border-radius:29px;box-shadow:0 0 0 7px #1c1d1c,0 30px 80px rgba(0,0,0,.55)"></div></div></div></section>
-<section style="padding:clamp(64px,9vw,120px) 24px;border-top:1px solid rgba(255,255,255,.06);"><div style="max-width:1120px;margin:0 auto"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:56px;align-items:center"><div style="display:flex;justify-content:center;order:0"><img src="images/plans.png" alt="Overload: plans screen" width="337" height="729" loading="lazy" style="display:block;width:337px;max-width:100%;height:auto;border-radius:29px;box-shadow:0 0 0 7px #1c1d1c,0 30px 80px rgba(0,0,0,.55)"></div><div style="display:flex;flex-direction:column;gap:22px"><span style="font:500 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">Plans</span><h2 style="margin:0;font:700 clamp(36px,5vw,56px)/1 'Barlow Condensed';color:#F2F4EE;text-wrap:balance">Templates and programs that follow your week.</h2>
+<div style="display:flex;justify-content:center"><img src="images/summary.webp" alt="The Overload workout summary, with the weight proposed for next time and its reason" width="337" height="729" loading="lazy" style="display:block;width:337px;max-width:100%;height:auto;border-radius:29px;box-shadow:0 0 0 7px #1c1d1c,0 30px 80px rgba(0,0,0,.55)"></div></div></div></section>
+<section style="padding:clamp(64px,9vw,120px) 24px;border-top:1px solid rgba(255,255,255,.06);"><div style="max-width:1120px;margin:0 auto"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:56px;align-items:center"><div style="display:flex;justify-content:center;order:0"><img src="images/plans.webp" alt="Templates and programs for the training week in Overload" width="337" height="729" loading="lazy" style="display:block;width:337px;max-width:100%;height:auto;border-radius:29px;box-shadow:0 0 0 7px #1c1d1c,0 30px 80px rgba(0,0,0,.55)"></div><div style="display:flex;flex-direction:column;gap:22px"><span style="font:500 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">Strength training</span><h2 style="margin:0;font:700 clamp(36px,5vw,56px)/1 'Barlow Condensed';color:#F2F4EE;text-wrap:balance">Templates and programs that follow your week.</h2>
 <p style="margin:0;font:400 18px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty;">Build a template from your lifts with sets, rep range and target reps in reserve. Group templates into a program and Overload pins the next one on Today, tracks the rotation, and tells you what the week still owes.</p>
 <div><div style="display:flex;gap:14px;padding:16px 0;border-top:1px solid rgba(255,255,255,.06)"><div style="width:7px;height:7px;border-radius:2px;background:#D6FF3E;margin-top:10px;flex:none"></div><p style="margin:0;font:400 17px/1.55 Barlow;color:#C9CEC2">Rest timers per lift, adaptive to how the set went.</p></div><div style="display:flex;gap:14px;padding:16px 0;border-top:1px solid rgba(255,255,255,.06)"><div style="width:7px;height:7px;border-radius:2px;background:#D6FF3E;margin-top:10px;flex:none"></div><p style="margin:0;font:400 17px/1.55 Barlow;color:#C9CEC2">Blocks on a whole program, not just one workout.</p></div><div style="display:flex;gap:14px;padding:16px 0;border-top:1px solid rgba(255,255,255,.06)"><div style="width:7px;height:7px;border-radius:2px;background:#D6FF3E;margin-top:10px;flex:none"></div><p style="margin:0;font:400 17px/1.55 Barlow;color:#C9CEC2">An empty workout when you’d rather improvise.</p></div><div style="display:flex;gap:14px;padding:16px 0;border-top:1px solid rgba(255,255,255,.06)"><div style="width:7px;height:7px;border-radius:2px;background:#D6FF3E;margin-top:10px;flex:none"></div><p style="margin:0;font:400 17px/1.55 Barlow;color:#C9CEC2">Swap a lift when a machine is taken; your history follows.</p></div></div></div></div></div></section>
 <section style="padding:clamp(64px,9vw,120px) 24px;border-top:1px solid rgba(255,255,255,.06);"><div style="max-width:1120px;margin:0 auto"><div style="display:flex;flex-direction:column;gap:18px"><span style="font:500 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">Your data</span><h2 style="margin:0;font:700 clamp(36px,5vw,56px)/1 'Barlow Condensed';color:#F2F4EE;text-wrap:balance">It stays on your phone. All of it.</h2></div>
@@ -71,7 +251,7 @@ summary::-webkit-details-marker{display:none}details[open] summary span{transfor
 <section id="faq" style="padding:clamp(64px,9vw,120px) 24px;border-top:1px solid rgba(255,255,255,.06);"><div style="max-width:1120px;margin:0 auto"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:40px 64px"><div style="display:flex;flex-direction:column;gap:18px"><span style="font:500 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">FAQ</span><h2 style="margin:0;font:700 clamp(36px,5vw,56px)/1 'Barlow Condensed';color:#F2F4EE;text-wrap:balance">Questions worth answering.</h2></div><div>
 <details style="border-top:1px solid rgba(255,255,255,.06);padding:4px 0"><summary style="cursor:pointer;padding:18px 0;font:500 19px/1.3 Barlow;color:#F2F4EE;list-style:none;display:flex;justify-content:space-between;gap:16px">Does it work offline?<span style="color:#9AA093;font-weight:400">+</span></summary><p style="margin:0 0 20px;font:400 17px/1.6 Barlow;color:#C9CEC2;max-width:680px">Entirely. The only thing that needs a connection is checking your subscription with Google Play, and the last answer is remembered, so training in a basement gym is fine.</p></details>
 <details style="border-top:1px solid rgba(255,255,255,.06);padding:4px 0"><summary style="cursor:pointer;padding:18px 0;font:500 19px/1.3 Barlow;color:#F2F4EE;list-style:none;display:flex;justify-content:space-between;gap:16px">Do I have to log reps in reserve?<span style="color:#9AA093;font-weight:400">+</span></summary><p style="margin:0 0 20px;font:400 17px/1.6 Barlow;color:#C9CEC2;max-width:680px">It is one tap per set, and it is what makes the proposals good. Skip it and the set is recorded at the target you planned for it, so the engine reads the workout as on plan. The honest tap is what earns you an accurate next weight. The linear rule ignores it either way, and sets imported from another app without an effort reading are progressed from reps alone.</p></details>
-<details style="border-top:1px solid rgba(255,255,255,.06);padding:4px 0"><summary style="cursor:pointer;padding:18px 0;font:500 19px/1.3 Barlow;color:#F2F4EE;list-style:none;display:flex;justify-content:space-between;gap:16px">Can I bring my history from another app?<span style="color:#9AA093;font-weight:400">+</span></summary><p style="margin:0 0 20px;font:400 17px/1.6 Barlow;color:#C9CEC2;max-width:680px">Yes. Strong and Hevy CSV exports import, and Overload matches them to your lifts. You can also import a previous Overload export.</p></details>
+<details style="border-top:1px solid rgba(255,255,255,.06);padding:4px 0"><summary style="cursor:pointer;padding:18px 0;font:500 19px/1.3 Barlow;color:#F2F4EE;list-style:none;display:flex;justify-content:space-between;gap:16px">Can I bring my history from another app?<span style="color:#9AA093;font-weight:400">+</span></summary><p style="margin:0 0 20px;font:400 17px/1.6 Barlow;color:#C9CEC2;max-width:680px">Yes. Strong and Hevy CSV exports import, and Overload matches them to your lifts. You can also import a previous Overload export. Here is <a href="support.html">how to import a CSV from another app</a>.</p></details>
 <details style="border-top:1px solid rgba(255,255,255,.06);padding:4px 0"><summary style="cursor:pointer;padding:18px 0;font:500 19px/1.3 Barlow;color:#F2F4EE;list-style:none;display:flex;justify-content:space-between;gap:16px">Is there a catch to it being free right now?<span style="color:#9AA093;font-weight:400">+</span></summary><p style="margin:0 0 20px;font:400 17px/1.6 Barlow;color:#C9CEC2;max-width:680px">No. Early access is free for everyone until 31 December 2026. The app does not ask for a subscription or a payment method before then, and you are not signed up to anything that starts charging later. From 2027 the app falls back to the free plan unless you subscribe, and nothing you made is deleted either way.</p></details>
 <details style="border-top:1px solid rgba(255,255,255,.06);padding:4px 0"><summary style="cursor:pointer;padding:18px 0;font:500 19px/1.3 Barlow;color:#F2F4EE;list-style:none;display:flex;justify-content:space-between;gap:16px">What happens to my data if I stop paying?<span style="color:#9AA093;font-weight:400">+</span></summary><p style="margin:0 0 20px;font:400 17px/1.6 Barlow;color:#C9CEC2;max-width:680px">Nothing is deleted or hidden. You keep training on the free plan, and everything is still there, and still exportable, if you come back.</p></details>
 <details style="border-top:1px solid rgba(255,255,255,.06);padding:4px 0"><summary style="cursor:pointer;padding:18px 0;font:500 19px/1.3 Barlow;color:#F2F4EE;list-style:none;display:flex;justify-content:space-between;gap:16px">iPhone?<span style="color:#9AA093;font-weight:400">+</span></summary><p style="margin:0 0 20px;font:400 17px/1.6 Barlow;color:#C9CEC2;max-width:680px">Not yet. Overload is Android only.</p></details>

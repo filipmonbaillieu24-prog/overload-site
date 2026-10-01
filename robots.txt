@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /README.md
+
+Sitemap: https://overload.icu/sitemap.xml
