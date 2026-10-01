@@ -23,9 +23,14 @@ privacy policy at a public URL, and because a paid app needs somewhere to explai
 
 `app/Overload App.dc.html` deliberately declares no `@font-face`. It is mounted into
 `try.html` by the component runtime, which resolves the component's relative URLs against the
-origin root rather than the page — so `fonts/…` inside it reaches `/fonts/…` and 404s on a
+origin root rather than the page, so `fonts/…` inside it reaches `/fonts/…`. That 404s on a
 project page like `/overload-site/`. `try.html` already declares the same five faces, with the
 same family names, and the mounted app inherits them.
+
+The fix was deliberately built from `document.baseURI` rather than a hard-coded `/overload-site/`
+prefix, so it survived the move to the `overload.icu` custom domain, where the site is served from
+the origin root and the prefix is gone. Keep it that way: a hard-coded prefix would have to be
+found and removed again at the next domain change.
 
 If the app file is re-synced from the design project, strip its `@font-face` block again.
 
