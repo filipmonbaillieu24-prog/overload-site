@@ -32,7 +32,7 @@ If the app file is re-synced from the design project, strip its `@font-face` blo
 ## Changes made to the prototype files here
 
 `app/overload-core.js` and `app/Overload App.dc.html` come from the design project, so a re-sync
-will overwrite them. Three changes were made after the handoff and need re-applying if that
+will overwrite them. Four changes were made after the handoff and need re-applying if that
 happens (they are also in `design_handoff_overload_site/site/app/`):
 
 1. **No `@font-face` in the app file** — see above.
@@ -41,5 +41,11 @@ happens (they are also in `design_handoff_overload_site/site/app/`):
 3. **Edit mode keeps the set rows.** The session screen dropped to wrapped chips while editing,
    and a chip has no room for the NEW BEST badge — so correcting a typo hid the records. Edit mode
    now rings the same rows and adds a pencil. `rows` gained the `tap` the chips had.
+4. **The step is sized from the session.** `outlook` in `overload-core.js` took `avg - target`
+   steps of `l.step`, which is 5% on a barbell and 50% on a light dumbbell — so the demo proposed
+   jumps the app no longer makes. It now refuses a step that its own numbers say would drop the
+   reps out of their range, and says so, mirroring `Engine.propose`'s `earned`. This one is
+   load-bearing for honesty: `try.html`'s "How the next weight is chosen" describes the new rule,
+   so a re-sync that dropped this would leave the page describing an engine the demo does not run.
 
-Changes 2 and 3 match the Android app (1.4, versionCode 13), which is the source of truth.
+Changes 2, 3 and 4 match the Android app, which is the source of truth.

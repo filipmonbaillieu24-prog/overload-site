@@ -173,8 +173,26 @@ function outlook(l, p, sets, final) {
   if (!sets.length) return hold(`Nothing logged, so nothing moves. It proposes ${fmt(W)} ${u} again.`);
   const avg = Math.floor(sets.reduce((a, s) => a + s.rir, 0) / sets.length), top = sets.every(s => s.r >= p.hi);
   if (avg < t) return hold(`Under target: ${final ? 'these averaged' : 'that averages'} ${avg} in reserve against ${t}. It holds at ${fmt(W)} ${u}, and a second session like this proposes a deload.`, true);
-  let st = top ? 1 : 0;
-  if (avg >= t + 2) st = 2; else if (avg >= t + 1) st = Math.max(st, 1);
+  let want = top ? 1 : 0;
+  if (avg >= t + 2) want = 2; else if (avg >= t + 1) want = Math.max(want, 1);
+  // How far this session's own numbers will carry the step, which is not the same as how many the
+  // rule asked for. Reserve is counted in reps and the ladder moves in kilos, so "two in hand, two
+  // steps up" is 5% on a barbell and 50% on a light dumbbell. The best set implies a one-rep max
+  // (Epley, counting reserve as reps), that says how many reps the next weight up would allow at
+  // the reserve being aimed for, and the step is only taken while that stays inside the rep range.
+  // Mirrors Engine.propose's `earned` in the Android app, which is the source of truth.
+  const oneRm = Math.max(...sets.map(x => x.w * (1 + (x.r + x.rir) / 30)));
+  let st = 0;
+  while (st < want) {
+    const cand = W + (st + 1) * l.step;
+    if (cand <= 0 || 30 * (oneRm / cand - 1) - t < p.lo) break;
+    st++;
+  }
+  // Clearing the rep range earns the weight whatever the arithmetic thinks: there is no rep left
+  // to add once you are at the top of it, so the first step is never sized away. Only a
+  // reserve-driven step can be.
+  if (top) st = Math.max(st, 1);
+  if (!st && want) return hold(`${fmt(l.step)} ${u} more would drop you under ${p.lo} reps, so it holds at ${fmt(W)} ${u}. Add a rep instead.`);
   if (st) {
     const nw = W + st * l.step, d = '+' + fmt(st * l.step);
     const why = final
