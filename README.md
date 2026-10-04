@@ -1,11 +1,11 @@
-# Overload — the public site
+# REGOL — the public site
 
 Four static pages, no build step, no dependencies. They exist because Google Play requires a
 privacy policy at a public URL, and because a paid app needs somewhere to explain itself.
 
 | File | What it is |
 |---|---|
-| `index.html` | What Overload is, what it costs, early access |
+| `index.html` | What REGOL is, what it costs, early access |
 | `privacy.html` | **The URL Play asks for.** What the app stores and the three ways data can leave it |
 | `terms.html` | Free plan, subscription, early access, training sense |
 | `support.html` | Contact, backups, moving phones, subscription questions |
@@ -36,7 +36,7 @@ project page like `/overload-site/`. `try.html` already declares the same five f
 same family names, and the mounted app inherits them.
 
 The fix was deliberately built from `document.baseURI` rather than a hard-coded `/overload-site/`
-prefix, so it survived the move to the `overload.icu` custom domain, where the site is served from
+prefix, so it survived the move to the `regolapp.be` custom domain, where the site is served from
 the origin root and the prefix is gone. Keep it that way: a hard-coded prefix would have to be
 found and removed again at the next domain change.
 
@@ -46,7 +46,7 @@ If the app file is re-synced from the design project, strip its `@font-face` blo
 
 `CNAME` is what makes GitHub Pages 301 every old
 `filipmonbaillieu24-prog.github.io/overload-site/...` URL to its exact counterpart on
-overload.icu. The redirect preserves the path, which is the ideal case: every old URL maps to
+regolapp.be. The redirect preserves the path, which is the ideal case: every old URL maps to
 its own counterpart rather than dumping everything on the home page, so Google transfers the
 signals and drops the old URLs over a few weeks with nothing else to do. Deleting `CNAME`, or
 renaming the repository, silently breaks that redirect and the old links start 404ing instead
@@ -77,7 +77,7 @@ happens (they are also in `design_handoff_overload_site/site/app/`):
    load-bearing for honesty: `try.html`'s "How the next weight is chosen" describes the new rule,
    so a re-sync that dropped this would leave the page describing an engine the demo does not run.
 5. **`meta robots noindex` in the app file's head.** `app/Overload App.dc.html` is a complete HTML
-   document, so GitHub Pages serves it at `/app/Overload%20App.dc.html` as a page with no title.
+   document, so GitHub Pages serves it at `/app/REGOL%20App.dc.html` as a page with no title.
    Its head carries `<meta name="robots" content="noindex">` and a `<title>` for that reason.
    Unlike the others, losing this one is silent: nothing breaks, the file just quietly becomes
    indexable again.
@@ -87,7 +87,7 @@ Changes 2, 3 and 4 match the Android app, which is the source of truth.
 ## Structured data: the dated fields
 
 `index.html` carries a JSON-LD `@graph` that declares the app entity once, as
-`https://overload.icu/#app`. Every other page references it by `@id`, so these values are edited
+`https://regolapp.be/#app`. Every other page references it by `@id`, so these values are edited
 in one file only. Five of them go stale on known triggers and nothing checks them
 automatically, so they are listed here.
 
@@ -112,6 +112,6 @@ a structured-data manual action for. There is no honest placeholder either: `rat
 figure is live, the listing is public, and the same number is visible to a human on
 `index.html`, and then update both together or neither.
 
-The `#developer` node is an `Organization` named "Overload" rather than a `Person`, because the
+The `#developer` node is an `Organization` named "REGOL" rather than a `Person`, because the
 personal name appears nowhere in human-readable text on the site. Swapping it for a `Person`
 is a one-node change, since every reference is by `@id`.

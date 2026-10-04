@@ -1,8 +1,8 @@
 blank_issues_enabled: true
 contact_links:
   - name: Email instead
-    url: mailto:support.overload@gmail.com
+    url: mailto:support@regolapp.be
     about: Prefer not to use GitHub, or have something private to send? Write to me directly.
   - name: Privacy, terms and support pages
-    url: https://overload.icu/support.html
+    url: https://regolapp.be/support.html
     about: Backups, moving phones, subscriptions and the rest.
