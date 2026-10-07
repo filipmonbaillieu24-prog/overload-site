@@ -134,6 +134,16 @@ export function tick(s, f) {
 }
 
 // The engine's voice: what a lift's logged (or projected) sets mean for next time.
+/**
+ * Reps of the rep range a step is allowed to cost beyond its bottom, before it counts as too big a
+ * jump for the lift to carry. Engine.SLACK in the Android app. Demanding that the next rung still
+ * sustain the bottom of the range at the full target reserve sounds careful and is not: on an 8-10
+ * range only a top-of-range session could ever earn a step, which quietly turns the reserve rule
+ * into double progression. Two reps of room keeps the ordinary case working and is still nothing
+ * like enough to let a 10 kg dumbbell jump to 12.5.
+ */
+const SLACK = 2;
+
 function outlook(l, p, sets, final) {
   sets = sets.filter(x => x.k !== 'drop' && x.k !== 'rp' && x.k !== 'warm');
   const W = sets.length ? sets[sets.length - 1].w : l.W, u = l.unit, t = p.rir;
@@ -141,8 +151,28 @@ function outlook(l, p, sets, final) {
   if (!sets.length) return hold(`Nothing logged, so nothing moves. It proposes ${fmt(W)} ${u} again.`);
   const avg = Math.floor(sets.reduce((a, s) => a + s.rir, 0) / sets.length), top = sets.every(s => s.r >= p.hi);
   if (avg < t) return hold(`Under target: ${final ? 'these averaged' : 'that averages'} ${avg} in reserve against ${t}. It holds at ${fmt(W)} ${u}, and a second session like this proposes a deload.`, true);
-  let st = top ? 1 : 0;
-  if (avg >= t + 2) st = 2; else if (avg >= t + 1) st = Math.max(st, 1);
+  // What the reserve reading asks for, which is not yet what the lift can carry.
+  let want = top ? 1 : 0;
+  if (avg >= t + 2) want = 2; else if (avg >= t + 1) want = Math.max(want, 1);
+  // Engine.earned in the Android app, which is the source of truth: a step must not land the lift
+  // outside its own rep range. Reserve is counted in reps and the ladder moves in kilos, so "two in
+  // hand, two steps up" is 5% on a barbell and 50% on a light dumbbell. The session's best set
+  // implies a one-rep max (Epley, counting reserve as reps), that says how many reps the candidate
+  // weight would allow at the reserve being aimed for, and the step is taken only while that stays
+  // within SLACK reps of the bottom of the range. Weighted lifts only there; every lift in this
+  // demo is weighted, so there is nothing to guard here.
+  const oneRm = Math.max(...sets.map(x => x.w * (1 + (x.r + x.rir) / 30)));
+  let st = 0;
+  while (st < want) {
+    const cand = W + (st + 1) * l.step;
+    if (cand <= 0 || 30 * (oneRm / cand - 1) - t < p.lo - SLACK) break;
+    st++;
+  }
+  // Only a step sized from what was left in reserve may shrink. Clearing the rep range is a
+  // prescription about reps rather than an estimate, and there is no rep left to add once you are
+  // past the top of the range, so that step is never sized away.
+  if (top) st = Math.max(st, 1);
+  if (!st && want) return hold(`${fmt(l.step)} ${u} more would leave you well short of ${p.lo} reps, so it holds at ${fmt(W)} ${u}. Add a rep instead.`);
   if (st) {
     const nw = W + st * l.step, d = '+' + fmt(st * l.step);
     const why = final
@@ -437,7 +467,12 @@ export function view(s, set, variant) {
       logLabel: it ? `Log ${fmt(cw)} ${l.unit} × ${cr} @ ${rirTxt(crir)}` : '', logLabel2: it ? `Log set ${si + 1} · ${fmt(cw)} ${l.unit} × ${cr}` : '',
       log: () => { if (!it) return; if (s.set.logKind !== 'none') playSound(s.set.logKind, s.set.volume / 100); if (s.set.haptic && navigator.vibrate) navigator.vibrate(15); updL(x => { const n = it.logged.length + 1, rest0 = it.rest ?? s.set.rest;
         const rest = s.set.adaptive ? Math.max(45, Math.min(300, rest0 + (crir === 0 ? 30 : crir >= it.rir + 2 ? -30 : 0))) : rest0;
-        return { items: x.items.map(y => y.lift === it.lift ? { ...y, extra: y.extra + ((x.pend.k || 'normal') === 'warm' ? 1 : 0), logged: [...y.logged, { w: cw, r: cr, rir: crir, k: x.pend.k || 'normal' }] } : y), pend: {}, rest, restTotal: rest, restWho: `${l.name}, set ${n} logged` }; }); },
+        const items = x.items.map(y => y.lift === it.lift ? { ...y, extra: y.extra + ((x.pend.k || 'normal') === 'warm' ? 1 : 0), logged: [...y.logged, { w: cw, r: cr, rir: crir, k: x.pend.k || 'normal' }] } : y);
+        // Rest is for the set that comes next. On the last set of the workout there is none, and
+        // the dock's job is to offer Finish rather than count down two minutes at someone already
+        // putting their shoes on. Mirrors Repo.check's anythingLeft branch in the Android app.
+        const more = items.some(y => y.logged.length < total(y));
+        return { items, pend: {}, rest: more ? rest : 0, restTotal: more ? rest : 0, restWho: more ? `${l.name}, set ${n} logged` : '' }; }); },
       restTxt: mmss(lvS.rest), restWho: lvS.restWho, restPct: Math.round(lvS.rest / Math.max(1, lvS.restTotal) * 100),
       nextLine: it ? `Next: ${l.name}, set ${si + 1} · ${fmt(cw)} ${l.unit} × ${cr}` : '',
       plus30: () => updL(x => ({ rest: x.rest + 30, restTotal: x.restTotal + 30 })), skip: () => updL(() => ({ rest: 0 })),

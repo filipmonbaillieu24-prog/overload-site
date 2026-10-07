@@ -79,25 +79,35 @@ placed in the repo would itself be 301'd), and no removal request for the old gi
 ## Changes made to the prototype files here
 
 `REGOL.dc.html` and `overload-core.js` come from the design project, so every re-sync overwrites
-them. Three changes were made here on top of the October 2026 handover and need re-applying
-after the next one. Check them against `design_handoff_regol_site/site/` before you push.
+them. Three changes were made here on top of the October 2026 handover and need re-applying after
+the next one. All three are in place today. Check them against `design_handoff_regol_site/site/`
+before you push.
 
 1. **`meta robots noindex` in the app file's head.** `REGOL.dc.html` is a complete HTML document,
    so GitHub Pages serves it at `/REGOL.dc.html` as a page. Its head carries
    `<meta name="robots" content="noindex">` and a `<title>` for that reason. Losing this one is
    silent: nothing breaks, the file just quietly becomes indexable again. **Re-applied.**
-2. **No rest timer after the last set.** `lv.log` in `overload-core.js` sets `rest`
-   unconditionally, including on the set that ends the workout. It should only start rest while a
-   set is still unlogged. **Not re-applied in the October 2026 handover.**
-3. **The step is sized from the session.** `outlook` in `overload-core.js` takes `avg - target`
-   steps of `l.step`, which is 5% on a barbell and 50% on a light dumbbell, so the demo proposes
-   jumps the app does not make. It should refuse a step its own numbers say would drop the reps
-   out of their range, mirroring `Engine.propose`'s `earned` in the Android app, which is the
-   source of truth. This one is load-bearing for honesty: `try.html`'s "How the next weight is
-   chosen" describes the earned-step rule in so many words ("will not take a step that would drop
-   your reps out of their range ... one easy session on a 10 kg dumbbell is never answered with
-   12.5 kg"), so while it is missing the page describes an engine the demo does not run.
-   **Not re-applied in the October 2026 handover.**
+2. **No rest timer after the last set.** The handover's `lv.log` in `overload-core.js` set `rest`
+   unconditionally, including on the set that ends the workout. It now starts rest only while a set
+   is still unlogged, so the dock offers Finish instead of counting down two minutes at someone
+   already putting their shoes on. Mirrors the `anythingLeft` branch of `Repo.check` in the Android
+   app.
+3. **The step is sized from the session.** The handover's `outlook` in `overload-core.js` took
+   `avg - target` steps of `l.step`, which is 5% on a barbell and 50% on a light dumbbell, so the
+   demo proposed jumps the app does not make. It now separates what the reserve reading asks for
+   from what the ladder allows: the session's best set implies a one-rep max (Epley, counting
+   reserve as reps), that says how many reps the candidate weight would allow at the reserve being
+   aimed for, and the step is taken only while that stays within `SLACK` reps of the bottom of the
+   range. A step earned by clearing the rep range is never sized away, because there is no rep left
+   to add once you are past the top of it. Mirrors `Engine.earned` and the `sized` flag in the
+   Android app, which is the source of truth, **including `SLACK = 2`**: an earlier version of this
+   patch demanded the full rep range and so was stricter than the engine, which quietly turns the
+   reserve rule into double progression on an 8-10 range.
+
+   This one is load-bearing for honesty: `try.html`'s "How the next weight is chosen" describes the
+   earned-step rule in so many words ("will not take a step that would drop your reps out of their
+   range ... one easy session on a 10 kg dumbbell is never answered with 12.5 kg"), so without it
+   the page describes an engine the demo does not run.
 
 A fourth change, stripping the app file's `@font-face` block, is no longer needed: see "The app
 component and fonts" above.
