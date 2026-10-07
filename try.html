@@ -3,44 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Try the REGOL gym log in your browser</title>
 <link rel="canonical" href="https://regolapp.be/try.html">
-<meta name="description" content="The whole REGOL app running in your browser, with a guided tour and every rule the progressive overload engine follows. Nothing to install, no account.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="REGOL">
 <meta property="og:url" content="https://regolapp.be/try.html">
-<meta property="og:title" content="Try the REGOL gym log in your browser">
-<meta property="og:description" content="The whole REGOL app running in your browser, with a guided tour and every rule the progressive overload engine follows. Nothing to install, no account.">
-<meta property="og:image" content="https://regolapp.be/images/today.png">
-<meta property="og:image:alt" content="The REGOL app showing the next working weight proposed from your reps and reps in reserve.">
+<meta property="og:title" content="Try REGOL in your browser">
+<meta property="og:description" content="The whole REGOL app, running in your browser with twelve weeks of made-up training. Nothing to install, no account.">
+<meta property="og:image" content="https://regolapp.be/images/og.jpg">
+<meta property="og:image:alt" content="The REGOL mark beside the headline &quot;Progressive overload, worked out for you.&quot; and the app mid-set.">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108 108'><rect width='108' height='108' rx='24' fill='%230b0c0b'/><circle cx='54' cy='54' r='18' fill='none' stroke='%23d6ff3e' stroke-width='7.2'/><rect y='49' width='108' height='10' fill='%230b0c0b'/><rect y='52.2' width='108' height='3.6' fill='%23d6ff3e'/></svg>">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<script src="./app/support.js"></script>
-<script>
-/* The five faces, with absolute URLs.
-   The component runtime re-resolves a mounted component's relative URLs against the origin root
-   rather than this page, so a static @font-face with "fonts/x.ttf" is fetched twice: once
-   correctly for the page and once as /fonts/x.ttf, which 404s on a project page. Resolving
-   against document.baseURI here gives one absolute URL that survives re-resolution, and keeps
-   working if the site ever moves to its own domain. */
-(function () {
-  var f = [
-    ['Barlow', 400, 'barlow_regular'],
-    ['Barlow', 500, 'barlow_medium'],
-    ['Barlow', 600, 'barlow_semibold'],
-    ['Barlow Condensed', 600, 'barlow_condensed_semibold'],
-    ['Barlow Condensed', 700, 'barlow_condensed_bold']
-  ];
-  var css = f.map(function (x) {
-    var u = new URL('fonts/' + x[2] + '.ttf', document.baseURI).href;
-    return "@font-face{font-family:'" + x[0] + "';src:url(" + u + ");font-weight:" + x[1] + ";font-display:swap}";
-  }).join('');
-  var el = document.createElement('style');
-  el.textContent = css;
-  document.head.appendChild(el);
-})();
-</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -79,58 +51,114 @@
   ]
 }
 </script>
+<script src="./support.js"></script>
 </head>
 <body>
+<noscript>
+<h1>The whole app, running here. Nothing to install.</h1>
+<p>This is REGOL with twelve weeks of made-up training behind it. Tap through it as you would on your phone. The tour explains what each screen is for and can jump you straight to it. Nothing you do here is saved.</p>
+<p>The demo is the real app, so this page needs JavaScript.</p>
+<ul>
+<li><a href="./">Home</a></li>
+<li><a href="testing.html">Join the test</a></li>
+<li><a href="roadmap.html">Roadmap</a></li>
+<li><a href="report.html">Report a bug</a></li>
+<li><a href="privacy.html">Privacy</a></li>
+<li><a href="terms.html">Terms</a></li>
+<li><a href="support.html">Support</a></li>
+<li><a href="mailto:support@regolapp.be">support@regolapp.be</a></li>
+</ul>
+</noscript>
 <x-dc>
-<helmet><style>
-
-
-
-
-
-html{scroll-behavior:smooth}body{margin:0;background:#0B0C0B;-webkit-font-smoothing:antialiased}
+<helmet><title>Try REGOL in your browser</title><meta name="description" content="The whole REGOL app, running in your browser with twelve weeks of made-up training. Nothing to install."><style>
+@font-face{font-family:Barlow;src:url(fonts/barlow_regular.ttf);font-weight:400}
+@font-face{font-family:Barlow;src:url(fonts/barlow_medium.ttf);font-weight:500}
+@font-face{font-family:Barlow;src:url(fonts/barlow_semibold.ttf);font-weight:600}
+@font-face{font-family:'Barlow Condensed';src:url(fonts/barlow_condensed_semibold.ttf);font-weight:600}
+@font-face{font-family:'Barlow Condensed';src:url(fonts/barlow_condensed_bold.ttf);font-weight:700}
+body{margin:0;background:#0B0C0B !important;display:block !important;min-height:0 !important;color:#F2F4EE;-webkit-font-smoothing:antialiased}
 a{color:#D6FF3E;text-underline-offset:3px}a:hover{color:#E6FF7A}
-summary::-webkit-details-marker{display:none}
-@media (max-width:900px){.try-grid{grid-template-columns:1fr !important}.try-phone{position:static !important}}
+details>summary{list-style:none}details>summary::-webkit-details-marker{display:none}
+details[open] .faqplus{transform:rotate(45deg)}
 </style></helmet>
-<div style="background:#0B0C0B;color:#F2F4EE;font-family:Barlow;min-height:100vh">
-<header style="position:sticky;top:0;z-index:10;background:rgba(11,12,11,.86);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06)"><div style="max-width:1120px;margin:0 auto;padding:14px 24px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 24px">
-<a href="./" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:#F2F4EE;font:700 24px/1 'Barlow Condensed'"><svg width="28" height="28" viewBox="0 0 108 108" aria-hidden="true"><rect width="108" height="108" rx="24" fill="#161917"></rect><circle cx="54" cy="54" r="18" fill="none" stroke="#d6ff3e" stroke-width="7.2"></circle><rect y="49" width="108" height="10" fill="#161917"></rect><rect y="52.2" width="108" height="3.6" fill="#d6ff3e"></rect></svg>REGOL</a><span style="flex:1"></span>
-<nav style="display:flex;flex-wrap:wrap;gap:4px 20px"><a href="./" style="font:500 15px/1 Barlow;color:#9AA093;text-decoration:none;padding:10px 0" style-hover="color:#F2F4EE">Home</a><a href="try.html" style="font:500 15px/1 Barlow;color:#F2F4EE;text-decoration:none;padding:10px 0" style-hover="color:#F2F4EE">Try it</a><a href="testing.html" style="font:500 15px/1 Barlow;color:#9AA093;text-decoration:none;padding:10px 0" style-hover="color:#F2F4EE">Join the test</a><a href="roadmap.html" style="font:500 15px/1 Barlow;color:#9AA093;text-decoration:none;padding:10px 0" style-hover="color:#F2F4EE">Roadmap</a><a href="report.html" style="font:500 15px/1 Barlow;color:#9AA093;text-decoration:none;padding:10px 0" style-hover="color:#F2F4EE">Report</a><a href="privacy.html" style="font:500 15px/1 Barlow;color:#9AA093;text-decoration:none;padding:10px 0" style-hover="color:#F2F4EE">Privacy</a><a href="support.html" style="font:500 15px/1 Barlow;color:#9AA093;text-decoration:none;padding:10px 0" style-hover="color:#F2F4EE">Support</a></nav></div></header>
-<main style="max-width:1120px;margin:0 auto;padding:clamp(40px,6vw,72px) 24px 96px">
-<div style="display:flex;flex-direction:column;gap:18px;max-width:760px"><span style="font:500 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">Try it · in your browser</span><h1 style="margin:0;font:700 clamp(44px,6.5vw,76px)/.95 'Barlow Condensed';letter-spacing:-.01em;text-wrap:balance">The whole app, running here. Nothing to install.</h1>
-<p style="margin:0;font:400 19px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">This is REGOL with twelve weeks of made-up training behind it. Tap through it as you would on your phone. The tour explains what each screen is for and can jump you straight to it. Nothing you do here is saved.</p></div>
-<div class="try-grid" style="display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr);gap:48px 64px;align-items:start;margin-top:48px">
-<div class="try-phone" style="position:sticky;top:96px;display:flex;flex-direction:column;align-items:center;gap:16px">
-<div style="width:392px;max-width:100%;height:848px;border-radius:34px;box-shadow:0 0 0 8px #1c1d1c,0 30px 80px rgba(0,0,0,.55);overflow:hidden"><dc-import name="app/Overload App" scene="{{ scene }}" seed="{{ seed }}" embedded="{{ true }}" fast-rest="{{ true }}" hint-size="392px,848px"></dc-import></div>
-<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center"><div onClick="{{ reset }}" style="height:44px;padding:0 16px;border-radius:14px;background:#1F2320;display:flex;align-items:center;font:500 15px/1 Barlow;color:#E4E8DC;cursor:pointer" style-hover="background:#262A26">Start over</div><span style="font:400 14px/1.4 Barlow;color:#8E948A;align-self:center">Rest timers run 10× faster here.</span></div>
+<div style="font-family:Barlow;color:#F2F4EE;background:#0B0C0B;overflow-x:hidden;min-height:100vh">
+
+<header style="position:sticky;top:0;z-index:10;background:rgba(11,12,11,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06)"><div style="max-width:1200px;margin:0 auto;padding:14px 24px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 28px">
+<a href="./" style="display:flex;align-items:center;gap:10px;color:#F2F4EE;text-decoration:none;font:700 26px/1 'Barlow Condensed';letter-spacing:.02em"><svg width="30" height="30" viewBox="0 0 108 108" aria-hidden="true"><rect width="108" height="108" rx="24" fill="#161917"></rect><circle cx="54" cy="54" r="18" fill="none" stroke="#d6ff3e" stroke-width="7.2"></circle><rect y="49" width="108" height="10" fill="#161917"></rect><rect y="52.2" width="108" height="3.6" fill="#d6ff3e"></rect></svg>REGOL</a>
+<span style="flex:1"></span>
+<nav style="display:flex;flex-wrap:wrap;gap:4px"><sc-for list="{{ nav }}" as="l" hint-placeholder-count="7"><sc-if value="{{ l.on }}" hint-placeholder-val="{{ false }}"><a href="{{ l.h }}" style="height:38px;padding:0 14px;border-radius:19px;background:#1F2320;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;font:600 14.5px/1 Barlow;white-space:nowrap">{{ l.t }}</a></sc-if><sc-if value="{{ l.off }}" hint-placeholder-val="{{ true }}"><a href="{{ l.h }}" style="height:38px;padding:0 14px;border-radius:19px;color:#C9CEC2;text-decoration:none;display:flex;align-items:center;font:500 14.5px/1 Barlow;white-space:nowrap" style-hover="background:#161917;color:#F2F4EE">{{ l.t }}</a></sc-if></sc-for></nav>
+</div></header>
+
+<main style="max-width:1200px;margin:0 auto;padding:clamp(40px,6vw,80px) 24px clamp(64px,8vw,110px);display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:20px;max-width:820px">
+<span style="align-self:flex-start;height:34px;padding:0 14px;border-radius:17px;background:#1E2317;display:flex;align-items:center;gap:8px;font:600 13px/1 Barlow;letter-spacing:.14em;text-transform:uppercase;color:#D6FF3E;white-space:nowrap"><span style="width:8px;height:8px;border-radius:4px;background:#D6FF3E"></span>Try it · in your browser</span>
+<h1 style="margin:0;font:700 clamp(48px,6.6vw,84px)/.92 'Barlow Condensed';letter-spacing:-.01em;text-wrap:balance">The whole app, running here. Nothing to install.</h1>
+<p style="margin:0;font:400 clamp(18px,1.6vw,20px)/1.55 Barlow;color:#C9CEC2;text-wrap:pretty">This is REGOL with twelve weeks of made-up training behind it. Tap through it as you would on your phone. The tour explains what each screen is for and can jump you straight to it. Nothing you do here is saved.</p>
 </div>
-<div style="display:flex;flex-direction:column;gap:40px;min-width:0">
-<div style="display:flex;flex-direction:column;gap:10px"><span style="font:500 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">Guided tour</span><h2 style="margin:0;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'">Ten things to try, in order.</h2></div>
-<div style="display:flex;flex-direction:column">
-<sc-for list="{{ steps }}" as="s" hint-placeholder-count="10">
-<div style="display:flex;gap:18px;padding:22px 0;border-top:1px solid rgba(255,255,255,.06)"><span style="width:36px;flex:none;font:700 28px/1 'Barlow Condensed';color:#8E948A">{{ s.n }}</span><div style="flex:1;display:flex;flex-direction:column;gap:8px;min-width:0"><h3 style="margin:0;font:700 24px/1.1 'Barlow Condensed';color:#F2F4EE">{{ s.title }}</h3><p style="margin:0;font:400 17px/1.55 Barlow;color:#C9CEC2;text-wrap:pretty" dangerouslySetInnerHTML="{{ s.html }}"></p><div onClick="{{ s.go }}" style="align-self:flex-start;height:44px;padding:0 6px 0 14px;border-radius:14px;background:#202419;border:1px solid #3A4520;display:flex;align-items:center;gap:4px;font:600 15px/1 Barlow;color:#D6FF3E;cursor:pointer;margin-top:4px" style-hover="background:#262D1C">Show me<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div></div></div>
+
+<div style="display:flex;flex-wrap:wrap;gap:48px 64px;align-items:flex-start">
+<div ref="{{ phoneRef }}" style="flex:0 0 auto;margin:0 auto;position:sticky;top:96px;display:flex;flex-direction:column;align-items:center;gap:16px;scroll-margin-top:96px">
+<div style="width:392px;height:848px;border-radius:36px;overflow:hidden;box-shadow:0 0 0 9px #1c1d1c,0 40px 100px rgba(0,0,0,.6)"><dc-import name="REGOL" scene="{{ scene }}" seed="{{ seed }}" embedded="{{ true }}" fast-rest="{{ true }}" hint-size="392px,848px"></dc-import></div>
+<div style="display:flex;align-items:center;gap:14px"><div onClick="{{ reset }}" style="height:44px;padding:0 18px;border-radius:22px;background:#1F2320;display:flex;align-items:center;gap:8px;font:600 14px/1 Barlow;cursor:pointer;white-space:nowrap" style-hover="background:#262A26"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4"></path></svg>Start over</div><span style="font:400 14px/1.3 Barlow;color:#9AA093">Rest timers run 10× faster here.</span></div>
+</div>
+
+<div style="flex:1 1 440px;min-width:0;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font:600 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">Guided tour</span><h2 style="margin:0;font:700 clamp(36px,4.4vw,52px)/.95 'Barlow Condensed'">Twelve things to try, in order.</h2></div>
+<div style="display:flex;flex-direction:column;gap:10px;margin-top:-20px">
+<sc-for list="{{ steps }}" as="s" hint-placeholder-count="12">
+<sc-if value="{{ s.on }}" hint-placeholder-val="{{ false }}"><div style="border-radius:26px;background:#1E2317;box-shadow:inset 0 0 0 1.5px #6E822C;padding:20px 22px;display:flex;gap:18px;align-items:flex-start"><span style="width:44px;height:44px;border-radius:22px;background:#D6FF3E;color:#0C0E0B;display:flex;align-items:center;justify-content:center;font:700 20px/1 'Barlow Condensed';flex:none">{{ s.n }}</span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:8px"><h3 style="margin:0;font:700 26px/1.05 'Barlow Condensed'">{{ s.title }}</h3><p style="margin:0;font:400 16px/1.55 Barlow;color:#E4E8DC;text-wrap:pretty" dangerouslySetInnerHTML="{{ s.html }}"></p><span style="align-self:flex-start;height:30px;padding:0 12px;border-radius:15px;background:#D6FF3E;color:#0C0E0B;display:flex;align-items:center;gap:6px;font:600 12px/1 Barlow;letter-spacing:.1em">ON THE PHONE NOW</span></div></div></sc-if>
+<sc-if value="{{ s.off }}" hint-placeholder-val="{{ true }}"><div style="border-radius:26px;background:#161917;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);padding:20px 22px;display:flex;gap:18px;align-items:flex-start"><span style="width:44px;height:44px;border-radius:22px;background:#1F2320;color:#C9CEC2;display:flex;align-items:center;justify-content:center;font:700 20px/1 'Barlow Condensed';flex:none">{{ s.n }}</span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:8px"><h3 style="margin:0;font:700 26px/1.05 'Barlow Condensed'">{{ s.title }}</h3><p style="margin:0;font:400 16px/1.55 Barlow;color:#C9CEC2;text-wrap:pretty" dangerouslySetInnerHTML="{{ s.html }}"></p><div onClick="{{ s.go }}" style="align-self:flex-start;height:40px;padding:0 16px;border-radius:20px;background:#1F2320;color:#F2F4EE;display:flex;align-items:center;gap:8px;font:600 14px/1 Barlow;cursor:pointer;white-space:nowrap" style-hover="background:#D6FF3E;color:#0C0E0B">Show me<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div></div></div></sc-if>
 </sc-for>
 </div>
-<div style="display:flex;flex-direction:column;gap:10px;padding-top:24px"><span style="font:500 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">How it works</span><h2 style="margin:0;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'">The rules the engine follows.</h2><p style="margin:0;font:400 17px/1.55 Barlow;color:#9AA093">Every rule the progressive overload engine follows, in one place.</p></div>
-<div style="display:flex;flex-direction:column">
-<details style="border-top:1px solid rgba(255,255,255,.06);padding:4px 0"><summary style="cursor:pointer;padding:18px 0;font:500 19px/1.3 Barlow;color:#F2F4EE;list-style:none;display:flex;justify-content:space-between;gap:16px">Reps in reserve (RIR)<span style="color:#9AA093;font-weight:400">+</span></summary><p style="margin:0 0 20px;font:400 17px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">How many more reps you could have done when you stopped. 0 is failure, 2 means two left. It is one tap per set and it is what makes the proposals good. Skip it and the set is recorded at the target you planned.</p></details><details style="border-top:1px solid rgba(255,255,255,.06);padding:4px 0"><summary style="cursor:pointer;padding:18px 0;font:500 19px/1.3 Barlow;color:#F2F4EE;list-style:none;display:flex;justify-content:space-between;gap:16px">How the next weight is chosen<span style="color:#9AA093;font-weight:400">+</span></summary><p style="margin:0 0 20px;font:400 17px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">With the RIR-gated rule the engine compares how much you had left in reserve with what you were aiming for. More than planned earns weight. How far the weight moves comes from your own sets rather than from a fixed step: the engine works out what they imply you could lift, and will not take a step that would drop your reps out of their range. This is why one easy session on a 10 kg dumbbell is never answered with 12.5 kg. Clearing the top of your rep range is the exception, and earns the weight on its own: once you are past the range there is no rep left to add. Less left in reserve than planned holds the weight, and two sessions in a row under target propose a deload. A session you cut short, or a lift you have not touched for three weeks, holds rather than advances, and says which it is. Double progression adds reps first, then weight. Linear adds a step every session you complete.</p></details><details style="border-top:1px solid rgba(255,255,255,.06);padding:4px 0"><summary style="cursor:pointer;padding:18px 0;font:500 19px/1.3 Barlow;color:#F2F4EE;list-style:none;display:flex;justify-content:space-between;gap:16px">Set types<span style="color:#9AA093;font-weight:400">+</span></summary><p style="margin:0 0 20px;font:400 17px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">Normal sets drive progression. Warm-ups never count. Drop sets and rest-pause sets are logged but do not move the weight. AMRAP counts, and a big number there is the fastest way to a step up.</p></details><details style="border-top:1px solid rgba(255,255,255,.06);padding:4px 0"><summary style="cursor:pointer;padding:18px 0;font:500 19px/1.3 Barlow;color:#F2F4EE;list-style:none;display:flex;justify-content:space-between;gap:16px">Templates, programs and blocks<span style="color:#9AA093;font-weight:400">+</span></summary><p style="margin:0 0 20px;font:400 17px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">A template is one workout. A program is an ordered rotation of templates; Today pins the next one. A block is a mesocycle: the target RIR gets one harder every other week, then a deload week. The week only turns once every template in the block has been trained.</p></details><details style="border-top:1px solid rgba(255,255,255,.06);padding:4px 0"><summary style="cursor:pointer;padding:18px 0;font:500 19px/1.3 Barlow;color:#F2F4EE;list-style:none;display:flex;justify-content:space-between;gap:16px">First time on a lift<span style="color:#9AA093;font-weight:400">+</span></summary><p style="margin:0 0 20px;font:400 17px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">No history means no proposal, so the first session finds your weight: aim for the middle of the rep range at the target RIR and log honestly. Sets that miss become test sets, and the next one is aimed from your answer.</p></details><details style="border-top:1px solid rgba(255,255,255,.06);padding:4px 0"><summary style="cursor:pointer;padding:18px 0;font:500 19px/1.3 Barlow;color:#F2F4EE;list-style:none;display:flex;justify-content:space-between;gap:16px">Stalls and deloads<span style="color:#9AA093;font-weight:400">+</span></summary><p style="margin:0 0 20px;font:400 17px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">No new estimated 1RM or top weight across four sessions over at least two weeks counts as a stall. The lift page and the Lifts list offer a deload next time (about 90%), a wider rep range, or a swap.</p></details><details style="border-top:1px solid rgba(255,255,255,.06);padding:4px 0"><summary style="cursor:pointer;padding:18px 0;font:500 19px/1.3 Barlow;color:#F2F4EE;list-style:none;display:flex;justify-content:space-between;gap:16px">Your data<span style="color:#9AA093;font-weight:400">+</span></summary><p style="margin:0 0 20px;font:400 17px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">No account and no server. One JSON file on the phone, exported or backed up whenever you like, importable from Strong and Hevy CSVs. The web version here keeps nothing at all: reload the page and it starts fresh.</p></details>
-</div>
-<div style="background:#202419;border:1px solid #3A4520;border-radius:20px;padding:24px 26px;display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center;justify-content:space-between"><div style="display:flex;flex-direction:column;gap:6px"><h3 style="margin:0;font:700 26px/1.1 'Barlow Condensed'">Like it? Train with the real thing.</h3><p style="margin:0;font:400 16px/1.5 Barlow;color:#E4E8DC">Android, free for everyone until 2027, and it rings on the lock screen.</p></div><a href="testing.html" style="height:56px;padding:0 26px;border-radius:18px;background:#D6FF3E;color:#0C0E0B;font:600 17px/1 Barlow;display:inline-flex;align-items:center;text-decoration:none;white-space:nowrap" style-hover="opacity:.88">Join the test</a></div>
-<p style="margin:0;font:400 14px/1.5 Barlow;color:#8E948A">What is different here: no lock-screen controls, no notifications, no Health Connect, no import or export, and the sounds are simple tones rather than the app’s bell. The training history is invented.</p>
+
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font:600 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">How it works</span><h2 style="margin:0;font:700 clamp(36px,4.4vw,52px)/.95 'Barlow Condensed'">The rules the engine follows.</h2><p style="margin:0;font:400 17px/1.55 Barlow;color:#C9CEC2">Every rule the progressive overload engine follows, in one place.</p></div>
+<div style="display:flex;flex-direction:column;gap:8px;margin-top:-16px"><sc-for list="{{ rules }}" as="q" hint-placeholder-count="7"><details style="border-radius:22px;background:#161917;padding:0 22px"><summary style="min-height:66px;display:flex;align-items:center;gap:16px;cursor:pointer;font:500 18px/1.35 Barlow"><span style="flex:1">{{ q.q }}</span><span class="faqplus" style="width:34px;height:34px;border-radius:17px;background:#1F2320;display:flex;align-items:center;justify-content:center;flex:none;transition:transform .2s ease"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D6FF3E" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span></summary><p style="margin:0;padding:0 0 22px;font:400 16px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">{{ q.a }}</p></details></sc-for></div>
+
+<div style="border-radius:32px;background:#D6FF3E;color:#0C0E0B;padding:28px 30px;display:flex;flex-wrap:wrap;align-items:center;gap:18px 28px;position:relative;overflow:hidden"><div style="position:absolute;right:-90px;top:-120px;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.22)"></div><div style="flex:1 1 260px;display:flex;flex-direction:column;gap:8px;position:relative"><h3 style="margin:0;font:700 34px/1 'Barlow Condensed'">Like it? Train with the real thing.</h3><p style="margin:0;font:500 16px/1.5 Barlow;opacity:.78">Android, free for everyone until 2027, and it rings on the lock screen.</p></div><a href="testing.html" style="position:relative;height:58px;padding:0 26px;border-radius:22px;background:#0C0E0B;color:#D6FF3E;text-decoration:none;display:flex;align-items:center;font:600 17px/1 Barlow;white-space:nowrap" style-hover="opacity:.88;color:#D6FF3E">Join the test</a></div>
+<p style="margin:0;font:400 14px/1.6 Barlow;color:#9AA093;text-wrap:pretty">What is different here: no lock-screen controls, no notifications, no Health Connect, no import or export, and the sounds are simple tones rather than the app’s bell. The training history is invented.</p>
 </div></div>
 </main>
-<footer style="border-top:1px solid rgba(255,255,255,.06);padding:40px 24px 56px"><div style="max-width:1120px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px 22px;font:400 15px/1.6 Barlow;color:#C9CEC2"><a href="./" style="color:#C9CEC2;text-decoration:none" style-hover="color:#F2F4EE">Home</a><a href="testing.html" style="color:#C9CEC2;text-decoration:none" style-hover="color:#F2F4EE">Join the test</a><a href="roadmap.html" style="color:#C9CEC2;text-decoration:none" style-hover="color:#F2F4EE">Roadmap</a><a href="report.html" style="color:#C9CEC2;text-decoration:none" style-hover="color:#F2F4EE">Report</a><a href="privacy.html" style="color:#C9CEC2;text-decoration:none" style-hover="color:#F2F4EE">Privacy</a><a href="terms.html" style="color:#C9CEC2;text-decoration:none" style-hover="color:#F2F4EE">Terms</a><a href="support.html" style="color:#C9CEC2;text-decoration:none" style-hover="color:#F2F4EE">Support</a><a href="mailto:support@regolapp.be" style="color:#C9CEC2;text-decoration:none" style-hover="color:#F2F4EE">support@regolapp.be</a></div></footer>
+
+<footer style="border-top:1px solid rgba(255,255,255,.06);padding:32px 24px 48px"><nav style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px 20px;font:500 15px/1 Barlow"><sc-for list="{{ footer }}" as="l" hint-placeholder-count="8"><a href="{{ l.h }}" style="color:#C9CEC2;text-decoration:none;padding:6px 0" style-hover="color:#F2F4EE">{{ l.t }}</a></sc-for></nav></footer>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="">
+<script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { scene: 'today', seed: 0 };
+  state = { scene: 'today', seed: 0, cur: 0 };
+  phoneRef = React.createRef();
   renderVals() {
-    const S = [["start","Start a workout","Today shows the next workout in your program and the weight the engine proposes for every lift, with its reason in the green block. Tap <b>Start Push</b>.","today"],["rir","Log a set and rate it","Weight and reps are already filled in. After the set, pick how many reps you had left in reserve (RIR), then tap <b>Log</b>. Watch the <b>Next time</b> block change as you change reps or RIR: that is the engine thinking out loud.","live"],["rest","Rest runs itself","Logging starts the rest timer and names the set you just did. In the real app it rings and vibrates even on silent, and can be logged from the lock screen. <b>+30s</b> and <b>Skip</b> are under your thumb.","rest"],["edit","Fix a mistake","Tap any done set to change its weight, reps, RIR or type, or mark it not done. Warm-up, drop, rest-pause and AMRAP sets are picked from the row under the set rail; only normal and AMRAP sets move next time’s weight.","live"],["board","Machine taken? Jump around","The list icon at the top right opens the board: every lift in the workout with its progress. Tap one to go to it, or add a lift that is not in the template.","board"],["summary","Finish and read the verdict","The summary marks every set that beat your previous best, then gives next time’s weight for each lift and the reason. Tap <b>Done</b> to save it into the Log.","summary"],["lift","Every lift has a page","Best estimated 1RM over time, rep maxes, a percentage table and every session. If a lift stalls for four sessions, a warning offers a deload.","lift"],["plans","Templates and programs","A template is a workout: lifts with sets, a rep range and a target RIR. A program rotates templates; Today always pins the one you owe next. Tap a lift to edit its prescription.","builder"],["log","Your history, readable","Workouts by week with a plain-English debrief, a calendar, and Stats: weekly tonnage and hard sets per muscle against a target. Tap any day or workout to open it, then <b>Edit</b> to correct it.","stats"],["you","Settings","Theme and accent, rest timer sound and volume, weekly goal, units, haptics, exports and backups. Everything lives on the phone; export is one tap.","settings"]];
-    return { scene: this.state.scene, seed: this.state.seed,
-      reset: () => this.setState(s => ({ scene: 'today', seed: s.seed + 1 })),
-      steps: S.map(([id, title, html, scene], i) => ({ n: String(i + 1).padStart(2, '0'), title, html: { __html: html }, go: () => { this.setState(s => ({ scene, seed: s.seed + 1 })); const el = document.querySelector('.try-phone'); if (el && window.innerWidth < 900) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }); } })) };
+    const S = [
+      ['Start a workout', 'Today shows the next workout in your program on one card, with the weight the engine proposes for every lift. Under it, <b>Why these weights</b> gives each lift its reason. Tap <b>Start Push</b>.', 'today'],
+      ['Read the reasons', 'Every lift gets a note: green when it goes up, grey when it holds, orange when it is time to deload. The sentences come from the same rules the engine uses.', 'why'],
+      ['Log a set and rate it', 'Weight and reps are already filled in. After the set, pick how many reps you had left in reserve (RIR), then tap <b>Log</b>. Watch the <b>Next time</b> note change as you change reps or RIR: that is the engine thinking out loud.', 'live'],
+      ['Rest takes over the screen', 'Logging starts the rest timer, full screen and readable from across the gym. <b>+30s</b> and <b>Skip rest</b> are under your thumb. In the real app it rings and vibrates even on silent.', 'rest'],
+      ['Pick a set type', 'Tap <b>Change</b> on the set type card for warm-up, drop set, rest-pause or AMRAP. Only normal sets and AMRAP move next time’s weight.', 'settype'],
+      ['Change this lift for today', '<b>Options</b> next to the lift name changes sets, rest and target reserve for this workout only, swaps the lift, or opens its full history and settings.', 'liftopts'],
+      ['Machine taken? Jump around', 'The list icon at the top right opens the board: every lift in the workout with its progress. Tap one to go to it, or add a lift that is not in the template.', 'board'],
+      ['Finish and read the verdict', 'The summary lists every new best, marks each set that beat it, and gives next time’s weight for each lift with the reason. The share button turns it into an image.', 'summary'],
+      ['Every lift has a page', 'Best estimated 1RM over time, rep maxes, a percentage table and every session. <b>Settings</b> sets the step size, the lightest weight and the equipment.', 'lift'],
+      ['See your program working', 'Plans shows the active program and its rotation. <b>Progress since you started</b> lists every lift’s change since the program began.', 'progress'],
+      ['Your history, readable', 'Workouts by week with a plain-English debrief, a calendar, and Stats: weekly tonnage, hard sets per muscle against targets you can set, and your biggest movers.', 'stats'],
+      ['Settings', 'Theme and accent, rest timer sound and volume, weekly goal, the default progression rule, units, haptics, exports and backups. Everything lives on the phone.', 'settings'],
+    ];
+    const NAV = [['./', 'Home'], ['try.html', 'Try it'], ['testing.html', 'Join the test'], ['roadmap.html', 'Roadmap'], ['report.html', 'Report'], ['privacy.html', 'Privacy'], ['support.html', 'Support']];
+    return {
+      phoneRef: this.phoneRef, scene: this.state.scene, seed: this.state.seed,
+      nav: NAV.map(([h, t]) => ({ h, t, on: h === 'try.html', off: h !== 'try.html' })),
+      footer: [...NAV, ['terms.html', 'Terms'], ['mailto:support@regolapp.be', 'support@regolapp.be']].map(([h, t]) => ({ h, t })),
+      reset: () => this.setState(s => ({ scene: 'today', seed: s.seed + 1, cur: 0 })),
+      steps: S.map(([title, html, scene], i) => ({ n: String(i + 1).padStart(2, '0'), title, html: { __html: html }, on: this.state.cur === i, off: this.state.cur !== i,
+        go: () => { this.setState(s => ({ scene, seed: s.seed + 1, cur: i })); const el = this.phoneRef.current; if (el && window.innerWidth < 980) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' }); } })),
+      rules: [
+        ['Reps in reserve (RIR)', 'How many more reps you could have done when you stopped. 0 is failure, 2 means two left. It is one tap per set and it is what makes the proposals good. Skip it and the set is recorded at the target you planned.'],
+        ['How the next weight is chosen', 'With the RIR-gated rule the engine compares how much you had left in reserve with what you were aiming for. More than planned earns weight. How far the weight moves comes from your own sets rather than from a fixed step: the engine works out what they imply you could lift, and will not take a step that would drop your reps out of their range. This is why one easy session on a 10 kg dumbbell is never answered with 12.5 kg. Clearing the top of your rep range is the exception, and earns the weight on its own: once you are past the range there is no rep left to add. Less left in reserve than planned holds the weight, and two sessions in a row under target propose a deload. A session you cut short, or a lift you have not touched for three weeks, holds rather than advances, and says which it is. Double progression adds reps first, then weight. Linear adds a step every session you complete.'],
+        ['Set types', 'Normal sets drive progression. Warm-ups never count. Drop sets and rest-pause sets are logged but do not move the weight. AMRAP counts, and a big number there is the fastest way to a step up.'],
+        ['Templates, programs and blocks', 'A template is one workout. A program is an ordered rotation of templates; Today pins the next one. A block is a mesocycle: the target RIR gets one harder every other week, then a deload week. The week only turns once every template in the block has been trained.'],
+        ['First time on a lift', 'No history means no proposal, so the first session finds your weight: aim for the middle of the rep range at the target RIR and log honestly. Sets that miss become test sets, and the next one is aimed from your answer.'],
+        ['Stalls and deloads', 'No new estimated 1RM or top weight across four sessions over at least two weeks counts as a stall. The lift page and the Lifts list offer a deload next time (about 90%), a wider rep range, or a swap.'],
+        ['Your data', 'No account and no server. One JSON file on the phone, exported or backed up whenever you like, importable from Strong and Hevy CSVs. The web version here keeps nothing at all: reload the page and it starts fresh.'],
+      ].map(([q, a]) => ({ q, a })),
+    };
   }
 }
 </script>

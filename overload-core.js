@@ -1,4 +1,4 @@
-// Shared data, engine and view model for the three Overload prototypes (current, refine, rework).
+// Shared data, engine and view model for the REGOL prototypes (current, refine, rework).
 // Each DC holds its own copy of the state; the markup is the only thing that differs.
 
 const DAY = 864e5;
@@ -6,7 +6,7 @@ const TODAY = new Date(2026, 8, 26);
 const DOW = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const MON = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const dateOf = off => new Date(TODAY.getTime() + off * DAY);
-export const fmt = x => Number.isInteger(x) ? String(x) : (Math.round(x * 10) / 10).toFixed(1).replace(/\.0$/, '');
+export const fmt = x => Number.isInteger(x) ? String(x) : String(Math.round(x * 100) / 100);
 const mmss = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
 const clock = t => { const d = new Date(t); return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`; };
 const shortDay = off => { const d = dateOf(off); return `${DOW[d.getDay()].slice(0, 3)} ${d.getDate()} ${MON[d.getMonth()].slice(0, 3)}`; };
@@ -14,7 +14,7 @@ const longDay = off => { const d = dateOf(off); return `${DOW[d.getDay()]} ${d.g
 const relDay = off => off === 0 ? 'today' : off === -1 ? 'yesterday' : off > -7 ? DOW[dateOf(off).getDay()] : `${-off} days ago`;
 const thousands = n => Math.round(n).toLocaleString('en-GB');
 export const SWATCHES = [['#D6FF3E', 'Lime'], ['#4DE1C1', 'Mint'], ['#FF6B3D', 'Ember'], ['#B79BFF', 'Lilac'], ['#FFC53D', 'Amber']];
-const SOUNDS = [['bell', 'Overload bell'], ['boxing', 'Boxing bell'], ['chime', 'Chime'], ['beep', 'Beep'], ['none', 'Silent']];
+const SOUNDS = [['bell', 'REGOL bell'], ['boxing', 'Boxing bell'], ['chime', 'Chime'], ['beep', 'Beep'], ['none', 'Silent']];
 const LOGS = [['none', 'Off'], ['tick', 'Tick'], ['beep', 'Beep']];
 const KINDS = [['warm', 'Warm-up', 'Warm-up'], ['normal', 'Normal set', 'Normal'], ['drop', 'Drop set', 'Drop'], ['rp', 'Rest-pause', 'Rest-pause'], ['amrap', 'AMRAP', 'AMRAP']];
 const kindName = k => (KINDS.find(x => x[0] === (k || 'normal')) || KINDS[1])[1];
@@ -124,38 +124,6 @@ export function initial() {
     kpF: 'w', kpBuf: '', kpFresh: true, toast: '', toastAt: 0, now: Date.now(), made: 0 };
 }
 
-// Opens the app straight into a state, by driving the same handlers a user would tap.
-export function scene(name, opts = {}) {
-  let st = initial(); const set = fn => { st = { ...st, ...fn(st) }; };
-  const V = () => view(st, set, 'rework');
-  if (opts.theme) st.set = { ...st.set, theme: opts.theme };
-  if (opts.accent) st.set = { ...st.set, accent: opts.accent };
-  const logAll = (bumpBench) => { for (let g = 0; g < 20 && V().lv.ready && !V().lv.modeFinish; g++) {
-    if (V().lv.modeRest) V().lv.skip();
-    if (bumpBench && V().lv.liftName === 'Bench Press') { V().lv.rPlus(); V().lv.rPlus(); }
-    V().lv.log(); } V().lv.ready && V().lv.skip(); };
-  const S = {
-    today: () => {},
-    live: () => { V().td.start(); V().lv.log(); V().lv.skip(); V().lv.rPlus(); },
-    rest: () => { V().td.start(); V().lv.log(); },
-    board: () => { V().td.start(); V().lv.log(); V().lv.skip(); V().lv.log(); V().lv.skip(); V().lv.log(); V().lv.skip(); V().lv.log(); V().lv.skip(); set(() => ({ sheet: 'board' })); },
-    keypad: () => { V().td.start(); V().lv.editW(); },
-    summary: () => { V().td.start(); logAll(true); V().lv.finish(); set(x => ({ pending: { ...x.pending, dur: 47 } })); },
-    lift: () => set(() => ({ route: { n: 'lift', id: 'bench' } })),
-    stall: () => set(() => ({ tab: 'lifts', lfQ: '' })),
-    plans: () => set(() => ({ tab: 'plans' })),
-    builder: () => set(() => ({ route: { n: 'builder', id: 'push' } })),
-    log: () => set(() => ({ tab: 'log', logTab: 'w' })),
-    stats: () => set(() => ({ tab: 'log', logTab: 's' })),
-    calendar: () => set(() => ({ tab: 'log', logTab: 'c' })),
-    session: () => { const x = st.sessions.slice().sort((a, b) => b.off - a.off)[0]; set(() => ({ route: { n: 'session', id: x.id } })); },
-    settings: () => set(() => ({ route: { n: 'settings' } })),
-    sound: () => set(() => ({ route: { n: 'settings' }, sheet: 'sound' })),
-  };
-  (S[name] || S.today)();
-  return { ...st, toast: '' };
-}
-
 export function tick(s, f) {
   const now = Date.now(); let live = s.live;
   if (live && live.rest > 0) { const r = Math.max(0, live.rest - f);
@@ -173,26 +141,8 @@ function outlook(l, p, sets, final) {
   if (!sets.length) return hold(`Nothing logged, so nothing moves. It proposes ${fmt(W)} ${u} again.`);
   const avg = Math.floor(sets.reduce((a, s) => a + s.rir, 0) / sets.length), top = sets.every(s => s.r >= p.hi);
   if (avg < t) return hold(`Under target: ${final ? 'these averaged' : 'that averages'} ${avg} in reserve against ${t}. It holds at ${fmt(W)} ${u}, and a second session like this proposes a deload.`, true);
-  let want = top ? 1 : 0;
-  if (avg >= t + 2) want = 2; else if (avg >= t + 1) want = Math.max(want, 1);
-  // How far this session's own numbers will carry the step, which is not the same as how many the
-  // rule asked for. Reserve is counted in reps and the ladder moves in kilos, so "two in hand, two
-  // steps up" is 5% on a barbell and 50% on a light dumbbell. The best set implies a one-rep max
-  // (Epley, counting reserve as reps), that says how many reps the next weight up would allow at
-  // the reserve being aimed for, and the step is only taken while that stays inside the rep range.
-  // Mirrors Engine.propose's `earned` in the Android app, which is the source of truth.
-  const oneRm = Math.max(...sets.map(x => x.w * (1 + (x.r + x.rir) / 30)));
-  let st = 0;
-  while (st < want) {
-    const cand = W + (st + 1) * l.step;
-    if (cand <= 0 || 30 * (oneRm / cand - 1) - t < p.lo) break;
-    st++;
-  }
-  // Clearing the rep range earns the weight whatever the arithmetic thinks: there is no rep left
-  // to add once you are at the top of it, so the first step is never sized away. Only a
-  // reserve-driven step can be.
-  if (top) st = Math.max(st, 1);
-  if (!st && want) return hold(`${fmt(l.step)} ${u} more would drop you under ${p.lo} reps, so it holds at ${fmt(W)} ${u}. Add a rep instead.`);
+  let st = top ? 1 : 0;
+  if (avg >= t + 2) st = 2; else if (avg >= t + 1) st = Math.max(st, 1);
   if (st) {
     const nw = W + st * l.step, d = '+' + fmt(st * l.step);
     const why = final
@@ -363,8 +313,7 @@ export function view(s, set, variant) {
       lifts: sess.items.map(it => { const l = lift(it.lift), p = sess.rx && sess.rx[it.lift] || rxOf(it.lift);
         return { name: l.name, unit: l.unit, chips: it.sets.map((t, i) => ({ txt: `${fmt(t.w)} × ${t.r} @${rirTxt(t.rir)}${t.k && t.k !== 'normal' ? ' · ' + kindName(t.k) : ''}`,
           tap: () => upd(() => ({ sheet: 'editset', editSet: { src: 'session', sid: sess.id, lift: it.lift, idx: i } })) })),
-        rows: it.sets.map((t, i) => ({ n: t.k === 'warm' ? 'WARM' : `SET ${it.sets.slice(0, i + 1).filter(z => z.k !== 'warm').length}`, wr: `${fmt(t.w)} ${l.unit} × ${t.r}`, kind: t.k && t.k !== 'normal' && t.k !== 'warm' ? kindName(t.k) : '', pr: it.prIdx.has(i), noPr: !it.prIdx.has(i), rir: t.rir === 0 ? 'to failure' : `${rirTxt(t.rir)} in reserve`,
-          tap: () => upd(() => ({ sheet: 'editset', editSet: { src: 'session', sid: sess.id, lift: it.lift, idx: i } })) })), setsTxt: it.sets.map(t => `${fmt(t.w)}×${t.r} @${rirTxt(t.rir)}`).join(' · '), top: `${fmt(it.sets[0].w)} ${l.unit}`, ...(o => ({ ...o, nextLine: `Next time: ${o.nw}${o.up ? ` (${o.d})` : ', same weight'}` }))(outlook(l, p, it.sets, true)) }; }),
+        rows: it.sets.map((t, i) => ({ n: t.k === 'warm' ? 'WARM' : `SET ${it.sets.slice(0, i + 1).filter(z => z.k !== 'warm').length}`, wr: `${fmt(t.w)} ${l.unit} × ${t.r}`, kind: t.k && t.k !== 'normal' && t.k !== 'warm' ? kindName(t.k) : '', pr: it.prIdx.has(i), noPr: !it.prIdx.has(i), rir: t.rir === 0 ? 'to failure' : `${rirTxt(t.rir)} in reserve` })), setsTxt: it.sets.map(t => `${fmt(t.w)}×${t.r} @${rirTxt(t.rir)}`).join(' · '), top: `${fmt(it.sets[0].w)} ${l.unit}`, ...(o => ({ ...o, nextLine: `Next time: ${o.nw}${o.up ? ` (${o.d})` : ', same weight'}` }))(outlook(l, p, it.sets, true)) }; }),
       vol: Object.entries(vol).map(([name, v]) => ({ name, sets: fmt(v), pct: Math.round(v / vmax * 100) })), fresh, past: !fresh };
   };
   let sm = {};
@@ -413,8 +362,8 @@ export function view(s, set, variant) {
     sound: st.sound ? 'On' : 'Off', soundOn: st.sound, soundOff: !st.sound, toggleSound: tog('sound'),
     unit: st.unit, cycleUnit: () => upd(x => ({ set: { ...x.set, unit: x.set.unit === 'kg' ? 'lb' : 'kg' } })),
     act: msg => () => upd(() => toast(msg)),
-    exportFile: () => upd(() => toast('overload-2026-09-26.json is ready to share')), copy: () => upd(() => toast('Copied as text')),
-    csv: () => upd(() => toast('overload-2026-09-26.csv is ready to share')), report: () => upd(() => toast('Opens a prefilled report. Nothing is sent until you press send.')) };
+    exportFile: () => upd(() => toast('regol-2026-09-26.json is ready to share')), copy: () => upd(() => toast('Copied as text')),
+    csv: () => upd(() => toast('regol-2026-09-26.csv is ready to share')), report: () => upd(() => toast('Opens a prefilled report. Nothing is sent until you press send.')) };
 
   const SW = s.set, togs = {};
   ['adaptive', 'keepOn', 'haptic', 'vibrate', 'warn10', 'muted', 'pauseMusic', 'health'].forEach(k => { togs[k + 'On'] = !!SW[k]; togs[k + 'Off'] = !SW[k]; togs['t_' + k] = tog(k); });
@@ -430,7 +379,7 @@ export function view(s, set, variant) {
     restMinus: () => upd(x => ({ set: { ...x.set, rest: Math.max(30, x.set.rest - 15) } })), restPlus: () => upd(x => ({ set: { ...x.set, rest: Math.min(300, x.set.rest + 15) } })),
     nudge: SW.nudge ? `After ${SW.nudge} quiet days` : 'Off', cycleNudge: () => upd(x => ({ set: { ...x.set, nudge: ({ 0: 3, 3: 5, 5: 7, 7: 0 })[x.set.nudge] } })),
     ruleName: { rir: 'RIR gated', double: 'Double progression', linear: 'Linear' }[SW.rule], cycleRule: () => upd(x => ({ set: { ...x.set, rule: ({ rir: 'double', double: 'linear', linear: 'rir' })[x.set.rule] } })),
-    importFile: () => upd(() => toast('Import reads an Overload export, a shared program, or a Strong or Hevy CSV.')),
+    importFile: () => upd(() => toast('Import reads a REGOL export, a shared program, or a Strong or Hevy CSV.')),
     widget: () => upd(() => toast('Widget added to the home screen')), licences: () => upd(() => toast('Exercise data: Free Exercise DB (public domain) and exercises-dataset (MIT).')),
     ask: () => upd(() => toast('Opens a prefilled request. Nothing is sent until you press send.')),
     wipeLabel: s.confirm === 'wipe' ? 'Tap again to delete every session' : 'Delete everything',
@@ -488,11 +437,7 @@ export function view(s, set, variant) {
       logLabel: it ? `Log ${fmt(cw)} ${l.unit} × ${cr} @ ${rirTxt(crir)}` : '', logLabel2: it ? `Log set ${si + 1} · ${fmt(cw)} ${l.unit} × ${cr}` : '',
       log: () => { if (!it) return; if (s.set.logKind !== 'none') playSound(s.set.logKind, s.set.volume / 100); if (s.set.haptic && navigator.vibrate) navigator.vibrate(15); updL(x => { const n = it.logged.length + 1, rest0 = it.rest ?? s.set.rest;
         const rest = s.set.adaptive ? Math.max(45, Math.min(300, rest0 + (crir === 0 ? 30 : crir >= it.rir + 2 ? -30 : 0))) : rest0;
-        const items = x.items.map(y => y.lift === it.lift ? { ...y, extra: y.extra + ((x.pend.k || 'normal') === 'warm' ? 1 : 0), logged: [...y.logged, { w: cw, r: cr, rir: crir, k: x.pend.k || 'normal' }] } : y);
-        // Rest is for the set that comes next. On the last set of the workout there is none, and
-        // the dock's job is to offer Finish rather than count down two minutes.
-        const more = items.some(y => y.logged.length < total(y));
-        return { items, pend: {}, rest: more ? rest : 0, restTotal: more ? rest : 0, restWho: more ? `${l.name}, set ${n} logged` : '' }; }); },
+        return { items: x.items.map(y => y.lift === it.lift ? { ...y, extra: y.extra + ((x.pend.k || 'normal') === 'warm' ? 1 : 0), logged: [...y.logged, { w: cw, r: cr, rir: crir, k: x.pend.k || 'normal' }] } : y), pend: {}, rest, restTotal: rest, restWho: `${l.name}, set ${n} logged` }; }); },
       restTxt: mmss(lvS.rest), restWho: lvS.restWho, restPct: Math.round(lvS.rest / Math.max(1, lvS.restTotal) * 100),
       nextLine: it ? `Next: ${l.name}, set ${si + 1} · ${fmt(cw)} ${l.unit} × ${cr}` : '',
       plus30: () => updL(x => ({ rest: x.rest + 30, restTotal: x.restTotal + 30 })), skip: () => updL(() => ({ rest: 0 })),
@@ -596,7 +541,7 @@ export function view(s, set, variant) {
     bd.del = () => upd(st => st.tpls.length <= 1 ? toast('Keep at least one template.') : st.confirm === 'tpl:' + id
       ? { tpls: st.tpls.filter(t => t.id !== id), prog: { ...st.prog, ids: st.prog.ids.filter(x => x !== id).length ? st.prog.ids.filter(x => x !== id) : [st.tpls.find(t => t.id !== id).id] }, route: null, tab: 'plans', confirm: null, ...toast('Template deleted') }
       : { confirm: 'tpl:' + id });
-    bd.share = () => upd(st => toast(`${st.tpls.find(t => t.id === id).name}.overload is ready to share`)); }
+    bd.share = () => upd(st => toast(`${st.tpls.find(t => t.id === id).name}.regol is ready to share`)); }
   if (r === 'lift' && ld.best && ld.best !== '–') { const l = lift(s.route.id), best = Math.max(...hist(l.id).map(x => bestOf(x.sets))), snap = v => Math.floor(v / l.step) * l.step;
     ld.pct = [100, 90, 80, 70, 60].map(p => ({ p: p + '%', w: fmt(snap(best * p / 100)), reps: p === 100 ? '1 rep' : `≈${Math.round(30 * (100 / p - 1))} reps` }));
     ld.rms = [1, 3, 5, 8, 10].map(n => ({ n: n + 'RM', w: fmt(snap(best / (1 + n / 30))) })); }
