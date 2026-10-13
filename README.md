@@ -121,7 +121,7 @@ automatically, so they are listed here.
 
 | Value | Where | Trigger | New value |
 |---|---|---|---|
-| `softwareVersion` | `#app` | every app release | the new `versionName` from `app-android/app/build.gradle.kts` (1.5 today) |
+| `softwareVersion` | `#app` | every app release | the new `versionName` from `app-android/app/build.gradle.kts` (1.8 today) |
 | `priceValidUntil` | first Offer | 1 January 2027 | remove the early-access Offer; the Subscription Offer takes over |
 | `isAccessibleForFree` | `#app` | 1 January 2027 | `false` (charts, records, the weekly debrief and notes become paid) |
 | `availability` / `downloadUrl` | first Offer, `#app` | public Play launch | `InStock` plus the public listing URL, and add `installUrl` back |

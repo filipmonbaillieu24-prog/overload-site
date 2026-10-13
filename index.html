@@ -46,7 +46,7 @@
       "applicationCategory": "HealthApplication",
       "applicationSubCategory": "Strength training",
       "operatingSystem": "Android 8.0 and up",
-      "softwareVersion": "1.5",
+      "softwareVersion": "1.8",
       "inLanguage": "en",
       "author": { "@id": "https://regolapp.be/#developer" },
       "publisher": { "@id": "https://regolapp.be/#developer" },
@@ -62,7 +62,7 @@
         "https://regolapp.be/images/screenshots/07-lift-detail.jpg",
         "https://regolapp.be/images/screenshots/08-volume.jpg"
       ],
-      "permissions": "Notifications, vibration, display over other apps for the rest timer, and Health Connect, which is optional and off by default",
+      "permissions": "Notifications, vibration, display over other apps for the rest timer, and Health Connect, which is optional and off by default. Health Connect is two separate permissions: writing finished workouts, and reading a weigh-in if you ask the bodyweight screen to look for one",
       "isAccessibleForFree": true,
       "featureList": [
         "Proposes your next weight from your logged reps and your reps in reserve, with the reasoning shown",
@@ -72,7 +72,12 @@
         "Warm-up sets that ramp to the working weight and shrink when the muscle is already warm",
         "Supersets, drop sets, rest-pause, AMRAP and top set plus back-offs, all counted correctly",
         "Templates with sets, rep range and target reps in reserve, grouped into programs that rotate",
-        "Training blocks that get harder week by week and end in a deload",
+        "Training blocks that get harder week by week and end in a deload, with the reps in reserve set week by week",
+        "Bodyweight recorded and charted, so pull-ups and dips count toward your totals",
+        "Timed sets for planks, carries and hangs, logged in seconds and left out of the proposals",
+        "Dark, light and true black themes, a colour of your own, and a colour per program",
+        "Share a program as a code another phone can scan, with no account and no server",
+        "All-time totals, milestones and a records board of your best sets at 1, 3, 5, 8 and 10 reps",
         "Estimated 1RM over recent workouts, rep records and percentage tables per lift",
         "Hard sets per muscle against a weekly target, weekly tonnage and a plain-English weekly debrief",
         "1,577 exercise guides with step-by-step instructions, bundled in the app",
@@ -229,7 +234,7 @@ details[open] .faqplus{transform:rotate(45deg)}
 <header style="position:sticky;top:0;z-index:10;background:rgba(11,12,11,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06)"><div style="max-width:1200px;margin:0 auto;padding:14px 24px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 28px">
 <a href="./" style="display:flex;align-items:center;gap:10px;color:#F2F4EE;text-decoration:none;font:700 26px/1 'Barlow Condensed';letter-spacing:.02em;white-space:nowrap;flex:none"><svg width="30" height="30" viewBox="0 0 108 108" aria-hidden="true"><rect width="108" height="108" rx="24" fill="#161917"></rect><circle cx="54" cy="54" r="18" fill="none" stroke="#d6ff3e" stroke-width="7.2"></circle><rect y="49" width="108" height="10" fill="#161917"></rect><rect y="52.2" width="108" height="3.6" fill="#d6ff3e"></rect></svg>REGOL</a>
 <span style="flex:1"></span>
-<nav style="display:flex;flex-wrap:wrap;gap:4px"><a href="./" style="height:38px;padding:0 14px;border-radius:19px;background:#1F2320;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;font:600 14.5px/1 Barlow;white-space:nowrap;flex:none">Home</a><a href="try.html" style="height:38px;padding:0 14px;border-radius:19px;color:#C9CEC2;text-decoration:none;display:flex;align-items:center;font:500 14.5px/1 Barlow;white-space:nowrap;flex:none" style-hover="background:#161917;color:#F2F4EE">Try it</a><a href="testing.html" style="height:38px;padding:0 14px;border-radius:19px;color:#C9CEC2;text-decoration:none;display:flex;align-items:center;font:500 14.5px/1 Barlow;white-space:nowrap;flex:none" style-hover="background:#161917;color:#F2F4EE">Join the test</a><a href="roadmap.html" style="height:38px;padding:0 14px;border-radius:19px;color:#C9CEC2;text-decoration:none;display:flex;align-items:center;font:500 14.5px/1 Barlow;white-space:nowrap;flex:none" style-hover="background:#161917;color:#F2F4EE">Roadmap</a><a href="report.html" style="height:38px;padding:0 14px;border-radius:19px;color:#C9CEC2;text-decoration:none;display:flex;align-items:center;font:500 14.5px/1 Barlow;white-space:nowrap;flex:none" style-hover="background:#161917;color:#F2F4EE">Report</a><a href="privacy.html" style="height:38px;padding:0 14px;border-radius:19px;color:#C9CEC2;text-decoration:none;display:flex;align-items:center;font:500 14.5px/1 Barlow;white-space:nowrap;flex:none" style-hover="background:#161917;color:#F2F4EE">Privacy</a><a href="support.html" style="height:38px;padding:0 14px;border-radius:19px;color:#C9CEC2;text-decoration:none;display:flex;align-items:center;font:500 14.5px/1 Barlow;white-space:nowrap;flex:none" style-hover="background:#161917;color:#F2F4EE">Support</a></nav>
+<nav style="display:flex;flex-wrap:wrap;gap:4px"><a href="./" style="height:38px;padding:0 14px;border-radius:19px;background:#1F2320;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;font:600 14.5px/1 Barlow;white-space:nowrap;flex:none">Home</a><a href="try.html" style="height:38px;padding:0 14px;border-radius:19px;color:#C9CEC2;text-decoration:none;display:flex;align-items:center;font:500 14.5px/1 Barlow;white-space:nowrap;flex:none" style-hover="background:#161917;color:#F2F4EE">Try it</a><a href="news.html" style="height:38px;padding:0 14px;border-radius:19px;color:#C9CEC2;text-decoration:none;display:flex;align-items:center;font:500 14.5px/1 Barlow;white-space:nowrap;flex:none" style-hover="background:#161917;color:#F2F4EE">News</a><a href="testing.html" style="height:38px;padding:0 14px;border-radius:19px;color:#C9CEC2;text-decoration:none;display:flex;align-items:center;font:500 14.5px/1 Barlow;white-space:nowrap;flex:none" style-hover="background:#161917;color:#F2F4EE">Join the test</a><a href="roadmap.html" style="height:38px;padding:0 14px;border-radius:19px;color:#C9CEC2;text-decoration:none;display:flex;align-items:center;font:500 14.5px/1 Barlow;white-space:nowrap;flex:none" style-hover="background:#161917;color:#F2F4EE">Roadmap</a><a href="report.html" style="height:38px;padding:0 14px;border-radius:19px;color:#C9CEC2;text-decoration:none;display:flex;align-items:center;font:500 14.5px/1 Barlow;white-space:nowrap;flex:none" style-hover="background:#161917;color:#F2F4EE">Report</a><a href="privacy.html" style="height:38px;padding:0 14px;border-radius:19px;color:#C9CEC2;text-decoration:none;display:flex;align-items:center;font:500 14.5px/1 Barlow;white-space:nowrap;flex:none" style-hover="background:#161917;color:#F2F4EE">Privacy</a><a href="support.html" style="height:38px;padding:0 14px;border-radius:19px;color:#C9CEC2;text-decoration:none;display:flex;align-items:center;font:500 14.5px/1 Barlow;white-space:nowrap;flex:none" style-hover="background:#161917;color:#F2F4EE">Support</a></nav>
 </div></header>
 
 <main>
@@ -345,6 +350,7 @@ class Component extends DCLogic {
         { scene: 'stats', title: 'A week you can actually read', body: 'Hard sets per muscle against a target you set, weekly tonnage, and a plain-English debrief that names the one thing worth fixing.' },
       ],
       engineList: [
+        { b: 'A different set each time', t: ': a lift can ask for 8–10 at two in reserve, then two at one, then a last set with nothing left — and every set is judged against the rung it was asked for.' },
         { b: 'Training blocks', t: ' that get harder week by week, then deload, and the week only turns once you’ve done every workout in it.' },
         { b: 'First time on a lift?', t: ' It finds your working weight in a few test sets instead of making you guess.' },
         { b: 'Warm-ups', t: ' that ramp to the day’s weight, and shrink when the muscle is already warm.' },
@@ -371,7 +377,7 @@ class Component extends DCLogic {
         ['iPhone?', 'Not yet. REGOL is Android only.'],
         ['Where do the lift guides come from?', 'Two open datasets, the Free Exercise DB (public domain) and exercises-dataset (MIT), bundled as text at build time, with the sources credited in the app. No images are shipped and no network requests are made for them.'],
       ].map(([q, a]) => ({ q, a: { __html: a } })),
-      footer: [['./', 'Home'], ['try.html', 'Try it'], ['testing.html', 'Join the test'], ['roadmap.html', 'Roadmap'], ['report.html', 'Report'], ['privacy.html', 'Privacy'], ['terms.html', 'Terms'], ['support.html', 'Support'],
+      footer: [['./', 'Home'], ['try.html', 'Try it'], ['news.html', 'News'], ['testing.html', 'Join the test'], ['roadmap.html', 'Roadmap'], ['report.html', 'Report'], ['privacy.html', 'Privacy'], ['terms.html', 'Terms'], ['support.html', 'Support'],
         ['https://github.com/filipmonbaillieu24-prog/overload-site/issues', 'Issues'], ['https://github.com/users/filipmonbaillieu24-prog/projects/3', 'Board'], ['mailto:support@regolapp.be', 'support@regolapp.be']].map(([h, t]) => ({ h, t })),
     };
   }

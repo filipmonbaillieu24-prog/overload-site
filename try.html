@@ -141,7 +141,7 @@ class Component extends DCLogic {
       ['Your history, readable', 'Workouts by week with a plain-English debrief, a calendar, and Stats: weekly tonnage, hard sets per muscle against targets you can set, and your biggest movers.', 'stats'],
       ['Settings', 'Theme and accent, rest timer sound and volume, weekly goal, the default progression rule, units, haptics, exports and backups. Everything lives on the phone.', 'settings'],
     ];
-    const NAV = [['./', 'Home'], ['try.html', 'Try it'], ['testing.html', 'Join the test'], ['roadmap.html', 'Roadmap'], ['report.html', 'Report'], ['privacy.html', 'Privacy'], ['support.html', 'Support']];
+    const NAV = [['./', 'Home'], ['try.html', 'Try it'], ['news.html', 'News'], ['testing.html', 'Join the test'], ['roadmap.html', 'Roadmap'], ['report.html', 'Report'], ['privacy.html', 'Privacy'], ['support.html', 'Support']];
     return {
       phoneRef: this.phoneRef, scene: this.state.scene, seed: this.state.seed,
       nav: NAV.map(([h, t]) => ({ h, t, on: h === 'try.html', off: h !== 'try.html' })),

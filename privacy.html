@@ -27,7 +27,7 @@
   "description": "REGOL keeps your training data on your phone. It has no accounts, no analytics and no ads.",
   "isPartOf": { "@id": "https://regolapp.be/#website" },
   "about": { "@id": "https://regolapp.be/#app" },
-  "dateModified": "2026-10-04",
+  "dateModified": "2026-10-11",
   "inLanguage": "en"
 }
 </script>
@@ -53,6 +53,7 @@
     <nav>
       <a href="./">Home</a>
       <a href="try.html">Try it</a>
+      <a href="news.html">News</a>
       <a href="testing.html">Join the test</a>
       <a href="roadmap.html">Roadmap</a>
       <a href="report.html">Report</a>
@@ -65,7 +66,7 @@
 <main class="wrap narrow doc">
   <h1>Privacy policy</h1>
   <p class="sub">REGOL is a gym log that keeps your data on your phone.</p>
-  <p class="date">Last updated 4 October 2026</p>
+  <p class="date">Last updated 11 October 2026</p>
 
   <div class="card">
     <h2>The short version</h2>
@@ -75,8 +76,8 @@
   </div>
 
   <h2>What REGOL stores, and where</h2>
-  <p>Everything you enter (lifts, templates, programs, logged sets, notes, settings) lives in
-  one file inside the app's private storage on your phone. REGOL also keeps the copy that file
+  <p>Everything you enter (lifts, templates, programs, logged sets, weigh-ins, notes, settings)
+  lives in one file inside the app's private storage on your phone. REGOL also keeps the copy that file
   replaced at the last save, so that a file damaged mid-write can be recovered instead of lost.
   Other apps cannot read either of them. I cannot read them. Uninstalling the app removes both from
   the phone.</p>
@@ -108,16 +109,25 @@
   <h3>Health Connect (off by default)</h3>
   <p>If you turn on Health Connect in the app, each finished workout is written to Health Connect on
   your phone as an exercise session: its name, when it started and ended, and a note listing the
-  lifts and the working sets you did. REGOL only writes; it never reads anything out of Health
-  Connect. You choose whether to grant that permission, and you can revoke it or have REGOL
-  delete everything it wrote, at any time, from the app's settings. Once a workout is in Health
-  Connect, what happens to it is between you and the other apps you have given access there.</p>
+  lifts and the working sets you did.</p>
+  <p>REGOL reads one thing from Health Connect, and only when you ask it to: your most recent
+  weigh-in, on the bodyweight screen, so you do not have to type a number your scale already knows.
+  It is offered rather than synced, so nothing is taken until you accept it, and nothing is sent
+  back. Reading is a separate permission from writing: turning on workout writing does not grant
+  it, and you can have one without the other.</p>
+  <p>You choose whether to grant either, and you can revoke them or have REGOL delete everything it
+  wrote, at any time, from the app's settings. Once a workout is in Health Connect, what happens to
+  it is between you and the other apps you have given access there.</p>
 
   <h3>Export and backups (only when you ask)</h3>
   <p>You can export your data as a JSON file, copy it as text, export a CSV, or pick a folder for
   automatic backups after each workout. Those files go where you send them: your own storage, your
   own cloud folder, a message to yourself. Once a file leaves the app it is covered by whatever
   service you put it in, not by this policy.</p>
+  <p>You can also hand someone a program, as a file or as a code their camera reads. The code is
+  drawn on your screen and nothing is uploaded to make it: the whole program is inside the code
+  itself, which is why it works with the network off. It carries the workouts, the lifts and the
+  rep ranges, and none of your weights or history.</p>
 
   <h2>Permissions, and why</h2>
   <ul>
@@ -127,6 +137,7 @@
     <li><strong>Run at startup</strong>: to re-arm the inactivity reminder after your phone restarts, so a reminder you asked for does not quietly stop happening. If the reminder is off, nothing is scheduled.</li>
     <li><strong>Internet and network state</strong>: added by the Google Play Billing library so it can reach Play. REGOL makes no network requests of its own.</li>
     <li><strong>Health Connect (write exercise)</strong>: only if you turn on the Health Connect option.</li>
+    <li><strong>Health Connect (read weight)</strong>: only if you ask the bodyweight screen to look for a weigh-in. Asked for separately from writing, and never read on its own.</li>
   </ul>
 
   <h2>Children</h2>
@@ -168,6 +179,7 @@
     <nav>
       <a href="./">Home</a>
       <a href="try.html">Try it</a>
+      <a href="news.html">News</a>
       <a href="testing.html">Join the test</a>
       <a href="roadmap.html">Roadmap</a>
       <a href="report.html">Report</a>
