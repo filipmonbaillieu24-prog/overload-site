@@ -1,18 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>REGOL: progressive overload, worked out for you</title><meta name="description" content="The Android gym log that reads your reps and reps in reserve, proposes the next weight, and tells you why. Free for everyone until 2027. No account, no ads."><link rel="icon" href="favicon.svg" type="image/svg+xml"><script src="site.js"></script><style>
+@font-face{font-family:Barlow;src:url(fonts/barlow_regular.ttf);font-weight:400;font-display:swap}
+@font-face{font-family:Barlow;src:url(fonts/barlow_medium.ttf);font-weight:500;font-display:swap}
+@font-face{font-family:Barlow;src:url(fonts/barlow_semibold.ttf);font-weight:600;font-display:swap}
+@font-face{font-family:'Barlow Condensed';src:url(fonts/barlow_condensed_semibold.ttf);font-weight:600;font-display:swap}
+@font-face{font-family:'Barlow Condensed';src:url(fonts/barlow_condensed_bold.ttf);font-weight:700;font-display:swap}
+body{margin:0;background:#0B0C0B !important;display:block !important;min-height:0 !important;color:#F2F4EE;-webkit-font-smoothing:antialiased}
+a{color:#D6FF3E;text-underline-offset:3px}a:hover{color:#E6FF7A}
+::selection{background:#D6FF3E;color:#0C0E0B}
+[data-deck]{display:flex;overflow:auto;scroll-snap-type:x mandatory;scrollbar-width:none;height:calc(100vh - 64px);height:calc(100dvh - 64px)}
+[data-deck]::-webkit-scrollbar{display:none}
+[data-ch]{flex:0 0 100%;width:100%;height:100%;scroll-snap-align:start;scroll-snap-stop:always;overflow:hidden auto;box-sizing:border-box;position:relative}
+[data-side]{display:flex;flex-direction:column}
+@media (max-width:940px){[data-deck]{flex-direction:column;scroll-snap-type:y mandatory}[data-hide-narrow]{display:none !important}}
+details>summary{list-style:none}details>summary::-webkit-details-marker{display:none}
+details[open] .faqplus{transform:rotate(45deg)}
+</style>
 <link rel="canonical" href="https://regolapp.be/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="REGOL">
 <meta property="og:url" content="https://regolapp.be/">
-<meta property="og:title" content="REGOL: the gym log that tells you what weight to lift next">
-<meta property="og:description" content="A gym log that does progressive overload for you. Free while it is in early access. No accounts, no ads, your data stays on your phone.">
-<meta property="og:image" content="https://regolapp.be/images/og.jpg">
+<meta property="og:title" content="REGOL: progressive overload, worked out for you">
+<meta property="og:description" content="The Android gym log that reads your reps and reps in reserve, proposes the next weight, and tells you why. Free for everyone until 2027. No account, no ads.">
+<meta property="og:image" content="https://regolapp.be/images/og.png">
 <meta property="og:image:alt" content="The REGOL mark beside the headline &quot;Progressive overload, worked out for you.&quot; and the app mid-set.">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="REGOL news" href="feed.xml">
+<link rel="stylesheet" href="site.css?v=1">
+<script src="site-ui.js" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -33,9 +52,7 @@
       "name": "REGOL",
       "url": "https://regolapp.be/",
       "email": "support@regolapp.be",
-      "sameAs": [
-        "https://github.com/filipmonbaillieu24-prog"
-      ]
+      "sameAs": ["https://github.com/filipmonbaillieu24-prog"]
     },
     {
       "@type": ["SoftwareApplication", "MobileApplication"],
@@ -50,22 +67,23 @@
       "inLanguage": "en",
       "author": { "@id": "https://regolapp.be/#developer" },
       "publisher": { "@id": "https://regolapp.be/#developer" },
-      "downloadUrl": "https://play.google.com/apps/testing/app.overload",
-      "image": "https://regolapp.be/images/og.jpg",
+      "downloadUrl": "https://play.google.com/store/apps/details?id=app.overload",
+      "image": "https://regolapp.be/images/og.png",
       "screenshot": [
-        "https://regolapp.be/images/screenshots/01-today.jpg",
-        "https://regolapp.be/images/screenshots/02-every-change-explained.jpg",
-        "https://regolapp.be/images/screenshots/03-mid-set.jpg",
-        "https://regolapp.be/images/screenshots/04-rest.jpg",
-        "https://regolapp.be/images/screenshots/05-summary.jpg",
-        "https://regolapp.be/images/screenshots/06-program-progress.jpg",
-        "https://regolapp.be/images/screenshots/07-lift-detail.jpg",
-        "https://regolapp.be/images/screenshots/08-volume.jpg"
+        "https://regolapp.be/images/app/today.png",
+        "https://regolapp.be/images/app/why.png",
+        "https://regolapp.be/images/app/live.png",
+        "https://regolapp.be/images/app/rest.png",
+        "https://regolapp.be/images/app/summary.png",
+        "https://regolapp.be/images/app/progress.png",
+        "https://regolapp.be/images/app/records.png",
+        "https://regolapp.be/images/app/chart.png"
       ],
       "permissions": "Notifications, vibration, display over other apps for the rest timer, and Health Connect, which is optional and off by default. Health Connect is two separate permissions: writing finished workouts, and reading a weigh-in if you ask the bodyweight screen to look for one",
       "isAccessibleForFree": true,
       "featureList": [
         "Proposes your next weight from your logged reps and your reps in reserve, with the reasoning shown",
+        "A rep range and a target reps in reserve per set, so a top set and its back-offs are each judged against what they asked for",
         "RIR-gated, double and linear progression, set per template or per lift",
         "Steps sized from your own sets rather than a fixed increment",
         "Stall detection across four workouts, offering a deload, a wider rep range or a lift swap",
@@ -75,10 +93,10 @@
         "Training blocks that get harder week by week and end in a deload, with the reps in reserve set week by week",
         "Bodyweight recorded and charted, so pull-ups and dips count toward your totals",
         "Timed sets for planks, carries and hangs, logged in seconds and left out of the proposals",
-        "Dark, light and true black themes, a colour of your own, and a colour per program",
-        "Share a program as a code another phone can scan, with no account and no server",
+        "Dark, light and true black themes, a colour of your own held to 7:1 contrast, and a colour per program",
+        "Share a template or a program as a code another phone can scan, with no account and no server",
         "All-time totals, milestones and a records board of your best sets at 1, 3, 5, 8 and 10 reps",
-        "Estimated 1RM over recent workouts, rep records and percentage tables per lift",
+        "Estimated 1RM over recent workouts, rep records and percentage tables per lift, each chart full screen and shareable",
         "Hard sets per muscle against a weekly target, weekly tonnage and a plain-English weekly debrief",
         "1,577 exercise guides with step-by-step instructions, bundled in the app",
         "Rest timers per lift that adapt to how the set went",
@@ -89,12 +107,12 @@
       "offers": [
         {
           "@type": "Offer",
-          "name": "Early access",
-          "description": "Every feature unlocked for everyone through 31 December 2026. No subscription, no payment details, nothing to redeem. The app is in closed testing, so access is by joining the tester group.",
+          "name": "Free for everyone",
+          "description": "Every feature unlocked for everyone through 31 December 2026. No subscription, no payment details, nothing to redeem.",
           "price": "0",
           "priceCurrency": "EUR",
           "priceValidUntil": "2026-12-31",
-          "availability": "https://schema.org/LimitedAvailability",
+          "availability": "https://schema.org/InStock",
           "url": "https://regolapp.be/#price",
           "seller": { "@id": "https://regolapp.be/#developer" }
         },
@@ -113,12 +131,7 @@
             "@type": "UnitPriceSpecification",
             "price": 1.99,
             "priceCurrency": "EUR",
-            "referenceQuantity": {
-              "@type": "QuantitativeValue",
-              "value": 1,
-              "unitCode": "MON",
-              "unitText": "month"
-            }
+            "referenceQuantity": { "@type": "QuantitativeValue", "value": 1, "unitCode": "MON", "unitText": "month" }
           }
         }
       ]
@@ -127,85 +140,63 @@
       "@type": ["WebPage", "FAQPage"],
       "@id": "https://regolapp.be/#webpage",
       "url": "https://regolapp.be/",
-      "name": "REGOL: the gym log that tells you what weight to lift next",
-      "description": "A gym log that does progressive overload for you: log your reps and reps in reserve and it proposes the next weight, with its reasoning. Free until 2027.",
+      "name": "REGOL: progressive overload, worked out for you",
+      "description": "The Android gym log that reads your reps and reps in reserve, proposes the next weight, and tells you why. Free for everyone until 2027.",
       "isPartOf": { "@id": "https://regolapp.be/#website" },
       "about": { "@id": "https://regolapp.be/#app" },
-      "primaryImageOfPage": "https://regolapp.be/images/og.jpg",
+      "primaryImageOfPage": "https://regolapp.be/images/og.png",
       "inLanguage": "en",
       "mainEntity": [
         {
           "@type": "Question",
+          "name": "Where do I get it?",
+          "acceptedAnswer": { "@type": "Answer", "text": "On Google Play, for Android 8.0 and up. Want a look first? Run the whole app in your browser." }
+        },
+        {
+          "@type": "Question",
           "name": "Does it work offline?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Entirely. The only thing that needs a connection is checking your subscription with Google Play, and the last answer is remembered, so training in a basement gym is fine."
-          }
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes, completely. The only thing that ever needs a connection is checking your subscription with Google Play, and the last answer is remembered." }
         },
         {
           "@type": "Question",
           "name": "Do I have to log reps in reserve?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "It is one tap per set, and it is what makes the proposals good. Skip it and the set is recorded at the target you planned for it, so the engine reads the workout as on plan. The honest tap is what earns you an accurate next weight. The linear rule ignores it either way, and sets imported from another app without an effort reading are progressed from reps alone."
-          }
+          "acceptedAnswer": { "@type": "Answer", "text": "It is one tap per set, and it is what makes the proposals good. If you skip it, the set is recorded at the effort you planned, so the engine reads the workout as on plan." }
         },
         {
           "@type": "Question",
           "name": "Can I bring my history from another app?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. Strong and Hevy CSV exports import, and REGOL matches them to your lifts. You can also import a previous REGOL export. Here is how to import a CSV from another app."
-          }
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Strong and Hevy CSV exports import directly, and REGOL matches them to your lifts. How to import." }
         },
         {
           "@type": "Question",
-          "name": "Is there a catch to it being free right now?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No. Early access is free for everyone until 31 December 2026. The app does not ask for a subscription or a payment method before then, and you are not signed up to anything that starts charging later. From 2027 the app falls back to the free plan unless you subscribe, and nothing you made is deleted either way."
-          }
+          "name": "Is there a catch to it being free?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Everything is free for everyone until 31 December 2026, with no payment method asked for. From 2027 the app falls back to the free plan unless you subscribe, and nothing you made is deleted either way." }
         },
         {
           "@type": "Question",
           "name": "What happens to my data if I stop paying?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Nothing is deleted or hidden. You keep training on the free plan, and everything is still there, and still exportable, if you come back."
-          }
+          "acceptedAnswer": { "@type": "Answer", "text": "Nothing is deleted or hidden. You keep training on the free plan, and everything stays exportable. Templates and programs beyond the free limit wait, greyed out, until you subscribe again." }
         },
         {
           "@type": "Question",
           "name": "iPhone?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Not yet. REGOL is Android only."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Where do the lift guides come from?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Two open datasets, the Free Exercise DB (public domain) and exercises-dataset (MIT), bundled as text at build time, with the sources credited in the app. No images are shipped and no network requests are made for them."
-          }
+          "acceptedAnswer": { "@type": "Answer", "text": "Not yet. REGOL is Android only. iOS is on the roadmap, after the Android app has stopped changing shape." }
         }
       ]
     }
   ]
 }
 </script>
-<script src="./support.js"></script>
 </head>
 <body>
 <noscript>
-<h1>The gym log that tells you what weight to lift next.</h1>
-<p>Most workout trackers remember what you did. REGOL reads it: your reps, and your reps in reserve (RIR), from your last workout. Then it proposes the next weight, with the reasoning written underneath. You still decide. You just stop guessing.</p>
-<p>Free for everyone until 2027. No account. No ads. Your data never leaves your phone. Android only.</p>
-<p>This page runs the app itself, so it needs JavaScript. The rest of the site does not:</p>
+<h1>Progressive overload, worked out for you.</h1>
+<p>REGOL is an Android gym log. You log the weight, the reps, and how many reps you had left. It works out next time’s weight for every lift and tells you why, in a sentence you can read between sets. Free for everyone until 2027. No account, no ads, and your training never leaves your phone.</p>
+<p>The home page turns one idea per screen, which needs JavaScript. Everything is also one link away:</p>
 <ul>
+<li><a href="https://play.google.com/store/apps/details?id=app.overload&amp;pcampaignid=web_share">Get it on Google Play</a></li>
 <li><a href="try.html">Try it in your browser</a></li>
-<li><a href="testing.html">Join the test</a></li>
+<li><a href="news.html">News</a></li>
 <li><a href="roadmap.html">Roadmap</a></li>
 <li><a href="report.html">Report a bug</a></li>
 <li><a href="privacy.html">Privacy</a></li>
@@ -214,174 +205,231 @@
 <li><a href="mailto:support@regolapp.be">support@regolapp.be</a></li>
 </ul>
 </noscript>
-<x-dc>
-<helmet><title>REGOL: the gym log that tells you what weight to lift next</title><meta name="description" content="A gym log that does progressive overload for you: log your reps and reps in reserve and it proposes the next weight, with its reasoning. Free until 2027."><style>
-@font-face{font-family:Barlow;src:url(fonts/barlow_regular.ttf);font-weight:400}
-@font-face{font-family:Barlow;src:url(fonts/barlow_medium.ttf);font-weight:500}
-@font-face{font-family:Barlow;src:url(fonts/barlow_semibold.ttf);font-weight:600}
-@font-face{font-family:'Barlow Condensed';src:url(fonts/barlow_condensed_semibold.ttf);font-weight:600}
-@font-face{font-family:'Barlow Condensed';src:url(fonts/barlow_condensed_bold.ttf);font-weight:700}
-html{scroll-behavior:smooth}
-body{margin:0;background:#0B0C0B !important;display:block !important;min-height:0 !important;color:#F2F4EE;-webkit-font-smoothing:antialiased}
-a{color:#D6FF3E;text-underline-offset:3px}a:hover{color:#E6FF7A}
-details>summary{list-style:none}details>summary::-webkit-details-marker{display:none}
-details[open] .faqplus{transform:rotate(45deg)}
-</style></helmet>
-<div style="font-family:Barlow;color:#F2F4EE;background:#0B0C0B;overflow-x:hidden">
-
-<a href="testing.html" style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 14px;padding:12px 20px;background:#D6FF3E;color:#0C0E0B;text-decoration:none;font:500 15px/1.35 Barlow;text-align:center" style-hover="background:#E6FF7A"><span style="font:700 13px/1 Barlow;letter-spacing:.14em;text-transform:uppercase">Testers wanted</span><span>Train with REGOL before it launches: everything unlocked, free, while the test runs.</span><span style="font-weight:600">Join the test ›</span></a>
-
-<header style="position:sticky;top:0;z-index:10;background:rgba(11,12,11,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06)"><div style="max-width:1200px;margin:0 auto;padding:14px 24px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 28px">
-<a href="./" style="display:flex;align-items:center;gap:10px;color:#F2F4EE;text-decoration:none;font:700 26px/1 'Barlow Condensed';letter-spacing:.02em;white-space:nowrap;flex:none"><svg width="30" height="30" viewBox="0 0 108 108" aria-hidden="true"><rect width="108" height="108" rx="24" fill="#161917"></rect><circle cx="54" cy="54" r="18" fill="none" stroke="#d6ff3e" stroke-width="7.2"></circle><rect y="49" width="108" height="10" fill="#161917"></rect><rect y="52.2" width="108" height="3.6" fill="#d6ff3e"></rect></svg>REGOL</a>
+<div style="font-family:Barlow;color:#F2F4EE;background:#0B0C0B">
+<header data-site-header style="position:sticky;top:0;z-index:30;height:64px;box-sizing:border-box;background:rgba(11,12,11,.88);backdrop-filter:blur(16px) saturate(1.2);-webkit-backdrop-filter:blur(16px) saturate(1.2);border-bottom:1px solid rgba(255,255,255,.06)"><div style="max-width:1400px;height:100%;margin:0 auto;padding:0 16px 0 20px;display:flex;align-items:center;gap:10px">
+<a href="./" aria-label="REGOL home" style="display:flex;align-items:center;gap:10px;color:#F2F4EE;text-decoration:none;font:700 26px/1 'Barlow Condensed';letter-spacing:.02em;white-space:nowrap;flex:none;min-height:44px" class="hv-ink"><svg width="30" height="30" viewBox="0 0 108 108" aria-hidden="true"><rect width="108" height="108" rx="24" fill="#161917"></rect><circle cx="54" cy="54" r="18" fill="none" stroke="#d6ff3e" stroke-width="7.2"></circle><rect y="49" width="108" height="10" fill="#161917"></rect><rect y="52.2" width="108" height="3.6" fill="#d6ff3e"></rect></svg>REGOL</a>
 <span style="flex:1"></span>
-<nav style="display:flex;flex-wrap:wrap;gap:4px"><a href="./" style="height:38px;padding:0 14px;border-radius:19px;background:#1F2320;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;font:600 14.5px/1 Barlow;white-space:nowrap;flex:none">Home</a><a href="try.html" style="height:38px;padding:0 14px;border-radius:19px;color:#C9CEC2;text-decoration:none;display:flex;align-items:center;font:500 14.5px/1 Barlow;white-space:nowrap;flex:none" style-hover="background:#161917;color:#F2F4EE">Try it</a><a href="news.html" style="height:38px;padding:0 14px;border-radius:19px;color:#C9CEC2;text-decoration:none;display:flex;align-items:center;font:500 14.5px/1 Barlow;white-space:nowrap;flex:none" style-hover="background:#161917;color:#F2F4EE">News</a><a href="testing.html" style="height:38px;padding:0 14px;border-radius:19px;color:#C9CEC2;text-decoration:none;display:flex;align-items:center;font:500 14.5px/1 Barlow;white-space:nowrap;flex:none" style-hover="background:#161917;color:#F2F4EE">Join the test</a><a href="roadmap.html" style="height:38px;padding:0 14px;border-radius:19px;color:#C9CEC2;text-decoration:none;display:flex;align-items:center;font:500 14.5px/1 Barlow;white-space:nowrap;flex:none" style-hover="background:#161917;color:#F2F4EE">Roadmap</a><a href="report.html" style="height:38px;padding:0 14px;border-radius:19px;color:#C9CEC2;text-decoration:none;display:flex;align-items:center;font:500 14.5px/1 Barlow;white-space:nowrap;flex:none" style-hover="background:#161917;color:#F2F4EE">Report</a><a href="privacy.html" style="height:38px;padding:0 14px;border-radius:19px;color:#C9CEC2;text-decoration:none;display:flex;align-items:center;font:500 14.5px/1 Barlow;white-space:nowrap;flex:none" style-hover="background:#161917;color:#F2F4EE">Privacy</a><a href="support.html" style="height:38px;padding:0 14px;border-radius:19px;color:#C9CEC2;text-decoration:none;display:flex;align-items:center;font:500 14.5px/1 Barlow;white-space:nowrap;flex:none" style-hover="background:#161917;color:#F2F4EE">Support</a></nav>
-</div></header>
-
-<main>
-<section style="padding:clamp(48px,7vw,96px) 24px clamp(56px,8vw,110px)"><div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:56px 64px">
-<div style="flex:1 1 460px;min-width:0;display:flex;flex-direction:column;gap:24px">
-<span style="align-self:flex-start;height:34px;padding:0 14px;border-radius:17px;background:#1E2317;display:flex;align-items:center;gap:8px;font:600 13px/1 Barlow;letter-spacing:.14em;text-transform:uppercase;color:#D6FF3E;white-space:nowrap"><span style="width:8px;height:8px;border-radius:4px;background:#D6FF3E"></span>Early access · Android</span>
-<h1 style="margin:0;font:700 clamp(52px,7.4vw,96px)/.92 'Barlow Condensed';letter-spacing:-.01em;text-wrap:balance">The gym log that tells you what weight to lift next.</h1>
-<p style="margin:0;font:400 clamp(18px,1.6vw,21px)/1.55 Barlow;color:#C9CEC2;max-width:600px;text-wrap:pretty">Most workout trackers remember what you did. REGOL reads it: your reps, and your reps in reserve (RIR), from your last workout. Then it proposes the next weight, with the reasoning written underneath. You still decide. You just stop guessing.</p>
-<div style="display:flex;flex-wrap:wrap;gap:10px"><a href="try.html" style="height:60px;padding:0 26px;border-radius:22px;background:#D6FF3E;color:#0C0E0B;text-decoration:none;display:flex;align-items:center;gap:10px;font:600 17px/1 Barlow;box-shadow:0 8px 24px rgba(214,255,62,.22);white-space:nowrap;flex:none" style-hover="background:#E6FF7A;color:#0C0E0B"><svg width="16" height="16" viewBox="0 0 24 24" fill="#0C0E0B"><path d="M7 4.5v15l12-7.5z"></path></svg>Try it in your browser</a><a href="#price" style="height:60px;padding:0 24px;border-radius:22px;background:#1F2320;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;font:500 17px/1 Barlow;white-space:nowrap;flex:none" style-hover="background:#262A26;color:#F2F4EE">What it costs</a><a href="#what" style="height:60px;padding:0 24px;border-radius:22px;color:#E4E8DC;text-decoration:none;display:flex;align-items:center;font:500 17px/1 Barlow;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);white-space:nowrap;flex:none" style-hover="background:#161917;color:#F2F4EE">See what it does</a></div>
-<p style="margin:0;font:400 15px/1.5 Barlow;color:#9AA093">Free for everyone until 2027. No account. No ads. Your data never leaves your phone.</p>
+<a href="https://play.google.com/store/apps/details?id=app.overload&pcampaignid=web_share" target="_blank" rel="noopener" style="height:44px;padding:0 16px 0 13px;border-radius:22px;background:#D6FF3E;color:#0C0E0B;text-decoration:none;display:flex;align-items:center;gap:8px;font:600 14.5px/1 Barlow;white-space:nowrap;flex:none" class="hv-play"><svg width="13" height="13" viewBox="0 0 24 24" fill="#0C0E0B" aria-hidden="true"><path d="M6 3.5v17l14-8.5z"></path></svg><span data-cta-label>Get it on Google Play</span></a>
+<button data-act="menu" aria-expanded="false" aria-label="Menu" style="border:0;height:44px;padding:0 14px 0 16px;border-radius:22px;background:#1F2320;color:#F2F4EE;display:flex;align-items:center;gap:10px;cursor:pointer;flex:none;font:600 14.5px/1 Barlow" class="hv-raised"><span data-menu-label>Menu</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F2F4EE" stroke-width="2.2" stroke-linecap="round"><path data-menu-icon d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
 </div>
-<div style="flex:0 1 460px;min-width:300px;display:flex;flex-direction:column;align-items:center;gap:18px">
-<div style="position:relative;width:420px;max-width:100%;height:760px;display:flex;justify-content:center">
-<div style="position:absolute;left:50%;top:150px;width:460px;height:460px;margin-left:-230px;border-radius:50%;box-shadow:inset 0 0 0 58px #D6FF3E"></div>
-<div style="position:absolute;left:-40px;right:-40px;top:362px;height:36px;background:#0B0C0B"></div>
-<div style="position:absolute;left:-40px;right:-40px;top:374px;height:12px;background:#D6FF3E"></div>
-<div style="position:relative;width:345px;height:746px;border-radius:32px;overflow:hidden;box-shadow:0 0 0 8px #1c1d1c,0 30px 80px rgba(0,0,0,.6)"><div aria-hidden="true" inert="" style="width:392px;height:848px;transform:scale(.88);transform-origin:0 0;pointer-events:none;user-select:none"><dc-import name="REGOL" scene="today" embedded="{{ true }}" still="{{ true }}" hint-size="392px,848px"></dc-import></div></div>
-</div>
-<span style="font:400 15px/1.4 Barlow;color:#9AA093;text-align:center">Want to tap through it? <a href="try.html">Run the whole app in your browser</a>.</span>
-</div>
-</div></section>
+<nav data-menu aria-label="Main" style="position:absolute;left:0;right:0;top:64px;height:calc(100vh - 64px);height:calc(100dvh - 64px);background:#0B0C0B;overflow:auto;display:flex;flex-direction:column"><div style="max-width:1400px;width:100%;box-sizing:border-box;margin:0 auto;padding:24px 20px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:4px 32px;align-content:start">
+<a href="./" aria-current="page" style="min-height:64px;padding:0 16px;border-radius:20px;background:#161917;color:#D6FF3E;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Home</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">What REGOL does</span></a><a href="try.html" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Try it</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">The app in your browser</span></a><a href="news.html" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>News</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">Releases</span></a><a href="roadmap.html" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Roadmap</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">What is being built</span></a><a href="report.html" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Report</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">A bug or an idea</span></a><a href="privacy.html" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Privacy</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">Your data stays on your phone</span></a><a href="support.html" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Support</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">Help, backups, FAQ</span></a>
+</div><div style="margin-top:auto;padding:16px 20px 28px;display:flex;flex-wrap:wrap;gap:8px 20px;font:500 15px/1.3 Barlow;color:#9AA093;border-top:1px solid rgba(255,255,255,.06)"><a href="terms.html" style="color:#C9CEC2;text-decoration:none;padding:6px 0" class="hv-ink">Terms</a><a href="feed.xml" style="color:#C9CEC2;text-decoration:none;padding:6px 0" class="hv-ink">RSS</a><a href="mailto:support@regolapp.be" style="color:#C9CEC2;text-decoration:none;padding:6px 0" class="hv-ink">support@regolapp.be</a></div></nav>
+</header>
 
-<section style="padding:0 24px"><div style="max-width:1200px;margin:0 auto;border-radius:36px;background:#D6FF3E;color:#0C0E0B;padding:clamp(36px,5vw,64px);display:flex;flex-wrap:wrap;align-items:center;gap:24px 48px;position:relative;overflow:hidden">
-<div style="position:absolute;right:-120px;top:-160px;width:420px;height:420px;border-radius:50%;background:rgba(255,255,255,.22)"></div>
-<div style="flex:1 1 380px;display:flex;flex-direction:column;gap:14px;position:relative"><span style="font:700 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase">Testers wanted</span><h2 style="margin:0;font:700 clamp(38px,5vw,60px)/.95 'Barlow Condensed';text-wrap:balance">Try it before it launches, free.</h2></div>
-<div style="flex:1 1 380px;display:flex;flex-direction:column;align-items:flex-start;gap:20px;position:relative"><p style="margin:0;font:500 18px/1.55 Barlow;opacity:.8;text-wrap:pretty">REGOL is in closed testing. Testers get every feature unlocked at no cost while the test runs, in exchange for training with it for a couple of weeks and telling me what breaks.</p><a href="testing.html" style="height:58px;padding:0 26px;border-radius:22px;background:#0C0E0B;color:#D6FF3E;text-decoration:none;display:flex;align-items:center;font:600 17px/1 Barlow;white-space:nowrap;flex:none" style-hover="opacity:.88;color:#D6FF3E">Join the test</a></div>
-</div></section>
+<div style="position:relative">
+<div data-deck="">
 
-<section id="what" style="padding:clamp(72px,9vw,128px) 24px 0;scroll-margin-top:80px"><div style="max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:48px">
-<div style="display:flex;flex-direction:column;gap:14px;max-width:760px"><span style="font:600 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">What it does</span><h2 style="margin:0;font:700 clamp(40px,5vw,64px)/.95 'Barlow Condensed';text-wrap:balance">Everything a workout needs, and nothing it doesn’t.</h2><p style="margin:0;font:400 19px/1.55 Barlow;color:#C9CEC2">Built for the gym floor: big numbers, one thumb, and no menu-diving between sets.</p></div>
-<div style="display:flex;flex-wrap:wrap;gap:20px">
-<sc-for list="{{ features }}" as="f" hint-placeholder-count="3"><div style="flex:1 1 320px;min-width:0;border-radius:32px;background:#161917;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);overflow:hidden;display:flex;flex-direction:column">
-<div style="padding:28px 28px 0;display:flex;flex-direction:column;gap:10px"><h3 style="margin:0;font:700 30px/1 'Barlow Condensed'">{{ f.title }}</h3><p style="margin:0;font:400 16px/1.55 Barlow;color:#C9CEC2;text-wrap:pretty">{{ f.body }}</p></div>
-<div style="height:470px;position:relative;overflow:hidden;margin-top:auto;padding-top:28px;box-sizing:content-box;flex:none"><div style="position:absolute;left:50%;top:0;margin-left:-141px;width:282px;height:610px;border-radius:28px 28px 0 0;overflow:hidden;box-shadow:0 0 0 7px #1c1d1c"><div aria-hidden="true" inert="" style="width:392px;height:848px;transform:scale(.72);transform-origin:0 0;pointer-events:none;user-select:none"><dc-import name="REGOL" scene="{{ f.scene }}" embedded="{{ true }}" still="{{ true }}" hint-size="392px,848px"></dc-import></div></div></div>
-</div></sc-for>
+<section data-ch="" data-title="Start" id="start" data-screen-label="01 Hero" style="background:#0B0C0B"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;gap:24px 48px">
+<div style="flex:1 1 440px;min-width:0;display:flex;flex-direction:column;gap:clamp(16px,2.4vh,28px)">
+<span style="align-self:flex-start;height:34px;padding:0 14px;border-radius:17px;background:#1E2317;display:flex;align-items:center;gap:8px;font:600 13px/1 Barlow;letter-spacing:.14em;text-transform:uppercase;color:#D6FF3E;white-space:nowrap"><span style="width:8px;height:8px;border-radius:4px;background:#D6FF3E"></span>Out now on Google Play</span>
+<h1 style="margin:0;font:700 clamp(54px,8.4vw,136px)/.86 'Barlow Condensed';letter-spacing:-.02em;text-wrap:balance">Progressive overload, <span style="color:#D6FF3E">worked out</span> for you.</h1>
+<p style="margin:0;font:400 clamp(17px,1.5vw,22px)/1.5 Barlow;color:#C9CEC2;max-width:540px;text-wrap:pretty">You log the weight, the reps, and how many reps you had left. REGOL works out next time’s weight for every lift and tells you why, in a sentence you can read between sets.</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px">
+<a href="https://play.google.com/store/apps/details?id=app.overload&pcampaignid=web_share" target="_blank" rel="noopener" style="height:60px;padding:0 26px 0 20px;border-radius:22px;background:#D6FF3E;color:#0C0E0B;text-decoration:none;display:flex;align-items:center;gap:12px;font:600 17px/1 Barlow;white-space:nowrap" class="hv-play"><svg width="17" height="17" viewBox="0 0 24 24" fill="#0C0E0B" aria-hidden="true"><path d="M6 3.5v17l14-8.5z"></path></svg>Get it on Google Play</a>
+<a href="try.html" style="height:60px;padding:0 24px;border-radius:22px;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;font:500 17px/1 Barlow;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);white-space:nowrap" class="hv-card">Try it in your browser</a>
+</div>
+<p style="margin:0;font:500 14px/1.4 Barlow;color:#9AA093">Android 8.0 and up · Free for everyone until 2027 · No account · No ads · Works offline</p>
+</div>
+<div style="flex:1 1 320px;min-width:0;height:min(76vh,820px);position:relative;display:flex;justify-content:center;align-items:flex-start;overflow:hidden">
+<img src="images/app/today.png" alt="REGOL’s Today screen: the next workout on one card, every lift with its proposed weight already filled in." width="1080" height="2400" style="position:relative;height:112%;width:auto;max-width:92%;object-fit:cover;object-position:top;border-radius:30px;box-shadow:0 0 0 9px #1a1c1a,0 0 0 10px rgba(255,255,255,.07),0 50px 120px -10px rgba(0,0,0,.75);margin-top:4%">
 </div></div></section>
 
-<section id="engine" style="padding:clamp(72px,9vw,128px) 24px 0;scroll-margin-top:80px"><div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:flex-start;gap:56px 72px">
-<div style="flex:1 1 480px;min-width:0;display:flex;flex-direction:column;gap:22px">
-<span style="font:600 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">Progressive overload</span>
-<h2 style="margin:0;font:700 clamp(40px,5vw,64px)/.95 'Barlow Condensed';text-wrap:balance">It watches effort, not just numbers.</h2>
-<p style="margin:0;font:400 18px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">After each set you say how many reps you had left: your reps in reserve. REGOL turns that into progressive overload: clear the rep ceiling or leave reps in reserve and the weight goes up; grind through two workouts under target and it proposes a step back before you stall.</p>
-<div style="background:#202419;box-shadow:inset 0 0 0 1px #3A4520;border-radius:24px;padding:20px 22px;display:flex;flex-direction:column;gap:10px"><div style="display:flex;align-items:center;gap:10px"><div style="width:28px;height:28px;border-radius:9px;background:#D6FF3E;display:flex;align-items:center;justify-content:center;flex:none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0C0E0B" stroke-width="2.6" stroke-linecap="round"><path d="M5 12h14"></path></svg></div><span style="flex:1;font:600 13px/1 Barlow;letter-spacing:.14em;color:#D6FF3E">NEXT TIME</span><span style="font:700 30px/1 'Barlow Condensed'">60 kg</span><span style="font:500 13px/1 Barlow;color:#C9CEC2;background:#1F2320;border-radius:7px;padding:5px 8px">holds</span></div><span style="font:400 17px/1.5 Barlow;color:#E4E8DC;text-wrap:pretty">Holds at 60 kg next time. Clear 11 reps on every set, or finish them at 3 in reserve, and it’s 62.5 kg.</span></div>
-<p style="margin:0;font:400 18px/1.6 Barlow;color:#C9CEC2">Every proposal shows its reason, so you always know why the number changed, and you can overrule it in one tap.</p>
-<div style="border-radius:28px;overflow:hidden;display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.06)"><sc-for list="{{ engineList }}" as="e" hint-placeholder-count="5"><div style="display:flex;gap:14px;align-items:flex-start;padding:18px 20px;background:#161917"><div style="width:8px;height:8px;border-radius:2px;background:#D6FF3E;flex:none;margin-top:8px"></div><p style="margin:0;font:400 16px/1.55 Barlow;color:#C9CEC2;text-wrap:pretty"><strong style="color:#F2F4EE;font-weight:600">{{ e.b }}</strong>{{ e.t }}</p></div></sc-for></div>
+<section data-ch="" data-title="The problem" id="problem" data-screen-label="02 Problem" style="background:#D6FF3E;color:#0C0E0B"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;gap:clamp(20px,3vh,40px)">
+<span style="font:700 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase">The problem</span>
+<h2 style="margin:0;font:700 clamp(56px,10vw,176px)/.84 'Barlow Condensed';letter-spacing:-.025em;text-wrap:balance;max-width:1200px">Most gym apps are notebooks.</h2>
+<p style="margin:0;font:400 clamp(18px,1.8vw,26px)/1.45 Barlow;color:#2E3415;max-width:720px;text-wrap:pretty">They remember what you did. Then they leave you standing at the rack doing the one thing an app should do for you: working out what to lift next. So you guess. Too light, and the week is wasted. Too heavy, and you grind to a stop.</p>
+</div></section>
+
+<section data-ch="" data-title="Reps in reserve" id="rir" data-screen-label="03 Reps in reserve" style="background:#0B0C0B"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;gap:24px 56px">
+<div style="flex:1 1 400px;min-width:0;display:flex;flex-direction:column;gap:clamp(14px,2.2vh,24px)">
+<span style="font:600 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">The one extra tap</span>
+<h2 style="margin:0;font:700 clamp(48px,6.6vw,108px)/.88 'Barlow Condensed';letter-spacing:-.02em;text-wrap:balance">How many more could you have done?</h2>
+<p style="margin:0;font:400 clamp(17px,1.4vw,21px)/1.5 Barlow;color:#C9CEC2;max-width:560px;text-wrap:pretty">That number is called reps in reserve. Zero means you hit failure. Two means you had two more in you. You tap it once after every set, and it is the difference between an app that stores numbers and one that understands them.</p>
+<p style="margin:0;font:400 clamp(15px,1.2vw,18px)/1.5 Barlow;color:#9AA093;max-width:560px;text-wrap:pretty">Skip it and the set is recorded at the effort you planned, so nothing breaks. The honest tap is what earns you an accurate next weight.</p>
 </div>
-<div style="flex:0 1 380px;min-width:300px;display:flex;justify-content:center;position:sticky;top:100px"><div style="width:337px;height:729px;border-radius:32px;overflow:hidden;box-shadow:0 0 0 8px #1c1d1c,0 30px 80px rgba(0,0,0,.55)"><div aria-hidden="true" inert="" style="width:392px;height:848px;transform:scale(.86);transform-origin:0 0;pointer-events:none;user-select:none"><dc-import name="REGOL" scene="summary" embedded="{{ true }}" still="{{ true }}" hint-size="392px,848px"></dc-import></div></div></div>
-</div></section>
-
-<section style="padding:clamp(72px,9vw,128px) 24px 0"><div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap-reverse;align-items:center;gap:56px 72px">
-<div style="flex:0 1 380px;min-width:300px;display:flex;justify-content:center"><div style="width:337px;height:729px;border-radius:32px;overflow:hidden;box-shadow:0 0 0 8px #1c1d1c,0 30px 80px rgba(0,0,0,.55)"><div aria-hidden="true" inert="" style="width:392px;height:848px;transform:scale(.86);transform-origin:0 0;pointer-events:none;user-select:none"><dc-import name="REGOL" scene="progress" embedded="{{ true }}" still="{{ true }}" hint-size="392px,848px"></dc-import></div></div></div>
-<div style="flex:1 1 480px;min-width:0;display:flex;flex-direction:column;gap:22px">
-<span style="font:600 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">Strength training</span>
-<h2 style="margin:0;font:700 clamp(40px,5vw,64px)/.95 'Barlow Condensed';text-wrap:balance">Templates and programs that follow your week.</h2>
-<p style="margin:0;font:400 18px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">Build a template from your lifts with sets, rep range and target reps in reserve. Group templates into a program and REGOL pins the next one on Today, tracks the rotation, and tells you what the week still owes.</p>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px"><sc-for list="{{ plansList }}" as="p" hint-placeholder-count="4"><div style="border-radius:22px;background:#161917;padding:18px 20px;display:flex;gap:12px;align-items:flex-start"><div style="width:8px;height:8px;border-radius:2px;background:#D6FF3E;flex:none;margin-top:8px"></div><span style="font:400 16px/1.5 Barlow;color:#E4E8DC;text-wrap:pretty">{{ p }}</span></div></sc-for></div>
+<div style="flex:1 1 340px;min-width:0;max-width:560px;display:flex;flex-direction:column;gap:12px" aria-hidden="true">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font:500 13px/1 Barlow;letter-spacing:.14em;color:#9AA093"><span>REPS LEFT IN THE TANK</span><span style="color:#D6FF3E;letter-spacing:0;font-size:15px">aiming for 2</span></div>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px">
+<div style="border-radius:20px;background:#161917;padding:clamp(14px,2.4vh,26px) 0;display:flex;flex-direction:column;align-items:center;gap:8px"><span style="font:700 clamp(32px,4vw,56px)/1 'Barlow Condensed'">0</span><span style="font:400 13px/1 Barlow;color:#9AA093">failure</span></div>
+<div style="border-radius:20px;background:#161917;padding:clamp(14px,2.4vh,26px) 0;display:flex;flex-direction:column;align-items:center;gap:8px"><span style="font:700 clamp(32px,4vw,56px)/1 'Barlow Condensed'">1</span><span style="font:400 13px/1 Barlow;color:#9AA093">1 left</span></div>
+<div style="border-radius:20px;background:#D6FF3E;color:#0C0E0B;padding:clamp(14px,2.4vh,26px) 0;display:flex;flex-direction:column;align-items:center;gap:8px;box-shadow:0 14px 40px rgba(214,255,62,.25)"><span style="font:700 clamp(32px,4vw,56px)/1 'Barlow Condensed'">2</span><span style="font:500 13px/1 Barlow">2 left</span></div>
+<div style="border-radius:20px;background:#161917;padding:clamp(14px,2.4vh,26px) 0;display:flex;flex-direction:column;align-items:center;gap:8px"><span style="font:700 clamp(32px,4vw,56px)/1 'Barlow Condensed'">3</span><span style="font:400 13px/1 Barlow;color:#9AA093">3 left</span></div>
+<div style="border-radius:20px;background:#161917;padding:clamp(14px,2.4vh,26px) 0;display:flex;flex-direction:column;align-items:center;gap:8px"><span style="font:700 clamp(32px,4vw,56px)/1 'Barlow Condensed'">4+</span><span style="font:400 13px/1 Barlow;color:#9AA093">4+ left</span></div>
 </div>
+<div style="height:64px;border-radius:22px;background:#D6FF3E;color:#0C0E0B;display:flex;align-items:center;justify-content:center;font:600 18px/1 Barlow">Log 80 kg × 8 @ 2 left</div>
+</div></div></section>
+
+<section data-ch="" data-title="The answer" id="answer" data-screen-label="04 The answer" style="background:#D6FF3E;color:#0C0E0B"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;gap:24px 56px">
+<div style="flex:1 1 400px;min-width:0;display:flex;flex-direction:column;gap:clamp(14px,2.2vh,24px)">
+<span style="font:700 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase">The answer</span>
+<h2 style="margin:0;font:700 clamp(48px,6.6vw,108px)/.88 'Barlow Condensed';letter-spacing:-.02em;text-wrap:balance">Then REGOL reads it, and writes down the next weight.</h2>
+<p style="margin:0;font:400 clamp(17px,1.4vw,21px)/1.5 Barlow;color:#2E3415;max-width:560px;text-wrap:pretty">Before you start, every lift in the workout already has its weight on the card. Tap <b>Why these weights</b> and each one explains itself in plain words. The same sentence waits for you on the live screen, so there is never a number without a reason.</p>
+</div>
+<div style="flex:1 1 320px;min-width:0;display:flex;flex-direction:column;align-items:center;gap:16px">
+<div aria-hidden="true" style="width:100%;max-width:520px;background:#0C0E0B;color:#F2F4EE;border-radius:28px;padding:20px 22px;display:flex;flex-direction:column;gap:10px;box-shadow:0 30px 80px rgba(0,0,0,.25)">
+<div style="display:flex;align-items:center;gap:12px"><div style="width:32px;height:32px;border-radius:10px;background:#D6FF3E;display:flex;align-items:center;justify-content:center;flex:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0C0E0B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16l5-5 4 4 7-7M15 8h5v5"></path></svg></div><span style="flex:1;font:600 12px/1 Barlow;letter-spacing:.14em;color:#D6FF3E">NEXT TIME · BENCH PRESS</span><span style="font:700 30px/1 'Barlow Condensed'">82.5 kg</span></div>
+<span style="font:400 clamp(15px,1.2vw,17px)/1.45 Barlow;color:#E4E8DC;text-wrap:pretty">You had about 3 reps left in reserve, one more than the 2 you were aiming for.</span>
+</div>
+<img src="images/app/session.png" alt="A logged session: every set, and next time’s weight with its reason for each lift." width="1080" height="2400" style="height:min(46vh,560px);width:auto;max-width:100%;object-fit:cover;object-position:top;border-radius:26px 26px 0 0;box-shadow:0 0 0 9px #0C0E0B,0 0 0 10px rgba(255,255,255,.3),0 50px 120px -10px rgba(12,14,11,.5);display:block">
+</div></div></section>
+
+<section data-ch="" data-title="Five things it can say" id="says" data-screen-label="05 Five things it can say" style="background:#0B0C0B"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;gap:clamp(16px,2.6vh,32px)">
+<div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 40px"><div style="display:flex;flex-direction:column;gap:12px"><span style="font:600 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">In plain words</span><h2 style="margin:0;font:700 clamp(44px,6vw,96px)/.88 'Barlow Condensed';letter-spacing:-.02em">Five things it can say.</h2></div><p style="margin:0;max-width:420px;font:400 clamp(15px,1.2vw,18px)/1.5 Barlow;color:#9AA093;text-wrap:pretty">These are the app’s own sentences. It compares how much you had left with what you were aiming for, averaged over your sets.</p></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:10px">
+<div style="border-radius:24px;background:#161917;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);padding:clamp(16px,2vh,22px) 20px;display:flex;flex-direction:column;gap:10px;min-height:0"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px"><span style="font:700 clamp(22px,2vw,28px)/1 'Barlow Condensed';color:#D6FF3E">Up</span><span style="height:26px;padding:0 9px;border-radius:8px;background:#D6FF3E;color:#0C0E0B;display:flex;align-items:center;font:600 12px/1 Barlow">+2.5 kg</span></div><p style="margin:0;font:400 clamp(14px,1.1vw,16px)/1.5 Barlow;color:#E4E8DC;text-wrap:pretty">“You had about 4 reps left in reserve and were aiming for 2, so there is plenty of room.”</p><span style="margin-top:auto;font:400 13px/1.4 Barlow;color:#9AA093">More in the tank than planned.</span></div><div style="border-radius:24px;background:#161917;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);padding:clamp(16px,2vh,22px) 20px;display:flex;flex-direction:column;gap:10px;min-height:0"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px"><span style="font:700 clamp(22px,2vw,28px)/1 'Barlow Condensed';color:#F2F4EE">Add a rep</span><span style="height:26px;padding:0 9px;border-radius:8px;background:#1F2320;color:#C9CEC2;display:flex;align-items:center;font:600 12px/1 Barlow">holds</span></div><p style="margin:0;font:400 clamp(14px,1.1vw,16px)/1.5 Barlow;color:#E4E8DC;text-wrap:pretty">“Right on target with 2 reps left in reserve. Same weight, and try for another rep.”</p><span style="margin-top:auto;font:400 13px/1.4 Barlow;color:#9AA093">Exactly the effort you aimed for.</span></div><div style="border-radius:24px;background:#161917;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);padding:clamp(16px,2vh,22px) 20px;display:flex;flex-direction:column;gap:10px;min-height:0"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px"><span style="font:700 clamp(22px,2vw,28px)/1 'Barlow Condensed';color:#F2F4EE">Again</span><span style="height:26px;padding:0 9px;border-radius:8px;background:#1F2320;color:#C9CEC2;display:flex;align-items:center;font:600 12px/1 Barlow">holds</span></div><p style="margin:0;font:400 clamp(14px,1.1vw,16px)/1.5 Barlow;color:#E4E8DC;text-wrap:pretty">“You had about 1 rep left in reserve, fewer than the 2 you were aiming for. Same weight again rather than less, so give it another go.”</p><span style="margin-top:auto;font:400 13px/1.4 Barlow;color:#9AA093">Harder than planned. One bad day is not a trend.</span></div><div style="border-radius:24px;background:#161917;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);padding:clamp(16px,2vh,22px) 20px;display:flex;flex-direction:column;gap:10px;min-height:0"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px"><span style="font:700 clamp(22px,2vw,28px)/1 'Barlow Condensed';color:#F2F4EE">Longer rest</span><span style="height:26px;padding:0 9px;border-radius:8px;background:#1F2320;color:#C9CEC2;display:flex;align-items:center;font:600 12px/1 Barlow">holds</span></div><p style="margin:0;font:400 clamp(14px,1.1vw,16px)/1.5 Barlow;color:#E4E8DC;text-wrap:pretty">“You started with about 4 reps left in reserve and finished with nothing left in reserve. That is fatigue across the session rather than a weight that is too heavy. Same weight, and try it with a longer rest.”</p><span style="margin-top:auto;font:400 13px/1.4 Barlow;color:#9AA093">Effort fell away set by set.</span></div><div style="border-radius:24px;background:#161917;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);padding:clamp(16px,2vh,22px) 20px;display:flex;flex-direction:column;gap:10px;min-height:0"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px"><span style="font:700 clamp(22px,2vw,28px)/1 'Barlow Condensed';color:#FF7043">Deload</span><span style="height:26px;padding:0 9px;border-radius:8px;background:#2A1A14;color:#FF9B7A;display:flex;align-items:center;font:600 12px/1 Barlow">−10 %</span></div><p style="margin:0;font:400 clamp(14px,1.1vw,16px)/1.5 Barlow;color:#E4E8DC;text-wrap:pretty">“Two sessions in a row under target and REGOL offers a lighter week, about ten percent off. You can say no.”</p><span style="margin-top:auto;font:400 13px/1.4 Barlow;color:#9AA093">Only ever offered, never imposed.</span></div>
+</div></div></section>
+
+<section data-ch="" data-title="The step size" id="step" data-screen-label="06 Step size" style="background:#161917"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;gap:24px 56px">
+<div style="flex:1 1 400px;min-width:0;display:flex;flex-direction:column;gap:clamp(14px,2.2vh,24px)">
+<span style="font:600 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">The step size</span>
+<h2 style="margin:0;font:700 clamp(48px,6.6vw,108px)/.88 'Barlow Condensed';letter-spacing:-.02em;text-wrap:balance">It never jumps further than your reps can carry.</h2>
+<p style="margin:0;font:400 clamp(17px,1.4vw,21px)/1.5 Barlow;color:#C9CEC2;max-width:560px;text-wrap:pretty">Your best set says roughly what you could lift once. From that, REGOL checks whether the next step up would still let you reach the bottom of your rep range. On a heavy barbell, 2.5 kg is nothing. On a 10 kg dumbbell it is a quarter of the weight, so instead of sending you up, it asks for one more rep.</p>
+<p style="margin:0;font:400 clamp(15px,1.2vw,18px)/1.5 Barlow;color:#9AA093;max-width:560px;text-wrap:pretty">Clear the top of your rep range on every set and the weight goes up regardless. Past the top there is no rep left to add.</p>
+</div>
+<div style="flex:1 1 320px;min-width:0;max-width:560px;display:flex;flex-direction:column;gap:10px" aria-hidden="true">
+<div style="border-radius:24px;background:#0B0C0B;padding:20px 22px;display:flex;flex-direction:column;gap:10px"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><span style="font:600 12px/1 Barlow;letter-spacing:.14em;color:#9AA093">LATERAL RAISE · 10 KG DUMBBELLS</span><span style="font:700 26px/1 'Barlow Condensed'">10 kg</span></div><span style="font:400 15px/1.5 Barlow;color:#E4E8DC">You had about 3 reps left in reserve, one more than the 2 you were aiming for, but 2.5 kg more would leave you well short of 12 reps. Same weight, and add a rep instead.</span></div>
+<div style="border-radius:24px;background:#202419;box-shadow:inset 0 0 0 1px #3A4520;padding:20px 22px;display:flex;flex-direction:column;gap:10px"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><span style="font:600 12px/1 Barlow;letter-spacing:.14em;color:#D6FF3E">SQUAT · BARBELL</span><span style="font:700 26px/1 'Barlow Condensed'">122.5 kg</span></div><span style="font:400 15px/1.5 Barlow;color:#E4E8DC">You had about 3 reps left in reserve, one more than the 2 you were aiming for.</span></div>
+<p style="margin:0;font:400 13px/1.5 Barlow;color:#9AA093">The same session, two different lifts, two different answers. Both sentences are the engine’s.</p>
+</div></div></section>
+
+<section data-ch="" data-title="Rest" id="rest" data-screen-label="07 Rest" style="background:#D6FF3E;color:#0C0E0B"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;gap:24px 56px">
+<div style="flex:1 1 400px;min-width:0;display:flex;flex-direction:column;gap:clamp(14px,2.2vh,24px)">
+<span style="font:700 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase">Between sets</span>
+<h2 style="margin:0;font:700 clamp(52px,7.4vw,124px)/.86 'Barlow Condensed';letter-spacing:-.02em;text-wrap:balance">Rest you can read from across the room.</h2>
+<p style="margin:0;font:400 clamp(17px,1.4vw,21px)/1.5 Barlow;color:#2E3415;max-width:540px;text-wrap:pretty">Log a set and the rest timer starts on its own and fills the screen. Put the phone down on the bench and you can still read it. It rings and vibrates when the rest ends, even on silent, and the next set is already filled in when you pick the phone back up.</p>
+</div>
+<div style="flex:1 1 300px;min-width:0;display:flex;justify-content:center;align-items:flex-end;height:min(70vh,760px);overflow:hidden"><img src="images/app/rest.png" alt="REGOL’s rest screen: a countdown large enough to read from a distance, with the next set underneath." width="1080" height="2400" style="height:108%;width:auto;max-width:100%;object-fit:cover;object-position:top;border-radius:30px;box-shadow:0 0 0 9px #0C0E0B,0 0 0 10px rgba(255,255,255,.3),0 50px 120px -10px rgba(12,14,11,.5);display:block"></div>
 </div></section>
 
-<section style="padding:clamp(72px,9vw,128px) 24px 0"><div style="max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
-<div style="display:flex;flex-direction:column;gap:14px"><span style="font:600 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">Your data</span><h2 style="margin:0;font:700 clamp(40px,5vw,64px)/.95 'Barlow Condensed'">It stays on your phone. All of it.</h2></div>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px"><sc-for list="{{ dataCards }}" as="d" hint-placeholder-count="3"><div style="border-radius:28px;background:#161917;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);padding:28px;display:flex;flex-direction:column;gap:12px"><span style="align-self:flex-start;height:30px;padding:0 12px;border-radius:15px;background:#1E2317;display:flex;align-items:center;font:600 12px/1 Barlow;letter-spacing:.14em;text-transform:uppercase;color:#D6FF3E">{{ d.k }}</span><h3 style="margin:0;font:700 28px/1 'Barlow Condensed'">{{ d.t }}</h3><p style="margin:0;font:400 16px/1.55 Barlow;color:#C9CEC2;text-wrap:pretty">{{ d.b }}</p></div></sc-for></div>
-<p style="margin:0;font:400 16px/1.5 Barlow;color:#9AA093">Read the <a href="privacy.html">privacy policy</a>. It is short, and it says the same thing.</p>
+<section data-ch="" data-title="Records" id="moments" data-screen-label="08 Records" style="background:#0B0C0B"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;gap:24px 56px">
+<div style="flex:1 1 300px;min-width:0;display:flex;justify-content:center;align-items:flex-end;height:min(70vh,760px);overflow:hidden;order:2"><img src="images/app/summary.png" alt="The workout summary: every new best called out, with next time’s weight and reason for each lift." width="1080" height="2400" style="height:108%;width:auto;max-width:100%;object-fit:cover;object-position:top;border-radius:30px;box-shadow:0 0 0 9px #1a1c1a,0 0 0 10px rgba(255,255,255,.07),0 50px 120px -10px rgba(0,0,0,.75);display:block"></div>
+<div style="flex:1 1 400px;min-width:0;display:flex;flex-direction:column;gap:clamp(14px,2.2vh,24px);order:1">
+<span style="font:600 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">After the last set</span>
+<h2 style="margin:0;font:700 clamp(48px,6.6vw,108px)/.88 'Barlow Condensed';letter-spacing:-.02em;text-wrap:balance">Every new best gets a moment.</h2>
+<p style="margin:0;font:400 clamp(17px,1.4vw,21px)/1.5 Barlow;color:#C9CEC2;max-width:560px;text-wrap:pretty">Beat a record and the screen takes over to say so, with a buzz you will feel through the bench. It is the only celebration in the app, so it means something. Then the summary lists each best, the set that beat it, and next time’s weight for every lift.</p>
+<p style="margin:0;font:400 clamp(15px,1.2vw,18px)/1.5 Barlow;color:#9AA093;max-width:560px;text-wrap:pretty">One line at the top reads the session for you: your heaviest in four months, a lift that moved for the first time since August. Observation, never praise.</p>
+</div></div></section>
+
+<section data-ch="" data-title="Proof" id="proof" data-screen-label="09 Proof" style="background:#D6FF3E;color:#0C0E0B"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;gap:24px 56px">
+<div style="flex:1 1 400px;min-width:0;display:flex;flex-direction:column;gap:clamp(14px,2.2vh,24px)">
+<span style="font:700 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase">Weeks later</span>
+<h2 style="margin:0;font:700 clamp(48px,6.6vw,108px)/.88 'Barlow Condensed';letter-spacing:-.02em;text-wrap:balance">Proof the program is working.</h2>
+<p style="margin:0;font:400 clamp(17px,1.4vw,21px)/1.5 Barlow;color:#2E3415;max-width:560px;text-wrap:pretty">Every lift’s first working weight beside its latest, since the day you started the program. Each lift also has its own page: estimated one-rep max over time, your heaviest sets for 1, 3, 5, 8 and 10 reps, and every session you have logged.</p>
+<p style="margin:0;font:400 clamp(15px,1.2vw,18px)/1.5 Barlow;color:#2E3415;max-width:560px;text-wrap:pretty">If a lift goes four sessions without a new best, REGOL says so and offers a lighter week, a wider rep range, or a swap.</p>
+</div>
+<div style="flex:1 1 320px;min-width:0;display:flex;justify-content:center;align-items:flex-end;gap:16px;height:min(70vh,760px);overflow:hidden">
+<img src="images/app/progress.png" alt="Program progress: each lift’s starting weight next to its latest." width="1080" height="2400" style="height:100%;width:auto;max-width:48%;object-fit:cover;object-position:top;border-radius:26px 26px 0 0;box-shadow:0 0 0 8px #0C0E0B,0 0 0 9px rgba(255,255,255,.3),0 40px 100px -10px rgba(12,14,11,.5);display:block;margin-top:8%">
+<img src="images/app/records.png" alt="The records board: heaviest set for 1, 3, 5, 8 and 10 reps, per lift." width="1080" height="2400" style="height:100%;width:auto;max-width:48%;object-fit:cover;object-position:top;border-radius:26px 26px 0 0;box-shadow:0 0 0 8px #0C0E0B,0 0 0 9px rgba(255,255,255,.3),0 40px 100px -10px rgba(12,14,11,.5);display:block">
+</div></div></section>
+
+<section data-ch="" data-title="Under the hood" id="engine" data-screen-label="10 Engine" style="background:#0B0C0B"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;gap:clamp(16px,2.6vh,32px)">
+<div style="display:flex;flex-direction:column;gap:12px;max-width:900px"><span style="font:600 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">Under the hood</span><h2 style="margin:0;font:700 clamp(44px,6vw,96px)/.88 'Barlow Condensed';letter-spacing:-.02em;text-wrap:balance">Built for how people actually train.</h2></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:10px">
+<div style="border-radius:24px;background:#161917;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);padding:clamp(16px,2vh,22px) 20px;display:flex;flex-direction:column;gap:8px"><strong style="font:700 clamp(22px,2vw,28px)/1.05 'Barlow Condensed';color:#F2F4EE">A different set each time</strong><span style="font:400 clamp(14px,1.1vw,16px)/1.5 Barlow;color:#C9CEC2;text-wrap:pretty">A lift can ask for 8 to 10 with two left, then one left, then nothing. Each set is judged against what it asked for, so a top set and back-offs read correctly.</span></div><div style="border-radius:24px;background:#161917;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);padding:clamp(16px,2vh,22px) 20px;display:flex;flex-direction:column;gap:8px"><strong style="font:700 clamp(22px,2vw,28px)/1.05 'Barlow Condensed';color:#F2F4EE">Training blocks</strong><span style="font:400 clamp(14px,1.1vw,16px)/1.5 Barlow;color:#C9CEC2;text-wrap:pretty">Harder week by week, then a lighter one. The week turns only when every workout in it is done, so it moves with your training, not the calendar.</span></div><div style="border-radius:24px;background:#161917;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);padding:clamp(16px,2vh,22px) 20px;display:flex;flex-direction:column;gap:8px"><strong style="font:700 clamp(22px,2vw,28px)/1.05 'Barlow Condensed';color:#F2F4EE">First time on a lift</strong><span style="font:400 clamp(14px,1.1vw,16px)/1.5 Barlow;color:#C9CEC2;text-wrap:pretty">No history, no guessing. A few test sets find your working weight, and the next one is aimed from your answer.</span></div><div style="border-radius:24px;background:#161917;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);padding:clamp(16px,2vh,22px) 20px;display:flex;flex-direction:column;gap:8px"><strong style="font:700 clamp(22px,2vw,28px)/1.05 'Barlow Condensed';color:#F2F4EE">Warm-ups that know the plan</strong><span style="font:400 clamp(14px,1.1vw,16px)/1.5 Barlow;color:#C9CEC2;text-wrap:pretty">They ramp to the day’s weight, and shrink when the muscle is already warm from an earlier lift.</span></div><div style="border-radius:24px;background:#161917;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);padding:clamp(16px,2vh,22px) 20px;display:flex;flex-direction:column;gap:8px"><strong style="font:700 clamp(22px,2vw,28px)/1.05 'Barlow Condensed';color:#F2F4EE">Every kind of set</strong><span style="font:400 clamp(14px,1.1vw,16px)/1.5 Barlow;color:#C9CEC2;text-wrap:pretty">Supersets, drop sets, rest-pause, AMRAP, timed holds. Warm-ups and drops are logged but never move the weight. A set to failure counts double.</span></div><div style="border-radius:24px;background:#161917;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);padding:clamp(16px,2vh,22px) 20px;display:flex;flex-direction:column;gap:8px"><strong style="font:700 clamp(22px,2vw,28px)/1.05 'Barlow Condensed';color:#F2F4EE">Share with friends</strong><span style="font:400 clamp(14px,1.1vw,16px)/1.5 Barlow;color:#C9CEC2;text-wrap:pretty">Hand a friend a template or a whole program as a code their camera reads, or as a file. Everything travels inside the code, so it works with no server and no signal.</span></div>
+</div>
+<p style="margin:0;font:400 14px/1.5 Barlow;color:#9AA093;max-width:720px;text-wrap:pretty">The engine is tested against 33,705 recorded training situations before every release, so a weight it proposed last month is the weight it proposes today.</p>
 </div></section>
 
-<section id="price" style="padding:clamp(72px,9vw,128px) 24px 0;scroll-margin-top:80px"><div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:40px 64px;align-items:flex-start">
-<div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:20px">
+<section data-ch="" data-title="Make it yours" id="yours" data-screen-label="11 Make it yours" style="background:#161917"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;gap:24px 56px">
+<div style="flex:1 1 400px;min-width:0;display:flex;flex-direction:column;gap:clamp(14px,2.2vh,24px)">
+<span style="font:600 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E" data-accent-ink>Make it yours</span>
+<h2 style="margin:0;font:700 clamp(48px,6.6vw,108px)/.88 'Barlow Condensed';letter-spacing:-.02em;text-wrap:balance">Five accents. Three themes. Or a colour of your own.</h2>
+<p style="margin:0;font:400 clamp(17px,1.4vw,21px)/1.5 Barlow;color:#C9CEC2;max-width:560px;text-wrap:pretty">Dark, Light, or true Black for OLED screens and night sessions. Pick a preset or dial in your own hue. Every colour is held to at least 7:1 contrast against the black ink on top of it, so a button is readable at any brightness. A program can carry its own colour too, worn only while you train it.</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px" role="radiogroup" aria-label="Accent">
+<button data-act="sw" aria-label="Lime" aria-checked="true" role="radio" style="border:0;cursor:pointer;height:52px;padding:0 16px 0 8px;border-radius:20px;background:#0B0C0B;box-shadow:inset 0 0 0 1.5px #D6FF3E;display:flex;align-items:center;gap:10px;font:600 15px/1 Barlow;color:#F2F4EE"><span style="width:36px;height:36px;border-radius:13px;background:#D6FF3E"></span>Lime</button><button data-act="sw" aria-label="Mint" aria-checked="false" role="radio" style="border:0;cursor:pointer;height:52px;padding:0 16px 0 8px;border-radius:20px;background:#0B0C0B;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);display:flex;align-items:center;gap:10px;font:600 15px/1 Barlow;color:#F2F4EE"><span style="width:36px;height:36px;border-radius:13px;background:#4DE1C1"></span>Mint</button><button data-act="sw" aria-label="Ember" aria-checked="false" role="radio" style="border:0;cursor:pointer;height:52px;padding:0 16px 0 8px;border-radius:20px;background:#0B0C0B;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);display:flex;align-items:center;gap:10px;font:600 15px/1 Barlow;color:#F2F4EE"><span style="width:36px;height:36px;border-radius:13px;background:#FF6B3D"></span>Ember</button><button data-act="sw" aria-label="Lilac" aria-checked="false" role="radio" style="border:0;cursor:pointer;height:52px;padding:0 16px 0 8px;border-radius:20px;background:#0B0C0B;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);display:flex;align-items:center;gap:10px;font:600 15px/1 Barlow;color:#F2F4EE"><span style="width:36px;height:36px;border-radius:13px;background:#B79BFF"></span>Lilac</button><button data-act="sw" aria-label="Amber" aria-checked="false" role="radio" style="border:0;cursor:pointer;height:52px;padding:0 16px 0 8px;border-radius:20px;background:#0B0C0B;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);display:flex;align-items:center;gap:10px;font:600 15px/1 Barlow;color:#F2F4EE"><span style="width:36px;height:36px;border-radius:13px;background:#FFC53D"></span>Amber</button>
+</div>
+</div>
+<div style="flex:1 1 320px;min-width:0;max-width:560px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px" aria-hidden="true">
+<div style="border-radius:24px;background:#0B0C0B;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);padding:14px;display:flex;flex-direction:column;gap:8px;min-height:clamp(180px,30vh,300px)"><span style="font:600 11px/1 Barlow;letter-spacing:.14em;color:#9AA093">DARK</span><div style="border-radius:16px;background:#161917;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);padding:12px;display:flex;flex-direction:column;gap:6px;flex:1"><span style="font:700 clamp(26px,3vw,40px)/1 'Barlow Condensed';color:#F2F4EE">82.5</span><span style="font:400 11px/1.3 Barlow;color:#9AA093">kg · next time</span><span data-accent-fill style="margin-top:auto;height:28px;border-radius:10px;background:#D6FF3E;color:#0C0E0B;display:flex;align-items:center;justify-content:center;font:600 12px/1 Barlow">Start</span></div></div><div style="border-radius:24px;background:#F4F5F2;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);padding:14px;display:flex;flex-direction:column;gap:8px;min-height:clamp(180px,30vh,300px)"><span style="font:600 11px/1 Barlow;letter-spacing:.14em;color:#6B6F67">LIGHT</span><div style="border-radius:16px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);padding:12px;display:flex;flex-direction:column;gap:6px;flex:1"><span style="font:700 clamp(26px,3vw,40px)/1 'Barlow Condensed';color:#121412">82.5</span><span style="font:400 11px/1.3 Barlow;color:#6B6F67">kg · next time</span><span data-accent-fill style="margin-top:auto;height:28px;border-radius:10px;background:#D6FF3E;color:#0C0E0B;display:flex;align-items:center;justify-content:center;font:600 12px/1 Barlow">Start</span></div></div><div style="border-radius:24px;background:#000000;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);padding:14px;display:flex;flex-direction:column;gap:8px;min-height:clamp(180px,30vh,300px)"><span style="font:600 11px/1 Barlow;letter-spacing:.14em;color:#9AA093">BLACK</span><div style="border-radius:16px;background:#0E0F0E;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);padding:12px;display:flex;flex-direction:column;gap:6px;flex:1"><span style="font:700 clamp(26px,3vw,40px)/1 'Barlow Condensed';color:#F2F4EE">82.5</span><span style="font:400 11px/1.3 Barlow;color:#9AA093">kg · next time</span><span data-accent-fill style="margin-top:auto;height:28px;border-radius:10px;background:#D6FF3E;color:#0C0E0B;display:flex;align-items:center;justify-content:center;font:600 12px/1 Barlow">Start</span></div></div>
+</div></div></section>
+
+<section data-ch="" data-title="Your data" id="privacy" data-screen-label="12 Privacy" style="background:#D6FF3E;color:#0C0E0B"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;gap:24px 56px">
+<div style="flex:1 1 400px;min-width:0;display:flex;flex-direction:column;gap:clamp(14px,2.2vh,24px)">
+<span style="font:700 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase">Your data</span>
+<h2 style="margin:0;font:700 clamp(48px,6.6vw,108px)/.88 'Barlow Condensed';letter-spacing:-.02em;text-wrap:balance">Your training never leaves your phone.</h2>
+<p style="margin:0;font:400 clamp(17px,1.4vw,21px)/1.5 Barlow;color:#2E3415;max-width:560px;text-wrap:pretty">There is no account to make and no server holding your history. Everything lives in one file on your phone, which is why the app works in a basement gym with no signal. Export it as JSON or CSV whenever you like, or have it backed up to a folder you choose after every workout.</p>
+<a href="privacy.html" style="align-self:flex-start;font:600 16px/1.3 Barlow;color:#0C0E0B" class="hv-dark">Read the privacy policy ›</a>
+</div>
+<div style="flex:1 1 300px;min-width:0;max-width:520px;display:flex;flex-direction:column;gap:6px" aria-hidden="true">
+<div style="display:flex;align-items:baseline;gap:20px;border-bottom:2px solid rgba(12,14,11,.14);padding:4px 0"><span style="font:700 clamp(72px,10vw,150px)/.85 'Barlow Condensed';width:clamp(60px,8vw,120px)">0</span><span style="font:700 clamp(30px,3.4vw,52px)/.95 'Barlow Condensed'">accounts</span></div><div style="display:flex;align-items:baseline;gap:20px;border-bottom:2px solid rgba(12,14,11,.14);padding:4px 0"><span style="font:700 clamp(72px,10vw,150px)/.85 'Barlow Condensed';width:clamp(60px,8vw,120px)">0</span><span style="font:700 clamp(30px,3.4vw,52px)/.95 'Barlow Condensed'">ads</span></div><div style="display:flex;align-items:baseline;gap:20px;border-bottom:2px solid rgba(12,14,11,.14);padding:4px 0"><span style="font:700 clamp(72px,10vw,150px)/.85 'Barlow Condensed';width:clamp(60px,8vw,120px)">0</span><span style="font:700 clamp(30px,3.4vw,52px)/.95 'Barlow Condensed'">servers</span></div>
+</div></div></section>
+
+<section data-ch="" data-title="Pricing" id="price" data-screen-label="13 Pricing" style="background:#0B0C0B"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;gap:24px 56px">
+<div style="flex:1 1 400px;min-width:0;display:flex;flex-direction:column;gap:clamp(14px,2.2vh,24px)">
 <span style="font:600 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">Pricing</span>
-<h2 style="margin:0;font:700 clamp(40px,5vw,64px)/.95 'Barlow Condensed'">Free for everyone until 2027.</h2>
-<p style="margin:0;font:400 18px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">Every feature is unlocked, for everyone, through 31 December 2026: no subscription, no payment details, nothing to redeem. Install it and train. What it costs after that is below, so you know before you start.</p>
-<div style="border-radius:28px;background:#D6FF3E;color:#0C0E0B;padding:24px 28px;display:flex;align-items:flex-end;gap:18px"><span style="font:700 96px/.8 'Barlow Condensed';letter-spacing:-.02em">€1.99</span><span style="font:600 16px/1.3 Barlow;opacity:.75;padding-bottom:4px">a month<br>from 1 January 2027</span></div>
-<p style="margin:0;font:400 16px/1.6 Barlow;color:#9AA093;text-wrap:pretty">A monthly subscription, the first month free for new subscribers, cancel any time in Google Play. You can subscribe before then if you would rather pay now, and the app keeps working without one. It just gets smaller. This is the plan the table describes; until 2027 every row on it is a yes.</p>
+<h2 style="margin:0;font:700 clamp(48px,6.6vw,108px)/.88 'Barlow Condensed';letter-spacing:-.02em">Free for everyone until 2027.</h2>
+<p style="margin:0;font:400 clamp(17px,1.4vw,21px)/1.5 Barlow;color:#C9CEC2;max-width:560px;text-wrap:pretty">Every feature is unlocked through 31 December 2026. No subscription, no card, nothing that starts charging later. From 1 January 2027 it is €1.99 a month, billed by Google Play, first month free, cancel any time. Without it the app keeps working on the free plan, and nothing you made is ever deleted.</p>
+<div style="display:flex;align-items:flex-end;gap:14px"><span style="font:700 clamp(64px,8vw,120px)/.8 'Barlow Condensed';letter-spacing:-.02em;color:#D6FF3E">€1.99</span><span style="font:500 15px/1.3 Barlow;color:#9AA093;padding-bottom:6px">a month<br>from 2027</span></div>
 </div>
-<div style="flex:1 1 460px;min-width:0;display:flex;flex-direction:column;gap:16px">
-<div style="border-radius:28px;overflow:hidden;display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.06)">
-<div style="display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);gap:12px;padding:16px 20px;background:#131513;font:600 12px/1.2 Barlow;letter-spacing:.12em;text-transform:uppercase;color:#9AA093"><span>From 2027</span><span>Free plan</span><span style="color:#D6FF3E">Subscription</span></div>
-<sc-for list="{{ priceRows }}" as="r" hint-placeholder-count="6"><div style="display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:center;padding:16px 20px;background:#161917;font:400 16px/1.4 Barlow"><span style="color:#E4E8DC">{{ r.l }}</span><span style="color:#C9CEC2;font-weight:500">{{ r.f }}</span><span style="color:#D6FF3E;font-weight:600">{{ r.s }}</span></div></sc-for>
+<div style="flex:1 1 320px;min-width:0;max-width:600px;border-radius:24px;overflow:hidden;display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.06)">
+<div style="display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);gap:10px;padding:12px 18px;background:#131513;font:600 11px/1.2 Barlow;letter-spacing:.12em;text-transform:uppercase;color:#9AA093"><span>From 2027</span><span>Free plan</span><span style="color:#D6FF3E">Subscription</span></div>
+<div style="display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);gap:10px;align-items:center;padding:clamp(10px,1.6vh,15px) 18px;background:#161917;font:400 15px/1.35 Barlow"><span style="color:#E4E8DC">Training, logging and the engine</span><span style="color:#C9CEC2;font-weight:500">Yes</span><span style="color:#D6FF3E;font-weight:600">Yes</span></div><div style="display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);gap:10px;align-items:center;padding:clamp(10px,1.6vh,15px) 18px;background:#161917;font:400 15px/1.35 Barlow"><span style="color:#E4E8DC">Rest timer, lift guides, export, backups</span><span style="color:#C9CEC2;font-weight:500">Yes</span><span style="color:#D6FF3E;font-weight:600">Yes</span></div><div style="display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);gap:10px;align-items:center;padding:clamp(10px,1.6vh,15px) 18px;background:#161917;font:400 15px/1.35 Barlow"><span style="color:#E4E8DC">Workout templates</span><span style="color:#C9CEC2;font-weight:500">3</span><span style="color:#D6FF3E;font-weight:600">Unlimited</span></div><div style="display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);gap:10px;align-items:center;padding:clamp(10px,1.6vh,15px) 18px;background:#161917;font:400 15px/1.35 Barlow"><span style="color:#E4E8DC">Programs</span><span style="color:#C9CEC2;font-weight:500">1</span><span style="color:#D6FF3E;font-weight:600">Unlimited</span></div><div style="display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);gap:10px;align-items:center;padding:clamp(10px,1.6vh,15px) 18px;background:#161917;font:400 15px/1.35 Barlow"><span style="color:#E4E8DC">Charts, records, the weekly debrief</span><span style="color:#C9CEC2;font-weight:500">No</span><span style="color:#D6FF3E;font-weight:600">Yes</span></div><div style="display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);gap:10px;align-items:center;padding:clamp(10px,1.6vh,15px) 18px;background:#161917;font:400 15px/1.35 Barlow"><span style="color:#E4E8DC">Notes on lifts and templates</span><span style="color:#C9CEC2;font-weight:500">No</span><span style="color:#D6FF3E;font-weight:600">Yes</span></div>
+</div></div></section>
+
+<section data-ch="" data-title="Get it" id="get" data-screen-label="14 Get it" style="background:#D6FF3E;color:#0C0E0B"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;gap:clamp(20px,3vh,36px);position:relative">
+<div aria-hidden="true" style="position:absolute;right:-12%;top:50%;width:min(60vw,620px);aspect-ratio:1;margin-top:min(-30vw,-310px);border-radius:50%;box-shadow:inset 0 0 0 clamp(44px,7vw,78px) rgba(255,255,255,.28);pointer-events:none"></div>
+<span style="font:700 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;position:relative">Out now · Android</span>
+<h2 style="margin:0;font:700 clamp(56px,9.4vw,160px)/.84 'Barlow Condensed';letter-spacing:-.025em;max-width:1000px;text-wrap:balance;position:relative">Your next set is already worked out.</h2>
+<p style="margin:0;font:400 clamp(17px,1.5vw,22px)/1.45 Barlow;color:#2E3415;max-width:560px;position:relative;text-wrap:pretty">Bring your Strong or Hevy history with you, start with an empty log, or scan a program a friend sent. Either way, the first session finds your weights for you.</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px;position:relative">
+<a href="https://play.google.com/store/apps/details?id=app.overload&pcampaignid=web_share" target="_blank" rel="noopener" style="height:64px;padding:0 28px 0 22px;border-radius:22px;background:#0C0E0B;color:#D6FF3E;text-decoration:none;display:flex;align-items:center;gap:12px;font:600 18px/1 Barlow;white-space:nowrap" class="hv-fade"><svg width="18" height="18" viewBox="0 0 24 24" fill="#D6FF3E" aria-hidden="true"><path d="M6 3.5v17l14-8.5z"></path></svg>Get it on Google Play</a>
+<a href="try.html" style="height:64px;padding:0 26px;border-radius:22px;color:#0C0E0B;text-decoration:none;display:flex;align-items:center;font:600 18px/1 Barlow;box-shadow:inset 0 0 0 1.5px rgba(12,14,11,.35);white-space:nowrap" class="hv-onlime">Try it in your browser</a>
 </div>
-<div style="background:#202419;box-shadow:inset 0 0 0 1px #3A4520;border-radius:24px;padding:20px 22px;display:flex;flex-direction:column;gap:8px"><h3 style="margin:0;font:700 24px/1.1 'Barlow Condensed'">Nothing you make is ever deleted</h3><p style="margin:0;font:400 16px/1.55 Barlow;color:#E4E8DC;text-wrap:pretty">If a subscription ends, every template, program and workout stays in the app. The three templates you trained most recently and your most recent program stay trainable; the rest wait, greyed out, until you subscribe again.</p></div>
-<p style="margin:0;font:400 15px/1.5 Barlow;color:#9AA093">What you pay goes straight back into building the app: new features, fixes, and keeping it free of ads and accounts.</p>
-</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px 24px;font:500 16px/1.3 Barlow;position:relative"><a href="news.html" style="color:#0C0E0B" class="hv-dark">What’s new ›</a><a href="roadmap.html" style="color:#0C0E0B" class="hv-dark">Roadmap ›</a><a href="#faq" data-scroll-to="faq" style="color:#0C0E0B" class="hv-dark">Questions ›</a></div>
 </div></section>
 
-<section style="padding:clamp(72px,9vw,128px) 24px 0"><div style="max-width:1200px;margin:0 auto;border-radius:36px;background:#161917;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);padding:clamp(32px,5vw,60px);display:flex;flex-wrap:wrap;gap:24px 56px">
-<div style="flex:1 1 300px;display:flex;flex-direction:column;gap:14px"><span style="font:600 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">Early access</span><h2 style="margin:0;font:700 clamp(40px,5vw,60px)/.95 'Barlow Condensed'">Being built in the open.</h2></div>
-<div style="flex:2 1 420px;display:flex;flex-direction:column;gap:16px;font:400 17px/1.6 Barlow;color:#C9CEC2">
-<p style="margin:0;text-wrap:pretty">REGOL is in early access. It is a real training app doing real work: the engine, the logging and the stats are what I use myself. But it is young, it will change, and you may meet a rough edge.</p>
-<p style="margin:0;text-wrap:pretty">If something breaks or a number looks wrong, tell me. Bug reports and ideas go to <a href="report.html">the report form</a>, or by mail to <a href="mailto:support@regolapp.be">support@regolapp.be</a> if you’d rather not have a GitHub account.</p>
-<p style="margin:0;text-wrap:pretty">Nothing disappears into an inbox: every report lands on a public board, and <a href="roadmap.html">the roadmap</a> shows what is confirmed, what is being worked on, and what shipped.</p>
-<div style="display:flex;flex-wrap:wrap;gap:10px;padding-top:6px"><a href="report.html" style="height:54px;padding:0 22px;border-radius:20px;background:#D6FF3E;color:#0C0E0B;text-decoration:none;display:flex;align-items:center;font:600 16px/1 Barlow;white-space:nowrap;flex:none" style-hover="background:#E6FF7A;color:#0C0E0B">Report a bug</a><a href="roadmap.html" style="height:54px;padding:0 22px;border-radius:20px;background:#1F2320;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;font:500 16px/1 Barlow;white-space:nowrap;flex:none" style-hover="background:#262A26;color:#F2F4EE">See the roadmap</a></div>
+</div>
+
+<nav data-rail aria-label="Chapters" style="position:absolute;left:0;right:0;bottom:0;height:64px;display:flex;align-items:center;justify-content:center;gap:16px;padding:0 16px;pointer-events:none">
+<div style="pointer-events:auto;display:flex;align-items:center;gap:12px;height:44px;padding:0 16px 0 18px;border-radius:22px;background:rgba(11,12,11,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);max-width:calc(100% - 32px)">
+<span data-counter style="font:700 14px/1 'Barlow Condensed';color:#D6FF3E;letter-spacing:.04em;flex:none;min-width:48px">01 / 14</span>
+<span data-hide-narrow="" data-cur style="font:500 14px/1 Barlow;color:#F2F4EE;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px">Start</span>
+<div style="display:flex;gap:6px;flex:none"><button data-act="dot" aria-label="Chapter 1: Start" aria-current="step" style="border:0;padding:0;width:22px;height:8px;border-radius:4px;background:#D6FF3E;cursor:pointer;transition:width .25s ease,background .25s ease"></button><button data-act="dot" aria-label="Chapter 2: The problem" style="border:0;padding:0;width:8px;height:8px;border-radius:4px;background:#2B2F29;cursor:pointer;transition:width .25s ease,background .25s ease"></button><button data-act="dot" aria-label="Chapter 3: Reps in reserve" style="border:0;padding:0;width:8px;height:8px;border-radius:4px;background:#2B2F29;cursor:pointer;transition:width .25s ease,background .25s ease"></button><button data-act="dot" aria-label="Chapter 4: The answer" style="border:0;padding:0;width:8px;height:8px;border-radius:4px;background:#2B2F29;cursor:pointer;transition:width .25s ease,background .25s ease"></button><button data-act="dot" aria-label="Chapter 5: Five things it can say" style="border:0;padding:0;width:8px;height:8px;border-radius:4px;background:#2B2F29;cursor:pointer;transition:width .25s ease,background .25s ease"></button><button data-act="dot" aria-label="Chapter 6: The step size" style="border:0;padding:0;width:8px;height:8px;border-radius:4px;background:#2B2F29;cursor:pointer;transition:width .25s ease,background .25s ease"></button><button data-act="dot" aria-label="Chapter 7: Rest" style="border:0;padding:0;width:8px;height:8px;border-radius:4px;background:#2B2F29;cursor:pointer;transition:width .25s ease,background .25s ease"></button><button data-act="dot" aria-label="Chapter 8: Records" style="border:0;padding:0;width:8px;height:8px;border-radius:4px;background:#2B2F29;cursor:pointer;transition:width .25s ease,background .25s ease"></button><button data-act="dot" aria-label="Chapter 9: Proof" style="border:0;padding:0;width:8px;height:8px;border-radius:4px;background:#2B2F29;cursor:pointer;transition:width .25s ease,background .25s ease"></button><button data-act="dot" aria-label="Chapter 10: Under the hood" style="border:0;padding:0;width:8px;height:8px;border-radius:4px;background:#2B2F29;cursor:pointer;transition:width .25s ease,background .25s ease"></button><button data-act="dot" aria-label="Chapter 11: Make it yours" style="border:0;padding:0;width:8px;height:8px;border-radius:4px;background:#2B2F29;cursor:pointer;transition:width .25s ease,background .25s ease"></button><button data-act="dot" aria-label="Chapter 12: Your data" style="border:0;padding:0;width:8px;height:8px;border-radius:4px;background:#2B2F29;cursor:pointer;transition:width .25s ease,background .25s ease"></button><button data-act="dot" aria-label="Chapter 13: Pricing" style="border:0;padding:0;width:8px;height:8px;border-radius:4px;background:#2B2F29;cursor:pointer;transition:width .25s ease,background .25s ease"></button><button data-act="dot" aria-label="Chapter 14: Get it" style="border:0;padding:0;width:8px;height:8px;border-radius:4px;background:#2B2F29;cursor:pointer;transition:width .25s ease,background .25s ease"></button></div>
+<button data-act="next" aria-label="Next chapter" style="border:0;width:32px;height:32px;border-radius:16px;background:#1F2320;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none" class="hv-limebg"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F2F4EE" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></button>
+</div></nav>
+</div>
+
+<section id="faq" data-screen-label="FAQ" style="padding:clamp(64px,8vw,120px) 24px;scroll-margin-top:72px;border-top:1px solid rgba(255,255,255,.06)"><div style="max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;gap:32px 64px">
+<div style="flex:1 1 300px;display:flex;flex-direction:column;gap:14px"><span style="font:600 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">Questions</span><h2 style="margin:0;font:700 clamp(44px,5.6vw,76px)/.92 'Barlow Condensed'">Asked first.</h2><p style="margin:0;font:400 16px/1.55 Barlow;color:#9AA093">Something else? <a href="support.html">Support</a> has the rest.</p></div>
+<div style="flex:2 1 560px;min-width:0;display:flex;flex-direction:column;gap:8px">
+<details style="border-radius:22px;background:#161917;padding:0 22px"><summary style="min-height:68px;display:flex;align-items:center;gap:16px;cursor:pointer;font:500 18px/1.35 Barlow"><span style="flex:1">Where do I get it?</span><span class="faqplus" style="width:34px;height:34px;border-radius:17px;background:#1F2320;display:flex;align-items:center;justify-content:center;flex:none;transition:transform .2s ease"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D6FF3E" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span></summary><p style="margin:0;padding:0 0 22px;font:400 16px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">On <a href="https://play.google.com/store/apps/details?id=app.overload&pcampaignid=web_share" target="_blank" rel="noopener">Google Play</a>, for Android 8.0 and up. Want a look first? <a href="try.html">Run the whole app in your browser</a>.</p></details><details style="border-radius:22px;background:#161917;padding:0 22px"><summary style="min-height:68px;display:flex;align-items:center;gap:16px;cursor:pointer;font:500 18px/1.35 Barlow"><span style="flex:1">Does it work offline?</span><span class="faqplus" style="width:34px;height:34px;border-radius:17px;background:#1F2320;display:flex;align-items:center;justify-content:center;flex:none;transition:transform .2s ease"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D6FF3E" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span></summary><p style="margin:0;padding:0 0 22px;font:400 16px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">Yes, completely. The only thing that ever needs a connection is checking your subscription with Google Play, and the last answer is remembered.</p></details><details style="border-radius:22px;background:#161917;padding:0 22px"><summary style="min-height:68px;display:flex;align-items:center;gap:16px;cursor:pointer;font:500 18px/1.35 Barlow"><span style="flex:1">Do I have to log reps in reserve?</span><span class="faqplus" style="width:34px;height:34px;border-radius:17px;background:#1F2320;display:flex;align-items:center;justify-content:center;flex:none;transition:transform .2s ease"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D6FF3E" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span></summary><p style="margin:0;padding:0 0 22px;font:400 16px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">It is one tap per set, and it is what makes the proposals good. If you skip it, the set is recorded at the effort you planned, so the engine reads the workout as on plan.</p></details><details style="border-radius:22px;background:#161917;padding:0 22px"><summary style="min-height:68px;display:flex;align-items:center;gap:16px;cursor:pointer;font:500 18px/1.35 Barlow"><span style="flex:1">Can I bring my history from another app?</span><span class="faqplus" style="width:34px;height:34px;border-radius:17px;background:#1F2320;display:flex;align-items:center;justify-content:center;flex:none;transition:transform .2s ease"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D6FF3E" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span></summary><p style="margin:0;padding:0 0 22px;font:400 16px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">Yes. Strong and Hevy CSV exports import directly, and REGOL matches them to your lifts. <a href="support.html#import">How to import</a>.</p></details><details style="border-radius:22px;background:#161917;padding:0 22px"><summary style="min-height:68px;display:flex;align-items:center;gap:16px;cursor:pointer;font:500 18px/1.35 Barlow"><span style="flex:1">Is there a catch to it being free?</span><span class="faqplus" style="width:34px;height:34px;border-radius:17px;background:#1F2320;display:flex;align-items:center;justify-content:center;flex:none;transition:transform .2s ease"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D6FF3E" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span></summary><p style="margin:0;padding:0 0 22px;font:400 16px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">No. Everything is free for everyone until 31 December 2026, with no payment method asked for. From 2027 the app falls back to the free plan unless you subscribe, and nothing you made is deleted either way.</p></details><details style="border-radius:22px;background:#161917;padding:0 22px"><summary style="min-height:68px;display:flex;align-items:center;gap:16px;cursor:pointer;font:500 18px/1.35 Barlow"><span style="flex:1">What happens to my data if I stop paying?</span><span class="faqplus" style="width:34px;height:34px;border-radius:17px;background:#1F2320;display:flex;align-items:center;justify-content:center;flex:none;transition:transform .2s ease"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D6FF3E" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span></summary><p style="margin:0;padding:0 0 22px;font:400 16px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">Nothing is deleted or hidden. You keep training on the free plan, and everything stays exportable. Templates and programs beyond the free limit wait, greyed out, until you subscribe again.</p></details><details style="border-radius:22px;background:#161917;padding:0 22px"><summary style="min-height:68px;display:flex;align-items:center;gap:16px;cursor:pointer;font:500 18px/1.35 Barlow"><span style="flex:1">iPhone?</span><span class="faqplus" style="width:34px;height:34px;border-radius:17px;background:#1F2320;display:flex;align-items:center;justify-content:center;flex:none;transition:transform .2s ease"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D6FF3E" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span></summary><p style="margin:0;padding:0 0 22px;font:400 16px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">Not yet. REGOL is Android only. iOS is on the <a href="roadmap.html">roadmap</a>, after the Android app has stopped changing shape.</p></details>
 </div></div></section>
 
-<section id="faq" style="padding:clamp(72px,9vw,128px) 24px clamp(72px,9vw,128px);scroll-margin-top:80px"><div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:32px 64px">
-<div style="flex:1 1 300px;display:flex;flex-direction:column;gap:14px"><span style="font:600 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">FAQ</span><h2 style="margin:0;font:700 clamp(40px,5vw,60px)/.95 'Barlow Condensed'">Questions worth answering.</h2></div>
-<div style="flex:2 1 520px;min-width:0;display:flex;flex-direction:column;gap:8px">
-<sc-for list="{{ faq }}" as="q" hint-placeholder-count="7"><details style="border-radius:22px;background:#161917;padding:0 22px"><summary style="min-height:68px;display:flex;align-items:center;gap:16px;cursor:pointer;font:500 18px/1.35 Barlow"><span style="flex:1">{{ q.q }}</span><span class="faqplus" style="width:34px;height:34px;border-radius:17px;background:#1F2320;display:flex;align-items:center;justify-content:center;flex:none;transition:transform .2s ease"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D6FF3E" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span></summary><p style="margin:0;padding:0 0 22px;font:400 16px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty" dangerouslySetInnerHTML="{{ q.a }}"></p></details></sc-for>
-</div></div></section>
-</main>
-
-<footer style="border-top:1px solid rgba(255,255,255,.06);padding:40px 24px 56px"><div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:24px 40px;align-items:flex-start">
-<div style="flex:1 1 280px;display:flex;flex-direction:column;gap:10px"><a href="./" style="display:flex;align-items:center;gap:10px;color:#F2F4EE;text-decoration:none;font:700 24px/1 'Barlow Condensed';white-space:nowrap;flex:none"><svg width="26" height="26" viewBox="0 0 108 108" aria-hidden="true"><rect width="108" height="108" rx="24" fill="#161917"></rect><circle cx="54" cy="54" r="18" fill="none" stroke="#d6ff3e" stroke-width="7.2"></circle><rect y="49" width="108" height="10" fill="#161917"></rect><rect y="52.2" width="108" height="3.6" fill="#d6ff3e"></rect></svg>REGOL</a><span style="font:400 14px/1.4 Barlow;color:#9AA093">Early access · your data stays on your phone</span></div>
-<nav style="flex:2 1 480px;display:flex;flex-wrap:wrap;gap:8px 20px;font:500 15px/1 Barlow"><sc-for list="{{ footer }}" as="l" hint-placeholder-count="10"><a href="{{ l.h }}" style="color:#C9CEC2;text-decoration:none;padding:6px 0" style-hover="color:#F2F4EE">{{ l.t }}</a></sc-for></nav>
+<footer style="border-top:1px solid rgba(255,255,255,.06);padding:56px 24px 64px;background:#0B0C0B;font-family:Barlow"><div style="max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-wrap:wrap;gap:32px 48px;align-items:flex-start">
+<div style="flex:1 1 300px;display:flex;flex-direction:column;gap:14px">
+<a href="./" style="display:flex;align-items:center;gap:10px;color:#F2F4EE;text-decoration:none;font:700 28px/1 'Barlow Condensed';white-space:nowrap;align-self:flex-start" class="hv-ink"><svg width="30" height="30" viewBox="0 0 108 108" aria-hidden="true"><rect width="108" height="108" rx="24" fill="#161917"></rect><circle cx="54" cy="54" r="18" fill="none" stroke="#d6ff3e" stroke-width="7.2"></circle><rect y="49" width="108" height="10" fill="#161917"></rect><rect y="52.2" width="108" height="3.6" fill="#d6ff3e"></rect></svg>REGOL</a>
+<p style="margin:0;font:400 15px/1.55 Barlow;color:#9AA093;max-width:320px;text-wrap:pretty">The gym log that works out your next weight and tells you why. Android. Free for everyone until 2027. Your data stays on your phone.</p>
+<a href="https://play.google.com/store/apps/details?id=app.overload&pcampaignid=web_share" target="_blank" rel="noopener" style="align-self:flex-start;height:48px;padding:0 20px 0 16px;border-radius:20px;background:#1F2320;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;gap:10px;font:600 15px/1 Barlow;white-space:nowrap" class="hv-pressed"><svg width="14" height="14" viewBox="0 0 24 24" fill="#D6FF3E" aria-hidden="true"><path d="M6 3.5v17l14-8.5z"></path></svg>Get it on Google Play</a>
+</div>
+<div style="flex:2 1 520px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:28px 24px">
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font:600 12px/1 Barlow;letter-spacing:.14em;text-transform:uppercase;color:#9AA093">App</span><a href="./" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Home</a><a href="try.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Try it in your browser</a><a href="./#price" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Pricing</a><a href="./#faq" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">FAQ</a></div>
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font:600 12px/1 Barlow;letter-spacing:.14em;text-transform:uppercase;color:#9AA093">In the open</span><a href="news.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">News</a><a href="roadmap.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Roadmap</a><a href="report.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Report a bug</a><a href="https://github.com/users/filipmonbaillieu24-prog/projects/3" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Board</a></div>
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font:600 12px/1 Barlow;letter-spacing:.14em;text-transform:uppercase;color:#9AA093">Help</span><a href="support.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Support</a><a href="privacy.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Privacy</a><a href="terms.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Terms</a><a href="mailto:support@regolapp.be" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">support@regolapp.be</a></div>
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font:600 12px/1 Barlow;letter-spacing:.14em;text-transform:uppercase;color:#9AA093">Follow</span><a href="https://www.instagram.com/regolapp" rel="noopener" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Instagram</a><a href="feed.xml" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">RSS feed</a><a href="https://github.com/filipmonbaillieu24-prog/overload-site/issues" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">GitHub issues</a></div>
+</div></div>
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;padding-top:24px;border-top:1px solid rgba(255,255,255,.06);font:400 14px/1.4 Barlow;color:#8E948A"><span>No account. No ads. No analytics. Version 1.8.</span><span>Made by one person · regolapp.be</span></div>
 </div></footer>
 </div>
-</x-dc>
-<script type="text/x-dc" data-dc-script>
-class Component extends DCLogic {
-  renderVals() {
-    return {
-      features: [
-        { scene: 'live', title: 'A workout screen you can read mid-set', body: 'Weight and reps in huge type, the set rail underneath, and one button to log. Rest starts itself, and takes over the screen so you can read it across the room.' },
-        { scene: 'lift', title: 'Every lift, explained and charted', body: 'Estimated 1RM over your last workouts, rep records, percentages, and step-by-step form notes for 1,577 lifts, bundled in the app.' },
-        { scene: 'stats', title: 'A week you can actually read', body: 'Hard sets per muscle against a target you set, weekly tonnage, and a plain-English debrief that names the one thing worth fixing.' },
-      ],
-      engineList: [
-        { b: 'A different set each time', t: ': a lift can ask for 8–10 at two in reserve, then two at one, then a last set with nothing left — and every set is judged against the rung it was asked for.' },
-        { b: 'Training blocks', t: ' that get harder week by week, then deload, and the week only turns once you’ve done every workout in it.' },
-        { b: 'First time on a lift?', t: ' It finds your working weight in a few test sets instead of making you guess.' },
-        { b: 'Warm-ups', t: ' that ramp to the day’s weight, and shrink when the muscle is already warm.' },
-        { b: 'Stall detection', t: ' that watches four workouts back: no new estimated 1RM or top weight, and it offers a deload, a wider rep range, or a swap.' },
-        { b: 'Supersets, drop sets, rest-pause, AMRAP, top set plus back-offs', t: ': all counted correctly.' },
-      ],
-      plansList: ['Rest timers per lift, adaptive to how the set went.', 'Blocks on a whole program, not just one workout.', 'An empty workout when you’d rather improvise.', 'Swap a lift when a machine is taken; your history follows.'],
-      dataCards: [
-        { k: 'No account', t: 'Nothing to sign up for', b: 'Install it and start training. There is no login, no profile and no server holding your training history.' },
-        { k: 'No tracking', t: 'No analytics, no ads', b: 'The app contains no advertising or analytics code. Nothing about how you train is sent anywhere.' },
-        { k: 'Yours to take', t: 'Export whenever', b: 'One tap exports everything as JSON or CSV, and automatic backups can write to a folder you choose.' },
-      ],
-      priceRows: [
-        { l: 'Training, logging and the progression engine', f: 'Yes', s: 'Yes' }, { l: 'Lift guides, rest timers, export and backups', f: 'Yes', s: 'Yes' },
-        { l: 'Templates', f: '3', s: 'Unlimited' }, { l: 'Programs', f: '1', s: 'Unlimited' },
-        { l: 'Charts, records and the weekly debrief', f: 'No', s: 'Yes' }, { l: 'Notes on lifts and templates', f: 'No', s: 'Yes' },
-      ],
-      faq: [
-        ['Does it work offline?', 'Entirely. The only thing that needs a connection is checking your subscription with Google Play, and the last answer is remembered, so training in a basement gym is fine.'],
-        ['Do I have to log reps in reserve?', 'It is one tap per set, and it is what makes the proposals good. Skip it and the set is recorded at the target you planned for it, so the engine reads the workout as on plan. The honest tap is what earns you an accurate next weight. The linear rule ignores it either way, and sets imported from another app without an effort reading are progressed from reps alone.'],
-        ['Can I bring my history from another app?', 'Yes. Strong and Hevy CSV exports import, and REGOL matches them to your lifts. You can also import a previous REGOL export. Here is <a href="support.html">how to import a CSV from another app</a>.'],
-        ['Is there a catch to it being free right now?', 'No. Early access is free for everyone until 31 December 2026. The app does not ask for a subscription or a payment method before then, and you are not signed up to anything that starts charging later. From 2027 the app falls back to the free plan unless you subscribe, and nothing you made is deleted either way.'],
-        ['What happens to my data if I stop paying?', 'Nothing is deleted or hidden. You keep training on the free plan, and everything is still there, and still exportable, if you come back.'],
-        ['iPhone?', 'Not yet. REGOL is Android only.'],
-        ['Where do the lift guides come from?', 'Two open datasets, the Free Exercise DB (public domain) and exercises-dataset (MIT), bundled as text at build time, with the sources credited in the app. No images are shipped and no network requests are made for them.'],
-      ].map(([q, a]) => ({ q, a: { __html: a } })),
-      footer: [['./', 'Home'], ['try.html', 'Try it'], ['news.html', 'News'], ['testing.html', 'Join the test'], ['roadmap.html', 'Roadmap'], ['report.html', 'Report'], ['privacy.html', 'Privacy'], ['terms.html', 'Terms'], ['support.html', 'Support'],
-        ['https://github.com/filipmonbaillieu24-prog/overload-site/issues', 'Issues'], ['https://github.com/users/filipmonbaillieu24-prog/projects/3', 'Board'], ['mailto:support@regolapp.be', 'support@regolapp.be']].map(([h, t]) => ({ h, t })),
-    };
+<script>
+// Chapter 11: picking an accent recolours the kicker and the three theme cards,
+// the same thing the app does with the colour you choose.
+(function () {
+  var HEX = ['#D6FF3E', '#4DE1C1', '#FF6B3D', '#B79BFF', '#FFC53D'];
+  var btns = [].slice.call(document.querySelectorAll('[data-act="sw"]'));
+  var ink = document.querySelector('[data-accent-ink]');
+  var fills = [].slice.call(document.querySelectorAll('[data-accent-fill]'));
+  function pick(k) {
+    btns.forEach(function (b, j) {
+      b.style.boxShadow = j === k ? 'inset 0 0 0 1.5px ' + HEX[j] : 'inset 0 0 0 1px rgba(255,255,255,.08)';
+      b.setAttribute('aria-checked', j === k ? 'true' : 'false');
+    });
+    if (ink) ink.style.color = HEX[k];
+    fills.forEach(function (f) { f.style.background = HEX[k]; });
   }
-}
+  btns.forEach(function (b, k) { b.addEventListener('click', function () { pick(k); }); });
+})();
 </script>
 </body>
 </html>

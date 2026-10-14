@@ -3,255 +3,223 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Roadmap · REGOL</title>
+<title>Roadmap · REGOL</title><meta name="description" content="What is being built, what is broken, and what shipped in REGOL, straight from the public issue tracker."><link rel="icon" href="favicon.svg" type="image/svg+xml"><script src="site.js"></script><style>
+@font-face{font-family:Barlow;src:url(fonts/barlow_regular.ttf);font-weight:400;font-display:swap}
+@font-face{font-family:Barlow;src:url(fonts/barlow_medium.ttf);font-weight:500;font-display:swap}
+@font-face{font-family:Barlow;src:url(fonts/barlow_semibold.ttf);font-weight:600;font-display:swap}
+@font-face{font-family:'Barlow Condensed';src:url(fonts/barlow_condensed_semibold.ttf);font-weight:600;font-display:swap}
+@font-face{font-family:'Barlow Condensed';src:url(fonts/barlow_condensed_bold.ttf);font-weight:700;font-display:swap}
+body{margin:0;background:#0B0C0B !important;display:block !important;min-height:0 !important;color:#F2F4EE;-webkit-font-smoothing:antialiased}
+a{color:#D6FF3E;text-underline-offset:3px}a:hover{color:#E6FF7A}
+::selection{background:#D6FF3E;color:#0C0E0B}
+[data-deck]{display:flex;overflow:auto;scroll-snap-type:x mandatory;scrollbar-width:none;height:calc(100vh - 64px);height:calc(100dvh - 64px)}
+[data-deck]::-webkit-scrollbar{display:none}
+[data-ch]{flex:0 0 100%;width:100%;height:100%;scroll-snap-align:start;scroll-snap-stop:always;overflow:hidden auto;box-sizing:border-box;position:relative}
+@media (max-width:940px){[data-deck]{flex-direction:column;scroll-snap-type:y mandatory}[data-hide-narrow]{display:none !important}}
+</style>
 <link rel="canonical" href="https://regolapp.be/roadmap.html">
-<meta name="description" content="What is broken, what is being built, and what shipped in the REGOL gym log, straight from the public issue tracker.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="REGOL">
 <meta property="og:url" content="https://regolapp.be/roadmap.html">
 <meta property="og:title" content="REGOL roadmap">
-<meta property="og:description" content="Every tester report, in the open. What is broken, what is being built, what shipped.">
-<meta property="og:image" content="https://regolapp.be/images/og.jpg">
+<meta property="og:description" content="What is being built, what is broken, and what shipped in REGOL, straight from the public issue tracker.">
+<meta property="og:image" content="https://regolapp.be/images/og.png">
 <meta property="og:image:alt" content="The REGOL mark beside the headline &quot;Progressive overload, worked out for you.&quot; and the app mid-set.">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108 108'><rect width='108' height='108' rx='24' fill='%230b0c0b'/><circle cx='54' cy='54' r='18' fill='none' stroke='%23d6ff3e' stroke-width='7.2'/><rect y='49' width='108' height='10' fill='%230b0c0b'/><rect y='52.2' width='108' height='3.6' fill='%23d6ff3e'/></svg>">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="style.css?v=7">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": ["WebPage", "CollectionPage"],
-  "@id": "https://regolapp.be/roadmap.html#webpage",
-  "url": "https://regolapp.be/roadmap.html",
-  "name": "Roadmap",
-  "description": "What is broken, what is being built, and what shipped, straight from the issue tracker.",
-  "isPartOf": { "@id": "https://regolapp.be/#website" },
-  "about": { "@id": "https://regolapp.be/#app" },
-  "inLanguage": "en"
-}
-</script>
+<link rel="alternate" type="application/rss+xml" title="REGOL news" href="feed.xml">
+<link rel="stylesheet" href="site.css?v=1">
+<script src="site-ui.js" defer></script>
 </head>
 <body>
-
-<header class="site-head">
-  <div class="wrap">
-    <a class="brand" href="./">
-      <svg width="26" height="26" viewBox="0 0 108 108" aria-hidden="true">
-        <rect width="108" height="108" rx="24" fill="#161917"/>
-        <circle cx="54" cy="54" r="18" fill="none" stroke="#d6ff3e" stroke-width="7.2"/>
-        <rect y="49" width="108" height="10" fill="#161917"/>
-        <rect y="52.2" width="108" height="3.6" fill="#d6ff3e"/>
-      </svg>
-      REGOL
-    </a>
-    <nav>
-      <a href="./">Home</a>
-      <a href="try.html">Try it</a>
-      <a href="news.html">News</a>
-      <a href="testing.html">Join the test</a>
-      <a href="roadmap.html" aria-current="page">Roadmap</a>
-      <a href="report.html">Report</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="support.html">Support</a>
-    </nav>
-  </div>
+<div style="font-family:Barlow;color:#F2F4EE;background:#0B0C0B">
+<header data-site-header style="position:sticky;top:0;z-index:30;height:64px;box-sizing:border-box;background:rgba(11,12,11,.88);backdrop-filter:blur(16px) saturate(1.2);-webkit-backdrop-filter:blur(16px) saturate(1.2);border-bottom:1px solid rgba(255,255,255,.06)"><div style="max-width:1400px;height:100%;margin:0 auto;padding:0 16px 0 20px;display:flex;align-items:center;gap:10px">
+<a href="./" aria-label="REGOL home" style="display:flex;align-items:center;gap:10px;color:#F2F4EE;text-decoration:none;font:700 26px/1 'Barlow Condensed';letter-spacing:.02em;white-space:nowrap;flex:none;min-height:44px" class="hv-ink"><svg width="30" height="30" viewBox="0 0 108 108" aria-hidden="true"><rect width="108" height="108" rx="24" fill="#161917"></rect><circle cx="54" cy="54" r="18" fill="none" stroke="#d6ff3e" stroke-width="7.2"></circle><rect y="49" width="108" height="10" fill="#161917"></rect><rect y="52.2" width="108" height="3.6" fill="#d6ff3e"></rect></svg>REGOL</a>
+<span style="flex:1"></span>
+<a href="https://play.google.com/store/apps/details?id=app.overload&pcampaignid=web_share" target="_blank" rel="noopener" style="height:44px;padding:0 16px 0 13px;border-radius:22px;background:#D6FF3E;color:#0C0E0B;text-decoration:none;display:flex;align-items:center;gap:8px;font:600 14.5px/1 Barlow;white-space:nowrap;flex:none" class="hv-play"><svg width="13" height="13" viewBox="0 0 24 24" fill="#0C0E0B" aria-hidden="true"><path d="M6 3.5v17l14-8.5z"></path></svg><span data-cta-label>Get it on Google Play</span></a>
+<button data-act="menu" aria-expanded="false" aria-label="Menu" style="border:0;height:44px;padding:0 14px 0 16px;border-radius:22px;background:#1F2320;color:#F2F4EE;display:flex;align-items:center;gap:10px;cursor:pointer;flex:none;font:600 14.5px/1 Barlow" class="hv-raised"><span data-menu-label>Menu</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F2F4EE" stroke-width="2.2" stroke-linecap="round"><path data-menu-icon d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+</div>
+<nav data-menu aria-label="Main" style="position:absolute;left:0;right:0;top:64px;height:calc(100vh - 64px);height:calc(100dvh - 64px);background:#0B0C0B;overflow:auto;display:flex;flex-direction:column"><div style="max-width:1400px;width:100%;box-sizing:border-box;margin:0 auto;padding:24px 20px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:4px 32px;align-content:start">
+<a href="./" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Home</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">What REGOL does</span></a><a href="try.html" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Try it</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">The app in your browser</span></a><a href="news.html" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>News</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">Releases</span></a><a href="roadmap.html" aria-current="page" style="min-height:64px;padding:0 16px;border-radius:20px;background:#161917;color:#D6FF3E;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Roadmap</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">What is being built</span></a><a href="report.html" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Report</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">A bug or an idea</span></a><a href="privacy.html" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Privacy</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">Your data stays on your phone</span></a><a href="support.html" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Support</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">Help, backups, FAQ</span></a>
+</div><div style="margin-top:auto;padding:16px 20px 28px;display:flex;flex-wrap:wrap;gap:8px 20px;font:500 15px/1.3 Barlow;color:#9AA093;border-top:1px solid rgba(255,255,255,.06)"><a href="terms.html" style="color:#C9CEC2;text-decoration:none;padding:6px 0" class="hv-ink">Terms</a><a href="feed.xml" style="color:#C9CEC2;text-decoration:none;padding:6px 0" class="hv-ink">RSS</a><a href="mailto:support@regolapp.be" style="color:#C9CEC2;text-decoration:none;padding:6px 0" class="hv-ink">support@regolapp.be</a></div></nav>
 </header>
+<div style="position:relative">
+<div data-deck="">
 
-<main class="wrap narrow doc">
-  <p class="kicker">In the open</p>
-  <h1>What's being built.</h1>
-  <p class="lead">REGOL is one person working through a list, and the list is public. Everything
-  below comes straight out of the issue tracker. Nothing is curated for this page. If you report
-  something, this is where it turns up.</p>
+<section data-ch="" data-title="In the open" id="open" data-screen-label="01 In the open" style="background:#0B0C0B"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;gap:clamp(16px,2.6vh,28px)">
+<span style="font:600 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">In the open</span>
+<h1 style="margin:0;font:700 clamp(56px,9vw,150px)/.84 'Barlow Condensed';letter-spacing:-.025em;max-width:1100px;text-wrap:balance">One developer. A public list. You get a say.</h1>
+<p style="margin:0;font:400 clamp(17px,1.5vw,22px)/1.5 Barlow;color:#C9CEC2;max-width:640px;text-wrap:pretty">Everything on the next pages is read live from the public issue tracker when you open this page. Nothing is curated. Report something and this is where it turns up, and where you can watch it go from reported to shipped.</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px"><a href="report.html" style="height:58px;padding:0 24px;border-radius:22px;background:#D6FF3E;color:#0C0E0B;text-decoration:none;display:flex;align-items:center;font:600 17px/1 Barlow;white-space:nowrap" class="hv-play">Report a bug or ask for something</a><a href="https://github.com/users/filipmonbaillieu24-prog/projects/3" style="height:58px;padding:0 24px;border-radius:22px;background:#1F2320;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;font:500 17px/1 Barlow;white-space:nowrap" class="hv-pressed">Open the board on GitHub</a></div>
+<div style="display:flex;flex-wrap:wrap;gap:8px 20px;font:500 15px/1.3 Barlow;color:#9AA093"><button data-act="sum" style="border:0;background:transparent;padding:6px 0;display:flex;align-items:center;gap:8px;color:#C9CEC2;cursor:pointer;font:inherit" class="hv-ink"><span style="width:10px;height:10px;border-radius:3px;background:#D6FF3E"></span>Now · –</button><button data-act="sum" style="border:0;background:transparent;padding:6px 0;display:flex;align-items:center;gap:8px;color:#C9CEC2;cursor:pointer;font:inherit" class="hv-ink"><span style="width:10px;height:10px;border-radius:3px;background:#9AA093"></span>Next · –</button><button data-act="sum" style="border:0;background:transparent;padding:6px 0;display:flex;align-items:center;gap:8px;color:#C9CEC2;cursor:pointer;font:inherit" class="hv-ink"><span style="width:10px;height:10px;border-radius:3px;background:#FF7043"></span>Known problems · –</button><button data-act="sum" style="border:0;background:transparent;padding:6px 0;display:flex;align-items:center;gap:8px;color:#C9CEC2;cursor:pointer;font:inherit" class="hv-ink"><span style="width:10px;height:10px;border-radius:3px;background:#9AA093"></span>Asked for · –</button><button data-act="sum" style="border:0;background:transparent;padding:6px 0;display:flex;align-items:center;gap:8px;color:#C9CEC2;cursor:pointer;font:inherit" class="hv-ink"><span style="width:10px;height:10px;border-radius:3px;background:#4DE1C1"></span>Shipped · –</button></div>
+</div></section>
 
-  <div class="btns">
-    <a class="btn btn-primary" href="report.html">Report a bug or ask for something</a>
-    <a class="btn btn-ghost" href="https://github.com/users/filipmonbaillieu24-prog/projects/3">Open the board</a>
-  </div>
+<section data-ch="" data-title="Now" id="road-building" style="background:#0B0C0B;color:#F2F4EE"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:flex-start;align-content:flex-start;gap:20px 56px">
+<div style="flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:12px"><span style="display:flex;align-items:center;gap:10px;font:700 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E"><span style="width:12px;height:12px;border-radius:4px;background:#D6FF3E"></span>Now</span><h2 style="margin:0;font:700 clamp(44px,6vw,96px)/.88 'Barlow Condensed';letter-spacing:-.02em">Being worked on.</h2><span style="font:700 clamp(40px,5vw,72px)/1 'Barlow Condensed';color:#D6FF3E" data-count>–</span><p style="margin:0;font:400 16px/1.55 Barlow;color:#9AA093;max-width:400px;text-wrap:pretty">Assigned or in progress right now.</p></div>
+<ul data-list style="flex:2 1 520px;min-width:0;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;max-height:100%">
 
-  <section class="road" id="road-building">
-    <h2>Being worked on</h2>
-    <ul class="issues" data-empty="Nothing in progress this minute. The lists below say what is next."><li class="issue is-empty">Read from the issue tracker when this page opens. Not showing? <a href="https://github.com/filipmonbaillieu24-prog/overload-site/issues" rel="noopener">Open the tracker</a>.</li></ul>
-  </section>
+<li style="border-radius:20px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.06);padding:16px 18px;font:400 15px/1.5 Barlow;color:#9AA093">Reading the issue tracker…</li>
 
-  <section class="road" id="road-planned">
-    <h2>Planned</h2>
-    <p class="note">Decided on, not started. Each one has a comment saying what it is waiting for,
-    usually that something else matters more this month.</p>
-    <ul class="issues" data-empty="Nothing queued up yet."><li class="issue is-empty">Read from the issue tracker when this page opens. Not showing? <a href="https://github.com/filipmonbaillieu24-prog/overload-site/issues" rel="noopener">Open the tracker</a>.</li></ul>
-  </section>
+</ul></div></section><section data-ch="" data-title="Next" id="road-planned" style="background:#D6FF3E;color:#0C0E0B"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:flex-start;align-content:flex-start;gap:20px 56px">
+<div style="flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:12px"><span style="display:flex;align-items:center;gap:10px;font:700 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#0C0E0B"><span style="width:12px;height:12px;border-radius:4px;background:#0C0E0B"></span>Next</span><h2 style="margin:0;font:700 clamp(44px,6vw,96px)/.88 'Barlow Condensed';letter-spacing:-.02em">Planned.</h2><span style="font:700 clamp(40px,5vw,72px)/1 'Barlow Condensed';color:#0C0E0B" data-count>–</span><p style="margin:0;font:400 16px/1.55 Barlow;color:#2E3415;max-width:400px;text-wrap:pretty">Decided on, not started. Each has a comment saying what it is waiting for.</p></div>
+<ul data-list style="flex:2 1 520px;min-width:0;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;max-height:100%">
 
-  <section class="road" id="road-bugs">
-    <h2>Known problems</h2>
-    <p class="note">Confirmed means I have reproduced it. The rest are waiting on a reply from
-    whoever reported them.</p>
-    <ul class="issues" data-empty="No open bug reports. That will not last."><li class="issue is-empty">Read from the issue tracker when this page opens. Not showing? <a href="https://github.com/filipmonbaillieu24-prog/overload-site/issues" rel="noopener">Open the tracker</a>.</li></ul>
-  </section>
+<li style="border-radius:20px;box-shadow:inset 0 0 0 1.5px rgba(12,14,11,.12);padding:16px 18px;font:400 15px/1.5 Barlow;color:#2E3415">Reading the issue tracker…</li>
 
-  <section class="road" id="road-ideas">
-    <h2>Asked for</h2>
-    <p class="note">Ordered by votes. Give an issue a thumbs-up on GitHub and it climbs this list.
-    That is genuinely how the next thing gets picked.</p>
-    <ul class="issues" data-empty="Nothing requested yet. Be the first."><li class="issue is-empty">Read from the issue tracker when this page opens. Not showing? <a href="https://github.com/filipmonbaillieu24-prog/overload-site/issues" rel="noopener">Open the tracker</a>.</li></ul>
-  </section>
+</ul></div></section><section data-ch="" data-title="Known problems" id="road-bugs" style="background:#0B0C0B;color:#F2F4EE"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:flex-start;align-content:flex-start;gap:20px 56px">
+<div style="flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:12px"><span style="display:flex;align-items:center;gap:10px;font:700 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E"><span style="width:12px;height:12px;border-radius:4px;background:#FF7043"></span>Known problems</span><h2 style="margin:0;font:700 clamp(44px,6vw,96px)/.88 'Barlow Condensed';letter-spacing:-.02em">What is broken.</h2><span style="font:700 clamp(40px,5vw,72px)/1 'Barlow Condensed';color:#FF7043" data-count>–</span><p style="margin:0;font:400 16px/1.55 Barlow;color:#9AA093;max-width:400px;text-wrap:pretty">Confirmed means reproduced. The rest are waiting on a reply from whoever reported them.</p></div>
+<ul data-list style="flex:2 1 520px;min-width:0;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;max-height:100%">
 
-  <section class="road" id="road-shipped">
-    <h2>Shipped</h2>
-    <ul class="issues" data-empty="Nothing closed yet."><li class="issue is-empty">Read from the issue tracker when this page opens. Not showing? <a href="https://github.com/filipmonbaillieu24-prog/overload-site/issues" rel="noopener">Open the tracker</a>.</li></ul>
-  </section>
+<li style="border-radius:20px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.06);padding:16px 18px;font:400 15px/1.5 Barlow;color:#9AA093">Reading the issue tracker…</li>
 
-  <h2>What happens to something you report</h2>
-  <ol>
-    <li><strong>You file it</strong> from the <a href="report.html">report form</a>, which writes the
-      issue for you.</li>
-    <li><strong>I try to reproduce it.</strong> If I cannot, I will ask you a question on the issue.
-      You get an email, and answering it is usually what makes the fix possible.</li>
-    <li><strong>Once reproduced</strong> it is marked confirmed and given a severity: does it stop you
-      training, is it annoying, or is it cosmetic. That is the order things get fixed in.</li>
-    <li><strong>If it is agreed but not soon</strong> it goes under Planned, with a comment saying
-      what it is waiting for. That is a real answer, not a polite no; a polite no gets said as one,
-      on the issue.</li>
-    <li><strong>When it ships</strong> the issue closes, it appears above, and the change is in the
-      next Play update.</li>
-  </ol>
+</ul></div></section><section data-ch="" data-title="Asked for" id="road-ideas" style="background:#D6FF3E;color:#0C0E0B"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:flex-start;align-content:flex-start;gap:20px 56px">
+<div style="flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:12px"><span style="display:flex;align-items:center;gap:10px;font:700 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#0C0E0B"><span style="width:12px;height:12px;border-radius:4px;background:#0C0E0B"></span>Asked for</span><h2 style="margin:0;font:700 clamp(44px,6vw,96px)/.88 'Barlow Condensed';letter-spacing:-.02em">Your ideas, by votes.</h2><span style="font:700 clamp(40px,5vw,72px)/1 'Barlow Condensed';color:#0C0E0B" data-count>–</span><p style="margin:0;font:400 16px/1.55 Barlow;color:#2E3415;max-width:400px;text-wrap:pretty">Give an issue a thumbs-up on GitHub and it climbs this list.</p></div>
+<ul data-list style="flex:2 1 520px;min-width:0;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;max-height:100%">
 
-  <h2>Not on the list</h2>
-  <p>A few things are settled rather than open questions, so nobody spends a request on them.
-  REGOL will not get an account system, ads, or a server that holds your training. And the engine
-  will keep explaining itself: no suggestion will ever be a number with no reason attached.</p>
-  <p>iOS is a different case: it is wanted, and it is under Planned rather than ruled out. It will
-  not start until the Android app has stopped changing shape, because every decision made twice is
-  a decision made badly once.</p>
+<li style="border-radius:20px;box-shadow:inset 0 0 0 1.5px rgba(12,14,11,.12);padding:16px 18px;font:400 15px/1.5 Barlow;color:#2E3415">Reading the issue tracker…</li>
 
-  <p class="note">This page reads the public issue tracker from your browser when you open it, so it
-  is never out of date. The same things, arranged as columns I actually drag cards across, are on
-  <a href="https://github.com/users/filipmonbaillieu24-prog/projects/3">the board</a>. If GitHub is unreachable, or you block third-party requests, the
-  lists here stay empty and the links still work.</p>
-</main>
+</ul></div></section><section data-ch="" data-title="Shipped" id="road-shipped" style="background:#0B0C0B;color:#F2F4EE"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:flex-start;align-content:flex-start;gap:20px 56px">
+<div style="flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:12px"><span style="display:flex;align-items:center;gap:10px;font:700 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E"><span style="width:12px;height:12px;border-radius:4px;background:#4DE1C1"></span>Shipped</span><h2 style="margin:0;font:700 clamp(44px,6vw,96px)/.88 'Barlow Condensed';letter-spacing:-.02em">Done, and in the app.</h2><span style="font:700 clamp(40px,5vw,72px)/1 'Barlow Condensed';color:#4DE1C1" data-count>–</span><p style="margin:0;font:400 16px/1.55 Barlow;color:#9AA093;max-width:400px;text-wrap:pretty">Closed, and in the latest Play update or the next one.</p></div>
+<ul data-list style="flex:2 1 520px;min-width:0;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;max-height:100%">
 
-<footer>
-  <div class="wrap">
-    <div>REGOL · early access · your data stays on your phone</div>
-    <nav>
-      <a href="./">Home</a>
-      <a href="try.html">Try it</a>
-      <a href="news.html">News</a>
-      <a href="testing.html">Join the test</a>
-      <a href="roadmap.html">Roadmap</a>
-      <a href="report.html">Report</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
-      <a href="support.html">Support</a>
-      <a href="https://github.com/filipmonbaillieu24-prog/overload-site/issues">Issues</a>
-      <a href="https://github.com/users/filipmonbaillieu24-prog/projects/3">Board</a>
-      <a href="mailto:support@regolapp.be">support@regolapp.be</a>
-    </nav>
-  </div>
-</footer>
+<li style="border-radius:20px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.06);padding:16px 18px;font:400 15px/1.5 Barlow;color:#9AA093">Reading the issue tracker…</li>
 
+</ul></div></section>
+
+<section data-ch="" data-title="The process" id="process" data-screen-label="07 What happens" style="background:#161917"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;gap:24px 56px">
+<div style="flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:14px"><span style="font:600 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">The process</span><h2 style="margin:0;font:700 clamp(44px,6vw,96px)/.88 'Barlow Condensed';letter-spacing:-.02em;text-wrap:balance">What happens to something you report.</h2></div>
+<ol style="flex:2 1 520px;min-width:0;list-style:none;margin:0;padding:0;border-radius:28px;overflow:hidden;display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.06)">
+<li style="background:#0B0C0B;padding:clamp(14px,2vh,20px) 22px;display:flex;gap:16px;align-items:flex-start"><span style="width:32px;height:32px;border-radius:16px;background:#D6FF3E;color:#0C0E0B;display:flex;align-items:center;justify-content:center;font:700 17px/1 'Barlow Condensed';flex:none">1</span><p style="margin:4px 0 0;font:400 16px/1.55 Barlow;color:#C9CEC2;text-wrap:pretty"><strong style="color:#F2F4EE;font-weight:600">You file it</strong> from the report form, which writes the issue for you.</p></li><li style="background:#0B0C0B;padding:clamp(14px,2vh,20px) 22px;display:flex;gap:16px;align-items:flex-start"><span style="width:32px;height:32px;border-radius:16px;background:#D6FF3E;color:#0C0E0B;display:flex;align-items:center;justify-content:center;font:700 17px/1 'Barlow Condensed';flex:none">2</span><p style="margin:4px 0 0;font:400 16px/1.55 Barlow;color:#C9CEC2;text-wrap:pretty"><strong style="color:#F2F4EE;font-weight:600">I try to reproduce it.</strong> If I cannot, I ask you a question on the issue. You get an email, and answering it is usually what makes the fix possible.</p></li><li style="background:#0B0C0B;padding:clamp(14px,2vh,20px) 22px;display:flex;gap:16px;align-items:flex-start"><span style="width:32px;height:32px;border-radius:16px;background:#D6FF3E;color:#0C0E0B;display:flex;align-items:center;justify-content:center;font:700 17px/1 'Barlow Condensed';flex:none">3</span><p style="margin:4px 0 0;font:400 16px/1.55 Barlow;color:#C9CEC2;text-wrap:pretty"><strong style="color:#F2F4EE;font-weight:600">Once reproduced</strong> it is marked confirmed and given a severity: does it stop you training, is it annoying, or is it cosmetic. That is the order things get fixed in.</p></li><li style="background:#0B0C0B;padding:clamp(14px,2vh,20px) 22px;display:flex;gap:16px;align-items:flex-start"><span style="width:32px;height:32px;border-radius:16px;background:#D6FF3E;color:#0C0E0B;display:flex;align-items:center;justify-content:center;font:700 17px/1 'Barlow Condensed';flex:none">4</span><p style="margin:4px 0 0;font:400 16px/1.55 Barlow;color:#C9CEC2;text-wrap:pretty"><strong style="color:#F2F4EE;font-weight:600">If it is agreed but not soon</strong> it goes under Planned, with a comment saying what it is waiting for. That is a real answer, not a polite no.</p></li><li style="background:#0B0C0B;padding:clamp(14px,2vh,20px) 22px;display:flex;gap:16px;align-items:flex-start"><span style="width:32px;height:32px;border-radius:16px;background:#D6FF3E;color:#0C0E0B;display:flex;align-items:center;justify-content:center;font:700 17px/1 'Barlow Condensed';flex:none">5</span><p style="margin:4px 0 0;font:400 16px/1.55 Barlow;color:#C9CEC2;text-wrap:pretty"><strong style="color:#F2F4EE;font-weight:600">When it ships</strong> the issue closes, it appears under Shipped, and the change is in the next Play update.</p></li>
+</ol></div></section>
+
+<section data-ch="" data-title="Not on the list" id="not" data-screen-label="08 Not on the list" style="background:#D6FF3E;color:#0C0E0B"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;gap:24px 56px">
+<div style="flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:14px"><span style="font:700 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase">Settled</span><h2 style="margin:0;font:700 clamp(52px,8vw,140px)/.84 'Barlow Condensed';letter-spacing:-.025em">Not on the list.</h2></div>
+<div style="flex:2 1 480px;min-width:0;max-width:720px;display:flex;flex-direction:column;gap:14px;font:400 clamp(17px,1.4vw,21px)/1.55 Barlow;color:#2E3415">
+<p style="margin:0;text-wrap:pretty">A few things are settled rather than open questions, so nobody spends a request on them. REGOL will not get an account system, ads, or a server that holds your training. And the engine will keep explaining itself: no suggestion will ever be a number with no reason attached.</p>
+<p style="margin:0;text-wrap:pretty">iOS is different: it is wanted, and it sits under Planned rather than ruled out. It will not start until the Android app has stopped changing shape, because every decision made twice is a decision made badly once.</p>
+<p style="margin:0;font-size:14px;color:#2E3415;text-wrap:pretty">This page asks GitHub for the issue list from your browser. If GitHub is unreachable, or you block third-party requests, the lists stay empty and the links still work.</p>
+</div></div></section>
+
+</div>
+<nav data-rail aria-label="Chapters" style="position:absolute;left:0;right:0;bottom:0;height:64px;display:flex;align-items:center;justify-content:center;padding:0 16px;pointer-events:none">
+<div style="pointer-events:auto;display:flex;align-items:center;gap:12px;height:44px;padding:0 16px 0 18px;border-radius:22px;background:rgba(11,12,11,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)">
+<span data-counter style="font:700 14px/1 'Barlow Condensed';color:#D6FF3E;letter-spacing:.04em;min-width:48px">01 / 8</span>
+<span data-hide-narrow="" data-cur style="font:500 14px/1 Barlow;color:#F2F4EE;white-space:nowrap">In the open</span>
+<div style="display:flex;gap:6px"><button data-act="dot" aria-label="Chapter 1: In the open" aria-current="step" style="border:0;padding:0;width:22px;height:8px;border-radius:4px;background:#D6FF3E;cursor:pointer;transition:width .25s ease,background .25s ease"></button><button data-act="dot" aria-label="Chapter 2: Now" style="border:0;padding:0;width:8px;height:8px;border-radius:4px;background:#2B2F29;cursor:pointer;transition:width .25s ease,background .25s ease"></button><button data-act="dot" aria-label="Chapter 3: Next" style="border:0;padding:0;width:8px;height:8px;border-radius:4px;background:#2B2F29;cursor:pointer;transition:width .25s ease,background .25s ease"></button><button data-act="dot" aria-label="Chapter 4: Known problems" style="border:0;padding:0;width:8px;height:8px;border-radius:4px;background:#2B2F29;cursor:pointer;transition:width .25s ease,background .25s ease"></button><button data-act="dot" aria-label="Chapter 5: Asked for" style="border:0;padding:0;width:8px;height:8px;border-radius:4px;background:#2B2F29;cursor:pointer;transition:width .25s ease,background .25s ease"></button><button data-act="dot" aria-label="Chapter 6: Shipped" style="border:0;padding:0;width:8px;height:8px;border-radius:4px;background:#2B2F29;cursor:pointer;transition:width .25s ease,background .25s ease"></button><button data-act="dot" aria-label="Chapter 7: The process" style="border:0;padding:0;width:8px;height:8px;border-radius:4px;background:#2B2F29;cursor:pointer;transition:width .25s ease,background .25s ease"></button><button data-act="dot" aria-label="Chapter 8: Not on the list" style="border:0;padding:0;width:8px;height:8px;border-radius:4px;background:#2B2F29;cursor:pointer;transition:width .25s ease,background .25s ease"></button></div>
+<button data-act="next" aria-label="Next chapter" style="border:0;width:32px;height:32px;border-radius:16px;background:#1F2320;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none" class="hv-limebg"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F2F4EE" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></button>
+</div></nav>
+</div>
+<footer style="border-top:1px solid rgba(255,255,255,.06);padding:56px 24px 64px;background:#0B0C0B;font-family:Barlow"><div style="max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-wrap:wrap;gap:32px 48px;align-items:flex-start">
+<div style="flex:1 1 300px;display:flex;flex-direction:column;gap:14px">
+<a href="./" style="display:flex;align-items:center;gap:10px;color:#F2F4EE;text-decoration:none;font:700 28px/1 'Barlow Condensed';white-space:nowrap;align-self:flex-start" class="hv-ink"><svg width="30" height="30" viewBox="0 0 108 108" aria-hidden="true"><rect width="108" height="108" rx="24" fill="#161917"></rect><circle cx="54" cy="54" r="18" fill="none" stroke="#d6ff3e" stroke-width="7.2"></circle><rect y="49" width="108" height="10" fill="#161917"></rect><rect y="52.2" width="108" height="3.6" fill="#d6ff3e"></rect></svg>REGOL</a>
+<p style="margin:0;font:400 15px/1.55 Barlow;color:#9AA093;max-width:320px;text-wrap:pretty">The gym log that works out your next weight and tells you why. Android. Free for everyone until 2027. Your data stays on your phone.</p>
+<a href="https://play.google.com/store/apps/details?id=app.overload&pcampaignid=web_share" target="_blank" rel="noopener" style="align-self:flex-start;height:48px;padding:0 20px 0 16px;border-radius:20px;background:#1F2320;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;gap:10px;font:600 15px/1 Barlow;white-space:nowrap" class="hv-pressed"><svg width="14" height="14" viewBox="0 0 24 24" fill="#D6FF3E" aria-hidden="true"><path d="M6 3.5v17l14-8.5z"></path></svg>Get it on Google Play</a>
+</div>
+<div style="flex:2 1 520px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:28px 24px">
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font:600 12px/1 Barlow;letter-spacing:.14em;text-transform:uppercase;color:#9AA093">App</span><a href="./" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Home</a><a href="try.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Try it in your browser</a><a href="./#price" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Pricing</a><a href="./#faq" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">FAQ</a></div>
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font:600 12px/1 Barlow;letter-spacing:.14em;text-transform:uppercase;color:#9AA093">In the open</span><a href="news.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">News</a><a href="roadmap.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Roadmap</a><a href="report.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Report a bug</a><a href="https://github.com/users/filipmonbaillieu24-prog/projects/3" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Board</a></div>
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font:600 12px/1 Barlow;letter-spacing:.14em;text-transform:uppercase;color:#9AA093">Help</span><a href="support.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Support</a><a href="privacy.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Privacy</a><a href="terms.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Terms</a><a href="mailto:support@regolapp.be" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">support@regolapp.be</a></div>
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font:600 12px/1 Barlow;letter-spacing:.14em;text-transform:uppercase;color:#9AA093">Follow</span><a href="https://www.instagram.com/regolapp" rel="noopener" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Instagram</a><a href="feed.xml" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">RSS feed</a><a href="https://github.com/filipmonbaillieu24-prog/overload-site/issues" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">GitHub issues</a></div>
+</div></div>
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;padding-top:24px;border-top:1px solid rgba(255,255,255,.06);font:400 14px/1.4 Barlow;color:#8E948A"><span>No account. No ads. No analytics. Version 1.8.</span><span>Made by one person · regolapp.be</span></div>
+</div></footer>
+</div>
 <script>
+// Everything on the five list chapters is read from the public issue tracker in
+// your browser. No server of mine is involved, and no key is needed.
 (function () {
-  var REPO = 'filipmonbaillieu24-prog/overload-site';
-  var API = 'https://api.github.com/repos/' + REPO + '/issues?state=all&per_page=100&sort=updated';
+  var BOARD = 'https://github.com/users/filipmonbaillieu24-prog/projects/3';
+  var API = 'https://api.github.com/repos/filipmonbaillieu24-prog/overload-site/issues?state=all&per_page=100&sort=updated';
+  var G = [{"id":"road-building","k":"Now","fg":"#F2F4EE","body":"#9AA093","card":"#161917","ring":"rgba(255,255,255,.06)","chipBg":"#D6FF3E","chipFg":"#0C0E0B","empty":"Nothing in progress this minute. The next chapters say what is next."},{"id":"road-planned","k":"Next","fg":"#0C0E0B","body":"#2E3415","card":"rgba(12,14,11,.08)","ring":"rgba(12,14,11,.12)","chipBg":"#0C0E0B","chipFg":"#D6FF3E","empty":"Nothing queued up yet."},{"id":"road-bugs","k":"Known problems","fg":"#F2F4EE","body":"#9AA093","card":"#161917","ring":"rgba(255,255,255,.06)","chipBg":"#D6FF3E","chipFg":"#0C0E0B","empty":"No open bug reports. That will not last."},{"id":"road-ideas","k":"Asked for","fg":"#0C0E0B","body":"#2E3415","card":"rgba(12,14,11,.08)","ring":"rgba(12,14,11,.12)","chipBg":"#0C0E0B","chipFg":"#D6FF3E","empty":"Nothing requested yet. Be the first."},{"id":"road-shipped","k":"Shipped","fg":"#F2F4EE","body":"#9AA093","card":"#161917","ring":"rgba(255,255,255,.06)","chipBg":"#D6FF3E","chipFg":"#0C0E0B","empty":"Nothing closed yet."}];
+  var sums = [].slice.call(document.querySelectorAll('[data-act="sum"]'));
 
-  // textContent everywhere, never innerHTML: issue titles are written by the public.
-  function el(tag, cls, text) {
+  sums.forEach(function (b, k) {
+    b.addEventListener('click', function () {
+      if (window.REGOL && window.REGOL.chapters) window.REGOL.chapters.goTo(k + 1);
+    });
+  });
+
+  var lb = function (x) { return (x.labels || []).map(function (l) { return typeof l === 'string' ? l : l.name; }); };
+  var has = function (x, l) { return lb(x).indexOf(l) >= 0; };
+  var votes = function (x) { return (x.reactions && x.reactions['+1']) || 0; };
+  var busy = function (x) { return has(x, 'in-progress') || (x.assignees || []).length > 0; };
+  var spoken = function (x) { return busy(x) || has(x, 'planned'); };
+  var vt = function (v) { return v + (v === 1 ? ' vote' : ' votes'); };
+  function ago(iso) {
+    var d = Math.floor((Date.now() - new Date(iso)) / 864e5);
+    if (d <= 0) return 'today';
+    if (d === 1) return 'yesterday';
+    if (d < 30) return d + ' days ago';
+    var m = Math.round(d / 30);
+    return m + (m === 1 ? ' month ago' : ' months ago');
+  }
+
+  function el(tag, style, text) {
     var n = document.createElement(tag);
-    if (cls) n.className = cls;
+    if (style) n.setAttribute('style', style);
     if (text != null) n.textContent = text;
     return n;
   }
+  function safe(url) { return /^https:\/\/github\.com\//.test(url || '') ? url : BOARD; }
 
-  function ago(iso) {
-    var days = Math.floor((Date.now() - new Date(iso)) / 86400000);
-    if (days <= 0) return 'today';
-    if (days === 1) return 'yesterday';
-    if (days < 30) return days + ' days ago';
-    var months = Math.round(days / 30);
-    return months + (months === 1 ? ' month ago' : ' months ago');
-  }
-
-  function labels(issue) {
-    return (issue.labels || []).map(function (l) { return typeof l === 'string' ? l : l.name; });
-  }
-
-  function has(issue, label) { return labels(issue).indexOf(label) >= 0; }
-  function votes(issue) { return (issue.reactions && issue.reactions['+1']) || 0; }
-
-  // Being worked on = assigned to me, or labelled in-progress. Assigning is one click on the
-  // board card, so the board and this page stay in step without anything syncing them.
-  function busy(issue) {
-    return has(issue, 'in-progress') || (issue.assignees || []).length > 0;
-  }
-
-  // Planned is a promise, not activity: it must not also show up as a bug or a request.
-  function spoken(issue) { return busy(issue) || has(issue, 'planned'); }
-
-  function row(issue, tail) {
-    var li = el('li', 'issue');
-    var a = el('a', 'issue-title', issue.title);
-    a.href = issue.html_url;
+  function item(g, x, tail) {
+    var li = el('li', 'border-radius:20px;background:' + g.card + ';box-shadow:inset 0 0 0 1px ' + g.ring + ';padding:14px 18px;display:flex;flex-direction:column;gap:8px');
+    var a = el('a', 'color:' + g.fg + ';text-decoration:none;font:500 17px/1.35 Barlow', x.title);
+    a.href = safe(x.html_url);
     a.rel = 'noopener';
+    a.className = 'hv-ul';
     li.appendChild(a);
-    var meta = el('div', 'issue-meta');
-    if (busy(issue)) meta.appendChild(el('span', 'chip', 'in progress'));
-    else if (has(issue, 'planned')) meta.appendChild(el('span', 'chip', 'planned'));
-    else if (has(issue, 'confirmed')) meta.appendChild(el('span', 'chip', 'confirmed'));
-    meta.appendChild(el('span', null, tail));
-    li.appendChild(meta);
+    var row = el('div', 'display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font:400 13px/1.3 Barlow;color:' + g.body);
+    var chip = busy(x) ? 'in progress' : has(x, 'planned') ? 'planned' : has(x, 'confirmed') ? 'confirmed' : '';
+    if (chip) row.appendChild(el('span', 'height:24px;padding:0 9px;border-radius:7px;background:' + g.chipBg + ';color:' + g.chipFg + ';display:flex;align-items:center;font:600 11px/1 Barlow;letter-spacing:.08em;text-transform:uppercase', chip));
+    row.appendChild(el('span', null, tail));
+    li.appendChild(row);
     return li;
   }
 
-  function fill(id, issues, tail) {
-    var list = document.querySelector('#' + id + ' .issues');
-    list.textContent = '';
-    if (!issues.length) {
-      list.appendChild(el('li', 'issue is-empty', list.getAttribute('data-empty')));
+  function fill(k, list, tail, failed) {
+    var g = G[k];
+    var sec = document.getElementById(g.id);
+    if (!sec) return;
+    var ul = sec.querySelector('[data-list]');
+    var count = sec.querySelector('[data-count]');
+    if (count) count.textContent = failed ? '–' : String(list.length);
+    if (sums[k]) sums[k].lastChild.nodeValue = g.k + ' · ' + (failed ? '–' : String(list.length));
+    if (!ul) return;
+    ul.textContent = '';
+    if (!list.length) {
+      ul.appendChild(el('li', 'border-radius:20px;box-shadow:inset 0 0 0 1.5px ' + g.ring + ';padding:16px 18px;font:400 15px/1.5 Barlow;color:' + g.body,
+        failed ? 'Could not reach GitHub just now. Open the tracker on github.com instead.' : g.empty));
       return;
     }
-    issues.slice(0, 8).forEach(function (issue) { list.appendChild(row(issue, tail(issue))); });
+    list.slice(0, 6).forEach(function (x) { ul.appendChild(item(g, x, tail(x))); });
+    if (list.length > 6) {
+      var li = el('li', 'padding:4px 18px;font:500 14px/1.4 Barlow');
+      var a = el('a', 'color:' + g.fg, (list.length - 6) + ' more on the board ›');
+      a.href = BOARD;
+      li.appendChild(a);
+      ul.appendChild(li);
+    }
   }
 
-  fetch(API, {headers: {Accept: 'application/vnd.github+json'}})
-    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
-    .then(function (all) {
-      var issues = all.filter(function (i) { return !i.pull_request; });
-      var open = issues.filter(function (i) { return i.state === 'open'; });
+  function paint(all) {
+    var open = all.filter(function (x) { return x.state === 'open'; });
+    fill(0, open.filter(busy), function (x) { return 'since ' + ago(x.updated_at); });
+    fill(1, open.filter(function (x) { return has(x, 'planned') && !busy(x); }).sort(function (a, b) { return votes(b) - votes(a); }),
+      function (x) { return votes(x) ? vt(votes(x)) : 'agreed ' + ago(x.updated_at); });
+    fill(2, open.filter(function (x) { return has(x, 'bug') && !spoken(x); }).sort(function (a, b) { return (has(b, 'confirmed') ? 1 : 0) - (has(a, 'confirmed') ? 1 : 0); }),
+      function (x) { return 'reported ' + ago(x.created_at); });
+    fill(3, open.filter(function (x) { return has(x, 'idea') && !spoken(x); }).sort(function (a, b) { return votes(b) - votes(a); }),
+      function (x) { return votes(x) ? vt(votes(x)) : 'no votes yet'; });
+    fill(4, all.filter(function (x) { return x.state === 'closed' && !has(x, 'declined'); }).sort(function (a, b) { return new Date(b.closed_at) - new Date(a.closed_at); }),
+      function (x) { return 'closed ' + ago(x.closed_at); });
+  }
 
-      var building = open.filter(busy);
-      var planned = open.filter(function (i) { return has(i, 'planned') && !busy(i); })
-        .sort(function (a, b) { return votes(b) - votes(a); });
-      var bugs = open.filter(function (i) { return has(i, 'bug') && !spoken(i); })
-        .sort(function (a, b) { return (has(b, 'confirmed') ? 1 : 0) - (has(a, 'confirmed') ? 1 : 0); });
-      var ideas = open.filter(function (i) { return has(i, 'idea') && !spoken(i); })
-        .sort(function (a, b) { return votes(b) - votes(a); });
-      var shipped = issues.filter(function (i) { return i.state === 'closed' && !has(i, 'declined'); })
-        .sort(function (a, b) { return new Date(b.closed_at) - new Date(a.closed_at); });
-
-      fill('road-building', building, function (i) { return 'since ' + ago(i.updated_at); });
-      fill('road-planned', planned, function (i) {
-        var v = votes(i);
-        return v ? v + (v === 1 ? ' vote' : ' votes') : 'agreed ' + ago(i.updated_at);
-      });
-      fill('road-bugs', bugs, function (i) { return 'reported ' + ago(i.created_at); });
-      fill('road-ideas', ideas, function (i) {
-        var v = votes(i);
-        return v ? v + (v === 1 ? ' vote' : ' votes') : 'no votes yet';
-      });
-      fill('road-shipped', shipped, function (i) { return 'closed ' + ago(i.closed_at); });
-    })
-    .catch(function () {
-      Array.prototype.forEach.call(document.querySelectorAll('.issues'), function (list) {
-        list.textContent = '';
-        var li = el('li', 'issue is-empty', 'Could not reach GitHub just now. ');
-        var a = el('a', null, 'Open the tracker instead');
-        a.href = 'https://github.com/' + REPO + '/issues';
-        li.appendChild(a);
-        list.appendChild(li);
-      });
-    });
+  fetch(API, { headers: { Accept: 'application/vnd.github+json' } })
+    .then(function (res) { return res.ok ? res.json() : Promise.reject(res.status); })
+    .then(function (all) { paint(all.filter(function (x) { return !x.pull_request; })); })
+    .catch(function () { for (var k = 0; k < G.length; k++) fill(k, [], function () { return ''; }, true); });
 })();
 </script>
-
 </body>
 </html>

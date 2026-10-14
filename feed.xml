@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title>REGOL news</title>
+<link>https://regolapp.be/news.html</link>
+<atom:link href="https://regolapp.be/feed.xml" rel="self" type="application/rss+xml"/>
+<description>Every REGOL release, what it changes, and why it was worth doing.</description>
+<language>en</language>
+<lastBuildDate>Tue, 13 Oct 2026 09:00:00 GMT</lastBuildDate>
+<item>
+<title>REGOL 1.8: a lift can now ask for a different set each time</title>
+<link>https://regolapp.be/news-1-8.html</link>
+<guid isPermaLink="true">https://regolapp.be/news-1-8.html</guid>
+<pubDate>Tue, 13 Oct 2026 09:00:00 GMT</pubDate>
+<description>Every set of a lift can now ask for its own rep range and reps in reserve, and REGOL judges each one against what it asked for. Also: Why these weights on Today, full-size lift charts, rebuilt share cards, and Plans split into two tabs.</description>
+</item>
+</channel>
+</rss>

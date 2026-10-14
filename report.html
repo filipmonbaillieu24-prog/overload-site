@@ -3,192 +3,151 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Report a bug or ask for something · REGOL</title>
+<title>Report a bug or ask for something · REGOL</title><meta name="description" content="Fill this in and it opens a ready-made GitHub issue, or sends the same thing by email."><link rel="icon" href="favicon.svg" type="image/svg+xml"><script src="site.js"></script><style>
+@font-face{font-family:Barlow;src:url(fonts/barlow_regular.ttf);font-weight:400;font-display:swap}
+@font-face{font-family:Barlow;src:url(fonts/barlow_medium.ttf);font-weight:500;font-display:swap}
+@font-face{font-family:Barlow;src:url(fonts/barlow_semibold.ttf);font-weight:600;font-display:swap}
+@font-face{font-family:'Barlow Condensed';src:url(fonts/barlow_condensed_semibold.ttf);font-weight:600;font-display:swap}
+@font-face{font-family:'Barlow Condensed';src:url(fonts/barlow_condensed_bold.ttf);font-weight:700;font-display:swap}
+body{margin:0;background:#0B0C0B !important;display:block !important;min-height:0 !important;color:#F2F4EE;-webkit-font-smoothing:antialiased}
+a{color:#D6FF3E;text-underline-offset:3px}a:hover{color:#E6FF7A}
+::selection{background:#D6FF3E;color:#0C0E0B}
+input::placeholder,textarea::placeholder{color:#8E948A}
+[data-deck]{display:flex;overflow:auto;scroll-snap-type:x mandatory;scrollbar-width:none;height:calc(100vh - 64px);height:calc(100dvh - 64px)}
+[data-deck]::-webkit-scrollbar{display:none}
+[data-ch]{flex:0 0 100%;width:100%;height:100%;scroll-snap-align:start;scroll-snap-stop:always;overflow:hidden auto;box-sizing:border-box;position:relative}
+@media (max-width:940px){[data-deck]{flex-direction:column;scroll-snap-type:y mandatory}[data-hide-narrow]{display:none !important}}
+</style>
 <link rel="canonical" href="https://regolapp.be/report.html">
-<meta name="description" content="Fill this in and it opens a ready-made GitHub issue, or sends the same thing by email.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="REGOL">
 <meta property="og:url" content="https://regolapp.be/report.html">
 <meta property="og:title" content="Report a bug or ask for something">
 <meta property="og:description" content="Fill this in and it opens a ready-made GitHub issue, or sends the same thing by email.">
-<meta property="og:image" content="https://regolapp.be/images/og.jpg">
+<meta property="og:image" content="https://regolapp.be/images/og.png">
 <meta property="og:image:alt" content="The REGOL mark beside the headline &quot;Progressive overload, worked out for you.&quot; and the app mid-set.">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108 108'><rect width='108' height='108' rx='24' fill='%230b0c0b'/><circle cx='54' cy='54' r='18' fill='none' stroke='%23d6ff3e' stroke-width='7.2'/><rect y='49' width='108' height='10' fill='%230b0c0b'/><rect y='52.2' width='108' height='3.6' fill='%23d6ff3e'/></svg>">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="style.css?v=7">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "@id": "https://regolapp.be/report.html#webpage",
-  "url": "https://regolapp.be/report.html",
-  "name": "Report a bug or ask for something",
-  "description": "Fill this in and it opens a ready-made GitHub issue, or sends the same thing by email.",
-  "isPartOf": { "@id": "https://regolapp.be/#website" },
-  "about": { "@id": "https://regolapp.be/#app" },
-  "inLanguage": "en"
-}
-</script>
+<link rel="alternate" type="application/rss+xml" title="REGOL news" href="feed.xml">
+<link rel="stylesheet" href="site.css?v=1">
+<script src="site-ui.js" defer></script>
 </head>
 <body>
-
-<a class="banner" href="testing.html">
-  <span class="banner-tag">Testers wanted</span>
-  <span>Train with REGOL before it launches. Everything unlocked, free, while the test runs.</span>
-  <span class="banner-go">Join the test &rsaquo;</span>
-</a>
-
-<header class="site-head">
-  <div class="wrap">
-    <a class="brand" href="./">
-      <svg width="26" height="26" viewBox="0 0 108 108" aria-hidden="true">
-        <rect width="108" height="108" rx="24" fill="#161917"/>
-        <circle cx="54" cy="54" r="18" fill="none" stroke="#d6ff3e" stroke-width="7.2"/>
-        <rect y="49" width="108" height="10" fill="#161917"/>
-        <rect y="52.2" width="108" height="3.6" fill="#d6ff3e"/>
-      </svg>
-      REGOL
-    </a>
-    <nav>
-      <a href="./">Home</a>
-      <a href="try.html">Try it</a>
-      <a href="news.html">News</a>
-      <a href="testing.html">Join the test</a>
-      <a href="roadmap.html">Roadmap</a>
-      <a href="report.html" aria-current="page">Report</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="support.html">Support</a>
-    </nav>
-  </div>
+<div style="font-family:Barlow;color:#F2F4EE;background:#0B0C0B">
+<header data-site-header style="position:sticky;top:0;z-index:30;height:64px;box-sizing:border-box;background:rgba(11,12,11,.88);backdrop-filter:blur(16px) saturate(1.2);-webkit-backdrop-filter:blur(16px) saturate(1.2);border-bottom:1px solid rgba(255,255,255,.06)"><div style="max-width:1400px;height:100%;margin:0 auto;padding:0 16px 0 20px;display:flex;align-items:center;gap:10px">
+<a href="./" aria-label="REGOL home" style="display:flex;align-items:center;gap:10px;color:#F2F4EE;text-decoration:none;font:700 26px/1 'Barlow Condensed';letter-spacing:.02em;white-space:nowrap;flex:none;min-height:44px" class="hv-ink"><svg width="30" height="30" viewBox="0 0 108 108" aria-hidden="true"><rect width="108" height="108" rx="24" fill="#161917"></rect><circle cx="54" cy="54" r="18" fill="none" stroke="#d6ff3e" stroke-width="7.2"></circle><rect y="49" width="108" height="10" fill="#161917"></rect><rect y="52.2" width="108" height="3.6" fill="#d6ff3e"></rect></svg>REGOL</a>
+<span style="flex:1"></span>
+<a href="https://play.google.com/store/apps/details?id=app.overload&pcampaignid=web_share" target="_blank" rel="noopener" style="height:44px;padding:0 16px 0 13px;border-radius:22px;background:#D6FF3E;color:#0C0E0B;text-decoration:none;display:flex;align-items:center;gap:8px;font:600 14.5px/1 Barlow;white-space:nowrap;flex:none" class="hv-play"><svg width="13" height="13" viewBox="0 0 24 24" fill="#0C0E0B" aria-hidden="true"><path d="M6 3.5v17l14-8.5z"></path></svg><span data-cta-label>Get it on Google Play</span></a>
+<button data-act="menu" aria-expanded="false" aria-label="Menu" style="border:0;height:44px;padding:0 14px 0 16px;border-radius:22px;background:#1F2320;color:#F2F4EE;display:flex;align-items:center;gap:10px;cursor:pointer;flex:none;font:600 14.5px/1 Barlow" class="hv-raised"><span data-menu-label>Menu</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F2F4EE" stroke-width="2.2" stroke-linecap="round"><path data-menu-icon d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+</div>
+<nav data-menu aria-label="Main" style="position:absolute;left:0;right:0;top:64px;height:calc(100vh - 64px);height:calc(100dvh - 64px);background:#0B0C0B;overflow:auto;display:flex;flex-direction:column"><div style="max-width:1400px;width:100%;box-sizing:border-box;margin:0 auto;padding:24px 20px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:4px 32px;align-content:start">
+<a href="./" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Home</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">What REGOL does</span></a><a href="try.html" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Try it</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">The app in your browser</span></a><a href="news.html" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>News</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">Releases</span></a><a href="roadmap.html" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Roadmap</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">What is being built</span></a><a href="report.html" aria-current="page" style="min-height:64px;padding:0 16px;border-radius:20px;background:#161917;color:#D6FF3E;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Report</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">A bug or an idea</span></a><a href="privacy.html" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Privacy</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">Your data stays on your phone</span></a><a href="support.html" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Support</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">Help, backups, FAQ</span></a>
+</div><div style="margin-top:auto;padding:16px 20px 28px;display:flex;flex-wrap:wrap;gap:8px 20px;font:500 15px/1.3 Barlow;color:#9AA093;border-top:1px solid rgba(255,255,255,.06)"><a href="terms.html" style="color:#C9CEC2;text-decoration:none;padding:6px 0" class="hv-ink">Terms</a><a href="feed.xml" style="color:#C9CEC2;text-decoration:none;padding:6px 0" class="hv-ink">RSS</a><a href="mailto:support@regolapp.be" style="color:#C9CEC2;text-decoration:none;padding:6px 0" class="hv-ink">support@regolapp.be</a></div></nav>
 </header>
+<div style="position:relative">
+<div data-deck="">
 
-<main class="wrap narrow doc">
-  <p class="kicker">Bugs and ideas</p>
-  <h1>Tell me what's wrong.</h1>
-  <p class="lead">Fill this in and press the button. It opens a ready-made issue on GitHub with
-  everything already written. You just press Submit there. No GitHub account? The second button
-  sends the same thing by email.</p>
-  <p class="note">Whatever you file turns up on the <a href="roadmap.html">roadmap</a>, so you can watch it go from reported to shipped.</p>
+<section data-ch="" data-title="Tell me" id="why" data-screen-label="01 Tell me" style="background:#D6FF3E;color:#0C0E0B"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;gap:clamp(16px,2.6vh,28px)">
+<span style="font:700 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase">Bugs and ideas</span>
+<h1 style="margin:0;font:700 clamp(56px,9vw,150px)/.84 'Barlow Condensed';letter-spacing:-.025em;max-width:1000px">Tell me what’s wrong.</h1>
+<p style="margin:0;font:400 clamp(17px,1.5vw,22px)/1.5 Barlow;color:#2E3415;max-width:640px;text-wrap:pretty">Fill in the form on the next page and press the button. It opens a ready-made issue on GitHub with everything already written; you just press Submit there. No GitHub account? The second button sends the same thing by email. Either way it lands on the <a href="roadmap.html" style="color:#0C0E0B">public roadmap</a>, so you can watch it go from reported to shipped.</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px"><button data-act="bug" style="border:0;cursor:pointer;height:58px;padding:0 24px;border-radius:22px;background:#0C0E0B;color:#D6FF3E;font:600 17px/1 Barlow">Something is broken</button><button data-act="idea" style="border:0;cursor:pointer;height:58px;padding:0 24px;border-radius:22px;background:transparent;box-shadow:inset 0 0 0 1.5px rgba(12,14,11,.35);color:#0C0E0B;font:600 17px/1 Barlow">I have an idea</button></div>
+<p style="margin:0;font:400 14px/1.5 Barlow;color:#2E3415;max-width:640px;text-wrap:pretty">Why it works like this: the site is plain files with no server behind it, for the same reason the app has no account. The form writes your issue and hands it to GitHub, where your own account posts it, so you get notified when it is fixed.</p>
+</div></section>
 
-  <div class="tabs" role="tablist">
-    <button class="tab is-on" id="tab-bug" role="tab" aria-selected="true" aria-controls="form-bug">Something is broken</button>
-    <button class="tab" id="tab-idea" role="tab" aria-selected="false" aria-controls="form-idea">I have an idea</button>
-  </div>
+<section data-ch="" data-title="The form" id="form" data-screen-label="02 The form" style="background:#0B0C0B"><div style="min-height:100%;max-width:1400px;margin:0 auto;padding:clamp(20px,3vh,40px) 24px 80px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:flex-start;gap:20px 56px">
+<div style="flex:1 1 280px;min-width:0;display:flex;flex-direction:column;gap:12px"><span style="font:600 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">The form</span><h2 style="margin:0;font:700 clamp(40px,5vw,80px)/.9 'Barlow Condensed';letter-spacing:-.02em" data-form-title>Something is broken.</h2><p style="margin:0;font:400 15px/1.55 Barlow;color:#9AA093;max-width:380px;text-wrap:pretty" data-form-hint>What you did, what happened, what you expected. A screenshot is worth a paragraph.</p>
+<div role="tablist" style="display:flex;gap:4px;padding:4px;border-radius:20px;background:#131513;max-width:380px"><button role="tab" aria-selected="true" data-act="tab" style="flex:1;border:0;height:46px;border-radius:16px;background:#D6FF3E;color:#0C0E0B;font:600 14px/1.15 Barlow;cursor:pointer;padding:0 10px">Something is broken</button><button role="tab" aria-selected="false" data-act="tab" style="flex:1;border:0;height:46px;border-radius:16px;background:transparent;color:#9AA093;font:600 14px/1.15 Barlow;cursor:pointer;padding:0 10px">I have an idea</button></div></div>
 
-  <!-- ---- bug ---- -->
-  <form class="report" id="form-bug" role="tabpanel" aria-labelledby="tab-bug">
-    <label>
-      <span>One line: what went wrong</span>
-      <input name="title" maxlength="90" placeholder="The rest timer doesn't start after a drop set" required>
-    </label>
-    <label>
-      <span>What happened, and what you expected</span>
-      <textarea name="what" rows="5" placeholder="1. Started Upper A&#10;2. Logged the first set at 8 reps, 2 RIR&#10;3. The next set still showed the old weight&#10;&#10;I expected it to go up by one step." required></textarea>
-    </label>
-    <div class="row">
-      <label>
-        <span>App version <em>(You, at the bottom)</em></span>
-        <input name="version" maxlength="20" placeholder="1.0">
-      </label>
-      <label>
-        <span>Phone and Android version</span>
-        <input name="device" maxlength="60" placeholder="Pixel 7, Android 15">
-      </label>
-    </div>
-    <label>
-      <span>Anything else <em>(optional)</em></span>
-      <textarea name="extra" rows="2" placeholder="Happens every time. Screenshot to follow."></textarea>
-    </label>
-    <p class="note">Issues are public, so don't paste anything you'd rather keep private. Screenshots
-    can be dragged onto the issue once it opens.</p>
-    <div class="btns">
-      <button class="btn btn-primary" type="submit">Open the issue on GitHub</button>
-      <button class="btn btn-ghost" type="button" data-mail>Send it by email instead</button>
-    </div>
-  </form>
+<div style="flex:2 1 460px;min-width:0;max-width:720px">
+<form data-kind="bug" data-act="submit" style="border-radius:28px;background:#161917;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);padding:clamp(18px,2.5vw,28px);display:flex;flex-direction:column;gap:14px">
+<label style="display:flex;flex-direction:column;gap:6px"><span style="font:500 14px/1.3 Barlow;color:#E4E8DC">One line: what went wrong</span><input name="title" maxlength="90" required placeholder="The rest timer doesn't start after a drop set" style="height:50px;border:0;border-radius:14px;background:#1A1D1A;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);color:#F2F4EE;font:400 16px/1.45 Barlow;padding:0 14px;outline:none" class="fc-ring"></label>
+<label style="display:flex;flex-direction:column;gap:6px"><span style="font:500 14px/1.3 Barlow;color:#E4E8DC">What happened, and what you expected</span><textarea name="what" rows="4" required placeholder="1. Started Upper A&#10;2. Logged the first set at 8 reps, 2 left&#10;3. The next set still showed the old weight&#10;&#10;I expected it to go up by one step." style="border:0;border-radius:14px;background:#1A1D1A;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);color:#F2F4EE;font:400 16px/1.45 Barlow;padding:12px 14px;outline:none;resize:vertical" class="fc-ring"></textarea></label>
+<div style="display:flex;flex-wrap:wrap;gap:12px"><label style="flex:1 1 180px;display:flex;flex-direction:column;gap:6px"><span style="font:500 14px/1.3 Barlow;color:#E4E8DC">App version <span style="color:#9AA093;font-weight:400">(You, at the bottom)</span></span><input name="version" maxlength="20" placeholder="1.8" style="height:50px;border:0;border-radius:14px;background:#1A1D1A;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);color:#F2F4EE;font:400 16px/1.45 Barlow;padding:0 14px;outline:none" class="fc-ring"></label><label style="flex:1 1 180px;display:flex;flex-direction:column;gap:6px"><span style="font:500 14px/1.3 Barlow;color:#E4E8DC">Phone and Android version</span><input name="device" maxlength="60" placeholder="Pixel 7, Android 15" style="height:50px;border:0;border-radius:14px;background:#1A1D1A;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);color:#F2F4EE;font:400 16px/1.45 Barlow;padding:0 14px;outline:none" class="fc-ring"></label></div>
+<label style="display:flex;flex-direction:column;gap:6px"><span style="font:500 14px/1.3 Barlow;color:#E4E8DC">Anything else <span style="color:#9AA093;font-weight:400">(optional)</span></span><textarea name="extra" rows="2" placeholder="Happens every time. Screenshot to follow." style="border:0;border-radius:14px;background:#1A1D1A;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);color:#F2F4EE;font:400 16px/1.45 Barlow;padding:12px 14px;outline:none;resize:vertical" class="fc-ring"></textarea></label>
+<p style="margin:0;font:400 14px/1.5 Barlow;color:#9AA093">Issues are public, so don’t paste anything you’d rather keep private. Screenshots can be dragged onto the issue once it opens.</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px"><button type="submit" style="border:0;cursor:pointer;height:54px;padding:0 22px;border-radius:20px;background:#D6FF3E;color:#0C0E0B;font:600 16px/1 Barlow" class="hv-lime2">Open the issue on GitHub</button><button type="button" data-act="mail" style="border:0;cursor:pointer;height:54px;padding:0 22px;border-radius:20px;background:#1F2320;color:#F2F4EE;font:500 16px/1 Barlow" class="hv-raised">Send it by email instead</button></div>
+</form>
+<form data-kind="idea" data-act="submit" style="border-radius:28px;background:#161917;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);padding:clamp(18px,2.5vw,28px);display:none;flex-direction:column;gap:14px">
+<label style="display:flex;flex-direction:column;gap:6px"><span style="font:500 14px/1.3 Barlow;color:#E4E8DC">One line: what you want</span><input name="title" maxlength="90" required placeholder="Smaller jumps on fixed dumbbells" style="height:50px;border:0;border-radius:14px;background:#1A1D1A;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);color:#F2F4EE;font:400 16px/1.45 Barlow;padding:0 14px;outline:none" class="fc-ring"></label>
+<label style="display:flex;flex-direction:column;gap:6px"><span style="font:500 14px/1.3 Barlow;color:#E4E8DC">What are you trying to do?</span><textarea name="problem" rows="4" required placeholder="My gym only has fixed dumbbells, so the jump from 22.5 to 25 is too big on curls." style="border:0;border-radius:14px;background:#1A1D1A;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);color:#F2F4EE;font:400 16px/1.45 Barlow;padding:12px 14px;outline:none;resize:vertical" class="fc-ring"></textarea></label>
+<label style="display:flex;flex-direction:column;gap:6px"><span style="font:500 14px/1.3 Barlow;color:#E4E8DC">What did you have in mind? <span style="color:#9AA093;font-weight:400">(optional)</span></span><textarea name="idea" rows="3" placeholder="A rough shape is fine." style="border:0;border-radius:14px;background:#1A1D1A;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);color:#F2F4EE;font:400 16px/1.45 Barlow;padding:12px 14px;outline:none;resize:vertical" class="fc-ring"></textarea></label>
+<p style="margin:0;font:400 14px/1.5 Barlow;color:#9AA093">The situation in the gym is more useful than the feature. It usually leads somewhere better.</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px"><button type="submit" style="border:0;cursor:pointer;height:54px;padding:0 22px;border-radius:20px;background:#D6FF3E;color:#0C0E0B;font:600 16px/1 Barlow" class="hv-lime2">Open the issue on GitHub</button><button type="button" data-act="mail" style="border:0;cursor:pointer;height:54px;padding:0 22px;border-radius:20px;background:#1F2320;color:#F2F4EE;font:500 16px/1 Barlow" class="hv-raised">Send it by email instead</button></div>
+</form>
+</div></div></section>
 
-  <!-- ---- idea ---- -->
-  <form class="report hidden" id="form-idea" role="tabpanel" aria-labelledby="tab-idea">
-    <label>
-      <span>One line: what you want</span>
-      <input name="title" maxlength="90" placeholder="Smaller jumps on fixed dumbbells" required>
-    </label>
-    <label>
-      <span>What are you trying to do?</span>
-      <textarea name="problem" rows="5" placeholder="My gym only has fixed dumbbells, so the jump from 22.5 to 25 is too big on curls and the engine keeps telling me to go up." required></textarea>
-    </label>
-    <label>
-      <span>What did you have in mind? <em>(optional)</em></span>
-      <textarea name="idea" rows="3" placeholder="A rough shape is fine."></textarea>
-    </label>
-    <p class="note">The situation in the gym is more useful than the feature: it usually leads
-    somewhere better.</p>
-    <div class="btns">
-      <button class="btn btn-primary" type="submit">Open the issue on GitHub</button>
-      <button class="btn btn-ghost" type="button" data-mail>Send it by email instead</button>
-    </div>
-  </form>
-
-  <h2>Why it works like this</h2>
-  <p>This page is plain HTML on GitHub Pages. There is no server behind it, and there never will
-  be, for the same reason the app has no account: nothing to run, nothing to leak. So the form
-  writes your issue and hands it to GitHub, where your own account posts it. One extra click, and
-  the thread stays yours: you get notified when it's fixed.</p>
-</main>
-
-<footer>
-  <div class="wrap">
-    <div>REGOL · early access · your data stays on your phone</div>
-    <nav>
-      <a href="./">Home</a>
-      <a href="try.html">Try it</a>
-      <a href="news.html">News</a>
-      <a href="testing.html">Join the test</a>
-      <a href="roadmap.html">Roadmap</a>
-      <a href="report.html">Report</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
-      <a href="support.html">Support</a>
-      <a href="https://github.com/filipmonbaillieu24-prog/overload-site/issues">Issues</a>
-      <a href="https://github.com/users/filipmonbaillieu24-prog/projects/3">Board</a>
-      <a href="mailto:support@regolapp.be">support@regolapp.be</a>
-    </nav>
-  </div>
-</footer>
-
+</div>
+<nav data-rail aria-label="Chapters" style="position:absolute;left:0;right:0;bottom:0;height:64px;display:flex;align-items:center;justify-content:center;padding:0 16px;pointer-events:none">
+<div style="pointer-events:auto;display:flex;align-items:center;gap:12px;height:44px;padding:0 16px 0 18px;border-radius:22px;background:rgba(11,12,11,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)">
+<span data-counter style="font:700 14px/1 'Barlow Condensed';color:#D6FF3E;letter-spacing:.04em;min-width:48px">01 / 2</span>
+<span data-hide-narrow="" data-cur style="font:500 14px/1 Barlow;color:#F2F4EE;white-space:nowrap">Tell me</span>
+<div style="display:flex;gap:6px"><button data-act="dot" aria-label="Chapter 1: Tell me" aria-current="step" style="border:0;padding:0;width:22px;height:8px;border-radius:4px;background:#D6FF3E;cursor:pointer;transition:width .25s ease,background .25s ease"></button><button data-act="dot" aria-label="Chapter 2: The form" style="border:0;padding:0;width:8px;height:8px;border-radius:4px;background:#2B2F29;cursor:pointer;transition:width .25s ease,background .25s ease"></button></div>
+<button data-act="next" aria-label="Next chapter" style="border:0;width:32px;height:32px;border-radius:16px;background:#1F2320;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none" class="hv-limebg"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F2F4EE" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></button>
+</div></nav>
+</div>
+<footer style="border-top:1px solid rgba(255,255,255,.06);padding:56px 24px 64px;background:#0B0C0B;font-family:Barlow"><div style="max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-wrap:wrap;gap:32px 48px;align-items:flex-start">
+<div style="flex:1 1 300px;display:flex;flex-direction:column;gap:14px">
+<a href="./" style="display:flex;align-items:center;gap:10px;color:#F2F4EE;text-decoration:none;font:700 28px/1 'Barlow Condensed';white-space:nowrap;align-self:flex-start" class="hv-ink"><svg width="30" height="30" viewBox="0 0 108 108" aria-hidden="true"><rect width="108" height="108" rx="24" fill="#161917"></rect><circle cx="54" cy="54" r="18" fill="none" stroke="#d6ff3e" stroke-width="7.2"></circle><rect y="49" width="108" height="10" fill="#161917"></rect><rect y="52.2" width="108" height="3.6" fill="#d6ff3e"></rect></svg>REGOL</a>
+<p style="margin:0;font:400 15px/1.55 Barlow;color:#9AA093;max-width:320px;text-wrap:pretty">The gym log that works out your next weight and tells you why. Android. Free for everyone until 2027. Your data stays on your phone.</p>
+<a href="https://play.google.com/store/apps/details?id=app.overload&pcampaignid=web_share" target="_blank" rel="noopener" style="align-self:flex-start;height:48px;padding:0 20px 0 16px;border-radius:20px;background:#1F2320;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;gap:10px;font:600 15px/1 Barlow;white-space:nowrap" class="hv-pressed"><svg width="14" height="14" viewBox="0 0 24 24" fill="#D6FF3E" aria-hidden="true"><path d="M6 3.5v17l14-8.5z"></path></svg>Get it on Google Play</a>
+</div>
+<div style="flex:2 1 520px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:28px 24px">
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font:600 12px/1 Barlow;letter-spacing:.14em;text-transform:uppercase;color:#9AA093">App</span><a href="./" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Home</a><a href="try.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Try it in your browser</a><a href="./#price" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Pricing</a><a href="./#faq" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">FAQ</a></div>
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font:600 12px/1 Barlow;letter-spacing:.14em;text-transform:uppercase;color:#9AA093">In the open</span><a href="news.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">News</a><a href="roadmap.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Roadmap</a><a href="report.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Report a bug</a><a href="https://github.com/users/filipmonbaillieu24-prog/projects/3" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Board</a></div>
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font:600 12px/1 Barlow;letter-spacing:.14em;text-transform:uppercase;color:#9AA093">Help</span><a href="support.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Support</a><a href="privacy.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Privacy</a><a href="terms.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Terms</a><a href="mailto:support@regolapp.be" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">support@regolapp.be</a></div>
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font:600 12px/1 Barlow;letter-spacing:.14em;text-transform:uppercase;color:#9AA093">Follow</span><a href="https://www.instagram.com/regolapp" rel="noopener" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Instagram</a><a href="feed.xml" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">RSS feed</a><a href="https://github.com/filipmonbaillieu24-prog/overload-site/issues" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">GitHub issues</a></div>
+</div></div>
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;padding-top:24px;border-top:1px solid rgba(255,255,255,.06);font:400 14px/1.4 Barlow;color:#8E948A"><span>No account. No ads. No analytics. Version 1.8.</span><span>Made by one person · regolapp.be</span></div>
+</div></footer>
+</div>
 <script>
+// The form runs entirely in the browser: it writes the issue body and hands it
+// to GitHub, where your own account posts it, or to your mail app.
 (function () {
-  var REPO = 'https://github.com/filipmonbaillieu24-prog/overload-site';
-  var MAIL = 'support@regolapp.be';
+  var REPO = 'https://github.com/filipmonbaillieu24-prog/overload-site', MAIL = 'support@regolapp.be';
+  var kind = 'bug';
+  var forms = {
+    bug: document.querySelector('form[data-kind="bug"]'),
+    idea: document.querySelector('form[data-kind="idea"]'),
+  };
+  var tabs = [].slice.call(document.querySelectorAll('[data-act="tab"]'));
+  var title = document.querySelector('[data-form-title]');
+  var hint = document.querySelector('[data-form-hint]');
+  var TITLE = { bug: 'Something is broken.', idea: 'I have an idea.' };
+  var HINT = {
+    bug: 'What you did, what happened, what you expected. A screenshot is worth a paragraph.',
+    idea: 'Describe the situation in the gym, not just the feature. It usually leads somewhere better.',
+  };
 
-  var forms = {bug: document.getElementById('form-bug'), idea: document.getElementById('form-idea')};
-  var tabs = {bug: document.getElementById('tab-bug'), idea: document.getElementById('tab-idea')};
-
-  Object.keys(tabs).forEach(function (key) {
-    tabs[key].addEventListener('click', function () {
-      Object.keys(tabs).forEach(function (k) {
-        var on = k === key;
-        tabs[k].classList.toggle('is-on', on);
-        tabs[k].setAttribute('aria-selected', String(on));
-        forms[k].classList.toggle('hidden', !on);
-      });
+  function paint() {
+    forms.bug.style.display = kind === 'bug' ? 'flex' : 'none';
+    forms.idea.style.display = kind === 'idea' ? 'flex' : 'none';
+    tabs.forEach(function (b, k) {
+      var on = (k === 0 ? 'bug' : 'idea') === kind;
+      b.style.background = on ? '#D6FF3E' : 'transparent';
+      b.style.color = on ? '#0C0E0B' : '#9AA093';
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
     });
-  });
-
-  function values(form) {
-    var out = {};
-    Array.prototype.forEach.call(form.elements, function (el) {
-      if (el.name) out[el.name] = (el.value || '').trim();
-    });
-    return out;
+    if (title) title.textContent = TITLE[kind];
+    if (hint) hint.textContent = HINT[kind];
   }
+  function set(k, jump) {
+    kind = k; paint();
+    if (jump && window.REGOL && window.REGOL.chapters) window.REGOL.chapters.goTo(1);
+  }
+  tabs.forEach(function (b, k) { b.addEventListener('click', function () { set(k === 0 ? 'bug' : 'idea', false); }); });
+  var toBug = document.querySelector('[data-act="bug"]'), toIdea = document.querySelector('[data-act="idea"]');
+  if (toBug) toBug.addEventListener('click', function () { set('bug', true); });
+  if (toIdea) toIdea.addEventListener('click', function () { set('idea', true); });
 
-  // GitHub pre-fills an issue form from query parameters named after each field's id,
-  // so what is typed here lands in the right box on the issue.
-  function githubUrl(kind, v) {
-    var template = kind === 'bug' ? 'bug_report.yml' : 'feature_request.yml';
-    var p = new URLSearchParams({template: template, title: v.title || ''});
+  function vals(f) {
+    var o = {};
+    [].slice.call(f.elements).forEach(function (el) { if (el.name) o[el.name] = (el.value || '').trim(); });
+    return o;
+  }
+  function gh(v) {
+    var p = new URLSearchParams({ template: kind === 'bug' ? 'bug_report.yml' : 'feature_request.yml', title: v.title || '' });
     if (kind === 'bug') {
       p.set('what', v.what || '');
       if (v.version) p.set('version', v.version);
@@ -200,33 +159,24 @@
     }
     return REPO + '/issues/new?' + p.toString();
   }
-
-  function mailUrl(kind, v) {
+  function ml(v) {
     var body = kind === 'bug'
-      ? 'What happened:\n' + (v.what || '') +
-        '\n\nApp version: ' + (v.version || '') +
-        '\nPhone: ' + (v.device || '') +
-        (v.extra ? '\n\nAlso:\n' + v.extra : '')
-      : 'What I am trying to do:\n' + (v.problem || '') +
-        (v.idea ? '\n\nWhat I had in mind:\n' + v.idea : '');
-    return 'mailto:' + MAIL +
-      '?subject=' + encodeURIComponent((kind === 'bug' ? 'Bug: ' : 'Idea: ') + (v.title || '')) +
-      '&body=' + encodeURIComponent(body);
+      ? 'What happened:\n' + (v.what || '') + '\n\nApp version: ' + (v.version || '') + '\nPhone: ' + (v.device || '') + (v.extra ? '\n\nAlso:\n' + v.extra : '')
+      : 'What I am trying to do:\n' + (v.problem || '') + (v.idea ? '\n\nWhat I had in mind:\n' + v.idea : '');
+    return 'mailto:' + MAIL + '?subject=' + encodeURIComponent((kind === 'bug' ? 'Bug: ' : 'Idea: ') + (v.title || '')) + '&body=' + encodeURIComponent(body);
   }
-
-  Object.keys(forms).forEach(function (kind) {
-    var form = forms[kind];
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      window.open(githubUrl(kind, values(form)), '_blank', 'noopener');
-    });
-    form.querySelector('[data-mail]').addEventListener('click', function () {
-      if (!form.reportValidity()) return;
-      window.location.href = mailUrl(kind, values(form));
+  document.querySelectorAll('form[data-act="submit"]').forEach(function (f) {
+    f.addEventListener('submit', function (e) { e.preventDefault(); window.open(gh(vals(f)), '_blank', 'noopener'); });
+  });
+  document.querySelectorAll('[data-act="mail"]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var f = b.form;
+      if (!f.reportValidity()) return;
+      location.href = ml(vals(f));
     });
   });
+  paint();
 })();
 </script>
-
 </body>
 </html>

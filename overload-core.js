@@ -22,6 +22,9 @@ const PAL = {
   dark: { pg: '#0B0C0B', ch: '#0F110F', cd: '#161917', sk: '#131513', sh: '#131613', tl: '#1A1D1A', rs: '#1F2320', pr: '#262A26', bi: '#262A24', tk: '#22261E', hd: '#2B2F29',
     ink: '#F2F4EE', i2: '#E4E8DC', i3: '#C9CEC2', i4: '#9AA093', mu: '#8E948A', hr: 'rgba(255,255,255,.06)', hr2: 'rgba(255,255,255,.1)', scr: 'rgba(4,5,4,.72)',
     wn: '#FF7043', wg: '#221713', wb: '#4A2418', wg2: '#2A1A14', ow: '#1B0F0A' },
+  black: { pg: '#000000', ch: '#050605', cd: '#0E0F0E', sk: '#070807', sh: '#0A0B0A', tl: '#121412', rs: '#181B18', pr: '#1F221F', bi: '#1F221D', tk: '#1B1E17', hd: '#262924',
+    ink: '#F2F4EE', i2: '#E4E8DC', i3: '#C9CEC2', i4: '#9AA093', mu: '#8E948A', hr: 'rgba(255,255,255,.1)', hr2: 'rgba(255,255,255,.16)', scr: 'rgba(0,0,0,.78)',
+    wn: '#FF7043', wg: '#1C120E', wb: '#4A2418', wg2: '#241510', ow: '#1B0F0A' },
   light: { pg: '#F1F2ED', ch: '#E9EBE4', cd: '#FFFFFF', sk: '#E9EBE3', sh: '#F7F8F4', tl: '#F0F1EC', rs: '#ECEEE7', pr: '#DCDED3', bi: '#D5D8CE', tk: '#DDE0D6', hd: '#C9CDC2',
     ink: '#14160F', i2: '#1F221B', i3: '#3B3F35', i4: '#5E6458', mu: '#5A6054', hr: 'rgba(20,22,15,.09)', hr2: 'rgba(20,22,15,.16)', scr: 'rgba(20,22,15,.32)',
     wn: '#B8340F', wg: '#FBEDE8', wb: '#F0C4B5', wg2: '#F8E4DC', ow: '#FFFFFF' },
@@ -37,8 +40,16 @@ function inkOf(hex) {
   for (; l > .05; l -= .01) { const c = hsl2rgb(h, s, l); if ((bg + .05) / (lum(c) + .05) >= 4.5) return '#' + c.map(v => Math.round(v * 255).toString(16).padStart(2, '0')).join(''); }
   return '#222222';
 }
+const lumHex = h => { const f = x => { x /= 255; return x <= .03928 ? x / 12.92 : Math.pow((x + .055) / 1.055, 2.4); }; return .2126 * f(parseInt(h.slice(1, 3), 16)) + .7152 * f(parseInt(h.slice(3, 5), 16)) + .0722 * f(parseInt(h.slice(5, 7), 16)); };
+const hsl2hex = (h, s, l) => { const k = n => (n + h / 30) % 12, a = s * Math.min(l, 1 - l), f = n => l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1))); return '#' + [f(0), f(8), f(4)].map(x => Math.round(x * 255).toString(16).padStart(2, '0')).join('').toUpperCase(); };
+const INK_L = lumHex('#0C0E0B');
+export function customAccent(hue, bright = 50) {
+  // lowest lightness at this hue that still reads 7:1 against the ink, then brightness walks up from there
+  let floor = .3; while (floor < .98 && (lumHex(hsl2hex(hue, .9, floor)) + .05) / (INK_L + .05) < 7) floor += .005;
+  return hsl2hex(hue, .9, floor + (.96 - floor) * Math.max(0, Math.min(100, bright)) / 100);
+}
 export function themeVars(set) {
-  const light = set.theme === 'light', p = PAL[light ? 'light' : 'dark'], ac = set.accent, aci = light ? inkOf(ac) : ac;
+  const light = set.theme === 'light', p = PAL[light ? 'light' : set.theme === 'black' ? 'black' : 'dark'], ac = set.accent, aci = light ? inkOf(ac) : ac;
   return { ...p, ac, aci, acf: aci, am: `color-mix(in srgb, ${aci} ${light ? 60 : 45}%, ${p.cd})`, eg: `color-mix(in srgb, ${ac} ${light ? 16 : 7}%, ${p.cd})`,
     eb: `color-mix(in srgb, ${aci} ${light ? 45 : 22}%, ${p.cd})`, eg2: `color-mix(in srgb, ${ac} ${light ? 18 : 8}%, ${p.pg})`, gl: light ? 'rgba(0,0,0,0)' : `color-mix(in srgb, ${ac} 22%, transparent)` };
 }
@@ -398,7 +409,11 @@ export function view(s, set, variant) {
   const SW = s.set, togs = {};
   ['adaptive', 'keepOn', 'haptic', 'vibrate', 'warn10', 'muted', 'pauseMusic', 'health'].forEach(k => { togs[k + 'On'] = !!SW[k]; togs[k + 'Off'] = !SW[k]; togs['t_' + k] = tog(k); });
   Object.assign(settings, togs, {
-    isDark: SW.theme === 'dark', isLight: SW.theme === 'light', toDark: () => upd(x => ({ set: { ...x.set, theme: 'dark' } })), toLight: () => upd(x => ({ set: { ...x.set, theme: 'light' } })),
+    isDark: SW.theme === 'dark', isLight: SW.theme === 'light', isBlack: SW.theme === 'black', toDark: () => upd(x => ({ set: { ...x.set, theme: 'dark' } })), toLight: () => upd(x => ({ set: { ...x.set, theme: 'light' } })), toBlack: () => upd(x => ({ set: { ...x.set, theme: 'black' } })),
+    themes: [['dark', 'Dark'], ['light', 'Light'], ['black', 'Black']].map(([k, label]) => ({ label, on: (SW.theme || 'dark') === k, off: (SW.theme || 'dark') !== k, tap: () => upd(x => ({ set: { ...x.set, theme: k } })) })),
+    hue: SW.hue ?? 84, bright: SW.bright ?? 50, customOn: !SWATCHES.some(a => a[0] === SW.accent),
+    onHue: e => { const hue = +e.target.value; upd(x => ({ set: { ...x.set, hue, accent: customAccent(hue, x.set.bright ?? 50) } })); },
+    onBright: e => { const bright = +e.target.value; upd(x => ({ set: { ...x.set, bright, accent: customAccent(x.set.hue ?? 84, bright) } })); },
     accents: SWATCHES.map(([c, name]) => ({ c, name, on: SW.accent === c, off: SW.accent !== c, tap: () => upd(x => ({ set: { ...x.set, accent: c } })) })),
     accentName: (SWATCHES.find(a => a[0] === SW.accent) || ['', 'Custom'])[1],
     soundName: SOUNDS.find(a => a[0] === SW.sound)[1], logName: LOGS.find(a => a[0] === SW.logKind)[1], openSound: () => upd(() => ({ sheet: 'sound' })),

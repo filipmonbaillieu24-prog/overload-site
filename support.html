@@ -3,195 +3,142 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Support · REGOL</title>
+<title>Support · REGOL</title><meta name="description" content="Help with REGOL: backups, moving phones, importing from other apps, subscriptions, and the questions people ask first."><link rel="icon" href="favicon.svg" type="image/svg+xml"><script src="site.js"></script><style>
+@font-face{font-family:Barlow;src:url(fonts/barlow_regular.ttf);font-weight:400;font-display:swap}
+@font-face{font-family:Barlow;src:url(fonts/barlow_medium.ttf);font-weight:500;font-display:swap}
+@font-face{font-family:Barlow;src:url(fonts/barlow_semibold.ttf);font-weight:600;font-display:swap}
+@font-face{font-family:'Barlow Condensed';src:url(fonts/barlow_condensed_semibold.ttf);font-weight:600;font-display:swap}
+@font-face{font-family:'Barlow Condensed';src:url(fonts/barlow_condensed_bold.ttf);font-weight:700;font-display:swap}
+body{margin:0;background:#0B0C0B !important;display:block !important;min-height:0 !important;color:#F2F4EE;-webkit-font-smoothing:antialiased}
+a{color:#D6FF3E;text-underline-offset:3px}a:hover{color:#E6FF7A}
+::selection{background:#D6FF3E;color:#0C0E0B}
+em{font-style:normal;font-weight:600}
+[data-deck]{display:flex;overflow:auto;scroll-snap-type:x mandatory;scrollbar-width:none;height:calc(100vh - 64px);height:calc(100dvh - 64px)}
+[data-deck]::-webkit-scrollbar{display:none}
+[data-ch]{flex:0 0 100%;width:100%;height:100%;scroll-snap-align:start;scroll-snap-stop:always;overflow:hidden auto;box-sizing:border-box;position:relative}
+@media (max-width:940px){[data-deck]{flex-direction:column;scroll-snap-type:y mandatory}[data-hide-narrow]{display:none !important}}
+details>summary{list-style:none}details>summary::-webkit-details-marker{display:none}
+details[open] .faqplus{transform:rotate(45deg)}
+</style>
 <link rel="canonical" href="https://regolapp.be/support.html">
-<meta name="description" content="Help with REGOL: moving your data, subscriptions, backups and reporting a bug.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="REGOL">
 <meta property="og:url" content="https://regolapp.be/support.html">
-<meta property="og:title" content="Support">
-<meta property="og:description" content="Help with REGOL: moving your data, subscriptions, backups and reporting a bug.">
-<meta property="og:image" content="https://regolapp.be/images/og.jpg">
+<meta property="og:title" content="REGOL support">
+<meta property="og:description" content="Help with REGOL: backups, moving phones, importing from other apps, subscriptions, and the questions people ask first.">
+<meta property="og:image" content="https://regolapp.be/images/og.png">
 <meta property="og:image:alt" content="The REGOL mark beside the headline &quot;Progressive overload, worked out for you.&quot; and the app mid-set.">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108 108'><rect width='108' height='108' rx='24' fill='%230b0c0b'/><circle cx='54' cy='54' r='18' fill='none' stroke='%23d6ff3e' stroke-width='7.2'/><rect y='49' width='108' height='10' fill='%230b0c0b'/><rect y='52.2' width='108' height='3.6' fill='%23d6ff3e'/></svg>">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="style.css?v=7">
+<link rel="alternate" type="application/rss+xml" title="REGOL news" href="feed.xml">
+<link rel="stylesheet" href="site.css?v=1">
+<script src="site-ui.js" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@graph": [
+  "@type": ["WebPage", "FAQPage"],
+  "@id": "https://regolapp.be/support.html#webpage",
+  "url": "https://regolapp.be/support.html",
+  "name": "Support",
+  "description": "Help with REGOL: backups, moving phones, importing from other apps, subscriptions, and the questions people ask first.",
+  "isPartOf": { "@id": "https://regolapp.be/#website" },
+  "about": { "@id": "https://regolapp.be/#app" },
+  "inLanguage": "en",
+  "mainEntity": [
     {
-      "@type": ["WebPage", "FAQPage"],
-      "@id": "https://regolapp.be/support.html#webpage",
-      "url": "https://regolapp.be/support.html",
-      "name": "Support",
-      "description": "Help with REGOL: moving your data, subscriptions, backups and reporting a bug.",
-      "isPartOf": { "@id": "https://regolapp.be/#website" },
-      "about": { "@id": "https://regolapp.be/#app" },
-      "inLanguage": "en",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "How do I cancel?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "In the Play Store: your profile → Payments & subscriptions → Subscriptions → REGOL → Cancel. You keep everything until the period you have paid for runs out, and then the app falls back to the free plan. Nothing you made is deleted."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "I subscribed but the app still looks locked",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Open You → I already subscribed. That asks Play again. If it still says free plan, check you are signed in to the Play account that subscribed."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "I paid but I want a refund",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Google handles the money, so refunds go through Google Play. If something about the app pushed you to it, tell me too. That is useful."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Why did the weight it suggested go down?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The engine reads your logged reps and reps in reserve. Two workouts under target, or reps falling below the range, and it proposes a step back. Every proposal shows its reason on the card, and you can always overrule it."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do I need an account?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No. There is no sign-in and no server."
-          }
-        }
-      ]
+      "@type": "Question",
+      "name": "Why did the weight it suggested stay the same?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The engine reads your logged reps and how many you had left. Exactly on target holds the weight and asks for one more rep. Under target holds rather than drops. Each card says which it was, and you can always overrule it." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why did it offer a deload?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Two sessions in a row under the effort you were aiming for. It is an offer, about ten percent lighter, and you can decline it. A lift that has not set a new best in four sessions also gets the offer." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need an account?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. There is no sign-in and no server." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work offline?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, completely. The only thing that needs a connection is checking your subscription with Google Play, and the last answer is remembered." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I cancel?",
+      "acceptedAnswer": { "@type": "Answer", "text": "In the Play Store: your profile, then Payments & subscriptions, Subscriptions, REGOL, Cancel. You keep everything until the period you paid for runs out, then the app falls back to the free plan. Nothing you made is deleted." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I delete everything?",
+      "acceptedAnswer": { "@type": "Answer", "text": "You, then Delete everything, wipes the app. To remove every trace at once, uninstall it. If you turned on Health Connect, remove what REGOL wrote there first, from the same settings screen." }
     }
   ]
 }
 </script>
 </head>
 <body>
-
-<a class="banner" href="testing.html">
-  <span class="banner-tag">Testers wanted</span>
-  <span>Train with REGOL before it launches. Everything unlocked, free, while the test runs.</span>
-  <span class="banner-go">Join the test &rsaquo;</span>
-</a>
-<header class="site-head">
-  <div class="wrap">
-    <a class="brand" href="./">
-      <svg width="26" height="26" viewBox="0 0 108 108" aria-hidden="true">
-        <rect width="108" height="108" rx="24" fill="#161917"/>
-        <circle cx="54" cy="54" r="18" fill="none" stroke="#d6ff3e" stroke-width="7.2"/>
-        <rect y="49" width="108" height="10" fill="#161917"/>
-        <rect y="52.2" width="108" height="3.6" fill="#d6ff3e"/>
-      </svg>
-      REGOL
-    </a>
-    <nav>
-      <a href="./">Home</a>
-      <a href="try.html">Try it</a>
-      <a href="news.html">News</a>
-      <a href="testing.html">Join the test</a>
-      <a href="roadmap.html">Roadmap</a>
-      <a href="report.html">Report</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="support.html" aria-current="page">Support</a>
-    </nav>
-  </div>
+<div style="font-family:Barlow;color:#F2F4EE;background:#0B0C0B">
+<header data-site-header style="position:sticky;top:0;z-index:30;height:64px;box-sizing:border-box;background:rgba(11,12,11,.88);backdrop-filter:blur(16px) saturate(1.2);-webkit-backdrop-filter:blur(16px) saturate(1.2);border-bottom:1px solid rgba(255,255,255,.06)"><div style="max-width:1400px;height:100%;margin:0 auto;padding:0 16px 0 20px;display:flex;align-items:center;gap:10px">
+<a href="./" aria-label="REGOL home" style="display:flex;align-items:center;gap:10px;color:#F2F4EE;text-decoration:none;font:700 26px/1 'Barlow Condensed';letter-spacing:.02em;white-space:nowrap;flex:none;min-height:44px" class="hv-ink"><svg width="30" height="30" viewBox="0 0 108 108" aria-hidden="true"><rect width="108" height="108" rx="24" fill="#161917"></rect><circle cx="54" cy="54" r="18" fill="none" stroke="#d6ff3e" stroke-width="7.2"></circle><rect y="49" width="108" height="10" fill="#161917"></rect><rect y="52.2" width="108" height="3.6" fill="#d6ff3e"></rect></svg>REGOL</a>
+<span style="flex:1"></span>
+<a href="https://play.google.com/store/apps/details?id=app.overload&pcampaignid=web_share" target="_blank" rel="noopener" style="height:44px;padding:0 16px 0 13px;border-radius:22px;background:#D6FF3E;color:#0C0E0B;text-decoration:none;display:flex;align-items:center;gap:8px;font:600 14.5px/1 Barlow;white-space:nowrap;flex:none" class="hv-play"><svg width="13" height="13" viewBox="0 0 24 24" fill="#0C0E0B" aria-hidden="true"><path d="M6 3.5v17l14-8.5z"></path></svg><span data-cta-label>Get it on Google Play</span></a>
+<button data-act="menu" aria-expanded="false" aria-label="Menu" style="border:0;height:44px;padding:0 14px 0 16px;border-radius:22px;background:#1F2320;color:#F2F4EE;display:flex;align-items:center;gap:10px;cursor:pointer;flex:none;font:600 14.5px/1 Barlow" class="hv-raised"><span data-menu-label>Menu</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F2F4EE" stroke-width="2.2" stroke-linecap="round"><path data-menu-icon d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+</div>
+<nav data-menu aria-label="Main" style="position:absolute;left:0;right:0;top:64px;height:calc(100vh - 64px);height:calc(100dvh - 64px);background:#0B0C0B;overflow:auto;display:flex;flex-direction:column"><div style="max-width:1400px;width:100%;box-sizing:border-box;margin:0 auto;padding:24px 20px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:4px 32px;align-content:start">
+<a href="./" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Home</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">What REGOL does</span></a><a href="try.html" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Try it</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">The app in your browser</span></a><a href="news.html" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>News</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">Releases</span></a><a href="roadmap.html" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Roadmap</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">What is being built</span></a><a href="report.html" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Report</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">A bug or an idea</span></a><a href="privacy.html" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Privacy</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">Your data stays on your phone</span></a><a href="support.html" aria-current="page" style="min-height:64px;padding:0 16px;border-radius:20px;background:#161917;color:#D6FF3E;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Support</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">Help, backups, FAQ</span></a>
+</div><div style="margin-top:auto;padding:16px 20px 28px;display:flex;flex-wrap:wrap;gap:8px 20px;font:500 15px/1.3 Barlow;color:#9AA093;border-top:1px solid rgba(255,255,255,.06)"><a href="terms.html" style="color:#C9CEC2;text-decoration:none;padding:6px 0" class="hv-ink">Terms</a><a href="feed.xml" style="color:#C9CEC2;text-decoration:none;padding:6px 0" class="hv-ink">RSS</a><a href="mailto:support@regolapp.be" style="color:#C9CEC2;text-decoration:none;padding:6px 0" class="hv-ink">support@regolapp.be</a></div></nav>
 </header>
+<div style="position:relative">
+<div data-deck="">
 
-<main class="wrap narrow doc">
-  <h1>Support</h1>
-  <p class="sub">REGOL is made by one person. Write to me and you get me.</p>
+<section data-ch="" data-title="Support" id="hello" data-screen-label="01 Support" style="background:#0B0C0B"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;gap:24px 56px">
+<div style="flex:1 1 400px;min-width:0;display:flex;flex-direction:column;gap:clamp(14px,2.2vh,24px)">
+<span style="font:600 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">Support</span>
+<h1 style="margin:0;font:700 clamp(56px,8.4vw,136px)/.86 'Barlow Condensed';letter-spacing:-.02em;text-wrap:balance">Write to me and you get me.</h1>
+<p style="margin:0;font:400 clamp(17px,1.4vw,21px)/1.5 Barlow;color:#C9CEC2;max-width:560px;text-wrap:pretty">REGOL is made by one person. What helps: what you did, what happened, and what you expected. A screenshot is worth a paragraph. If it involves your training data, <em>You → Data → Export file</em> and attach the JSON: it is only your own workouts, and it lets me reproduce the problem exactly.</p>
+</div>
+<div style="flex:1 1 320px;min-width:0;max-width:560px;display:flex;flex-direction:column;gap:10px">
+<a href="mailto:support@regolapp.be" style="border-radius:28px;background:#D6FF3E;color:#0C0E0B;padding:clamp(20px,3vh,32px) 28px;display:flex;flex-direction:column;gap:8px;text-decoration:none" class="hv-play"><span style="font:700 12px/1 Barlow;letter-spacing:.16em">EMAIL</span><span style="font:700 clamp(28px,3vw,42px)/1 'Barlow Condensed';word-break:break-word">support@regolapp.be</span></a>
+<a href="report.html" style="border-radius:28px;background:#161917;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);padding:clamp(20px,3vh,32px) 28px;display:flex;flex-direction:column;gap:8px;text-decoration:none;color:#F2F4EE" class="hv-tile"><span style="font:600 12px/1 Barlow;letter-spacing:.16em;color:#D6FF3E">BUG OR IDEA</span><span style="font:700 clamp(28px,3vw,42px)/1 'Barlow Condensed'">Report it in the open ›</span><span style="font:400 15px/1.5 Barlow;color:#C9CEC2">The form writes a GitHub issue for you, and it shows up on the public roadmap.</span></a>
+</div></div></section>
 
-  <div class="card">
-    <h2>Report a bug or ask for something</h2>
-    <p><a href="mailto:support@regolapp.be">support@regolapp.be</a></p>
-    <p>What helps: what you did, what happened, and what you expected. A screenshot is worth a
-    paragraph. If it involves your training data, <em>You → Data → Export file</em> and attach the
-    JSON: it is only your own workouts, and it lets me reproduce the problem exactly.</p>
-  </div>
+<section data-ch="" data-title="Your data" id="data" data-screen-label="02 Your data" style="background:#D6FF3E;color:#0C0E0B"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;gap:24px 56px">
+<div style="flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:14px"><span style="font:700 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase">Your data</span><h2 style="margin:0;font:700 clamp(44px,6vw,96px)/.88 'Barlow Condensed';letter-spacing:-.02em;text-wrap:balance">Backups, new phones, other apps.</h2><p style="margin:0;font:400 16px/1.55 Barlow;color:#2E3415;max-width:420px;text-wrap:pretty">REGOL stores everything on your phone, so a backup is up to you. The privacy policy covers <a href="privacy.html" style="color:#0C0E0B">what it stores, and where</a>.</p></div>
+<div style="flex:2 1 480px;min-width:0;display:flex;flex-direction:column;gap:10px">
+<div id="backup" style="border-radius:24px;background:#0C0E0B;color:#F2F4EE;padding:clamp(16px,2vh,22px) 24px;display:flex;flex-direction:column;gap:8px"><h3 style="margin:0;font:700 clamp(22px,2.2vw,28px)/1 'Barlow Condensed'">Keeping your data safe</h3><p style="margin:0;font:400 15px/1.55 Barlow;color:#C9CEC2;text-wrap:pretty"><em>One-off copy:</em> You → Data → Export file, then send it somewhere safe. <em>Automatic:</em> You → Data → Backups, pick a folder (a cloud-synced one is ideal). REGOL writes a backup after each workout and keeps the last ten. <em>Restoring:</em> You → Data → Import file → Replace.</p></div><div id="move" style="border-radius:24px;background:#0C0E0B;color:#F2F4EE;padding:clamp(16px,2vh,22px) 24px;display:flex;flex-direction:column;gap:8px"><h3 style="margin:0;font:700 clamp(22px,2.2vw,28px)/1 'Barlow Condensed'">Moving to a new phone</h3><p style="margin:0;font:400 15px/1.55 Barlow;color:#C9CEC2;text-wrap:pretty">Export on the old phone, install REGOL on the new one, then Import → Replace. If you have Google’s device backup on, Android restores the file for you when you set up the new phone.</p></div><div id="import" style="border-radius:24px;background:#0C0E0B;color:#F2F4EE;padding:clamp(16px,2vh,22px) 24px;display:flex;flex-direction:column;gap:8px"><h3 style="margin:0;font:700 clamp(22px,2.2vw,28px)/1 'Barlow Condensed'">Coming from another app</h3><p style="margin:0;font:400 15px/1.55 Barlow;color:#C9CEC2;text-wrap:pretty">Strong and Hevy CSV exports import directly, and REGOL matches them to your lifts. You → Data → Import file, then pick the CSV. Sets imported without an effort rating progress by reps until you log your own.</p></div>
+</div></div></section>
 
-  <h2>Keeping your data safe</h2>
-  <p>REGOL stores everything on your phone, so a backup is up to you. The privacy policy covers
-  <a href="privacy.html">what REGOL stores, and where</a>.</p>
-  <ul>
-    <li><strong>One-off copy:</strong> You → Data → <em>Export file</em>, then send it somewhere safe.</li>
-    <li><strong>Automatic:</strong> You → Data → <em>Backups</em>, pick a folder (a cloud-synced one is ideal).
-      REGOL writes a backup after each workout and keeps the last ten.</li>
-    <li><strong>Restoring:</strong> You → Data → <em>Import file</em> → <em>Replace</em>.</li>
-  </ul>
+<section data-ch="" data-title="Questions" id="faq" data-screen-label="03 Questions" style="background:#0B0C0B"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:flex-start;align-content:flex-start;gap:20px 56px">
+<div style="flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:14px"><span style="font:600 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">Questions</span><h2 style="margin:0;font:700 clamp(44px,6vw,96px)/.88 'Barlow Condensed';letter-spacing:-.02em">Asked first.</h2><p style="margin:0;font:400 16px/1.55 Barlow;color:#9AA093;max-width:420px;text-wrap:pretty">The subscription questions do not apply yet: REGOL is free for everyone through 31 December 2026. See <a href="./#price">what it costs after</a>.</p></div>
+<div style="flex:2 1 520px;min-width:0;display:flex;flex-direction:column;gap:8px"><details style="border-radius:22px;background:#161917;padding:0 22px"><summary style="min-height:60px;display:flex;align-items:center;gap:16px;cursor:pointer;font:500 17px/1.35 Barlow"><span style="flex:1">Why did the weight it suggested stay the same?</span><span class="faqplus" style="width:34px;height:34px;border-radius:17px;background:#1F2320;display:flex;align-items:center;justify-content:center;flex:none;transition:transform .2s ease"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D6FF3E" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span></summary><p style="margin:0;padding:0 0 20px;font:400 15px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">The engine reads your logged reps and how many you had left. Exactly on target holds the weight and asks for one more rep. Under target holds rather than drops. Each card says which it was, and you can always overrule it.</p></details><details style="border-radius:22px;background:#161917;padding:0 22px"><summary style="min-height:60px;display:flex;align-items:center;gap:16px;cursor:pointer;font:500 17px/1.35 Barlow"><span style="flex:1">Why did it offer a deload?</span><span class="faqplus" style="width:34px;height:34px;border-radius:17px;background:#1F2320;display:flex;align-items:center;justify-content:center;flex:none;transition:transform .2s ease"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D6FF3E" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span></summary><p style="margin:0;padding:0 0 20px;font:400 15px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">Two sessions in a row under the effort you were aiming for. It is an offer, about ten percent lighter, and you can decline it. A lift that has not set a new best in four sessions also gets the offer.</p></details><details style="border-radius:22px;background:#161917;padding:0 22px"><summary style="min-height:60px;display:flex;align-items:center;gap:16px;cursor:pointer;font:500 17px/1.35 Barlow"><span style="flex:1">Do I need an account?</span><span class="faqplus" style="width:34px;height:34px;border-radius:17px;background:#1F2320;display:flex;align-items:center;justify-content:center;flex:none;transition:transform .2s ease"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D6FF3E" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span></summary><p style="margin:0;padding:0 0 20px;font:400 15px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">No. There is no sign-in and no server.</p></details><details style="border-radius:22px;background:#161917;padding:0 22px"><summary style="min-height:60px;display:flex;align-items:center;gap:16px;cursor:pointer;font:500 17px/1.35 Barlow"><span style="flex:1">Does it work offline?</span><span class="faqplus" style="width:34px;height:34px;border-radius:17px;background:#1F2320;display:flex;align-items:center;justify-content:center;flex:none;transition:transform .2s ease"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D6FF3E" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span></summary><p style="margin:0;padding:0 0 20px;font:400 15px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">Yes, completely. The only thing that needs a connection is checking your subscription with Google Play, and the last answer is remembered.</p></details><details style="border-radius:22px;background:#161917;padding:0 22px"><summary style="min-height:60px;display:flex;align-items:center;gap:16px;cursor:pointer;font:500 17px/1.35 Barlow"><span style="flex:1">How do I cancel?</span><span class="faqplus" style="width:34px;height:34px;border-radius:17px;background:#1F2320;display:flex;align-items:center;justify-content:center;flex:none;transition:transform .2s ease"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D6FF3E" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span></summary><p style="margin:0;padding:0 0 20px;font:400 15px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">In the Play Store: your profile → Payments &amp; subscriptions → Subscriptions → REGOL → Cancel. You keep everything until the period you paid for runs out, then the app falls back to the free plan. Nothing you made is deleted.</p></details><details style="border-radius:22px;background:#161917;padding:0 22px"><summary style="min-height:60px;display:flex;align-items:center;gap:16px;cursor:pointer;font:500 17px/1.35 Barlow"><span style="flex:1">I subscribed but the app still looks locked</span><span class="faqplus" style="width:34px;height:34px;border-radius:17px;background:#1F2320;display:flex;align-items:center;justify-content:center;flex:none;transition:transform .2s ease"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D6FF3E" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span></summary><p style="margin:0;padding:0 0 20px;font:400 15px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">Open You → <em>I already subscribed</em>. That asks Play again. If it still says free plan, check you are signed in to the Play account that subscribed.</p></details><details style="border-radius:22px;background:#161917;padding:0 22px"><summary style="min-height:60px;display:flex;align-items:center;gap:16px;cursor:pointer;font:500 17px/1.35 Barlow"><span style="flex:1">I paid but I want a refund</span><span class="faqplus" style="width:34px;height:34px;border-radius:17px;background:#1F2320;display:flex;align-items:center;justify-content:center;flex:none;transition:transform .2s ease"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D6FF3E" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span></summary><p style="margin:0;padding:0 0 20px;font:400 15px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">Google handles the money, so refunds go through <a href="https://support.google.com/googleplay/answer/2479637">Google Play</a>. If something about the app pushed you to it, tell me too.</p></details><details style="border-radius:22px;background:#161917;padding:0 22px"><summary style="min-height:60px;display:flex;align-items:center;gap:16px;cursor:pointer;font:500 17px/1.35 Barlow"><span style="flex:1">Can I delete everything?</span><span class="faqplus" style="width:34px;height:34px;border-radius:17px;background:#1F2320;display:flex;align-items:center;justify-content:center;flex:none;transition:transform .2s ease"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D6FF3E" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span></summary><p style="margin:0;padding:0 0 20px;font:400 15px/1.6 Barlow;color:#C9CEC2;text-wrap:pretty">You → Delete everything wipes the app. To remove every trace at once, uninstall it. If you turned on Health Connect, remove what REGOL wrote there first, from the same settings screen.</p></details></div>
+</div></section>
 
-  <h2>Moving to a new phone</h2>
-  <p>Export on the old phone, install REGOL on the new one, then Import → Replace. The same
-  applies when you move from a sideloaded copy to the Play version: Android treats them as different
-  apps, so export first, uninstall, install from Play, and import.</p>
-
-  <h2>Coming from another app</h2>
-  <p>Strong and Hevy CSV exports import directly, and REGOL matches them to your lifts.
-  You → Data → <em>Import file</em>, then pick the CSV. You can also import a previous REGOL
-  export.</p>
-
-  <h2>Subscription questions</h2>
-  <p>None of these apply yet: REGOL is free for everyone while it is in early access, through
-  31 December 2026. They are here for when the subscription starts, and for anyone who chose to
-  subscribe early. See <a href="./#price">what the gym log costs after 2026</a>.</p>
-
-  <h3>How do I cancel?</h3>
-  <p>In the Play Store: your profile → Payments &amp; subscriptions → Subscriptions → REGOL →
-  Cancel. You keep everything until the period you have paid for runs out, and then the app falls
-  back to the free plan. Nothing you made is deleted.</p>
-
-  <h3>I subscribed but the app still looks locked</h3>
-  <p>Open You → <em>I already subscribed</em>. That asks Play again. If it still says free plan,
-  check you are signed in to the Play account that subscribed.</p>
-
-  <h3>I paid but I want a refund</h3>
-  <p>Google handles the money, so refunds go through
-  <a href="https://support.google.com/googleplay/answer/2479637">Google Play</a>. If something about
-  the app pushed you to it, tell me too. That is useful.</p>
-
-  <h2>Common questions</h2>
-  <h3>Why did the weight it suggested go down?</h3>
-  <p>The engine reads your logged reps and reps in reserve. Two workouts under target, or reps
-  falling below the range, and it proposes a step back. Every proposal shows its reason on the card,
-  and you can always overrule it.</p>
-
-  <h3>Do I need an account?</h3>
-  <p>No. There is no sign-in and no server.</p>
-
-  <h3>Does it work offline?</h3>
-  <p>Entirely. The only thing that needs a connection is checking your subscription with Google
-  Play, and the last answer is remembered, so a week without signal changes nothing. More in
-  <a href="./#faq">the FAQ</a>.</p>
-</main>
-
-<footer>
-  <div class="wrap">
-    <div>REGOL · early access · your data stays on your phone</div>
-    <nav>
-      <a href="./">Home</a>
-      <a href="try.html">Try it</a>
-      <a href="news.html">News</a>
-      <a href="testing.html">Join the test</a>
-      <a href="roadmap.html">Roadmap</a>
-      <a href="report.html">Report</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
-      <a href="support.html">Support</a>
-      <a href="https://github.com/filipmonbaillieu24-prog/overload-site/issues">Issues</a>
-      <a href="https://github.com/users/filipmonbaillieu24-prog/projects/3">Board</a>
-      <a href="mailto:support@regolapp.be">support@regolapp.be</a>
-    </nav>
-  </div>
-</footer>
+</div>
+<nav data-rail aria-label="Chapters" style="position:absolute;left:0;right:0;bottom:0;height:64px;display:flex;align-items:center;justify-content:center;padding:0 16px;pointer-events:none">
+<div style="pointer-events:auto;display:flex;align-items:center;gap:12px;height:44px;padding:0 16px 0 18px;border-radius:22px;background:rgba(11,12,11,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)">
+<span data-counter style="font:700 14px/1 'Barlow Condensed';color:#D6FF3E;letter-spacing:.04em;min-width:48px">01 / 3</span>
+<span data-hide-narrow="" data-cur style="font:500 14px/1 Barlow;color:#F2F4EE;white-space:nowrap">Support</span>
+<div style="display:flex;gap:6px"><button data-act="dot" aria-label="Chapter 1: Support" aria-current="step" style="border:0;padding:0;width:22px;height:8px;border-radius:4px;background:#D6FF3E;cursor:pointer;transition:width .25s ease,background .25s ease"></button><button data-act="dot" aria-label="Chapter 2: Your data" style="border:0;padding:0;width:8px;height:8px;border-radius:4px;background:#2B2F29;cursor:pointer;transition:width .25s ease,background .25s ease"></button><button data-act="dot" aria-label="Chapter 3: Questions" style="border:0;padding:0;width:8px;height:8px;border-radius:4px;background:#2B2F29;cursor:pointer;transition:width .25s ease,background .25s ease"></button></div>
+<button data-act="next" aria-label="Next chapter" style="border:0;width:32px;height:32px;border-radius:16px;background:#1F2320;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none" class="hv-limebg"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F2F4EE" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></button>
+</div></nav>
+</div>
+<footer style="border-top:1px solid rgba(255,255,255,.06);padding:56px 24px 64px;background:#0B0C0B;font-family:Barlow"><div style="max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-wrap:wrap;gap:32px 48px;align-items:flex-start">
+<div style="flex:1 1 300px;display:flex;flex-direction:column;gap:14px">
+<a href="./" style="display:flex;align-items:center;gap:10px;color:#F2F4EE;text-decoration:none;font:700 28px/1 'Barlow Condensed';white-space:nowrap;align-self:flex-start" class="hv-ink"><svg width="30" height="30" viewBox="0 0 108 108" aria-hidden="true"><rect width="108" height="108" rx="24" fill="#161917"></rect><circle cx="54" cy="54" r="18" fill="none" stroke="#d6ff3e" stroke-width="7.2"></circle><rect y="49" width="108" height="10" fill="#161917"></rect><rect y="52.2" width="108" height="3.6" fill="#d6ff3e"></rect></svg>REGOL</a>
+<p style="margin:0;font:400 15px/1.55 Barlow;color:#9AA093;max-width:320px;text-wrap:pretty">The gym log that works out your next weight and tells you why. Android. Free for everyone until 2027. Your data stays on your phone.</p>
+<a href="https://play.google.com/store/apps/details?id=app.overload&pcampaignid=web_share" target="_blank" rel="noopener" style="align-self:flex-start;height:48px;padding:0 20px 0 16px;border-radius:20px;background:#1F2320;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;gap:10px;font:600 15px/1 Barlow;white-space:nowrap" class="hv-pressed"><svg width="14" height="14" viewBox="0 0 24 24" fill="#D6FF3E" aria-hidden="true"><path d="M6 3.5v17l14-8.5z"></path></svg>Get it on Google Play</a>
+</div>
+<div style="flex:2 1 520px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:28px 24px">
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font:600 12px/1 Barlow;letter-spacing:.14em;text-transform:uppercase;color:#9AA093">App</span><a href="./" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Home</a><a href="try.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Try it in your browser</a><a href="./#price" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Pricing</a><a href="./#faq" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">FAQ</a></div>
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font:600 12px/1 Barlow;letter-spacing:.14em;text-transform:uppercase;color:#9AA093">In the open</span><a href="news.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">News</a><a href="roadmap.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Roadmap</a><a href="report.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Report a bug</a><a href="https://github.com/users/filipmonbaillieu24-prog/projects/3" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Board</a></div>
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font:600 12px/1 Barlow;letter-spacing:.14em;text-transform:uppercase;color:#9AA093">Help</span><a href="support.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Support</a><a href="privacy.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Privacy</a><a href="terms.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Terms</a><a href="mailto:support@regolapp.be" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">support@regolapp.be</a></div>
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font:600 12px/1 Barlow;letter-spacing:.14em;text-transform:uppercase;color:#9AA093">Follow</span><a href="https://www.instagram.com/regolapp" rel="noopener" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Instagram</a><a href="feed.xml" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">RSS feed</a><a href="https://github.com/filipmonbaillieu24-prog/overload-site/issues" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">GitHub issues</a></div>
+</div></div>
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;padding-top:24px;border-top:1px solid rgba(255,255,255,.06);font:400 14px/1.4 Barlow;color:#8E948A"><span>No account. No ads. No analytics. Version 1.8.</span><span>Made by one person · regolapp.be</span></div>
+</div></footer>
+</div>
 </body>
 </html>

@@ -3,32 +3,31 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>News · REGOL</title>
+<title>News · REGOL</title><meta name="description" content="Every REGOL release, what it changes, and why it was worth doing."><link rel="alternate" type="application/rss+xml" title="REGOL news" href="feed.xml"><link rel="icon" href="favicon.svg" type="image/svg+xml"><script src="site.js"></script><style>
+@font-face{font-family:Barlow;src:url(fonts/barlow_regular.ttf);font-weight:400;font-display:swap}
+@font-face{font-family:Barlow;src:url(fonts/barlow_medium.ttf);font-weight:500;font-display:swap}
+@font-face{font-family:Barlow;src:url(fonts/barlow_semibold.ttf);font-weight:600;font-display:swap}
+@font-face{font-family:'Barlow Condensed';src:url(fonts/barlow_condensed_semibold.ttf);font-weight:600;font-display:swap}
+@font-face{font-family:'Barlow Condensed';src:url(fonts/barlow_condensed_bold.ttf);font-weight:700;font-display:swap}
+body{margin:0;background:#0B0C0B !important;display:block !important;min-height:0 !important;color:#F2F4EE;-webkit-font-smoothing:antialiased}
+a{color:#D6FF3E;text-underline-offset:3px}a:hover{color:#E6FF7A}
+::selection{background:#D6FF3E;color:#0C0E0B}
+[data-deck]{display:flex;overflow:auto;scroll-snap-type:x mandatory;scrollbar-width:none;height:calc(100vh - 64px);height:calc(100dvh - 64px)}
+[data-deck]::-webkit-scrollbar{display:none}
+[data-ch]{flex:0 0 100%;width:100%;height:100%;scroll-snap-align:start;scroll-snap-stop:always;overflow:hidden auto;box-sizing:border-box;position:relative}
+@media (max-width:940px){[data-deck]{flex-direction:column;scroll-snap-type:y mandatory}[data-hide-narrow]{display:none !important}}
+</style>
 <link rel="canonical" href="https://regolapp.be/news.html">
-<meta name="description" content="Release notes and news from REGOL, the gym log that works out what weight you should lift next.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="REGOL">
 <meta property="og:url" content="https://regolapp.be/news.html">
 <meta property="og:title" content="REGOL news">
-<meta property="og:description" content="What is new in REGOL, the gym log that tells you what weight to lift next.">
-<meta property="og:image" content="https://regolapp.be/images/og.jpg">
+<meta property="og:description" content="Every REGOL release, what it changes, and why it was worth doing.">
+<meta property="og:image" content="https://regolapp.be/images/og.png">
 <meta property="og:image:alt" content="The REGOL mark beside the headline &quot;Progressive overload, worked out for you.&quot; and the app mid-set.">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108 108'><rect width='108' height='108' rx='24' fill='%230b0c0b'/><circle cx='54' cy='54' r='18' fill='none' stroke='%23d6ff3e' stroke-width='7.2'/><rect y='49' width='108' height='10' fill='%230b0c0b'/><rect y='52.2' width='108' height='3.6' fill='%23d6ff3e'/></svg>">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="style.css?v=7">
-<style>
-  .post { margin-top: 44px }
-  .post + .post { border-top: 1px solid rgba(255,255,255,.08); padding-top: 44px }
-  .post h2 { margin: 10px 0 0 }
-  .post .date { margin: 0 }
-  .shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-           gap: 14px; margin: 26px 0 }
-  .shots img { width: 100%; height: auto; display: block; border-radius: 16px }
-  .shots figure { margin: 0 }
-  .shots figcaption { margin-top: 8px; font-size: 14px; color: #9AA093; line-height: 1.45 }
-  .post h3 { margin: 30px 0 6px; font: 600 19px/1.3 Barlow }
-</style>
+<link rel="stylesheet" href="site.css?v=1">
+<script src="site-ui.js" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -36,7 +35,7 @@
   "@id": "https://regolapp.be/news.html#webpage",
   "url": "https://regolapp.be/news.html",
   "name": "News",
-  "description": "Release notes and news from REGOL.",
+  "description": "Every REGOL release, what it changes, and why it was worth doing.",
   "isPartOf": { "@id": "https://regolapp.be/#website" },
   "about": { "@id": "https://regolapp.be/#app" },
   "inLanguage": "en",
@@ -45,8 +44,8 @@
       "@type": "BlogPosting",
       "headline": "REGOL 1.8: a lift can now ask for a different set each time",
       "datePublished": "2026-10-13",
-      "url": "https://regolapp.be/news.html#v1-8",
-      "image": "https://regolapp.be/images/screenshots/01-today.jpg",
+      "url": "https://regolapp.be/news-1-8.html",
+      "image": "https://regolapp.be/images/og.png",
       "author": { "@id": "https://regolapp.be/#developer" },
       "publisher": { "@id": "https://regolapp.be/#developer" }
     }
@@ -55,138 +54,78 @@
 </script>
 </head>
 <body>
-
-<header class="site-head">
-  <div class="wrap">
-    <a class="brand" href="./">
-      <svg width="26" height="26" viewBox="0 0 108 108" aria-hidden="true">
-        <rect width="108" height="108" rx="24" fill="#161917"/>
-        <circle cx="54" cy="54" r="18" fill="none" stroke="#d6ff3e" stroke-width="7.2"/>
-        <rect y="49" width="108" height="10" fill="#161917"/>
-        <rect y="52.2" width="108" height="3.6" fill="#d6ff3e"/>
-      </svg>
-      REGOL
-    </a>
-    <nav>
-      <a href="./">Home</a>
-      <a href="try.html">Try it</a>
-      <a href="news.html" aria-current="page">News</a>
-      <a href="testing.html">Join the test</a>
-      <a href="roadmap.html">Roadmap</a>
-      <a href="report.html">Report</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="support.html">Support</a>
-    </nav>
-  </div>
+<div style="font-family:Barlow;color:#F2F4EE;background:#0B0C0B">
+<header data-site-header style="position:sticky;top:0;z-index:30;height:64px;box-sizing:border-box;background:rgba(11,12,11,.88);backdrop-filter:blur(16px) saturate(1.2);-webkit-backdrop-filter:blur(16px) saturate(1.2);border-bottom:1px solid rgba(255,255,255,.06)"><div style="max-width:1400px;height:100%;margin:0 auto;padding:0 16px 0 20px;display:flex;align-items:center;gap:10px">
+<a href="./" aria-label="REGOL home" style="display:flex;align-items:center;gap:10px;color:#F2F4EE;text-decoration:none;font:700 26px/1 'Barlow Condensed';letter-spacing:.02em;white-space:nowrap;flex:none;min-height:44px" class="hv-ink"><svg width="30" height="30" viewBox="0 0 108 108" aria-hidden="true"><rect width="108" height="108" rx="24" fill="#161917"></rect><circle cx="54" cy="54" r="18" fill="none" stroke="#d6ff3e" stroke-width="7.2"></circle><rect y="49" width="108" height="10" fill="#161917"></rect><rect y="52.2" width="108" height="3.6" fill="#d6ff3e"></rect></svg>REGOL</a>
+<span style="flex:1"></span>
+<a href="https://play.google.com/store/apps/details?id=app.overload&pcampaignid=web_share" target="_blank" rel="noopener" style="height:44px;padding:0 16px 0 13px;border-radius:22px;background:#D6FF3E;color:#0C0E0B;text-decoration:none;display:flex;align-items:center;gap:8px;font:600 14.5px/1 Barlow;white-space:nowrap;flex:none" class="hv-play"><svg width="13" height="13" viewBox="0 0 24 24" fill="#0C0E0B" aria-hidden="true"><path d="M6 3.5v17l14-8.5z"></path></svg><span data-cta-label>Get it on Google Play</span></a>
+<button data-act="menu" aria-expanded="false" aria-label="Menu" style="border:0;height:44px;padding:0 14px 0 16px;border-radius:22px;background:#1F2320;color:#F2F4EE;display:flex;align-items:center;gap:10px;cursor:pointer;flex:none;font:600 14.5px/1 Barlow" class="hv-raised"><span data-menu-label>Menu</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F2F4EE" stroke-width="2.2" stroke-linecap="round"><path data-menu-icon d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+</div>
+<nav data-menu aria-label="Main" style="position:absolute;left:0;right:0;top:64px;height:calc(100vh - 64px);height:calc(100dvh - 64px);background:#0B0C0B;overflow:auto;display:flex;flex-direction:column"><div style="max-width:1400px;width:100%;box-sizing:border-box;margin:0 auto;padding:24px 20px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:4px 32px;align-content:start">
+<a href="./" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Home</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">What REGOL does</span></a><a href="try.html" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Try it</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">The app in your browser</span></a><a href="news.html" aria-current="page" style="min-height:64px;padding:0 16px;border-radius:20px;background:#161917;color:#D6FF3E;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>News</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">Releases</span></a><a href="roadmap.html" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Roadmap</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">What is being built</span></a><a href="report.html" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Report</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">A bug or an idea</span></a><a href="privacy.html" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Privacy</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">Your data stays on your phone</span></a><a href="support.html" style="min-height:64px;padding:0 16px;border-radius:20px;background:transparent;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:16px;font:700 clamp(32px,4vw,44px)/1 'Barlow Condensed'" class="hv-card"><span>Support</span><span style="font:500 14px/1.3 Barlow;color:#9AA093;text-align:right;max-width:50%">Help, backups, FAQ</span></a>
+</div><div style="margin-top:auto;padding:16px 20px 28px;display:flex;flex-wrap:wrap;gap:8px 20px;font:500 15px/1.3 Barlow;color:#9AA093;border-top:1px solid rgba(255,255,255,.06)"><a href="terms.html" style="color:#C9CEC2;text-decoration:none;padding:6px 0" class="hv-ink">Terms</a><a href="feed.xml" style="color:#C9CEC2;text-decoration:none;padding:6px 0" class="hv-ink">RSS</a><a href="mailto:support@regolapp.be" style="color:#C9CEC2;text-decoration:none;padding:6px 0" class="hv-ink">support@regolapp.be</a></div></nav>
 </header>
+<div style="position:relative">
+<div data-deck="">
 
-<main class="wrap narrow doc">
-  <p class="kicker">News</p>
-  <h1>What's new in REGOL.</h1>
-  <p class="lead">Every release, what it changes, and why it was worth doing. REGOL is in early
-  access and free for everyone until 2027, so everything below is already on your phone if you
-  have the app.</p>
+<section data-ch="" data-title="Latest" id="latest" data-screen-label="01 Latest" style="background:#D6FF3E;color:#0C0E0B"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;gap:24px 56px;position:relative">
+<span aria-hidden="true" style="position:absolute;right:-10px;bottom:-40px;font:700 clamp(200px,36vw,520px)/.8 'Barlow Condensed';letter-spacing:-.05em;color:rgba(12,14,11,.07);pointer-events:none">1.8</span>
+<div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:clamp(14px,2.2vh,24px);position:relative">
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px"><span style="height:30px;padding:0 12px;border-radius:15px;background:#0C0E0B;color:#D6FF3E;display:flex;align-items:center;font:600 12px/1 Barlow;letter-spacing:.12em">NEWS · LATEST RELEASE</span><span style="font:500 14px/1 Barlow;color:#2E3415">Version 1.8 · 13 October 2026</span></div>
+<h1 style="margin:0;font:700 clamp(52px,7.6vw,128px)/.86 'Barlow Condensed';letter-spacing:-.02em;text-wrap:balance">A lift can now ask for a different set each time.</h1>
+<p style="margin:0;font:400 clamp(17px,1.4vw,21px)/1.5 Barlow;color:#2E3415;max-width:600px;text-wrap:pretty">The biggest update since launch. Set by set targets, the reasoning for every lift on Today, a true black theme and a colour of your own, timed sets, bodyweight, a records board, and a moment for every new best.</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px"><a href="news-1-8.html" style="height:58px;padding:0 24px;border-radius:22px;background:#0C0E0B;color:#D6FF3E;text-decoration:none;display:flex;align-items:center;gap:10px;font:600 17px/1 Barlow;white-space:nowrap" class="hv-fade">Read the release<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></a><a href="feed.xml" style="height:58px;padding:0 22px;border-radius:22px;color:#0C0E0B;text-decoration:none;display:flex;align-items:center;gap:10px;font:600 17px/1 Barlow;box-shadow:inset 0 0 0 1.5px rgba(12,14,11,.35);white-space:nowrap" class="hv-onlime"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 5a14 14 0 0 1 14 14M5 11a8 8 0 0 1 8 8"></path><circle cx="6" cy="18" r="1.6" fill="currentColor" stroke="none"></circle></svg>RSS</a></div>
+</div>
+<div aria-hidden="true" style="flex:1 1 300px;min-width:0;max-width:520px;display:flex;flex-direction:column;gap:8px;position:relative">
+<span style="font:700 13px/1 Barlow;letter-spacing:.16em">SET BY SET · BENCH PRESS</span>
+<div style="display:flex;align-items:center;gap:14px;background:#0C0E0B;color:#F2F4EE;border-radius:20px;padding:clamp(10px,1.6vh,16px) 16px"><span style="width:36px;height:36px;border-radius:12px;background:#1F2320;display:flex;align-items:center;justify-content:center;font:700 18px/1 'Barlow Condensed'">1</span><span style="flex:1;font:700 clamp(20px,2vw,26px)/1 'Barlow Condensed'">8–10 reps</span><span style="height:28px;padding:0 10px;border-radius:9px;background:#D6FF3E;color:#0C0E0B;display:flex;align-items:center;font:600 13px/1 Barlow">2 left</span></div><div style="display:flex;align-items:center;gap:14px;background:#0C0E0B;color:#F2F4EE;border-radius:20px;padding:clamp(10px,1.6vh,16px) 16px"><span style="width:36px;height:36px;border-radius:12px;background:#1F2320;display:flex;align-items:center;justify-content:center;font:700 18px/1 'Barlow Condensed'">2</span><span style="flex:1;font:700 clamp(20px,2vw,26px)/1 'Barlow Condensed'">8–10 reps</span><span style="height:28px;padding:0 10px;border-radius:9px;background:#D6FF3E;color:#0C0E0B;display:flex;align-items:center;font:600 13px/1 Barlow">1 left</span></div><div style="display:flex;align-items:center;gap:14px;background:#0C0E0B;color:#F2F4EE;border-radius:20px;padding:clamp(10px,1.6vh,16px) 16px"><span style="width:36px;height:36px;border-radius:12px;background:#1F2320;display:flex;align-items:center;justify-content:center;font:700 18px/1 'Barlow Condensed'">3</span><span style="flex:1;font:700 clamp(20px,2vw,26px)/1 'Barlow Condensed'">8–10 reps</span><span style="height:28px;padding:0 10px;border-radius:9px;background:#D6FF3E;color:#0C0E0B;display:flex;align-items:center;font:600 13px/1 Barlow">1 left</span></div><div style="display:flex;align-items:center;gap:14px;background:#0C0E0B;color:#F2F4EE;border-radius:20px;padding:clamp(10px,1.6vh,16px) 16px"><span style="width:36px;height:36px;border-radius:12px;background:#1F2320;display:flex;align-items:center;justify-content:center;font:700 18px/1 'Barlow Condensed'">4</span><span style="flex:1;font:700 clamp(20px,2vw,26px)/1 'Barlow Condensed'">8–10 reps</span><span style="height:28px;padding:0 10px;border-radius:9px;background:#D6FF3E;color:#0C0E0B;display:flex;align-items:center;font:600 13px/1 Barlow">nothing left</span></div>
+</div></div></section>
 
-  <div class="btns">
-    <a class="btn btn-primary" href="testing.html">Get REGOL free</a>
-    <a class="btn btn-ghost" href="try.html">Try it in your browser</a>
-  </div>
+<section data-ch="" data-title="Timeline" id="timeline" data-screen-label="02 Timeline" style="background:#0B0C0B"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;gap:24px 56px">
+<div style="flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:14px"><span style="font:600 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;color:#D6FF3E">Every release</span><h2 style="margin:0;font:700 clamp(44px,6vw,96px)/.88 'Barlow Condensed';letter-spacing:-.02em">The timeline.</h2><p style="margin:0;font:400 16px/1.55 Barlow;color:#9AA093;max-width:420px;text-wrap:pretty">New releases land here first and in the <a href="feed.xml">RSS feed</a>. Updates arrive through Google Play like any other app.</p></div>
+<ol style="flex:2 1 520px;min-width:0;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px">
+<li style="position:relative;padding-left:40px"><span style="position:absolute;left:0;top:26px;width:24px;height:24px;border-radius:12px;background:#0B0C0B;box-shadow:inset 0 0 0 6px #D6FF3E"></span>
+<a href="news-1-8.html" style="display:flex;flex-direction:column;gap:10px;border-radius:28px;background:#161917;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);padding:22px 24px;text-decoration:none;color:#F2F4EE" class="hv-tile">
+<div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px"><span style="font:700 40px/.9 'Barlow Condensed';color:#D6FF3E">1.8</span><span style="font:500 14px/1 Barlow;color:#9AA093">13 October 2026</span></div>
+<h3 style="margin:0;font:700 clamp(24px,2.4vw,32px)/1 'Barlow Condensed';text-wrap:balance">A lift can now ask for a different set each time.</h3>
+<p style="margin:0;font:400 15px/1.55 Barlow;color:#C9CEC2;text-wrap:pretty">Set by set targets judged rung by rung, Why these weights on Today, true black and custom accents, timed sets, bodyweight, a records board, a moment for every record, and program sharing as a code.</p>
+<div style="display:flex;flex-wrap:wrap;gap:6px"><span style="height:28px;padding:0 10px;border-radius:9px;background:#1F2320;color:#C9CEC2;display:flex;align-items:center;font:500 13px/1 Barlow">Set by set</span><span style="height:28px;padding:0 10px;border-radius:9px;background:#1F2320;color:#C9CEC2;display:flex;align-items:center;font:500 13px/1 Barlow">Why these weights</span><span style="height:28px;padding:0 10px;border-radius:9px;background:#1F2320;color:#C9CEC2;display:flex;align-items:center;font:500 13px/1 Barlow">Black theme</span><span style="height:28px;padding:0 10px;border-radius:9px;background:#1F2320;color:#C9CEC2;display:flex;align-items:center;font:500 13px/1 Barlow">Your own colour</span><span style="height:28px;padding:0 10px;border-radius:9px;background:#1F2320;color:#C9CEC2;display:flex;align-items:center;font:500 13px/1 Barlow">Records board</span><span style="height:28px;padding:0 10px;border-radius:9px;background:#1F2320;color:#C9CEC2;display:flex;align-items:center;font:500 13px/1 Barlow">Share as a code</span></div>
+</a></li>
+<li style="padding-left:40px;font:400 14px/1.5 Barlow;color:#9AA093">Earlier releases, 1.1 to 1.7, will be added here as they are written up.</li>
+</ol></div></section>
 
-  <article class="post" id="v1-8">
-    <p class="date">13 October 2026 · Version 1.8</p>
-    <h2>A lift can now ask for a different set each time.</h2>
+<section data-ch="" data-title="Keep up" id="follow" data-screen-label="03 Follow" style="background:#D6FF3E;color:#0C0E0B"><div style="height:100%;max-width:1400px;margin:0 auto;padding:clamp(24px,4vh,48px) 24px 72px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;gap:clamp(20px,3vh,36px);position:relative">
+<div aria-hidden="true" style="position:absolute;right:-12%;top:50%;width:min(60vw,620px);aspect-ratio:1;margin-top:min(-30vw,-310px);border-radius:50%;box-shadow:inset 0 0 0 clamp(44px,7vw,78px) rgba(255,255,255,.28);pointer-events:none"></div>
+<span style="font:700 13px/1 Barlow;letter-spacing:.16em;text-transform:uppercase;position:relative">Keep up</span>
+<h2 style="margin:0;font:700 clamp(56px,9vw,150px)/.84 'Barlow Condensed';letter-spacing:-.025em;max-width:1000px;text-wrap:balance;position:relative">Every update, free until 2027.</h2>
+<p style="margin:0;font:400 clamp(17px,1.5vw,22px)/1.45 Barlow;color:#2E3415;max-width:560px;position:relative;text-wrap:pretty">Install once and updates arrive through Google Play. Follow along on Instagram, or subscribe to the feed.</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px;position:relative"><a href="https://play.google.com/store/apps/details?id=app.overload&pcampaignid=web_share" target="_blank" rel="noopener" style="height:64px;padding:0 28px 0 22px;border-radius:22px;background:#0C0E0B;color:#D6FF3E;text-decoration:none;display:flex;align-items:center;gap:12px;font:600 18px/1 Barlow;white-space:nowrap" class="hv-fade"><svg width="18" height="18" viewBox="0 0 24 24" fill="#D6FF3E" aria-hidden="true"><path d="M6 3.5v17l14-8.5z"></path></svg>Get it on Google Play</a><a href="https://www.instagram.com/regolapp" rel="noopener" style="height:64px;padding:0 26px;border-radius:22px;color:#0C0E0B;text-decoration:none;display:flex;align-items:center;font:600 18px/1 Barlow;box-shadow:inset 0 0 0 1.5px rgba(12,14,11,.35);white-space:nowrap" class="hv-onlime">Instagram</a><a href="feed.xml" style="height:64px;padding:0 26px;border-radius:22px;color:#0C0E0B;text-decoration:none;display:flex;align-items:center;font:600 18px/1 Barlow;box-shadow:inset 0 0 0 1.5px rgba(12,14,11,.35);white-space:nowrap" class="hv-onlime">RSS feed</a></div>
+</div></section>
 
-    <p>Most gym apps hold your sets and give them back to you. REGOL reads them: your reps, and
-    how many you had left in the tank, and then proposes the next weight with the reasoning
-    written underneath. Version 1.8 is the biggest update since launch, and it goes after the one
-    thing that was still too blunt — the idea that every set of a lift should ask for the same
-    thing.</p>
-
-    <div class="shots">
-      <figure>
-        <img src="images/screenshots/01-today.jpg" alt="The Today screen, with every lift's proposed weight already on the card." loading="lazy" width="1080" height="1920">
-        <figcaption>Open the app and the weights are already there.</figcaption>
-      </figure>
-      <figure>
-        <img src="images/screenshots/03-mid-set.jpg" alt="The live workout screen, with weight and reps in large type." loading="lazy" width="1080" height="1920">
-        <figcaption>Readable with a bar in your hands.</figcaption>
-      </figure>
-      <figure>
-        <img src="images/screenshots/06-program-progress.jpg" alt="Program progress, comparing each lift's first working weight with its latest." loading="lazy" width="1080" height="1920">
-        <figcaption>Proof the programme is working.</figcaption>
-      </figure>
-    </div>
-
-    <h3>Set by set</h3>
-    <p>Turn <em>Set by set</em> on in a lift's prescription and each set gets its own rep range and
-    its own target reps in reserve: 8 to 10 with two left, then two more at one, then a last set
-    with nothing in the tank. The engine then judges every set against the rung it was actually
-    asked for.</p>
-    <p>That sounds like a detail. It is the difference between being read correctly and not.
-    Finish a ramp exactly as written and your effort drops across the session by design — and
-    against a single flat target that looks like fatigue, so the weight would be held. Read set by
-    set, the same session is dead on target and earns the step. If you train with top sets and
-    back-offs, or anything that gets harder as it goes, this is the release that understands it.</p>
-
-    <h3>Why these weights</h3>
-    <p>Today's card now opens the engine's reasoning for every lift in the session at once, in the
-    same words you will see on the live screen when you get there. And the label beside each weight
-    says what was actually decided: a weight that holds says <em>holds</em>. Red is kept for a
-    weight that genuinely comes down.</p>
-
-    <h3>Every lift's chart, full size</h3>
-    <p>A lift's page opens its chart on its own screen — estimated one-rep max, top set or volume,
-    with every session listed underneath and a point you can tap to jump to the day behind it. From
-    there it shares as a card of its own.</p>
-
-    <h3>Cards worth posting</h3>
-    <p>The share cards were rebuilt. A workout card lists every lift rather than the first four. A
-    progress card shows every lift in the programme. The all-time card draws the running total that
-    produced the number, and a record card draws the run-up the record sits on the end of. All of
-    them can be set to kilograms, pounds, or exactly as you logged it — because the person you send
-    it to was not there.</p>
-
-    <h3>Plans is two tabs</h3>
-    <p>Programs and Templates are separate now, so the workout you are about to edit is not three
-    screens below the programme card. Your training block also shows as a bar for each week with the
-    deload marked at the end, so where you are in it is something you see rather than something you
-    read.</p>
-
-    <h3>And about a hundred and twenty smaller things</h3>
-    <p>Every screen in the app was read line by line before this release. Names that were cut short
-    with room to spare, numbers clipped by columns too narrow to hold them, counts that read
-    "1 workouts", a record screen that lost its words at large text sizes: all fixed. None of it is
-    the sort of thing anyone writes a headline about, and all of it is the sort of thing you notice
-    every session.</p>
-
-    <h3>Nothing about your training moved</h3>
-    <p>The same engine reads the same file on your phone. No weight you have logged changed because
-    of this update, and nothing was uploaded anywhere — REGOL still has no accounts, no analytics
-    and no ads, and your training never leaves your device.</p>
-
-    <div class="btns">
-      <a class="btn btn-primary" href="testing.html">Join the test, free</a>
-      <a class="btn btn-ghost" href="./">What REGOL does</a>
-    </div>
-  </article>
-</main>
-
-<footer>
-  <div class="wrap">
-    <div>REGOL · early access · your data stays on your phone</div>
-    <nav>
-      <a href="./">Home</a>
-      <a href="try.html">Try it</a>
-      <a href="news.html">News</a>
-      <a href="testing.html">Join the test</a>
-      <a href="roadmap.html">Roadmap</a>
-      <a href="report.html">Report</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
-      <a href="support.html">Support</a>
-    </nav>
-  </div>
-</footer>
-
+</div>
+<nav data-rail aria-label="Chapters" style="position:absolute;left:0;right:0;bottom:0;height:64px;display:flex;align-items:center;justify-content:center;padding:0 16px;pointer-events:none">
+<div style="pointer-events:auto;display:flex;align-items:center;gap:12px;height:44px;padding:0 16px 0 18px;border-radius:22px;background:rgba(11,12,11,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)">
+<span data-counter style="font:700 14px/1 'Barlow Condensed';color:#D6FF3E;letter-spacing:.04em;min-width:48px">01 / 3</span>
+<span data-hide-narrow="" data-cur style="font:500 14px/1 Barlow;color:#F2F4EE;white-space:nowrap">Latest</span>
+<div style="display:flex;gap:6px"><button data-act="dot" aria-label="Chapter 1: Latest" aria-current="step" style="border:0;padding:0;width:22px;height:8px;border-radius:4px;background:#D6FF3E;cursor:pointer;transition:width .25s ease,background .25s ease"></button><button data-act="dot" aria-label="Chapter 2: Timeline" style="border:0;padding:0;width:8px;height:8px;border-radius:4px;background:#2B2F29;cursor:pointer;transition:width .25s ease,background .25s ease"></button><button data-act="dot" aria-label="Chapter 3: Keep up" style="border:0;padding:0;width:8px;height:8px;border-radius:4px;background:#2B2F29;cursor:pointer;transition:width .25s ease,background .25s ease"></button></div>
+<button data-act="next" aria-label="Next chapter" style="border:0;width:32px;height:32px;border-radius:16px;background:#1F2320;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none" class="hv-limebg"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F2F4EE" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></button>
+</div></nav>
+</div>
+<footer style="border-top:1px solid rgba(255,255,255,.06);padding:56px 24px 64px;background:#0B0C0B;font-family:Barlow"><div style="max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-wrap:wrap;gap:32px 48px;align-items:flex-start">
+<div style="flex:1 1 300px;display:flex;flex-direction:column;gap:14px">
+<a href="./" style="display:flex;align-items:center;gap:10px;color:#F2F4EE;text-decoration:none;font:700 28px/1 'Barlow Condensed';white-space:nowrap;align-self:flex-start" class="hv-ink"><svg width="30" height="30" viewBox="0 0 108 108" aria-hidden="true"><rect width="108" height="108" rx="24" fill="#161917"></rect><circle cx="54" cy="54" r="18" fill="none" stroke="#d6ff3e" stroke-width="7.2"></circle><rect y="49" width="108" height="10" fill="#161917"></rect><rect y="52.2" width="108" height="3.6" fill="#d6ff3e"></rect></svg>REGOL</a>
+<p style="margin:0;font:400 15px/1.55 Barlow;color:#9AA093;max-width:320px;text-wrap:pretty">The gym log that works out your next weight and tells you why. Android. Free for everyone until 2027. Your data stays on your phone.</p>
+<a href="https://play.google.com/store/apps/details?id=app.overload&pcampaignid=web_share" target="_blank" rel="noopener" style="align-self:flex-start;height:48px;padding:0 20px 0 16px;border-radius:20px;background:#1F2320;color:#F2F4EE;text-decoration:none;display:flex;align-items:center;gap:10px;font:600 15px/1 Barlow;white-space:nowrap" class="hv-pressed"><svg width="14" height="14" viewBox="0 0 24 24" fill="#D6FF3E" aria-hidden="true"><path d="M6 3.5v17l14-8.5z"></path></svg>Get it on Google Play</a>
+</div>
+<div style="flex:2 1 520px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:28px 24px">
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font:600 12px/1 Barlow;letter-spacing:.14em;text-transform:uppercase;color:#9AA093">App</span><a href="./" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Home</a><a href="try.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Try it in your browser</a><a href="./#price" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Pricing</a><a href="./#faq" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">FAQ</a></div>
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font:600 12px/1 Barlow;letter-spacing:.14em;text-transform:uppercase;color:#9AA093">In the open</span><a href="news.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">News</a><a href="roadmap.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Roadmap</a><a href="report.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Report a bug</a><a href="https://github.com/users/filipmonbaillieu24-prog/projects/3" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Board</a></div>
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font:600 12px/1 Barlow;letter-spacing:.14em;text-transform:uppercase;color:#9AA093">Help</span><a href="support.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Support</a><a href="privacy.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Privacy</a><a href="terms.html" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Terms</a><a href="mailto:support@regolapp.be" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">support@regolapp.be</a></div>
+<div style="display:flex;flex-direction:column;gap:12px"><span style="font:600 12px/1 Barlow;letter-spacing:.14em;text-transform:uppercase;color:#9AA093">Follow</span><a href="https://www.instagram.com/regolapp" rel="noopener" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">Instagram</a><a href="feed.xml" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">RSS feed</a><a href="https://github.com/filipmonbaillieu24-prog/overload-site/issues" style="color:#C9CEC2;text-decoration:none;font:500 15px/1.3 Barlow" class="hv-ink">GitHub issues</a></div>
+</div></div>
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;padding-top:24px;border-top:1px solid rgba(255,255,255,.06);font:400 14px/1.4 Barlow;color:#8E948A"><span>No account. No ads. No analytics. Version 1.8.</span><span>Made by one person · regolapp.be</span></div>
+</div></footer>
+</div>
 </body>
 </html>

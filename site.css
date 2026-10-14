@@ -1,0 +1,32 @@
+/* Hover and focus states for the REGOL site.
+
+   The pages carry their layout in inline styles, as the design does. An inline
+   style beats any selector, so every declaration here has to be forced; that is
+   the price of keeping the markup a one-to-one copy of the design reference.
+   Each class name maps to exactly one declaration set from the design. */
+
+.hv-ink:hover { color: #F2F4EE !important }
+.hv-dark:hover { color: #0C0E0B !important }
+.hv-ul:hover { text-decoration: underline !important }
+.hv-fade:hover { opacity: .9 !important; color: #D6FF3E !important }
+
+.hv-play:hover { background: #E6FF7A !important; color: #0C0E0B !important }
+.hv-lime:hover { background: #D6FF3E !important; color: #0C0E0B !important }
+.hv-lime2:hover { background: #E6FF7A !important }
+.hv-limebg:hover { background: #D6FF3E !important }
+.hv-inv:hover { background: #0C0E0B !important; color: #D6FF3E !important }
+.hv-onlime:hover { background: rgba(12, 14, 11, .06) !important; color: #0C0E0B !important }
+
+.hv-card:hover { background: #161917 !important; color: #F2F4EE !important }
+.hv-cardbg:hover { background: #161917 !important }
+.hv-tile:hover { background: #1A1D1A !important; color: #F2F4EE !important }
+.hv-raised:hover { background: #262A26 !important }
+.hv-pressed:hover { background: #262A26 !important; color: #F2F4EE !important }
+
+.fc-ring:focus { box-shadow: inset 0 0 0 1.5px #6E822C !important }
+
+/* The header's menu panel sits in the markup on every page and is revealed by
+   the Menu button. Forced for the same reason as the hovers: the panel carries
+   its own display:flex inline. */
+[data-menu] { display: none !important }
+[data-menu][data-open] { display: flex !important }

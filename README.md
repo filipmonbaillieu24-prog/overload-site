@@ -1,145 +1,164 @@
 # REGOL — the public site
 
-Eight static pages, no build step, no dependencies. They exist because Google Play requires a
-privacy policy at a public URL, and because a paid app needs somewhere to explain itself.
+Ten static pages, no build step, no dependencies, no framework. They exist because Google Play
+requires a privacy policy at a public URL, and because an app people pay for needs somewhere to
+explain itself.
+
+The site is the **Chapters** generation (October 2026): the home page and most sub-pages are
+full-screen chapters, one idea per screen. On desktop they sit side by side and the wheel, the
+arrow keys and the bottom rail move between them; under 940px they stack and snap vertically.
+Privacy and Terms stay long-form.
 
 | File | What it is |
 |---|---|
-| `index.html` | What REGOL is, what it costs, early access |
-| `try.html` | The whole app running in the browser, with a twelve-step guided tour |
-| `testing.html` | How to join the closed test |
-| `roadmap.html` | The GitHub issues feed and the board |
+| `index.html` | 14 chapters, then the FAQ and the footer |
+| `try.html` | The whole app in the browser with a twelve-step tour, plus the engine calculator |
+| `news.html` | Latest release, the timeline, how to follow |
+| `news-1-8.html` | The 1.8 release, nine chapters |
+| `roadmap.html` | Eight chapters, five of them read live from the GitHub issues API |
 | `report.html` | The bug and idea form |
 | `privacy.html` | **The URL Play asks for.** What the app stores and the three ways data can leave it |
-| `terms.html` | Free plan, subscription, early access, training sense |
+| `terms.html` | Free plan, subscription, training sense |
 | `support.html` | Contact, backups, moving phones, subscription questions |
-| `style.css` | Shared styling for the six pages below Home and Try it |
-| `REGOL.dc.html` | The app prototype every phone on the site is mounted from |
+| `404.html` | Root-absolute links, `noindex` |
+| `testing.html` | A meta-refresh to the Play listing. The closed test is over; old links land here |
+| `site.js` | The Play link, the scroll reveal and the chapter deck (`REGOL.deck`) |
+| `site-ui.js` | The header menu and the chapter rail, on every page that has them |
+| `site.css` | Hover and focus states, and the menu panel's open/closed rule |
+| `try.js` | The tour, the simulator bridge and the engine calculator |
+| `REGOL.dc.html` | The app prototype the Try page embeds |
 | `overload-core.js` | Its data, view model and simplified engine |
-| `support.js` | The runtime that renders the `.dc.html` pages in the browser |
+| `support.js` | The runtime that renders `REGOL.dc.html` in the browser |
 
-All eight pages are meant to be indexed. The only `noindex` tags on the site are in
-`404.html` (because a direct request to /404.html returns 200, even though GitHub Pages
-serves the file with a 404 status for unmatched paths) and in
-`REGOL.dc.html` (because GitHub Pages serves it as a page of its own).
-`robots.txt` blocks only `/README.md`, which has no `<head>` to put a tag in. Never disallow
-`/REGOL.dc.html`, `/support.js`, `/overload-core.js` or `/fonts/`: they are the resources
-`index.html` and `try.html` render from, and blocking them leaves Googlebot looking at an
-empty page.
+All ten pages are meant to be indexed. The only `noindex` tags on the site are in `404.html`
+(a direct request to /404.html returns 200, even though GitHub Pages serves the file with a 404
+status for unmatched paths), `testing.html` (a redirect) and `REGOL.dc.html` (GitHub Pages serves
+it as a page of its own). `robots.txt` blocks only `/README.md`, which has no `<head>` to put a
+tag in. Never disallow `/REGOL.dc.html`, `/support.js`, `/overload-core.js` or `/fonts/`: they are
+what `try.html` renders from, and blocking them leaves Googlebot looking at an empty page.
 
+## How the pages are written
 
-## Next (October 2026)
+Every page carries its layout in **inline styles**, exactly as the design reference in
+`design_handoff_regol_site_v2/design/*.dc.html` does. That is deliberate: the design files are the
+source of truth for look, copy and spacing, and keeping the markup identical means a change there
+can be carried over by hand without reconciling a stylesheet.
 
-- `index.html` and `try.html` are Design Component pages: a `<x-dc>` template plus a logic class,
-  rendered in the browser by `support.js`. There is no build step. Most repeated copy (feature
-  cards, pricing rows, FAQ, tour steps) lives in the arrays in the logic class at the bottom of
-  each file, not in the markup.
-- The other six pages keep their markup and copy; their look comes from `style.css`. Bump
-  `style.css?v=` in all seven files that link it (the six plus `404.html`) whenever it changes.
-- Every phone on the site is the real app prototype, `REGOL.dc.html`, mounted with
-  `<dc-import name="REGOL" ...>` and started in a scene. It resolves to the sibling file, so
-  `REGOL.dc.html`, `overload-core.js` and `support.js` must stay in the repo root next to the
-  pages.
-- **Only `try.html` is interactive.** Every phone on `index.html` carries `inert`,
-  `aria-hidden="true"`, `pointer-events:none` and `still`, so it looks live but cannot be tapped,
-  focused or read by a screen reader. Keep that rule if you add phones anywhere else.
-- `images/` now holds only the metadata images: `og.jpg` (the Play feature graphic, used as the
-  `og:image` on every page) and `screenshots/01-08` (the Play screenshots, referenced by the
-  JSON-LD `screenshot` array). No page loads them.
-- To regenerate any of it after a design change, re-export from the design project:
-  `REGOL Site Home.dc.html`, `REGOL Site Try.dc.html`, `REGOL.dc.html`,
-  `REGOL Play Store.dc.html`.
+An inline style beats any selector, so the two things a selector has to do anyway — `:hover` and
+`:focus` — live in `site.css` as one class per declaration set, each forced with `!important`.
+A design file's `style-hover="background:#E6FF7A;color:#0C0E0B"` became `class="hv-play"`.
+
+What the design files express as component logic is plain JavaScript here:
+
+- **`site-ui.js`** reads `data-title` off each `[data-ch]` chapter and drives `[data-rail]`:
+  the counter, the current title, the dots and the next button. It also runs the header menu
+  (`[data-act="menu"]` toggles `data-open` on `[data-menu]`) and any `[data-scroll-to]` link.
+- **`site.js`** is the design's own file, shipped unchanged.
+- Per-page behaviour sits in a `<script>` at the end of the page it belongs to — the accent
+  swatches on Home, the share buttons on the release page, the live issue lists on the roadmap,
+  the two forms on Report. Only `try.html` is big enough to earn its own file.
+
+Elements the scripts reach for are marked with `data-` attributes and nothing else; no class or
+style on the page is load-bearing for JavaScript.
+
+## The embedded app, and two fixes it needed
+
+`try.html` embeds `REGOL.dc.html` in an iframe and picks the screen through **the frame's URL**:
+`REGOL.dc.html?embedded=1&fast=1&scene=live&seed=3`. Two things forced that, both verified in a
+browser rather than reasoned about:
+
+1. **`__dcSetProps` cannot drive it.** The design's own Try page passes `scene` as a prop, which
+   works inside the component runtime but not across a frame boundary: setting props after boot
+   leaves the component rendering an empty shell. So `REGOL.dc.html` gained a small block that
+   reads `scene`, `embedded` and `fast` from its own query string, with the props still winning
+   when there is no query string — opening the file on its own behaves exactly as before.
+2. **One missing `</div>`.** In the handed-over file the Today chapter's scroll container was
+   never closed: the list that used to close it was replaced by the *Why these weights* row higher
+   up, and its closing tag went with it. The browser then nested all 28 of the following
+   `<sc-if>` blocks *inside* the Today block, so every screen other than Today rendered blank.
+   One `</div>` before the bottom dock fixes it. **This is in the design file too and needs fixing
+   there, or the next re-sync brings it back.**
+
+Both changes are in `REGOL.dc.html` in this repo and are the first thing to re-apply after a
+re-sync from the design project.
+
+The three fixes the previous generation listed here — `noindex` in the app file's head, no rest
+timer after the last set, and a step sized from the session rather than a flat percentage — are
+all present in the handed-over files and need no re-applying. Check them again next time:
+`grep -c 'content="noindex"' REGOL.dc.html` and `grep -c SLACK overload-core.js` should both be
+non-zero.
+
+## Rebuilding a page from the design
+
+There is no build step in the repo, and there should not be one. The pages were produced by a
+one-off converter that expands the design files' `sc-for`, `sc-if` and `{{ }}` against the data in
+their logic classes, swaps `style-hover` for a class, inlines the header and footer and rewrites
+`*.dc.html` hrefs to `*.html`. It lives in `E:\Overload\site-build`, outside this repo so nothing
+unservable is served, and its own README says how to run it.
+
+A small design change is faster to port by hand: the markup here is a character-for-character copy
+of the design's, so a diff of the design file says exactly what to paste. Either way, read the diff
+in this repo before pushing — the converter does not regenerate the hand-written scripts, and they
+can fall out of step with a marker that moved. Do not introduce a framework for any of it.
 
 ## The app component and fonts
 
 `REGOL.dc.html` declares its own five `@font-face` rules with relative `fonts/...` URLs. The
-component runtime resolves a mounted component's relative URLs against the origin root rather
-than the page, and the site is served from the origin root of `regolapp.be`, so they reach
-`/fonts/...` and resolve. That was not true on the old `github.io/overload-site/` project page,
-which is why the previous app file declared no faces and `try.html` built absolute URLs from
-`document.baseURI` instead. If the site ever moves back under a path prefix, that problem
-returns and the `document.baseURI` approach is the fix. Never hard-code a prefix.
+component runtime resolves a mounted component's relative URLs against the origin root rather than
+the page, and the site is served from the origin root of `regolapp.be`, so they reach `/fonts/...`
+and resolve. That was not true on the old `github.io/overload-site/` project page, which is why the
+previous app file declared no faces and `try.html` built absolute URLs from `document.baseURI`
+instead. If the site ever moves back under a path prefix, that problem returns and the
+`document.baseURI` approach is the fix. Never hard-code a prefix.
 
 ## CNAME is load-bearing for SEO
 
 `CNAME` is what makes GitHub Pages 301 every old
 `filipmonbaillieu24-prog.github.io/overload-site/...` URL to its exact counterpart on
-regolapp.be. The redirect preserves the path, which is the ideal case: every old URL maps to
-its own counterpart rather than dumping everything on the home page, so Google transfers the
-signals and drops the old URLs over a few weeks with nothing else to do. Deleting `CNAME`, or
-renaming the repository, silently breaks that redirect and the old links start 404ing instead
-of pointing anywhere. There is no warning when that happens.
+regolapp.be. The redirect preserves the path, which is the ideal case: every old URL maps to its
+own counterpart rather than dumping everything on the home page, so Google transfers the signals
+and drops the old URLs over a few weeks with nothing else to do. Deleting `CNAME`, or renaming the
+repository, silently breaks that redirect and the old links start 404ing instead of pointing
+anywhere. There is no warning when that happens.
 
-Two things deliberately not done: no Change of Address in Search Console (it needs both
-properties verified, and the old one can no longer be verified because a verification file
-placed in the repo would itself be 301'd), and no removal request for the old github.io URLs
-(they drop out on their own, and a removal request can suppress the destination URL too).
-
-
-## Changes made to the prototype files here
-
-`REGOL.dc.html` and `overload-core.js` come from the design project, so every re-sync overwrites
-them. Three changes were made here on top of the October 2026 handover and need re-applying after
-the next one. All three are in place today. Check them against `design_handoff_regol_site/site/`
-before you push.
-
-1. **`meta robots noindex` in the app file's head.** `REGOL.dc.html` is a complete HTML document,
-   so GitHub Pages serves it at `/REGOL.dc.html` as a page. Its head carries
-   `<meta name="robots" content="noindex">` and a `<title>` for that reason. Losing this one is
-   silent: nothing breaks, the file just quietly becomes indexable again. **Re-applied.**
-2. **No rest timer after the last set.** The handover's `lv.log` in `overload-core.js` set `rest`
-   unconditionally, including on the set that ends the workout. It now starts rest only while a set
-   is still unlogged, so the dock offers Finish instead of counting down two minutes at someone
-   already putting their shoes on. Mirrors the `anythingLeft` branch of `Repo.check` in the Android
-   app.
-3. **The step is sized from the session.** The handover's `outlook` in `overload-core.js` took
-   `avg - target` steps of `l.step`, which is 5% on a barbell and 50% on a light dumbbell, so the
-   demo proposed jumps the app does not make. It now separates what the reserve reading asks for
-   from what the ladder allows: the session's best set implies a one-rep max (Epley, counting
-   reserve as reps), that says how many reps the candidate weight would allow at the reserve being
-   aimed for, and the step is taken only while that stays within `SLACK` reps of the bottom of the
-   range. A step earned by clearing the rep range is never sized away, because there is no rep left
-   to add once you are past the top of it. Mirrors `Engine.earned` and the `sized` flag in the
-   Android app, which is the source of truth, **including `SLACK = 2`**: an earlier version of this
-   patch demanded the full rep range and so was stricter than the engine, which quietly turns the
-   reserve rule into double progression on an 8-10 range.
-
-   This one is load-bearing for honesty: `try.html`'s "How the next weight is chosen" describes the
-   earned-step rule in so many words ("will not take a step that would drop your reps out of their
-   range ... one easy session on a 10 kg dumbbell is never answered with 12.5 kg"), so without it
-   the page describes an engine the demo does not run.
-
-A fourth change, stripping the app file's `@font-face` block, is no longer needed: see "The app
-component and fonts" above.
+Two things deliberately not done: no Change of Address in Search Console (it needs both properties
+verified, and the old one can no longer be verified because a verification file placed in the repo
+would itself be 301'd), and no removal request for the old github.io URLs (they drop out on their
+own, and a removal request can suppress the destination URL too).
 
 ## Structured data: the dated fields
 
 `index.html` carries a JSON-LD `@graph` that declares the app entity once, as
-`https://regolapp.be/#app`. Every other page references it by `@id`, so these values are edited
-in one file only. Five of them go stale on known triggers and nothing checks them
-automatically, so they are listed here.
+`https://regolapp.be/#app`. Every other page references it by `@id`, so these values are edited in
+one file only. Four of them go stale on known triggers and nothing checks them automatically.
 
 | Value | Where | Trigger | New value |
 |---|---|---|---|
 | `softwareVersion` | `#app` | every app release | the new `versionName` from `app-android/app/build.gradle.kts` (1.8 today) |
-| `priceValidUntil` | first Offer | 1 January 2027 | remove the early-access Offer; the Subscription Offer takes over |
+| `priceValidUntil` | first Offer | 1 January 2027 | remove the free-for-everyone Offer; the Subscription Offer takes over |
 | `isAccessibleForFree` | `#app` | 1 January 2027 | `false` (charts, records, the weekly debrief and notes become paid) |
-| `availability` / `downloadUrl` | first Offer, `#app` | public Play launch | `InStock` plus the public listing URL, and add `installUrl` back |
 | `dateModified` | privacy.html, terms.html | any edit to those pages | the same date as their "Last updated" line |
 
-While the app is in closed testing, `downloadUrl` is the opt-in link
-`https://play.google.com/apps/testing/app.overload` and the early-access Offer is
-`LimitedAvailability`, because that is the only way a stranger can actually get the app and it
-is the only Play URL the site links. `sameAs` still points at the store listing, because that
-is an identity statement, not an availability claim.
-
-Never add `aggregateRating`, `review`, `reviewCount`, an `award` or a download count. The app
-has almost no ratings; inventing them is false and is one of the specific things Google issues
-a structured-data manual action for. There is no honest placeholder either: `ratingCount` 0 and
+Never add `aggregateRating`, `review`, `reviewCount`, an `award` or a download count. The app has
+almost no ratings; inventing them is false and is one of the specific things Google issues a
+structured-data manual action for. There is no honest placeholder either: `ratingCount` 0 and
 `ratingValue` "0.0" are both validator errors. Add a real `aggregateRating` only when the Play
-figure is live, the listing is public, and the same number is visible to a human on
-`index.html`, and then update both together or neither.
+figure is live and the same number is visible to a human on `index.html`, and then update both
+together or neither.
 
 The `#developer` node is an `Organization` named "REGOL" rather than a `Person`, because the
-personal name appears nowhere in human-readable text on the site. Swapping it for a `Person`
-is a one-node change, since every reference is by `@id`.
+personal name appears nowhere in human-readable text on the site. Swapping it for a `Person` is a
+one-node change, since every reference is by `@id`.
+
+## Keeping the feed and the sitemap in step
+
+A new release means three edits, not one: the post itself (`news-1-8.html` and its card in
+`news.html`), an `<item>` at the top of `feed.xml`, and a `<loc>` in `sitemap.xml`. The head of
+every page links the feed.
+
+## Images
+
+`images/app/*.png` are real build-30 screenshots, recoloured from the owner's blue accent to the
+lime default. Only the ten the pages and the JSON-LD actually reference are in the repo; the rest
+of the set is in `design_handoff_regol_site_v2/design/images/app/`. `images/og.png` is the link
+preview, set as `og:image` on every page. `images/app-icon-512.png` is the Play icon.
