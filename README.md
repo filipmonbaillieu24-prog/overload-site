@@ -159,6 +159,6 @@ every page links the feed.
 ## Images
 
 `images/app/*.png` are real build-30 screenshots, recoloured from the owner's blue accent to the
-lime default. Only the ten the pages and the JSON-LD actually reference are in the repo; the rest
+lime default. Only the eleven the pages and the JSON-LD actually reference are in the repo; the rest
 of the set is in `design_handoff_regol_site_v2/design/images/app/`. `images/og.png` is the link
 preview, set as `og:image` on every page. `images/app-icon-512.png` is the Play icon.
