@@ -56,12 +56,51 @@
       if (nextIcon) nextIcon.setAttribute('d', narrow.matches ? 'M6 9l6 6 6-6' : 'M9 6l6 6-6 6');
     }
 
-    var api = window.REGOL.deck(deck, function (k) { i = k; paint(); });
-    window.REGOL.chapters = api;
-    dots.forEach(function (d, k) { d.addEventListener('click', function () { api.goTo(k); }); });
-    if (nextBtn) nextBtn.addEventListener('click', function () { api.goTo(i + 1 < n ? i + 1 : 0); });
-    on(narrow, paint);
+    // REGOL.deck measures in whole viewports. Sideways on desktop that is
+    // exactly right and it stays in charge, wheel and keys and all. On a phone
+    // a chapter is as tall as its content, so the measure no longer holds, and
+    // its re-snap on resize would fire every time the address bar slides away.
+    // There it hands over to the two functions below.
+    var api = null, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function attach() {
+      if (narrow.matches) { if (api) { api.destroy(); api = null; } }
+      else if (!api) api = window.REGOL.deck(deck, function (k) { i = k; paint(); });
+    }
+
+    function nearest() {
+      var top = deck.scrollTop, best = 0, gap = Infinity;
+      chapters.forEach(function (c, k) {
+        var d = Math.abs(c.offsetTop - top);
+        if (d < gap) { gap = d; best = k; }
+      });
+      return best;
+    }
+    function goTo(k, instant) {
+      k = Math.max(0, Math.min(n - 1, k));
+      if (api) return api.goTo(k, instant);
+      deck.scrollTo({ top: chapters[k].offsetTop, behavior: reduce || instant ? 'auto' : 'smooth' });
+      i = k;
+      paint();
+    }
+    deck.addEventListener('scroll', function () {
+      if (!narrow.matches) return;
+      var k = nearest();
+      if (k !== i) { i = k; paint(); }
+    }, { passive: true });
+
+    window.REGOL.chapters = { goTo: goTo };
+    dots.forEach(function (d, k) { d.addEventListener('click', function () { goTo(k); }); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { goTo(i + 1 < n ? i + 1 : 0); });
+    on(narrow, function () { attach(); if (narrow.matches) i = nearest(); paint(); });
+    attach();
     paint();
+
+    // A link into a chapter, such as /#price, lands by the deck's own measure.
+    var hash = location.hash.slice(1);
+    if (hash && narrow.matches) {
+      var k = chapters.findIndex(function (c) { return c.id === hash; });
+      if (k > 0) setTimeout(function () { goTo(k, true); }, 120);
+    }
 
     // Links that jump to a chapter of this page rather than to another page.
     document.querySelectorAll('[data-go]').forEach(function (el) {
@@ -69,7 +108,7 @@
         var k = chapters.findIndex(function (c) { return c.id === el.getAttribute('data-go'); });
         if (k < 0) return;
         e.preventDefault();
-        api.goTo(k);
+        goTo(k);
       });
     });
   }

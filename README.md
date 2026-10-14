@@ -44,9 +44,10 @@ Every page carries its layout in **inline styles**, exactly as the design refere
 source of truth for look, copy and spacing, and keeping the markup identical means a change there
 can be carried over by hand without reconciling a stylesheet.
 
-An inline style beats any selector, so the two things a selector has to do anyway — `:hover` and
-`:focus` — live in `site.css` as one class per declaration set, each forced with `!important`.
-A design file's `style-hover="background:#E6FF7A;color:#0C0E0B"` became `class="hv-play"`.
+An inline style beats any selector, so the three things a selector has to do
+anyway — `:hover`, `:focus` and the phone layout — live in `site.css`, each forced
+with `!important`. A design file's `style-hover="background:#E6FF7A;color:#0C0E0B"`
+became `class="hv-play"`.
 
 What the design files express as component logic is plain JavaScript here:
 
@@ -60,6 +61,38 @@ What the design files express as component logic is plain JavaScript here:
 
 Elements the scripts reach for are marked with `data-` attributes and nothing else; no class or
 style on the page is load-bearing for JavaScript.
+
+## Phones
+
+Under 940px the design turns the deck vertical and keeps every chapter exactly
+one viewport tall. Measured on a 375 × 812 phone, ten of the home page's
+fourteen chapters held more than that — the hero by 448px — so each became its
+own scroller inside a mandatory snap: copy cut off at the fold, the rail sitting
+on whatever was under it, and two gestures needed to move on.
+
+`site.css` ends with the phone rules, and they are the only place the site
+departs from the design reference:
+
+- A chapter is at least a screen tall and grows to its content. It is a flex
+  item in a column, so its height is `flex-basis`, not `height: 100%`; both have
+  to let go or nothing moves.
+- The snap relaxes from mandatory to proximity, so a tall chapter is read in one
+  movement and the next one still comes to rest at the top.
+- `site-ui.js` stops using `REGOL.deck` here. The deck measures in whole
+  viewports, which is right sideways and wrong once chapters differ in height,
+  and it re-snaps on every resize — on a phone the address bar sliding away is a
+  resize. The rail reads the nearest chapter's `offsetTop` instead. Sideways on
+  desktop `REGOL.deck` is still in charge, wheel and keys and all, and nothing
+  about that path changed.
+- Four chapters needed a rule of their own, each noted in the stylesheet, and
+  the controls that sat under the design's own 44px floor were raised. The
+  rail's dots grow a hit area without the dot changing size.
+- The header tightens at 400px and drops the Menu pill's word at 340px, which is
+  what keeps a 320px phone free of a sideways scroll.
+
+Check a change at 320, 375 and 430 before pushing. The quickest proof is
+`document.documentElement.scrollWidth` matching the viewport width on every
+page, and no `[data-ch]` being scrollable inside itself.
 
 ## The embedded app, and two fixes it needed
 

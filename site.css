@@ -30,3 +30,125 @@
    its own display:flex inline. */
 [data-menu] { display: none !important }
 [data-menu][data-open] { display: flex !important }
+
+/* ---- Phones -------------------------------------------------------------
+
+   Under 940px the deck turns vertical, and in the design every chapter is
+   still exactly one viewport tall. Measured on a 375 x 812 phone, ten of the
+   home page's fourteen chapters hold more than that - the hero by 448px - so
+   each one became its own little scroller inside a mandatory snap: the copy
+   was cut off at the fold, the rail sat on top of whatever was under it, and
+   moving on took two gestures instead of one.
+
+   A chapter is at least a screen tall here and grows to its content, and the
+   snap relaxes to proximity so a tall chapter can be read in one movement and
+   the next one still comes to rest at the top. Nothing about the desktop deck
+   changes. */
+@media (max-width: 940px) {
+  [data-deck] { scroll-snap-type: y proximity !important }
+
+  /* A chapter is a flex item in a column, so its height is flex-basis, not
+     height: 100%. Both have to let go. */
+  [data-ch] {
+    flex: 0 0 auto !important;
+    height: auto !important;
+    min-height: calc(100vh - 64px);
+    min-height: calc(100dvh - 64px);
+    scroll-snap-stop: normal !important;
+    /* Nothing can overflow a chapter that is as tall as its content, so this
+       only clips the decoration that bleeds past it - the ghost "1.8" on the
+       news pages hangs 40px below its chapter and was worth 80px of scroll
+       that showed nothing. */
+    overflow: hidden !important;
+  }
+  /* The frame inside each chapter carries the height, so it has to let go too.
+     Its own overflow stays as it is, which is what keeps the decorative rings
+     and the ghost numerals clipped to the chapter. */
+  [data-ch] > div {
+    height: auto !important;
+    min-height: calc(100vh - 64px);
+    min-height: calc(100dvh - 64px);
+  }
+
+  /* Home, chapter 9. The two phones are sized by height and capped at 48% of
+     the column, so at a phone's width object-fit:cover was slicing a strip out
+     of the middle of each. Cap the height instead and they fit side by side
+     whole. */
+  #proof > div > div:nth-child(2) { height: min(40vh, 340px) !important }
+
+  /* Home, chapter 4. Icon, label and weight do not fit on one line at this
+     width; the label and the weight take a line each rather than the weight
+     running off the card. */
+  #answer div[aria-hidden="true"] > div:first-child { flex-wrap: wrap; row-gap: 8px }
+
+  /* The same card is width:100% over content-box padding, so at a phone's
+     width it hung 22px into the gutter on each side while everything above it
+     kept to 24px. */
+  #answer div[aria-hidden="true"] { box-sizing: border-box !important }
+
+  /* Home, chapter 13. "Subscription" is wider than a 1fr column here, so the
+     label column gives some width back and the heads set a little smaller. */
+  #price > div > div:nth-child(2) > div {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr) !important;
+  }
+  #price > div > div:nth-child(2) > div:first-child {
+    font-size: 10px !important;
+    letter-spacing: .06em !important;
+  }
+
+  /* Touch targets. The design's own floor is 44px and several controls sit
+     under it, which matters on a phone and not on a desk. Where the mark is
+     meant to be small - the rail's dots - the hit area grows and the dot does
+     not. */
+  [data-rail] [data-act="dot"],
+  [data-rail] [data-act="next"] { position: relative }
+  [data-rail] [data-act="dot"]::after { content: ""; position: absolute; inset: -18px -5px }
+  [data-rail] [data-act="next"]::after { content: ""; position: absolute; inset: -6px }
+
+  /* Try it: the tour is the page, and every one of its controls was short. */
+  [data-act="step"],
+  [data-act="reset"],
+  [data-act="preset"],
+  [data-act="add"],
+  [data-act="drop"] { height: 44px !important }
+  [data-act="prev"],
+  [data-act="next-step"] { width: 44px !important; height: 44px !important; border-radius: 22px !important }
+
+  /* Roadmap: the counts on the first chapter jump to their list. */
+  [data-act="sum"] { padding: 12px 0 !important }
+
+  /* The footer's four link columns, at 20px a row, were a lottery. */
+  footer [style*="grid-template-columns"] > div > a { padding: 8px 0 }
+}
+
+/* Under about 380px - a 360px Android, an iPhone SE - the header's three
+   parts add up to more than the width and the Menu pill was pushed off the
+   right edge, taking the whole page 7px wide with it. The row tightens rather
+   than dropping anything: the wordmark, the Play pill and Menu all stay. */
+@media (max-width: 400px) {
+  [data-site-header] > div { padding: 0 12px !important; gap: 8px !important }
+  [data-site-header] > div > a:first-child { font-size: 23px !important; gap: 8px !important }
+  [data-site-header] > div > a:first-child svg { width: 26px; height: 26px }
+  [data-site-header] a[target="_blank"] { padding: 0 12px 0 10px !important; font-size: 14px !important }
+  [data-site-header] [data-act="menu"] { padding: 0 12px 0 14px !important; font-size: 14px !important }
+}
+
+/* At 320px, the narrowest phone still in use, there is no room for both pill
+   labels. The hamburger loses its word - the button keeps its aria-label - so
+   that "Get the app" keeps its own. */
+@media (max-width: 340px) {
+  [data-site-header] [data-menu-label] { display: none }
+  [data-site-header] [data-act="menu"] { padding: 0 11px !important }
+}
+
+/* The home page's rail carries fourteen dots. At 360px and below they, the
+   counter and the next button no longer fit between the pill's edges and the
+   button was pushed out of the page. Everything tightens instead of anything
+   being dropped. */
+@media (max-width: 360px) {
+  [data-rail] > div { gap: 8px !important; padding: 0 10px 0 12px !important }
+  [data-rail] [data-counter] { min-width: 40px !important }
+  [data-rail] [data-act="dot"] { position: relative }
+  [data-rail] [data-act="dot"]::after { inset: -18px -2px }
+  [data-rail] > div > div { gap: 4px !important; min-width: 0; overflow: hidden }
+}
