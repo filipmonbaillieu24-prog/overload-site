@@ -22,6 +22,9 @@ body{margin:0;background:#0B0C0B;color:#F2F4EE;font-family:Barlow;-webkit-font-s
 a{color:#D6FF3E;text-underline-offset:3px}a:hover{color:#E6FF7A}
 ::selection{background:#D6FF3E;color:#0C0E0B}
 button,input,select{font-family:inherit}
+/* .btn is inline-flex, which beats the user-agent rule for [hidden]: without this the
+   Open in REGOL button stays on screen with nothing to open and jumps to the top. */
+[hidden]{display:none !important}
 input,select{color-scheme:dark}
 
 /* The editor. One column on a phone, two from 900px: the program on the left and what you are
