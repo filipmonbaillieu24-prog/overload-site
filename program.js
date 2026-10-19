@@ -17,6 +17,11 @@
   var DRAFT = 'regol.program.draft';
   var ANSWERS = 'regol.program.answers';
   var EQUIP = ['Barbell', 'Dumbbell', 'Cable', 'Machine', 'Bodyweight'];
+  // Pro.FREE_TEMPLATES on the app side. The app refuses an import that would put a free plan
+  // over it - the whole program, not the part that fits - so this page has to say so before
+  // somebody spends twenty minutes building something their phone will turn away.
+  // ProTest pins the pair: change one and the app's own tests fail.
+  var FREE_TEMPLATES = 3;
 
   var lifts = null;               // the library, once fetched
   var byKey = {};                 // name|equip -> row
@@ -327,6 +332,7 @@
       side.textContent = 'Nothing to send yet.';
       open.hidden = true; copy.disabled = true; file.disabled = true;
       big.hidden = true; size.textContent = '';
+      $('[data-free]').hidden = true;
       return;
     }
 
@@ -346,6 +352,12 @@
         return;
       }
       size.textContent = r.chars + ' of ' + MAX_CHARS + ' characters';
+      var over = state.templates.length > FREE_TEMPLATES;
+      var fr = $('[data-free]');
+      fr.hidden = !over;
+      if (over) fr.textContent = state.templates.length + ' workouts. REGOL\'s free plan keeps ' +
+        FREE_TEMPLATES + ' and turns away a program that would go over, so this one needs the ' +
+        'subscription on the phone it lands on.';
       if (r.over) {
         big.hidden = false;
         big.textContent = 'This program is too big to travel as a code - ' + r.chars + ' characters against the ' +
@@ -505,6 +517,8 @@
     if (p.dropped.length) line += ' ' + p.dropped.join(' and ') + (p.dropped.length === 1 ? ' has' : ' have') +
       ' nothing left, so those days go to the workouts that do.';
     if (p.skipped.length) line += ' Left out, because nothing you ticked can do it: ' + p.skipped.join(', ').toLowerCase() + '.';
+    if (p.templates.length > FREE_TEMPLATES) line += ' More than ' + FREE_TEMPLATES +
+      ' workouts, so it needs the subscription on the phone it lands on.';
     $('[data-quiz-preview]').textContent = line;
 
     // The button says what it will do. Twenty minutes of picking lifts should not disappear
