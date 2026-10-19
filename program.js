@@ -235,22 +235,41 @@
     });
   }
 
+  // How well a row answers the query. Lower is better. The library is sorted by name, so without
+  // this, typing the exact name of a lift hands you whatever sorts first among the lifts that
+  // happen to contain those words: "barbell squat" opened on Barbell Bench Front Squat.
+  function rank(r, q, words) {
+    var n = r.n.toLowerCase();
+    if (n === q) return 0;
+    if (n.indexOf(q) === 0) return 1;
+    if (n.indexOf(' ' + q) >= 0) return 2;   // the query starts a word in the name
+    if (n.indexOf(q) >= 0) return 3;         // somewhere in the name
+    var hay = n + ' ' + r.e.toLowerCase() + ' ' + r.g.toLowerCase();
+    for (var w = 0; w < words.length; w++) if (hay.indexOf(words[w]) < 0) return -1;
+    return 4;                                // every word, scattered across name, kit and group
+  }
+
   function drawPickList() {
     var q = ($('[data-pick-search]').value || '').trim().toLowerCase();
     var on = EQUIP.filter(function (e) { return pickEquip[e]; });
     var words = q ? q.split(/\s+/) : [];
     var out = [];
-    for (var i = 0; i < lifts.length && out.length < 80; i++) {
+    for (var i = 0; i < lifts.length; i++) {
       var r = lifts[i];
       if (on.length && on.indexOf(r.e) < 0) continue;
       if (words.length) {
-        var hay = (r.n + ' ' + r.e + ' ' + r.g).toLowerCase();
-        var all = true;
-        for (var w = 0; w < words.length; w++) if (hay.indexOf(words[w]) < 0) { all = false; break; }
-        if (!all) continue;
+        var k = rank(r, q, words);
+        if (k < 0) continue;
+        r = { r: r, k: k };
+      } else {
+        if (out.length >= 80) break;
+        r = { r: r, k: 0 };
       }
       out.push(r);
     }
+    // Best answer first, then the shorter name, then alphabetically - the order the file is in.
+    if (words.length) out.sort(function (a, b) { return a.k - b.k || a.r.n.length - b.r.n.length; });
+    out = out.slice(0, 80).map(function (x) { return x.r; });
     var host = $('[data-pick-list]');
     host.textContent = '';
     if (!out.length) { host.appendChild(el('p', 'note', 'Nothing matches that.')); return; }
