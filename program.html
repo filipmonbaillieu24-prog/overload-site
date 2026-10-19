@@ -11,7 +11,8 @@
 <link rel="stylesheet" href="site.css?v=6">
 <script src="site.js"></script>
 <script src="site-ui.js" defer></script>
-<script src="program.js?v=2" defer></script>
+<script src="program-plan.js?v=1" defer></script>
+<script src="program.js?v=3" defer></script>
 <style>
 @font-face{font-family:Barlow;src:url(fonts/barlow_regular.ttf);font-weight:400;font-display:swap}
 @font-face{font-family:Barlow;src:url(fonts/barlow_medium.ttf);font-weight:500;font-display:swap}
@@ -90,6 +91,22 @@ dialog.pick::backdrop{background:rgba(4,5,4,.72)}
 .pick-item b{font:600 16px/1.25 Barlow}
 .pick-item span{font:400 13px/1.3 Barlow;color:#9AA093}
 
+/* On a phone the name and the four numbers cannot share a line: the numbers want about 320px
+   and the card has 283, so the name column collapses to nothing and the two overlap. Stack them,
+   and trim the inputs enough that the four plus the bin still fit on one line. */
+@media (max-width:560px){
+  .row{grid-template-columns:1fr;gap:12px}
+  .num input{width:48px}
+}
+
+/* The six questions. Same sheet as the picker, one block per question. */
+.q{padding:15px 12px;display:flex;flex-direction:column;gap:9px;border-top:1px solid rgba(255,255,255,.06)}
+.q:first-child{border-top:0}
+.q-ask{font:600 15px/1.35 Barlow}
+.q-why{font:400 13px/1.45 Barlow;color:#9AA093}
+.pick-foot{padding:14px 18px 18px;border-top:1px solid rgba(255,255,255,.06);display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.pick-foot .note{flex:1 1 170px;margin:0}
+
 /* What you are about to send, and the three ways to send it. */
 .out{border-radius:24px;background:#202419;box-shadow:inset 0 0 0 1px #3A4520;padding:18px 20px;display:flex;flex-direction:column;gap:12px}
 .bar{display:flex;flex-wrap:wrap;gap:8px}
@@ -141,6 +158,10 @@ dialog.pick::backdrop{background:rgba(4,5,4,.72)}
           </div>
         </div>
         <p class="note">The unit only matters for lifts you do not already have in the app. One you train keeps its own.</p>
+        <div class="field"><span>Run it as a block</span>
+          <div class="chips" data-block></div>
+        </div>
+        <p class="note" data-block-note hidden></p>
       </div>
 
       <div data-templates style="display:flex;flex-direction:column;gap:16px"></div>
@@ -164,6 +185,25 @@ dialog.pick::backdrop{background:rgba(4,5,4,.72)}
     </aside>
   </div>
 </main>
+
+<dialog class="pick" data-quiz>
+  <div class="pick-box">
+    <div class="pick-head">
+      <div style="display:flex;align-items:center;gap:12px">
+        <h2 class="h2" style="flex:1">Six questions</h2>
+        <button class="icon" data-act="close-quiz" aria-label="Close">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <p class="note">Nothing here is sent anywhere, and every number it proposes can be changed afterwards.</p>
+    </div>
+    <div class="pick-list" data-quiz-body></div>
+    <div class="pick-foot">
+      <p class="note" data-quiz-preview></p>
+      <button class="btn btn-primary btn-sm" data-act="build">Build it</button>
+    </div>
+  </div>
+</dialog>
 
 <dialog class="pick" data-picker>
   <div class="pick-box">

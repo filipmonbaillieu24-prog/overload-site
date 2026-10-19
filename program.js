@@ -15,6 +15,7 @@
 
   var MAX_CHARS = 2600;           // Formats.programLink's own ceiling
   var DRAFT = 'regol.program.draft';
+  var ANSWERS = 'regol.program.answers';
   var EQUIP = ['Barbell', 'Dumbbell', 'Cable', 'Machine', 'Bodyweight'];
 
   var lifts = null;               // the library, once fetched
@@ -81,7 +82,14 @@
     // A single workout travels as a template on its own; the app reads that as one template.
     if (state.templates.length > 1) {
       f.program = { id: 'p', name: name, templateIds: state.templates.map(function (t) { return t.id; }) };
-      if (state.block) f.program.block = state.block;
+      // The block carries only its length. A deload at the end and reserve ramping from the
+      // target down to two harder are Block's own defaults on the Kotlin side, so writing them
+      // would only cost characters.
+      if (state.block) {
+        var b = { startDay: state.block.startDay };
+        if (state.block.weeks !== 4) b.weeks = state.block.weeks;
+        f.program.block = b;
+      }
     }
     return f;
   }
@@ -164,7 +172,7 @@
         state.templates.splice(ti - 1, 0, state.templates.splice(ti, 1)[0]); save(); drawTemplates(); refresh();
       }));
       head.appendChild(iconBtn('Remove ' + (t.name || 'this workout'), 'M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14', function () {
-        state.templates.splice(ti, 1); save(); drawTemplates(); refresh();
+        state.templates.splice(ti, 1); save(); drawTemplates(); paintBlock(); refresh();
       }));
       card.appendChild(head);
 
@@ -304,10 +312,15 @@
     var side = $('[data-summary]');
     var open = $('[data-act="open"]'), copy = $('[data-act="copy"]'), file = $('[data-act="file"]');
     var big = $('[data-too-big]'), size = $('[data-size]');
-    var sets = 0, nLifts = 0;
+    var sets = 0, nLifts = 0, longest = 0;
     var seen = {};
     state.templates.forEach(function (t) {
-      t.items.forEach(function (i) { sets += i.sets; if (!seen[i.exId]) { seen[i.exId] = 1; nLifts++; } });
+      var own = 0;
+      t.items.forEach(function (i) {
+        sets += i.sets; own += i.sets;
+        if (!seen[i.exId]) { seen[i.exId] = 1; nLifts++; }
+      });
+      longest = Math.max(longest, own);
     });
 
     if (!state.templates.length || !sets) {
@@ -319,9 +332,11 @@
 
     var n = state.templates.length;
     // The app's own arithmetic for "about 45 minutes": three minutes a working set, rest included.
+    // The set count is the whole week; the time is one session, because those are the two numbers
+    // a lifter weighs and adding them together answers neither.
     side.textContent = n + (n === 1 ? ' workout · ' : ' workouts · ') + nLifts +
-      (nLifts === 1 ? ' lift · ' : ' lifts · ') + sets + ' working sets · about ' + (sets * 3) +
-      ' minutes a session';
+      (nLifts === 1 ? ' lift · ' : ' lifts · ') + sets + ' working sets' +
+      (n === 1 ? ' · about ' + (longest * 3) + ' minutes' : ' a week · the longest session about ' + (longest * 3) + ' minutes');
 
     link(programFile()).then(function (r) {
       if (r.error === 'old-browser') {
@@ -345,6 +360,157 @@
     });
   }
 
+  /* ---------- the block ---------- */
+
+  var WEEKS = [0, 4, 6, 8];
+
+  // A block is a run of weeks that gets harder, with a deload at the end. It lives on the
+  // program, so a single workout cannot carry one - and the app only learned to keep an imported
+  // one in 1.9, which is worth saying here rather than letting it disappear quietly on arrival.
+  function paintBlock() {
+    var host = $('[data-block]');
+    if (!host.childNodes.length) {
+      WEEKS.forEach(function (w) {
+        var c = el('button', 'chip', w ? w + ' weeks' : 'No block');
+        c.type = 'button';
+        c.setAttribute('data-weeks', w);
+        c.addEventListener('click', function () {
+          state.block = w ? { startDay: REGOL.planner.todayDay(), weeks: w } : null;
+          paintBlock(); save(); refresh();
+        });
+        host.appendChild(c);
+      });
+    }
+    var now = state.block ? state.block.weeks : 0;
+    $$('[data-block] .chip').forEach(function (c) {
+      c.setAttribute('aria-pressed', parseInt(c.getAttribute('data-weeks'), 10) === now ? 'true' : 'false');
+    });
+    var note = $('[data-block-note]');
+    if (!state.block) { note.hidden = true; return; }
+    note.hidden = false;
+    note.textContent = state.templates.length > 1
+      ? 'A deload at the end, and the reserve ramping from your target down to two harder - the app\'s own settings, which you can change there. Carrying a block needs REGOL 1.9 or newer; an older version imports the workouts and leaves the block behind.'
+      : 'A block runs across a rotation, so it needs more than one workout. Add a second one and it travels with the program.';
+  }
+
+  /* ---------- the six questions ---------- */
+
+  // One sheet rather than six screens. Every answer is a single tap, and seeing them together is
+  // what lets you weigh them against each other - five days at 30 minutes is a different program
+  // from three days at 75, and you should be able to see that before you commit to either.
+  var QUIZ = [
+    { key: 'days', ask: 'How many days a week can you train?',
+      why: '1 full body · 2 full body twice · 3 push / pull / legs · 4 upper / lower twice · 5 those plus an upper and a lower · 6 push / pull / legs twice. One workout per day.',
+      opts: [[1, '1'], [2, '2'], [3, '3'], [4, '4'], [5, '5'], [6, '6']] },
+    { key: 'kit', ask: 'What can you train with?', multi: true,
+      why: 'Every movement takes the first lift your kit allows. One that nothing you tick can do is left out rather than faked.',
+      opts: EQUIP.map(function (e) { return [e, e]; }) },
+    { key: 'level', ask: 'How long have you been lifting?',
+      why: 'Moves the set count and how close to failure it asks for: one fewer set at 3 in reserve, as written at 2, one more at 1.',
+      opts: [['new', 'First year'], ['some', 'A few years'], ['long', 'Longer than that']] },
+    { key: 'minutes', ask: 'How long can a session be?',
+      why: 'Lifts are added until three minutes a working set reaches your answer, which is the app\'s own arithmetic. Three go in whatever you say.',
+      opts: [[30, '30 min'], [45, '45 min'], [60, '60 min'], [75, '75 min']] },
+    { key: 'emphasis', ask: 'Anything you want to push?',
+      why: 'One more lift for it in every session that trains it - in place of the last lift, not on top of it, if the clock is full.',
+      opts: [['', 'Nothing in particular'], ['chest', 'Chest'], ['back', 'Back'], ['shoulders', 'Shoulders'], ['arms', 'Arms'], ['legs', 'Legs']] },
+    { key: 'weeks', ask: 'Should it run as a block?',
+      why: 'A fixed run of weeks that gets harder, with a deload at the end. Needs REGOL 1.9 or newer; without one the program simply rotates.',
+      opts: [[0, 'No block'], [4, '4 weeks'], [6, '6 weeks'], [8, '8 weeks']] },
+  ];
+
+  function blankAnswers() {
+    return { days: 3, kit: EQUIP.slice(), level: 'some', minutes: 60, emphasis: '', weeks: 0 };
+  }
+  var answers = null;
+
+  function loadAnswers() {
+    try {
+      var d = JSON.parse(localStorage.getItem(ANSWERS));
+      if (d && d.days && d.kit && d.kit.length) return d;
+    } catch (e) { /* private window, full disk */ }
+    return blankAnswers();
+  }
+
+  function drawQuiz() {
+    var host = $('[data-quiz-body]');
+    host.textContent = '';
+    QUIZ.forEach(function (q) {
+      var box = el('div', 'q');
+      box.appendChild(el('span', 'q-ask', q.ask));
+      var chips = el('div', 'chips');
+      chips.setAttribute('role', 'group');
+      chips.setAttribute('aria-label', q.ask);
+      q.opts.forEach(function (o) {
+        var c = el('button', 'chip', o[1]);
+        c.type = 'button';
+        var on = q.multi ? answers[q.key].indexOf(o[0]) >= 0 : answers[q.key] === o[0];
+        c.setAttribute('aria-pressed', on ? 'true' : 'false');
+        c.addEventListener('click', function () {
+          if (q.multi) {
+            var at = answers[q.key].indexOf(o[0]);
+            // Untick the last one and there is nothing to build with, so the last one stays.
+            if (at >= 0) { if (answers[q.key].length > 1) answers[q.key].splice(at, 1); }
+            else answers[q.key].push(o[0]);
+          } else {
+            answers[q.key] = o[0];
+          }
+          try { localStorage.setItem(ANSWERS, JSON.stringify(answers)); } catch (e) {}
+          drawQuiz();
+        });
+        chips.appendChild(c);
+      });
+      box.appendChild(chips);
+      box.appendChild(el('p', 'q-why', q.why));
+      host.appendChild(box);
+    });
+    previewQuiz();
+  }
+
+  // What those answers would produce, before you commit to them.
+  function previewQuiz() {
+    var p = REGOL.plan(answers, lifts);
+    var sets = 0, seen = {}, nLifts = 0, longest = 0;
+    p.templates.forEach(function (t) {
+      var own = 0;
+      t.items.forEach(function (i) {
+        sets += i.sets; own += i.sets;
+        if (!seen[i.exId]) { seen[i.exId] = 1; nLifts++; }
+      });
+      longest = Math.max(longest, own);
+    });
+    var line = p.name + ' · ' + p.templates.length + (p.templates.length === 1 ? ' workout · ' : ' workouts · ') +
+      nLifts + ' lifts · ' + sets + ' working sets a week · the longest session about ' + (longest * 3) + ' minutes.';
+    if (p.skipped.length) line += ' Left out, because nothing you ticked can do it: ' + p.skipped.join(', ').toLowerCase() + '.';
+    $('[data-quiz-preview]').textContent = line;
+
+    // The button says what it will do. Twenty minutes of picking lifts should not disappear
+    // behind a word as mild as "build".
+    var had = state.templates.some(function (t) { return t.items.length; });
+    $('[data-act="build"]').textContent = had ? 'Replace what I have' : 'Build it';
+  }
+
+  function openQuiz() {
+    ensureLibrary().then(function () {
+      if (!answers) answers = loadAnswers();
+      drawQuiz();
+      $('[data-quiz]').showModal();
+    });
+  }
+
+  function build() {
+    var p = REGOL.plan(answers, lifts);
+    state = { name: p.name, unit: state.unit, block: p.block, templates: p.templates, lifts: p.lifts, seq: p.seq };
+    save();
+    $('[data-quiz]').close();
+    var note = $('[data-draft]');
+    if (note) note.hidden = true;
+    paintTop();
+    drawTemplates();
+    refresh();
+    $('[data-templates]').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   /* ---------- starting points ---------- */
 
   function scratch() {
@@ -362,6 +528,7 @@
     $$('[data-unit]').forEach(function (b) {
       b.setAttribute('aria-pressed', b.getAttribute('data-unit') === state.unit ? 'true' : 'false');
     });
+    paintBlock();
   }
 
   function download() {
@@ -405,7 +572,7 @@
     $('[data-act="add-template"]').addEventListener('click', function () {
       var names = ['Workout A', 'Workout B', 'Workout C', 'Workout D', 'Workout E', 'Workout F'];
       state.templates.push({ id: id('t'), name: names[state.templates.length] || 'Workout', items: [] });
-      save(); drawTemplates(); refresh();
+      save(); drawTemplates(); paintBlock(); refresh();
     });
     $('[data-act="close-pick"]').addEventListener('click', function () { $('[data-picker]').close(); });
     $('[data-pick-search]').addEventListener('input', drawPickList);
@@ -420,11 +587,9 @@
         setTimeout(function () { btn.textContent = was; }, 1600);
       });
     });
-    // The questionnaire is the next piece. A button that opens an apology is worse than a
-    // button that says plainly it is not here yet.
-    var gen = $('[data-act="generate"]');
-    gen.disabled = true;
-    gen.textContent = 'Answer six questions - not built yet';
+    $('[data-act="generate"]').addEventListener('click', openQuiz);
+    $('[data-act="close-quiz"]').addEventListener('click', function () { $('[data-quiz]').close(); });
+    $('[data-act="build"]').addEventListener('click', build);
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
