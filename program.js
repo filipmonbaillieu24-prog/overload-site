@@ -402,7 +402,7 @@
     { key: 'days', ask: 'How many days a week can you train?',
       why: '1 full body · 2 full body twice · 3 push / pull / legs · 4 upper / lower twice · 5 those plus an upper and a lower · 6 push / pull / legs twice. One workout per day.',
       opts: [[1, '1'], [2, '2'], [3, '3'], [4, '4'], [5, '5'], [6, '6']] },
-    { key: 'kit', ask: 'What can you train with?', multi: true,
+    { key: 'kit', ask: 'What can you train with?', multi: true, atLeastOne: true,
       why: 'Every movement takes the first lift your kit allows. One that nothing you tick can do is left out rather than faked.',
       opts: EQUIP.map(function (e) { return [e, e]; }) },
     { key: 'level', ask: 'How long have you been lifting?',
@@ -414,20 +414,26 @@
     { key: 'emphasis', ask: 'Anything you want to push?',
       why: 'One more lift for it in every session that trains it - in place of the last lift, not on top of it, if the clock is full.',
       opts: [['', 'Nothing in particular'], ['chest', 'Chest'], ['back', 'Back'], ['shoulders', 'Shoulders'], ['arms', 'Arms'], ['legs', 'Legs']] },
+    { key: 'avoid', ask: 'Anything you would rather not train?', multi: true,
+      why: 'Those lifts come out before the clock is counted, so the time goes to the rest. A session left with nothing in it hands its day to the ones that still have lifts.',
+      opts: [['chest', 'Chest'], ['back', 'Back'], ['shoulders', 'Shoulders'], ['arms', 'Arms'], ['legs', 'Legs'], ['core', 'Core']] },
     { key: 'weeks', ask: 'Should it run as a block?',
       why: 'A fixed run of weeks that gets harder, with a deload at the end. Needs REGOL 1.9 or newer; without one the program simply rotates.',
       opts: [[0, 'No block'], [4, '4 weeks'], [6, '6 weeks'], [8, '8 weeks']] },
   ];
 
   function blankAnswers() {
-    return { days: 3, kit: EQUIP.slice(), level: 'some', minutes: 60, emphasis: '', weeks: 0 };
+    return { days: 3, kit: EQUIP.slice(), level: 'some', minutes: 60, emphasis: '', avoid: [], weeks: 0 };
   }
   var answers = null;
 
   function loadAnswers() {
     try {
       var d = JSON.parse(localStorage.getItem(ANSWERS));
-      if (d && d.days && d.kit && d.kit.length) return d;
+      if (d && d.days && d.kit && d.kit.length) {
+        if (!d.avoid) d.avoid = [];          // answered before the seventh question existed
+        return d;
+      }
     } catch (e) { /* private window, full disk */ }
     return blankAnswers();
   }
@@ -449,11 +455,18 @@
         c.addEventListener('click', function () {
           if (q.multi) {
             var at = answers[q.key].indexOf(o[0]);
-            // Untick the last one and there is nothing to build with, so the last one stays.
-            if (at >= 0) { if (answers[q.key].length > 1) answers[q.key].splice(at, 1); }
+            // Untick the last kit and there is nothing to build with, so the last one stays.
+            if (at >= 0) { if (!q.atLeastOne || answers[q.key].length > 1) answers[q.key].splice(at, 1); }
             else answers[q.key].push(o[0]);
           } else {
             answers[q.key] = o[0];
+          }
+          // Pushing an area and not training it are two answers that contradict each other.
+          // Whichever was just given wins, and the other one lets go.
+          if (q.key === 'avoid' && answers.avoid.indexOf(answers.emphasis) >= 0) answers.emphasis = '';
+          if (q.key === 'emphasis' && o[0]) {
+            var clash = answers.avoid.indexOf(o[0]);
+            if (clash >= 0) answers.avoid.splice(clash, 1);
           }
           try { localStorage.setItem(ANSWERS, JSON.stringify(answers)); } catch (e) {}
           drawQuiz();
@@ -479,15 +492,25 @@
       });
       longest = Math.max(longest, own);
     });
+    var btn = $('[data-act="build"]');
+    if (!p.templates.length) {
+      $('[data-quiz-preview]').textContent = 'Nothing left to train. Untick something above.';
+      btn.disabled = true;
+      return;
+    }
+    btn.disabled = false;
+
     var line = p.name + ' · ' + p.templates.length + (p.templates.length === 1 ? ' workout · ' : ' workouts · ') +
       nLifts + ' lifts · ' + sets + ' working sets a week · the longest session about ' + (longest * 3) + ' minutes.';
+    if (p.dropped.length) line += ' ' + p.dropped.join(' and ') + (p.dropped.length === 1 ? ' has' : ' have') +
+      ' nothing left, so those days go to the workouts that do.';
     if (p.skipped.length) line += ' Left out, because nothing you ticked can do it: ' + p.skipped.join(', ').toLowerCase() + '.';
     $('[data-quiz-preview]').textContent = line;
 
     // The button says what it will do. Twenty minutes of picking lifts should not disappear
     // behind a word as mild as "build".
     var had = state.templates.some(function (t) { return t.items.length; });
-    $('[data-act="build"]').textContent = had ? 'Replace what I have' : 'Build it';
+    btn.textContent = had ? 'Replace what I have' : 'Build it';
   }
 
   function openQuiz() {

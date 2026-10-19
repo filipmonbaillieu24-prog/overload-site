@@ -31,6 +31,12 @@
 //   the slot it doubles. The time cap then drops from the end, so the extra slot displaces the
 //   lowest-priority one rather than making the session longer.
 //
+//   An area you would rather not train has its slots taken out before the clock is counted, so
+//   the time goes to what is left rather than to a gap. A session that is left with fewer than
+//   three lifts is not a session, so that day goes to the workouts that do still have lifts -
+//   four days and no legs is four upper-body days, not two days and two empty rungs. Both
+//   answers are kept. Only when nothing in the split survives is the week left short.
+//
 //   A block is optional and carries only its length: the app's own defaults do the rest - a
 //   deload week at the end, reserve ramping from the target down to two harder.
 (function (root) {
@@ -219,22 +225,24 @@
     ] },
   };
 
-  // One template per training day. `v` is the variant: the second Push of the week takes the
-  // next lift for each slot, so Push A and Push B are not the same session twice.
+  var TITLE = { full: 'Full body', push: 'Push', pull: 'Pull', legs: 'Legs', upper: 'Upper', lower: 'Lower' };
+
+  // One template per training day, as [template, variant]. The variant is which lift each slot
+  // takes, so the second Push of the week is not the first one again. Names are not written
+  // here: a day is called Push when it is the only one and Push A when it is not, and a day
+  // that has been handed to another template has to be named after that one instead.
   var SPLITS = {
-    1: { name: 'Full body', days: [['full', 'Full body', 0]] },
-    2: { name: 'Full body', days: [['full', 'Full body A', 0], ['full', 'Full body B', 1]] },
-    3: { name: 'Push / Pull / Legs', days: [['push', 'Push', 0], ['pull', 'Pull', 0], ['legs', 'Legs', 0]] },
-    4: { name: 'Upper / Lower', days: [
-      ['upper', 'Upper A', 0], ['lower', 'Lower A', 0], ['upper', 'Upper B', 1], ['lower', 'Lower B', 1],
-    ] },
-    5: { name: 'Push / Pull / Legs + Upper / Lower', days: [
-      ['push', 'Push', 0], ['pull', 'Pull', 0], ['legs', 'Legs', 0], ['upper', 'Upper', 1], ['lower', 'Lower', 1],
-    ] },
-    6: { name: 'Push / Pull / Legs', days: [
-      ['push', 'Push A', 0], ['pull', 'Pull A', 0], ['legs', 'Legs A', 0],
-      ['push', 'Push B', 1], ['pull', 'Pull B', 1], ['legs', 'Legs B', 1],
-    ] },
+    1: [['full', 0]],
+    2: [['full', 0], ['full', 1]],
+    3: [['push', 0], ['pull', 0], ['legs', 0]],
+    4: [['upper', 0], ['lower', 0], ['upper', 1], ['lower', 1]],
+    5: [['push', 0], ['pull', 0], ['legs', 0], ['upper', 1], ['lower', 1]],
+    6: [['push', 0], ['pull', 0], ['legs', 0], ['push', 1], ['pull', 1], ['legs', 1]],
+  };
+
+  var SPLIT_NAME = {
+    1: 'Full body', 2: 'Full body', 3: 'Push / Pull / Legs', 4: 'Upper / Lower',
+    5: 'Push / Pull / Legs + Upper / Lower', 6: 'Push / Pull / Legs',
   };
 
   // What an emphasis doubles, in order of what it would rather add. The first slot the template
@@ -286,69 +294,132 @@
     return slots;
   }
 
+  /**
+   * One session, as a list of library keys. No ids are handed out here, because a session may
+   * be built and thrown away: whether a template is worth a day in the week is only knowable
+   * by building it.
+   */
+  function buildOne(key, variant, ctx) {
+    var tpl = TEMPLATES[key];
+    var slots = slotsFor(tpl, ctx.emphasis);
+    var usedHere = {};
+    var items = [];
+    var sets = 0;
+
+    for (var i = 0; i < slots.length; i++) {
+      var slot = SLOTS[slots[i][0]];
+      var cls = CLASS[slots[i][1]];
+      // Before the clock, not after: an hour you asked for should go to the lifts you want, not
+      // sit as a hole where the ones you do not want would have been.
+      if (ctx.avoid[slot.area]) continue;
+      var n = Math.max(MIN_SETS, cls.sets + ctx.level.sets);
+
+      // The clock. Three lifts go in whatever it says; after that a lift has to fit.
+      if (items.length >= MIN_SLOTS && sets + n > ctx.cap) break;
+
+      var free = slot.picks.filter(function (c) {
+        return ctx.kit[c[1]] && !usedHere[c[0] + '|' + c[1]] && ctx.byKey[c[0] + '|' + c[1]];
+      });
+      if (!free.length) { ctx.skipped[slot.label] = true; continue; }
+      var pick = free[Math.min(variant, free.length - 1)];
+      var k = pick[0] + '|' + pick[1];
+      usedHere[k] = true;
+      items.push({ key: k, sets: n, lo: cls.lo, hi: cls.hi, rir: ctx.level.rir });
+      sets += n;
+    }
+    return items;
+  }
+
   function plan(answers, library) {
     var a = answers || {};
     var days = Math.max(1, Math.min(6, a.days || 3));
     var kit = {};
     (a.kit && a.kit.length ? a.kit : ['Barbell', 'Dumbbell', 'Cable', 'Machine', 'Bodyweight'])
       .forEach(function (e) { kit[e] = true; });
-    var level = LEVEL[a.level] || LEVEL.some;
-    var cap = Math.floor((a.minutes || 60) / MIN_PER_SET);   // working sets the clock allows
-    var split = SPLITS[days];
+    var avoid = {};
+    (a.avoid || []).forEach(function (x) { if (x) avoid[x] = true; });
 
     var byKey = {};
     library.forEach(function (r) { byKey[r.n + '|' + r.e] = r; });
 
-    var out = { name: split.name, unit: a.unit || 'kg', block: null, templates: [], lifts: {}, seq: 0 };
-    var exOf = {};                                   // name|equip -> exercise id, shared program-wide
-    var skipped = {};                                // slot label -> true, for the report
+    var ctx = {
+      kit: kit, avoid: avoid, byKey: byKey,
+      emphasis: a.emphasis,
+      level: LEVEL[a.level] || LEVEL.some,
+      cap: Math.floor((a.minutes || 60) / MIN_PER_SET),    // working sets the clock allows
+      skipped: {},                                         // slot label -> nothing your kit can do
+    };
 
-    split.days.forEach(function (day) {
-      var tpl = TEMPLATES[day[0]];
-      var slots = slotsFor(tpl, a.emphasis);
-      var variant = day[2];
-      var usedHere = {};
-      var items = [];
-      var sets = 0;
+    var split = SPLITS[days];
 
-      for (var i = 0; i < slots.length; i++) {
-        var slot = SLOTS[slots[i][0]];
-        var cls = CLASS[slots[i][1]];
-        var n = Math.max(MIN_SETS, cls.sets + level.sets);
+    // Which of the split's templates still hold a session. The lift count does not depend on
+    // the variant - the same slots are filled either way - so one build per template answers it.
+    var keys = [];
+    split.forEach(function (d) { if (keys.indexOf(d[0]) < 0) keys.push(d[0]); });
+    var viable = keys.filter(function (k) { return buildOne(k, 0, ctx).length >= MIN_SLOTS; });
+    var dropped = keys.filter(function (k) { return viable.indexOf(k) < 0; }).map(function (k) { return TITLE[k]; });
 
-        // The clock. Three slots go in whatever it says; after that a slot has to fit.
-        if (items.length >= MIN_SLOTS && sets + n > cap) break;
-
-        var free = slot.picks.filter(function (c) {
-          return kit[c[1]] && !usedHere[c[0] + '|' + c[1]] && byKey[c[0] + '|' + c[1]];
-        });
-        if (!free.length) { skipped[slot.label] = true; continue; }
-        var pick = free[Math.min(variant, free.length - 1)];
-        var key = pick[0] + '|' + pick[1];
-        usedHere[key] = true;
-
-        if (!exOf[key]) {
-          out.seq += 1;
-          exOf[key] = 'x' + out.seq;
-          out.lifts[exOf[key]] = byKey[key];
-        }
-        items.push({ exId: exOf[key], sets: n, lo: cls.lo, hi: cls.hi, rir: level.rir });
-        sets += n;
-      }
-
-      out.seq += 1;
-      out.templates.push({ id: 't' + out.seq, name: day[1], items: items });
+    // Every day you said you had keeps a workout. A day whose own template no longer holds one
+    // goes to the templates that do, taking the next variant so it is not a session repeated.
+    var next = {};
+    split.forEach(function (d) { next[d[0]] = Math.max(next[d[0]] || 0, d[1] + 1); });
+    var picked = [];
+    var sub = 0;
+    split.forEach(function (d) {
+      if (viable.indexOf(d[0]) >= 0) { picked.push([d[0], d[1]]); return; }
+      if (!viable.length) return;                          // nothing in the split survives
+      var k = viable[sub++ % viable.length];
+      picked.push([k, next[k]++]);
     });
+
+    // A day is called Push when it is the only one and Push A when it is not.
+    var count = {};
+    picked.forEach(function (d) { count[d[0]] = (count[d[0]] || 0) + 1; });
+    var nth = {};
+    var names = picked.map(function (d) {
+      if (count[d[0]] === 1) return TITLE[d[0]];
+      nth[d[0]] = (nth[d[0]] || 0) + 1;
+      return TITLE[d[0]] + ' ' + String.fromCharCode(64 + nth[d[0]]);
+    });
+
+    var out = { name: SPLIT_NAME[days], unit: a.unit || 'kg', block: null, templates: [], lifts: {}, seq: 0 };
+    var exOf = {};                                   // name|equip -> exercise id, shared program-wide
+    ctx.skipped = {};                                // the trial builds have had their say
+
+    picked.forEach(function (d, i) {
+      var items = buildOne(d[0], d[1], ctx).map(function (it) {
+        if (!exOf[it.key]) {
+          out.seq += 1;
+          exOf[it.key] = 'x' + out.seq;
+          out.lifts[exOf[it.key]] = byKey[it.key];
+        }
+        return { exId: exOf[it.key], sets: it.sets, lo: it.lo, hi: it.hi, rir: it.rir };
+      });
+      out.seq += 1;
+      out.templates.push({ id: 't' + out.seq, name: names[i], items: items });
+    });
+
+    // The name has to describe what came out, not what was asked for.
+    if (dropped.length) {
+      var base = [];
+      out.templates.forEach(function (t) {
+        var b = t.name.replace(/ [A-Z]$/, '');
+        if (base.indexOf(b) < 0) base.push(b);
+      });
+      out.name = base.join(' / ') || 'Program';
+    }
 
     if (a.weeks) out.block = { startDay: todayDay(), weeks: a.weeks };
 
-    out.skipped = Object.keys(skipped);
+    out.skipped = Object.keys(ctx.skipped);
+    out.dropped = dropped;
     return out;
   }
 
   var api = {
     plan: plan, todayDay: todayDay,
     SLOTS: SLOTS, TEMPLATES: TEMPLATES, SPLITS: SPLITS, CLASS: CLASS, LEVEL: LEVEL, EMPHASIS: EMPHASIS,
+    TITLE: TITLE, MIN_SLOTS: MIN_SLOTS,
   };
   root.REGOL = root.REGOL || {};
   root.REGOL.plan = plan;
