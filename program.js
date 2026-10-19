@@ -333,6 +333,7 @@
       open.hidden = true; copy.disabled = true; file.disabled = true;
       big.hidden = true; size.textContent = '';
       $('[data-free]').hidden = true;
+      $('[data-qr]').hidden = true;
       return;
     }
 
@@ -352,6 +353,7 @@
         return;
       }
       size.textContent = r.chars + ' of ' + MAX_CHARS + ' characters';
+      drawQr(r.url);
       var over = state.templates.length > FREE_TEMPLATES;
       var fr = $('[data-free]');
       fr.hidden = !over;
@@ -546,6 +548,31 @@
     drawTemplates();
     refresh();
     $('[data-templates]').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  /* ---------- the code ---------- */
+
+  // Drawn from the link, not from anything else: the code and the link carry the same bytes, so
+  // a program that fits one fits the other and there is only ever one thing to be wrong.
+  var qrFor = null;
+
+  function drawQr(url) {
+    var box = $('[data-qr]');
+    if (!url) { box.hidden = true; return; }
+    if (qrFor === url) { box.hidden = false; return; }
+    REGOL.qr.load().then(function () {
+      // refresh() runs on every keystroke; only the last one should land.
+      if (refresh.last && refresh.last.url !== url) return;
+      var code = REGOL.qr.make(url);
+      if (!code) { box.hidden = true; return; }
+      qrFor = url;
+      $('[data-qr-img]').innerHTML = REGOL.qr.svg(code);
+      // The size is worth saying. A 133-module code read off one phone screen by another is at
+      // the edge of what cameras manage, and knowing that beats blaming the camera.
+      $('[data-qr-note]').textContent = code.size + ' modules' +
+        (code.size > 120 ? ' - a big one. Hold the phone close, or send the link instead.' : '');
+      box.hidden = false;
+    }).catch(function () { box.hidden = true; });
   }
 
   /* ---------- starting points ---------- */
