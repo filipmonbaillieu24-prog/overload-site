@@ -201,11 +201,11 @@
   var TEMPLATES = {
     full: { areas: ['chest', 'back', 'shoulders', 'arms', 'legs'], slots: [
       ['squat', 'P'], ['hpress', 'P'], ['row', 'S'], ['hinge', 'S'],
-      ['vpress', 'S'], ['vpull', 'S'], ['arms', 'I'], ['calves', 'I'],
+      ['vpress', 'S'], ['vpull', 'S'], ['arms', 'I'], ['calves', 'H'],
     ] },
     push: { areas: ['chest', 'shoulders', 'arms'], slots: [
       ['hpress', 'P'], ['incline', 'S'], ['vpress', 'S'],
-      ['chestiso', 'I'], ['sidedelt', 'I'], ['triceps', 'I'],
+      ['chestiso', 'I'], ['sidedelt', 'H'], ['triceps', 'I'],
     ] },
     // A second vertical pull rather than a hinge. The hinge is also in Legs and in Lower, so on
     // a five-day week a Romanian deadlift was trained three times: measured against the app's own
@@ -213,23 +213,45 @@
     // line, and both come right - lats on target 39% -> 69%, glutes 43% -> 65%.
     pull: { areas: ['back', 'arms'], slots: [
       ['vpull', 'P'], ['row', 'S'], ['vpull', 'S'],
-      ['reardelt', 'I'], ['biceps', 'I'], ['shrug', 'I'],
+      ['reardelt', 'H'], ['biceps', 'I'], ['shrug', 'I'],
     ] },
     legs: { areas: ['legs'], slots: [
       ['squat', 'P'], ['hinge', 'S'], ['legpress', 'S'],
-      ['hamcurl', 'I'], ['quadext', 'I'], ['calves', 'I'],
+      ['hamcurl', 'I'], ['quadext', 'I'], ['calves', 'H'],
     ] },
     upper: { areas: ['chest', 'back', 'shoulders', 'arms'], slots: [
       ['hpress', 'P'], ['vpull', 'P'], ['vpress', 'S'], ['row', 'S'],
-      ['sidedelt', 'I'], ['biceps', 'I'], ['triceps', 'I'],
+      // No triceps slot: every press on this day already pays them, and measured against the
+      // app's targets they reach it without one. Eight slots do not fit in an hour, and the two
+      // that were being squeezed were the delts, which nothing else on an upper/lower week
+      // trains at all.
+      ['sidedelt', 'H'], ['reardelt', 'H'], ['biceps', 'I'],
+    ] },
+    /**
+     * The fifth day of a five-day week.
+     *
+     * It used to be Lower, which on paper is upper/lower appended to push/pull/legs and in
+     * practice was the Legs day again: squat, hinge, hamstring curl, calves, twice. Hamstrings
+     * came out at a mean of 17.8 sets against a target of 8 to 16 while the delts starved. This
+     * day spends itself on exactly the muscles the measurement says are short.
+     *
+     * The repeated biceps and triceps slots are not a mistake: a slot that repeats takes the
+     * next lift its kit allows, so it reads as a curl and then a different curl.
+     */
+    arms: { areas: ['shoulders', 'arms'], slots: [
+      ['sidedelt', 'H'], ['reardelt', 'H'], ['biceps', 'I'], ['triceps', 'I'],
+      ['shrug', 'I'], ['core', 'I'],
     ] },
     lower: { areas: ['legs'], slots: [
       ['squat', 'P'], ['hinge', 'S'], ['splitsquat', 'S'],
-      ['hamcurl', 'I'], ['calves', 'I'], ['core', 'I'],
+      ['hamcurl', 'I'], ['calves', 'H'], ['core', 'I'],
     ] },
   };
 
-  var TITLE = { full: 'Full body', push: 'Push', pull: 'Pull', legs: 'Legs', upper: 'Upper', lower: 'Lower' };
+  var TITLE = {
+    full: 'Full body', push: 'Push', pull: 'Pull', legs: 'Legs',
+    upper: 'Upper', lower: 'Lower', arms: 'Arms & Shoulders',
+  };
 
   // One template per training day, as [template, variant]. The variant is which lift each slot
   // takes, so the second Push of the week is not the first one again. Names are not written
@@ -240,13 +262,13 @@
     2: [['full', 0], ['full', 1]],
     3: [['push', 0], ['pull', 0], ['legs', 0]],
     4: [['upper', 0], ['lower', 0], ['upper', 1], ['lower', 1]],
-    5: [['push', 0], ['pull', 0], ['legs', 0], ['upper', 1], ['lower', 1]],
+    5: [['push', 0], ['pull', 0], ['legs', 0], ['upper', 1], ['arms', 0]],
     6: [['push', 0], ['pull', 0], ['legs', 0], ['push', 1], ['pull', 1], ['legs', 1]],
   };
 
   var SPLIT_NAME = {
     1: 'Full body', 2: 'Full body', 3: 'Push / Pull / Legs', 4: 'Upper / Lower',
-    5: 'Push / Pull / Legs + Upper / Lower', 6: 'Push / Pull / Legs',
+    5: 'Push / Pull / Legs + Upper + Arms', 6: 'Push / Pull / Legs',
   };
 
   // What an emphasis doubles, in order of what it would rather add. The first slot the template
@@ -278,6 +300,16 @@
     P: { sets: 4, lo: 5, hi: 8, rest: 180, bw: { lo: 6, hi: 12 } },
     S: { sets: 3, lo: 8, hi: 10, rest: null, bw: { lo: 8, hi: 15 } },
     I: { sets: 3, lo: 10, hi: 15, rest: 90, bw: { lo: 12, hi: 20 } },
+    /**
+     * Isolation for a muscle nothing else in the week touches.
+     *
+     * Every press pays the triceps and every row pays the biceps, so the arms arrive at their
+     * target whether or not anything is aimed at them. The side delts, the rear delts and the
+     * calves get nothing from a compound: whatever their own slot asks for is the whole of it.
+     * Measured against the app's own targets, three sets left rear delts at a mean of 2.9
+     * against a target of 8 to 16, and calves below target in 86% of programs.
+     */
+    H: { sets: 4, lo: 10, hi: 15, rest: 90, bw: { lo: 12, hi: 20 } },
   };
 
   // First year, a few years, experienced.
@@ -286,6 +318,53 @@
     some: { sets: 0, rir: 2 },
     'long': { sets: 1, rir: 1 },
   };
+
+  /**
+   * Hard sets per muscle a week, as the app's own Stats.DEFAULT_TARGETS has them.
+   *
+   * Pinned on the Kotlin side by ProTest: the builder and the Stats tab have to agree about what
+   * a week should hold, or the page tells somebody their plan is light about a number the app
+   * will later call fine.
+   */
+  var TARGETS = {
+    Chest: [10, 20], 'Upper chest': [6, 12],
+    Back: [10, 20], Lats: [10, 20], Traps: [6, 14], 'Lower back': [4, 10],
+    Shoulders: [8, 18], 'Front delts': [6, 12], 'Side delts': [8, 18], 'Rear delts': [8, 16],
+    Arms: [8, 16], Biceps: [8, 16], Triceps: [8, 16], Forearms: [4, 10],
+    Legs: [10, 20], Quads: [10, 20], Hamstrings: [8, 16], Glutes: [8, 16],
+    Calves: [8, 16], Adductors: [4, 10],
+    Core: [6, 14], Abs: [6, 14], Obliques: [4, 10], Neck: [4, 8],
+  };
+
+  /**
+   * What a week of this plan asks of each muscle, counted the way the app counts it: a working
+   * set is one for the lift's main muscle and a half for each of the others it names.
+   *
+   * Only the muscles a plan actually trains are returned, each with how it sits against the
+   * target - under, in, or over - so a reader can see where a week is thin before they send it.
+   */
+  function volume(plan) {
+    var by = {}, aimed = {};
+    plan.templates.forEach(function (t) {
+      t.items.forEach(function (i) {
+        var e = plan.lifts[i.exId];
+        by[e.g] = (by[e.g] || 0) + i.sets;
+        aimed[e.g] = true;                       // something in the plan is for this muscle
+        (e.s || []).forEach(function (g) { by[g] = (by[g] || 0) + i.sets * 0.5; });
+      });
+    });
+    return Object.keys(by).map(function (g) {
+      var t = TARGETS[g];
+      var sets = Math.round(by[g] * 10) / 10;
+      // A muscle no lift is aimed at is not judged. Every row pays the forearms and every squat
+      // pays the lower back, and calling a plan short of forearms because nothing is aimed at
+      // them would be noise dressed as advice.
+      return {
+        group: g, sets: sets, lo: t && t[0], hi: t && t[1], aimed: !!aimed[g],
+        state: !t || !aimed[g] ? 'none' : sets < t[0] ? 'light' : sets > t[1] ? 'heavy' : 'on',
+      };
+    }).sort(function (a, b) { return b.sets - a.sets; });
+  }
 
   var MIN_SLOTS = 3;        // two lifts is not a session, whatever the clock says
   var MIN_SETS = 2;
@@ -370,10 +449,14 @@
       usedHere[k] = true;
       // Which prescription applies is only knowable once the kit has chosen the lift.
       var range = pick[1] === 'Bodyweight' ? cls.bw : cls;
-      // Warm up properly for the first lift of the session, a little for a second heavy one, and
+      // Warm up properly for the first heavy lift of the session, a little for a second one, and
       // not at all for the rest. The app shrinks them further when the muscle is already warm
       // from an earlier lift, so this only has to say roughly what the lift deserves.
-      var warm = items.length === 0 ? 3 : (slots[i][1] === 'P' ? 1 : 0);
+      //
+      // Tied to the class rather than the position: an arms day leads on a lateral raise, and
+      // three warm-up sets before a lateral raise is a joke at the lifter's expense.
+      var cls2 = slots[i][1];
+      var warm = cls2 === 'P' ? (items.length === 0 ? 3 : 1) : (cls2 === 'S' && items.length === 0 ? 1 : 0);
       items.push({
         key: k, sets: n, lo: range.lo, hi: range.hi, rir: ctx.level.rir,
         warm: warm, rest: cls.rest,
@@ -473,12 +556,13 @@
   }
 
   var api = {
-    plan: plan, todayDay: todayDay,
+    plan: plan, todayDay: todayDay, volume: volume, TARGETS: TARGETS,
     SLOTS: SLOTS, TEMPLATES: TEMPLATES, SPLITS: SPLITS, CLASS: CLASS, LEVEL: LEVEL, EMPHASIS: EMPHASIS,
     TITLE: TITLE, MIN_SLOTS: MIN_SLOTS,
   };
   root.REGOL = root.REGOL || {};
   root.REGOL.plan = plan;
+  root.REGOL.volume = volume;
   root.REGOL.planner = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
 })(typeof self !== 'undefined' ? self : globalThis);

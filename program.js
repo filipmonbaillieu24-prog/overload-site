@@ -342,6 +342,7 @@
       big.hidden = true; size.textContent = '';
       $('[data-free]').hidden = true;
       $('[data-qr]').hidden = true;
+      $('[data-volume]').hidden = true;
       return;
     }
 
@@ -361,6 +362,11 @@
         return;
       }
       size.textContent = r.chars + ' of ' + MAX_CHARS + ' characters';
+      var vol = $('[data-volume]');
+      vol.textContent = '';
+      vol.appendChild(el('span', 'kick', 'Hard sets a week'));
+      vol.appendChild(volumeTable(state));
+      vol.hidden = false;
       drawQr(r.url);
       var over = state.templates.length > FREE_TEMPLATES;
       var fr = $('[data-free]');
@@ -529,7 +535,8 @@
     if (p.skipped.length) line += ' Left out, because nothing you ticked can do it: ' + p.skipped.join(', ').toLowerCase() + '.';
     if (p.templates.length > FREE_TEMPLATES) line += ' More than ' + FREE_TEMPLATES +
       ' workouts, so it needs the subscription on the phone it lands on.';
-    $('[data-quiz-preview]').textContent = line;
+    // Every branch above already ends its sentence, so this one only needs the space.
+    $('[data-quiz-preview]').textContent = line + ' ' + volumeLine(p) + '.';
 
     // The button says what it will do. Twenty minutes of picking lifts should not disappear
     // behind a word as mild as "build".
@@ -556,6 +563,52 @@
     drawTemplates();
     refresh();
     $('[data-templates]').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  /* ---------- what a week of it asks of you ---------- */
+
+  /**
+   * The plan's weekly hard sets per muscle, against the targets the app itself uses.
+   *
+   * The app shows this on its Stats tab once there is training to measure. Here it is before
+   * anything has been trained, which is the only moment the answer can still change something:
+   * a week that is light on side delts is a thing to know while the questions are still open.
+   */
+  function volumeLine(plan) {
+    var v = REGOL.volume(plan).filter(function (x) { return x.state !== 'none'; });
+    var light = v.filter(function (x) { return x.state === 'light'; });
+    var heavy = v.filter(function (x) { return x.state === 'heavy'; });
+    var on = v.length - light.length - heavy.length;
+    // Three names and a count. Ten muscles listed out is a paragraph nobody reads, and the
+    // number in front of it already says how big the problem is.
+    var names = function (list) {
+      var n = list.slice(0, 3).map(function (x) { return x.group.toLowerCase(); });
+      return n.join(', ') + (list.length > 3 ? ' and ' + (list.length - 3) + ' more' : '');
+    };
+    var parts = [on + ' of ' + v.length + ' muscles on target'];
+    if (light.length) parts.push('light on ' + names(light));
+    if (heavy.length) parts.push('heavy on ' + names(heavy));
+    return parts.join(' · ');
+  }
+
+  /** The same reading as a table, for beside a program somebody is about to send. */
+  function volumeTable(plan) {
+    var box = el('div');
+    box.style.cssText = 'display:flex;flex-direction:column;gap:5px;padding-top:4px';
+    REGOL.volume(plan).filter(function (x) { return x.state !== 'none'; }).forEach(function (x) {
+      var r = el('div');
+      r.style.cssText = 'display:flex;align-items:baseline;gap:8px;font:400 13px/1.4 Barlow';
+      var n = el('span', null, x.group);
+      n.style.cssText = 'flex:1;color:#C9CEC2';
+      var s = el('span', null, x.sets + '');
+      s.style.cssText = 'font:700 14px/1 \'Barlow Condensed\';color:#F2F4EE;min-width:28px;text-align:right';
+      var t = el('span', null, x.state === 'on' ? 'on target' : x.state === 'light' ? 'light' : 'heavy');
+      t.style.cssText = 'min-width:62px;text-align:right;color:' +
+        (x.state === 'on' ? '#9AA093' : x.state === 'light' ? '#FF9B7A' : '#E6C84A');
+      r.appendChild(n); r.appendChild(s); r.appendChild(t);
+      box.appendChild(r);
+    });
+    return box;
   }
 
   /* ---------- the code ---------- */

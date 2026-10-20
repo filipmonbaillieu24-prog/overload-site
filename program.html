@@ -11,8 +11,8 @@
 <script src="site.js"></script>
 <script src="site-ui.js" defer></script>
 <script src="qr.js?v=1" defer></script>
-<script src="program-plan.js?v=5" defer></script>
-<script src="program.js?v=7" defer></script>
+<script src="program-plan.js?v=6" defer></script>
+<script src="program.js?v=8" defer></script>
 <style>
 @font-face{font-family:Barlow;src:url(fonts/barlow_regular.ttf);font-weight:400;font-display:swap}
 @font-face{font-family:Barlow;src:url(fonts/barlow_medium.ttf);font-weight:500;font-display:swap}
@@ -188,6 +188,7 @@ dialog.pick::backdrop{background:rgba(4,5,4,.72)}
         <p class="note" data-size></p>
         <p class="note" data-free hidden style="color:#FF9B7A"></p>
       </div>
+      <div class="card" data-volume hidden style="display:flex;flex-direction:column;gap:6px;padding:16px 18px"></div>
       <div class="warn" data-too-big hidden></div>
       <div class="qr" data-qr hidden>
         <div data-qr-img></div>
