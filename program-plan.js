@@ -10,7 +10,8 @@
 // The rules, as decided:
 //
 //   Days a week pick the split by name: 1 full body, 2 full body twice, 3 push / pull / legs,
-//   4 upper / lower twice, 5 push / pull / legs plus upper / lower, 6 push / pull / legs twice.
+//   4 upper / lower twice, 5 push / pull / legs plus an upper and an arms-and-shoulders day,
+//   6 push / pull / legs twice.
 //   One template per training day, so the rotation on the Plans card has exactly as many rungs
 //   as days you said you had. Where a split repeats a session - full body twice, upper twice -
 //   the second one takes the next lift for each slot, so A and B are not the same workout.
@@ -19,23 +20,26 @@
 //   in the order written here: nothing is inferred from muscle names, because the difference
 //   between a good default and a bad one is not something a muscle tag knows.
 //
-//   Three slot classes carry the prescription: P 4 x 5-8, S 3 x 8-10, I 3 x 10-15. Experience
-//   moves both the set count and the target reserve - first year one fewer set at RIR 3, a few
-//   years as written at RIR 2, experienced one more set at RIR 1.
+//   Four slot classes carry the prescription: P 4 x 5-8, S 3 x 8-10, I 3 x 10-15, and H 4 x 10-15
+//   for a muscle no compound in the week pays - side delts, rear delts, calves. Experience moves
+//   both the set count and the target reserve - first year one fewer set at RIR 3, a few years as
+//   written at RIR 2, experienced one more set at RIR 1.
 //
 //   Session length fills slots until the app's own arithmetic - three minutes a working set,
 //   rest included - reaches the time you have. Three slots is the floor whatever you answer,
 //   because two is not a session.
 //
-//   Emphasis adds one more slot for that area to every session that trains it, placed beside
-//   the slot it doubles. The time cap then drops from the end, so the extra slot displaces the
-//   lowest-priority one rather than making the session longer.
+//   Each muscle group can be asked for more, for less, or for nothing. Focus adds one more slot
+//   for that area to every session that trains it, placed beside the slot it doubles, and the
+//   time cap then displaces the lowest-priority slot rather than making the session longer. Less
+//   focus takes a set off each of that area's slots instead of removing anything, because an area
+//   you want less of is not an area you want gone. Don't train takes the slots out before the
+//   clock is counted, so the time goes to what is left rather than to a gap.
 //
-//   An area you would rather not train has its slots taken out before the clock is counted, so
-//   the time goes to what is left rather than to a gap. A session that is left with fewer than
-//   three lifts is not a session, so that day goes to the workouts that do still have lifts -
-//   four days and no legs is four upper-body days, not two days and two empty rungs. Both
-//   answers are kept. Only when nothing in the split survives is the week left short.
+//   A session left with fewer than three lifts is not a session, so that day goes to the workouts
+//   that do still have lifts - four days and no legs is four upper-body days, not two days and
+//   two empty rungs. Both answers are kept. Only when nothing in the split survives is the week
+//   left short.
 //
 //   A block is optional and carries only its length: the app's own defaults do the rest - a
 //   deload week at the end, reserve ramping from the target down to two harder.
@@ -271,7 +275,7 @@
     5: 'Push / Pull / Legs + Upper + Arms', 6: 'Push / Pull / Legs',
   };
 
-  // What an emphasis doubles, in order of what it would rather add. The first slot the template
+  // What a focus doubles, in order of what it would rather add. The first slot the template
   // already has is the one that gets a second entry; a template that trains none of them - legs
   // on a Push day - is left alone.
   var EMPHASIS = {
@@ -378,16 +382,18 @@
     return Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000);
   }
 
-  // The slot list a template trains, after the emphasis has been added.
-  function slotsFor(tpl, emphasis) {
+  /** The slot list a template trains, with a second slot added for each area asked for. */
+  function slotsFor(tpl, focus) {
     var slots = tpl.slots.map(function (s) { return s.slice(); });
-    if (!emphasis || tpl.areas.indexOf(emphasis) < 0) return slots;
-    var pref = EMPHASIS[emphasis] || [];
-    for (var p = 0; p < pref.length; p++) {
-      var at = -1;
-      for (var i = 0; i < slots.length; i++) if (slots[i][0] === pref[p]) at = i;
-      if (at >= 0) { slots.splice(at + 1, 0, [slots[at][0], slots[at][1]]); return slots; }
-    }
+    (focus || []).forEach(function (area) {
+      if (tpl.areas.indexOf(area) < 0) return;
+      var pref = EMPHASIS[area] || [];
+      for (var p = 0; p < pref.length; p++) {
+        var at = -1;
+        for (var i = 0; i < slots.length; i++) if (slots[i][0] === pref[p]) at = i;
+        if (at >= 0) { slots.splice(at + 1, 0, [slots[at][0], slots[at][1]]); return; }
+      }
+    });
     return slots;
   }
 
@@ -398,7 +404,7 @@
    */
   function buildOne(key, variant, ctx) {
     var tpl = TEMPLATES[key];
-    var slots = slotsFor(tpl, ctx.emphasis);
+    var slots = slotsFor(tpl, ctx.focus);
     var usedHere = {};
     var items = [];
     var sets = 0;
@@ -410,6 +416,10 @@
       // sit as a hole where the ones you do not want would have been.
       if (ctx.avoid[slot.area]) continue;
       var n = Math.max(MIN_SETS, cls.sets + ctx.level.sets);
+      // Less of this one: a set off each of its slots rather than one of them taken away. An
+      // area you want less of is not an area you want gone, and on most templates it only has
+      // one slot anyway - removing it would be the same answer as "don't train".
+      if (ctx.less[slot.area]) n = Math.max(MIN_SETS, n - 1);
 
       // The clock. Three lifts go in whatever it says; after that, take a set off the biggest
       // lifts already in rather than drop this one.
@@ -472,15 +482,20 @@
     var kit = {};
     (a.kit && a.kit.length ? a.kit : ['Barbell', 'Dumbbell', 'Cable', 'Machine', 'Bodyweight'])
       .forEach(function (e) { kit[e] = true; });
-    var avoid = {};
+    var avoid = {}, less = {};
     (a.avoid || []).forEach(function (x) { if (x) avoid[x] = true; });
+    (a.less || []).forEach(function (x) { if (x && !avoid[x]) less[x] = true; });
+    // One string was the old shape of this answer, when only one area could be pushed.
+    var focus = a.focus ? (typeof a.focus === 'string' ? [a.focus] : a.focus)
+      : (a.emphasis ? [a.emphasis] : []);
+    focus = focus.filter(function (x) { return x && !avoid[x] && !less[x]; });
 
     var byKey = {};
     library.forEach(function (r) { byKey[r.n + '|' + r.e] = r; });
 
     var ctx = {
-      kit: kit, avoid: avoid, byKey: byKey,
-      emphasis: a.emphasis,
+      kit: kit, avoid: avoid, less: less, byKey: byKey,
+      focus: focus,
       level: LEVEL[a.level] || LEVEL.some,
       cap: Math.floor((a.minutes || 60) / MIN_PER_SET),    // working sets the clock allows
       skipped: {},                                         // slot label -> nothing your kit can do

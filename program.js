@@ -428,7 +428,7 @@
   // from three days at 75, and you should be able to see that before you commit to either.
   var QUIZ = [
     { key: 'days', ask: 'How many days a week can you train?',
-      why: '1 full body · 2 full body twice · 3 push / pull / legs · 4 upper / lower twice · 5 those plus an upper and a lower · 6 push / pull / legs twice. One workout per day.',
+      why: '1 full body · 2 full body twice · 3 push / pull / legs · 4 upper / lower twice · 5 those three plus an upper and an arms day · 6 push / pull / legs twice. One workout per day.',
       opts: [[1, '1'], [2, '2'], [3, '3'], [4, '4'], [5, '5'], [6, '6']] },
     { key: 'kit', ask: 'What can you train with?', multi: true, atLeastOne: true,
       why: 'Every movement takes the first lift your kit allows. One that nothing you tick can do is left out rather than faked.',
@@ -438,28 +438,38 @@
       opts: [['new', 'First year'], ['some', 'A few years'], ['long', 'Longer than that']] },
     { key: 'minutes', ask: 'How long can a session be?',
       why: 'Lifts are added until three minutes a working set reaches your answer, which is the app\'s own arithmetic. Three go in whatever you say.',
-      opts: [[30, '30 min'], [45, '45 min'], [60, '60 min'], [75, '75 min']] },
-    { key: 'emphasis', ask: 'Anything you want to push?',
-      why: 'One more lift for it in every session that trains it - in place of the last lift, not on top of it, if the clock is full.',
-      opts: [['', 'Nothing in particular'], ['chest', 'Chest'], ['back', 'Back'], ['shoulders', 'Shoulders'], ['arms', 'Arms'], ['legs', 'Legs']] },
-    { key: 'avoid', ask: 'Anything you would rather not train?', multi: true,
-      why: 'Those lifts come out before the clock is counted, so the time goes to the rest. A session left with nothing in it hands its day to the ones that still have lifts.',
+      opts: [[30, '30 min'], [45, '45 min'], [60, '60 min'], [75, '75 min'], [90, '90 min'], [120, '2 hours']] },
+    { key: 'groups', ask: 'More or less of anything?', triple: true,
+      why: 'Focus gets one more lift in every session that trains it - in place of the last lift, not on top of it, if the clock is full. Less focus keeps the lifts and takes a set off each. Don\'t train takes them out before the clock is counted, so the time goes to the rest; a session left with nothing in it hands its day to the ones that still have lifts.',
       opts: [['chest', 'Chest'], ['back', 'Back'], ['shoulders', 'Shoulders'], ['arms', 'Arms'], ['legs', 'Legs'], ['core', 'Core']] },
     { key: 'weeks', ask: 'Should it run as a block?',
       why: 'A fixed run of weeks that gets harder, with a deload at the end. Needs REGOL 1.9 or newer; without one the program simply rotates.',
       opts: [[0, 'No block'], [4, '4 weeks'], [6, '6 weeks'], [8, '8 weeks']] },
   ];
 
+  // The three things you can say about a muscle group, each with the answer list it writes to.
+  // A group named in none of them is ordinary, which is most of them and needs no chip.
+  var GROUP_STATES = [['focus', 'Focus'], ['less', 'Less focus'], ['avoid', 'Don\'t train']];
+
   function blankAnswers() {
-    return { days: 3, kit: EQUIP.slice(), level: 'some', minutes: 60, emphasis: '', avoid: [], weeks: 0 };
+    return { days: 3, kit: EQUIP.slice(), level: 'some', minutes: 60, focus: [], less: [], avoid: [], weeks: 0 };
   }
   var answers = null;
+
+  function saveAnswers() {
+    try { localStorage.setItem(ANSWERS, JSON.stringify(answers)); } catch (e) { /* private window */ }
+  }
 
   function loadAnswers() {
     try {
       var d = JSON.parse(localStorage.getItem(ANSWERS));
       if (d && d.days && d.kit && d.kit.length) {
-        if (!d.avoid) d.avoid = [];          // answered before the seventh question existed
+        // Answered before the three-state question existed: one area could be pushed and any
+        // number left alone, which is the same answer in the new shape minus the middle rung.
+        if (!d.avoid) d.avoid = [];
+        if (!d.less) d.less = [];
+        if (!d.focus) d.focus = d.emphasis ? [d.emphasis] : [];
+        delete d.emphasis;
         return d;
       }
     } catch (e) { /* private window, full disk */ }
@@ -472,6 +482,7 @@
     QUIZ.forEach(function (q) {
       var box = el('div', 'q');
       box.appendChild(el('span', 'q-ask', q.ask));
+      if (q.triple) { box.appendChild(groupRows(q)); box.appendChild(el('p', 'q-why', q.why)); host.appendChild(box); return; }
       var chips = el('div', 'chips');
       chips.setAttribute('role', 'group');
       chips.setAttribute('aria-label', q.ask);
@@ -489,14 +500,7 @@
           } else {
             answers[q.key] = o[0];
           }
-          // Pushing an area and not training it are two answers that contradict each other.
-          // Whichever was just given wins, and the other one lets go.
-          if (q.key === 'avoid' && answers.avoid.indexOf(answers.emphasis) >= 0) answers.emphasis = '';
-          if (q.key === 'emphasis' && o[0]) {
-            var clash = answers.avoid.indexOf(o[0]);
-            if (clash >= 0) answers.avoid.splice(clash, 1);
-          }
-          try { localStorage.setItem(ANSWERS, JSON.stringify(answers)); } catch (e) {}
+          saveAnswers();
           drawQuiz();
         });
         chips.appendChild(c);
@@ -506,6 +510,45 @@
       host.appendChild(box);
     });
     previewQuiz();
+  }
+
+  /**
+   * One row per muscle group, each carrying the three things you can say about it.
+   *
+   * A segmented row rather than three toggles, because the three are one answer: a group cannot
+   * be focused and untrained at once, so tapping any of them clears the other two. Tapping the
+   * one already lit puts the group back to ordinary, which is the state most of them are in and
+   * the reason there is no fourth chip saying so.
+   */
+  function groupRows(q) {
+    var rows = el('div', 'g-rows');
+    rows.setAttribute('role', 'group');
+    rows.setAttribute('aria-label', q.ask);
+    q.opts.forEach(function (o) {
+      var row = el('div', 'g-row');
+      row.appendChild(el('span', 'g-name', o[1]));
+      var seg = el('div', 'g-seg');
+      GROUP_STATES.forEach(function (st) {
+        var c = el('button', 'chip', st[1]);
+        c.type = 'button';
+        var on = answers[st[0]].indexOf(o[0]) >= 0;
+        c.setAttribute('aria-pressed', on ? 'true' : 'false');
+        c.setAttribute('aria-label', o[1] + ': ' + st[1]);
+        c.addEventListener('click', function () {
+          GROUP_STATES.forEach(function (other) {
+            var at = answers[other[0]].indexOf(o[0]);
+            if (at >= 0) answers[other[0]].splice(at, 1);
+          });
+          if (!on) answers[st[0]].push(o[0]);
+          saveAnswers();
+          drawQuiz();
+        });
+        seg.appendChild(c);
+      });
+      row.appendChild(seg);
+      rows.appendChild(row);
+    });
+    return rows;
   }
 
   // What those answers would produce, before you commit to them.
