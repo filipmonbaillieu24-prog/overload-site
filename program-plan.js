@@ -341,14 +341,23 @@
       // at three sets cover a week better than four at five. The dose is thinner and the coverage
       // is wider, which is the trade, taken deliberately.
       if (items.length >= MIN_SLOTS && sets + n > ctx.cap) {
-        var freed = 0;
-        var order = items.map(function (_, k) { return k; })
-          .sort(function (a, b) { return items[b].sets - items[a].sets; });
-        for (var o = 0; o < order.length && sets + n - freed > ctx.cap; o++) {
-          var big = items[order[o]];
-          while (big.sets > MIN_SETS && sets + n - freed > ctx.cap) { big.sets -= 1; freed += 1; }
+        // One set at a time, from the back of the session forwards, round and round. Taking it
+        // from whichever lift has the most to give sounds fair and is not: the lift with the most
+        // sets is always the main compound, so the heaviest lift of the session came out with
+        // fewer sets than the lateral raise after it. The lead lift only loses a set once every
+        // accessory has lost one.
+        // The lift arriving is in the pool too, or it lands at full sets beside neighbours that
+        // were trimmed to make room for it, and the session ends on a number that looks arbitrary.
+        var pool = items.concat([{ sets: n }]);
+        var freed = 0, moved = true;
+        while (sets + n - freed > ctx.cap && moved) {
+          moved = false;
+          for (var o = pool.length - 1; o >= 0 && sets + n - freed > ctx.cap; o--) {
+            if (pool[o].sets > MIN_SETS) { pool[o].sets -= 1; freed += 1; moved = true; }
+          }
         }
-        sets -= freed;
+        n = pool[pool.length - 1].sets;
+        sets = items.reduce(function (a, x) { return a + x.sets; }, 0);
         if (sets + n > ctx.cap) break;
       }
 
