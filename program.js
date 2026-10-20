@@ -62,6 +62,9 @@
   // the other side: every byte saved here is a byte of program that still fits in a code.
   function item(it) {
     var o = { exId: it.exId };
+    // Warm-ups were simply dropped: the generator can ask for them and the app knows what to do
+    // with them, and the one step in between wrote every other field and not this one.
+    if (it.warm) o.warm = it.warm;
     if (it.sets !== 3) o.sets = it.sets;
     if (it.lo !== 8) o.lo = it.lo;
     if (it.hi !== 10) o.hi = it.hi;
@@ -188,7 +191,12 @@
         var lift = state.lifts[it.exId];
         var nameBox = el('div', 'row-name');
         nameBox.appendChild(el('b', null, lift.n));
-        nameBox.appendChild(el('span', null, lift.e + ' · ' + lift.g));
+        // What the generator asked for beyond the numbers in the boxes. The editor cannot change
+        // these yet, which is a reason to say they are there rather than a reason to hide them.
+        var extra = lift.e + ' · ' + lift.g;
+        if (it.warm) extra += ' · ' + it.warm + ' warm-up' + (it.warm === 1 ? '' : 's');
+        if (it.rest) extra += ' · rest ' + Math.floor(it.rest / 60) + ':' + ('0' + (it.rest % 60)).slice(-2);
+        nameBox.appendChild(el('span', null, extra));
         row.appendChild(nameBox);
 
         var nums = el('div', 'nums');

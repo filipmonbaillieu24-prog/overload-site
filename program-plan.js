@@ -207,8 +207,12 @@
       ['hpress', 'P'], ['incline', 'S'], ['vpress', 'S'],
       ['chestiso', 'I'], ['sidedelt', 'I'], ['triceps', 'I'],
     ] },
+    // A second vertical pull rather than a hinge. The hinge is also in Legs and in Lower, so on
+    // a five-day week a Romanian deadlift was trained three times: measured against the app's own
+    // volume targets, glutes landed over target in 57% of programs and lats under in 61%. One
+    // line, and both come right - lats on target 39% -> 69%, glutes 43% -> 65%.
     pull: { areas: ['back', 'arms'], slots: [
-      ['vpull', 'P'], ['row', 'S'], ['hinge', 'S'],
+      ['vpull', 'P'], ['row', 'S'], ['vpull', 'S'],
       ['reardelt', 'I'], ['biceps', 'I'], ['shrug', 'I'],
     ] },
     legs: { areas: ['legs'], slots: [
@@ -256,10 +260,24 @@
     legs: ['quadext', 'legpress', 'splitsquat', 'hinge', 'squat'],
   };
 
+  /**
+   * What each slot class asks for.
+   *
+   * [rest] is seconds, and null means the lifter's own default - which is the right answer for
+   * the middle of a session. A main compound wants longer than a default and an isolation lift
+   * wants less, and saying so is most of the difference between a program that reads as designed
+   * and one that reads as generated.
+   *
+   * [bw] is the same slot when the lift turns out to be bodyweight. A push-up prescribed 4 x 5-8
+   * is a prescription almost nobody can make hard, and a pull-up at 10-15 is one almost nobody
+   * can start. The ranges are wider than the loaded ones on purpose: with no weight to add, reps
+   * are the only thing that can move, and a bodyweight lift that takes added load can grow out of
+   * the range from the top.
+   */
   var CLASS = {
-    P: { sets: 4, lo: 5, hi: 8 },
-    S: { sets: 3, lo: 8, hi: 10 },
-    I: { sets: 3, lo: 10, hi: 15 },
+    P: { sets: 4, lo: 5, hi: 8, rest: 180, bw: { lo: 6, hi: 12 } },
+    S: { sets: 3, lo: 8, hi: 10, rest: null, bw: { lo: 8, hi: 15 } },
+    I: { sets: 3, lo: 10, hi: 15, rest: 90, bw: { lo: 12, hi: 20 } },
   };
 
   // First year, a few years, experienced.
@@ -314,8 +332,25 @@
       if (ctx.avoid[slot.area]) continue;
       var n = Math.max(MIN_SETS, cls.sets + ctx.level.sets);
 
-      // The clock. Three lifts go in whatever it says; after that a lift has to fit.
-      if (items.length >= MIN_SLOTS && sets + n > ctx.cap) break;
+      // The clock. Three lifts go in whatever it says; after that, take a set off the biggest
+      // lifts already in rather than drop this one.
+      //
+      // Dropping from the end sounds neutral and is not: the end of every list is where the
+      // isolation work lives, so the lifts cut were always the only ones training side delts,
+      // rear delts and calves - never trained at all in a fifth to a third of programs. Six lifts
+      // at three sets cover a week better than four at five. The dose is thinner and the coverage
+      // is wider, which is the trade, taken deliberately.
+      if (items.length >= MIN_SLOTS && sets + n > ctx.cap) {
+        var freed = 0;
+        var order = items.map(function (_, k) { return k; })
+          .sort(function (a, b) { return items[b].sets - items[a].sets; });
+        for (var o = 0; o < order.length && sets + n - freed > ctx.cap; o++) {
+          var big = items[order[o]];
+          while (big.sets > MIN_SETS && sets + n - freed > ctx.cap) { big.sets -= 1; freed += 1; }
+        }
+        sets -= freed;
+        if (sets + n > ctx.cap) break;
+      }
 
       var free = slot.picks.filter(function (c) {
         return ctx.kit[c[1]] && !usedHere[c[0] + '|' + c[1]] && ctx.byKey[c[0] + '|' + c[1]];
@@ -324,7 +359,16 @@
       var pick = free[Math.min(variant, free.length - 1)];
       var k = pick[0] + '|' + pick[1];
       usedHere[k] = true;
-      items.push({ key: k, sets: n, lo: cls.lo, hi: cls.hi, rir: ctx.level.rir });
+      // Which prescription applies is only knowable once the kit has chosen the lift.
+      var range = pick[1] === 'Bodyweight' ? cls.bw : cls;
+      // Warm up properly for the first lift of the session, a little for a second heavy one, and
+      // not at all for the rest. The app shrinks them further when the muscle is already warm
+      // from an earlier lift, so this only has to say roughly what the lift deserves.
+      var warm = items.length === 0 ? 3 : (slots[i][1] === 'P' ? 1 : 0);
+      items.push({
+        key: k, sets: n, lo: range.lo, hi: range.hi, rir: ctx.level.rir,
+        warm: warm, rest: cls.rest,
+      });
       sets += n;
     }
     return items;
@@ -393,7 +437,10 @@
           exOf[it.key] = 'x' + out.seq;
           out.lifts[exOf[it.key]] = byKey[it.key];
         }
-        return { exId: exOf[it.key], sets: it.sets, lo: it.lo, hi: it.hi, rir: it.rir };
+        return {
+          exId: exOf[it.key], sets: it.sets, lo: it.lo, hi: it.hi, rir: it.rir,
+          warm: it.warm, rest: it.rest,
+        };
       });
       out.seq += 1;
       out.templates.push({ id: 't' + out.seq, name: names[i], items: items });
