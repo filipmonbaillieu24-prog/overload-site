@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["Y52NHM48Z5.be.regolapp.regol"],
+        "components": [
+          {
+            "/": "/p.html",
+            "comment": "A shared program code. Exactly the path the Android manifest claims, and no other: every other page on this site belongs in a browser."
+          }
+        ]
+      }
+    ]
+  }
+}
