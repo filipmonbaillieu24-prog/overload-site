@@ -12,9 +12,17 @@
 // The one part of this that cannot be reasoned about is the data - how many error-correction
 // codewords each version and level uses, how codewords split into blocks, where the alignment
 // patterns sit. One wrong number there is a code that looks perfectly plausible and scans as
-// nothing. So those are not typed: qr-tables.json is read out of zxing, which is what the app
-// itself encodes with, by QrTablesDumpTest. QrRoundTripTest then takes what this file draws and
-// decodes it with zxing, which is the only proof that matters.
+// nothing. So those are not typed: qr-tables.json is read out of zxing, by QrTablesDumpTest.
+//
+// And "it decodes" turned out not to be the only proof that matters. The app no longer encodes with
+// zxing at all - zxing is a JVM library and the engine compiles for iOS now - so it runs a Kotlin
+// port of this file, and that port is checked against zxing MODULE FOR MODULE rather than by
+// decoding. Three defects in here survived years of round-trip tests, because every one of them
+// produced a code that scans perfectly and is a different picture: two timing modules wiped by the
+// format reservation, and two penalty rules whose arithmetic disagreed with zxing's and could
+// therefore choose a different mask. All three are fixed; see the comment at each. Eight masks are
+// legal and a reader tries all of them, which is exactly why a decoder cannot tell you that you
+// drew the wrong one.
 (function (root) {
   'use strict';
 
@@ -250,7 +258,18 @@
     }
     putVersion(g, version);
     // Reserved so the data placement steps over them; the real bits go in once the mask is known.
-    for (i = 0; i < 9; i++) { g.set(8, i, 0, true); g.set(i, 8, 0, true); }
+    //
+    // `i !== 6` is not a nicety. Row 6 and column 6 are the timing patterns, and the format
+    // information steps over them: column 8 carries format bits at rows 0-5, 7 and 8, and row 8 at
+    // columns 0-5, 7 and 8. Reserving the full nine wiped the timing modules at (6,8) and (8,6) to
+    // light, and putFormat skips them too, so nothing ever wrote them back. The codes still
+    // scanned - a reader finds its grid from the finder and alignment patterns, not from those two
+    // - which is why a round-trip test never saw it.
+    for (i = 0; i < 9; i++) {
+      if (i === 6) continue;
+      g.set(8, i, 0, true);
+      g.set(i, 8, 0, true);
+    }
     for (i = 0; i < 8; i++) { g.set(8, n - 1 - i, 0, true); g.set(n - 1 - i, 8, 0, true); }
     return g;
   }
@@ -319,29 +338,43 @@
     }
 
     // The finder-like sequence, which a scanner can mistake for a finder.
-    var A = [1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0], B = [0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1];
-    function runsAt(line) {
+    //
+    // Counted ONCE per occurrence, the way zxing counts it: the seven-module core 1011101 with four
+    // light modules on one side OR the other. Matching the two eleven-module patterns 10111010000
+    // and 00001011101 separately - which is what this did - scores a sequence with light on BOTH
+    // sides twice, at forty points a go. Out of bounds counts as not-light, so a sequence running
+    // off the edge of the code gets no benefit of the doubt.
+    function light(line, from, to) {
+      if (from < 0 || line.length < to) return false;
+      for (var k2 = from; k2 < to; k2++) if (line[k2]) return false;
+      return true;
+    }
+    function hitsIn(line) {
       var hits = 0;
-      for (var s = 0; s + 11 <= n; s++) {
-        var okA = true, okB = true;
-        for (i = 0; i < 11; i++) {
-          if (line[s + i] !== A[i]) okA = false;
-          if (line[s + i] !== B[i]) okB = false;
+      for (var s = 0; s + 6 < line.length; s++) {
+        if (line[s] && !line[s + 1] && line[s + 2] && line[s + 3] && line[s + 4] &&
+            !line[s + 5] && line[s + 6] &&
+            (light(line, s + 7, s + 11) || light(line, s - 4, s))) {
+          hits++;
         }
-        if (okA || okB) hits++;
       }
       return hits;
     }
     for (r = 0; r < n; r++) {
       var row = [], col = [];
       for (c = 0; c < n; c++) { row.push(g.get(r, c)); col.push(g.get(c, r)); }
-      score += 40 * (runsAt(row) + runsAt(col));
+      score += 40 * (hitsIn(row) + hitsIn(col));
     }
 
     // How far off an even split of dark and light it is.
+    //
+    // |2*dark - total| * 10 / total, in that order, which is zxing's arithmetic. Computing a
+    // percentage first and then dividing by five rounds twice, and the two answers differ by a
+    // whole step of ten points for darkness fractions that are common rather than rare.
     var dark = 0;
     for (i = 0; i < g.m.length; i++) dark += g.m[i];
-    score += 10 * Math.floor(Math.abs(dark * 100 / (n * n) - 50) / 5);
+    var total = n * n;
+    score += 10 * Math.floor(Math.abs(dark * 2 - total) * 10 / total);
     return score;
   }
 
