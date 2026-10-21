@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.overload",
+      "sha256_cert_fingerprints": [
+        "96:C9:CC:62:C9:64:CF:38:23:24:60:AE:9F:F4:58:E0:AB:74:C2:0D:B3:11:F1:8B:11:77:D2:AE:B6:C2:0A:73"
+      ]
+    }
+  }
+]

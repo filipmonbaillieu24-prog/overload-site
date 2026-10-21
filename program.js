@@ -1,6 +1,6 @@
 // The program maker.
 //
-// Builds a REGOL program in the browser and hands it to the phone as a `regol://p?d=...` link:
+// Builds a REGOL program in the browser and hands it to the phone as a `regolapp.be/p.html?d=...` link:
 // the JSON of Formats.ProgramFile, raw-deflated, base64url, exactly as engine/Formats.kt writes
 // and reads it. There is no server in this, which is the point - the whole program travels inside
 // the link, so it works with the network off, and nothing about anyone's training is sent anywhere.
@@ -114,7 +114,10 @@
     if (!self.CompressionStream) return Promise.resolve({ error: 'old-browser', json: json });
     var stream = new Blob([json]).stream().pipeThrough(new CompressionStream('deflate-raw'));
     return new Response(stream).arrayBuffer().then(function (packed) {
-      var url = 'regol://p?d=' + b64url(packed);
+      // An ordinary web address, the same one Formats.programLink writes. A regol:// code only
+      // opens on a phone that already has REGOL, and a code is the one thing here that travels to
+      // people who do not - so it points at a page, which reads the same payload and hands it on.
+      var url = 'https://regolapp.be/p.html?d=' + b64url(packed);
       return { url: url, chars: url.length, json: json, over: url.length > MAX_CHARS };
     });
   }
