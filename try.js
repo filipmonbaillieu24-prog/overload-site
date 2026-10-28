@@ -1,7 +1,7 @@
 // Try it: the twelve-step tour over the embedded app, and the calculator that
 // asks the progression engine directly.
 //
-// The simulator is REGOL.dc.html in an iframe, unchanged, driven through the
+// The simulator is REGOL.dc.html (the 1.9 app prototype) in an iframe, driven through the
 // design runtime's own prop setter. engine() below is the app's RIR rule for a
 // flat target on a weighted lift, with the app's own sentences, ported as it is.
 (function () {
@@ -12,7 +12,7 @@
     ['Why', 'Read the reasons', 'Every lift gets a sentence: green when it goes up, grey when it holds, red only when a weight actually comes down. These are the same words the live screen uses.', 'why'],
     ['Log', 'Log a set, then rate it', 'Weight and reps are already filled in. After the set, tap how many reps you had left, then <b>Log</b>. Change the reps or the reserve and watch <b>Next time</b> rewrite itself.', 'live'],
     ['Rest', 'Rest takes the screen', 'Logging starts the rest timer, full screen. <b>+30s</b> and <b>Skip</b> sit under your thumb. On the phone it rings and vibrates even on silent.', 'rest'],
-    ['Set type', 'Pick a set type', 'Tap <b>Change</b> on the set type for warm-up, drop set, rest-pause or AMRAP. Only normal sets and AMRAP move next time’s weight.', 'settype'],
+    ['Set type', 'Pick a set type', 'Tap <b>Set type</b> next to the set for warm-up, drop set, rest-pause or AMRAP. Only normal sets and AMRAP move next time’s weight.', 'settype'],
     ['Options', 'Change this lift for today', '<b>Options</b> changes sets, rest and target reserve for this workout only, swaps the lift, or opens its history and settings.', 'liftopts'],
     ['Board', 'Machine taken? Jump around', 'The list icon opens the board: every lift in the workout and how far along it is. Tap one to go to it, or add a lift that is not in the template.', 'board'],
     ['Summary', 'Finish and read the verdict', 'The summary lists every new best, marks the set that beat it, and gives next time’s weight for each lift with its reason.', 'summary'],
