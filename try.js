@@ -4,6 +4,16 @@
 // The simulator is REGOL.dc.html (the 1.9 app prototype) in an iframe, driven through the
 // design runtime's own prop setter. engine() below is the app's RIR rule for a
 // flat target on a weighted lift, with the app's own sentences, ported as it is.
+//
+// BUMP THIS WHENEVER REGOL.dc.html, regol-app.js OR polish/regol-core.js CHANGES.
+//
+// It is a cache key and nothing else. The iframe URL used to carry no version, the pages ship
+// with `Cache-Control: max-age=600`, and the old prototype's engine (`overload-core.js`) is
+// still on the server - so a browser holding the previous REGOL.dc.html served it from cache,
+// found everything it asked for, and went on running the OLD app with nothing broken to show
+// for it. That is not a theory about what might happen; it is what happened on the 28 October
+// deploy, and the only reason it was noticed is that somebody knew what the new one looked like.
+const PROTOTYPE = '20261028';
 (function () {
   'use strict';
 
@@ -226,7 +236,8 @@
     // component once and will not take new props afterwards, so a step is a
     // fresh load rather than a prop change.
     function show() {
-      frame.src = 'REGOL.dc.html?embedded=1&fast=1&scene=' + TOUR[cur][3] + '&seed=' + seed;
+      frame.src = 'REGOL.dc.html?embedded=1&fast=1&scene=' + TOUR[cur][3]
+        + '&seed=' + seed + '&v=' + PROTOTYPE;
     }
 
     // The embedded page draws its own shell as soon as it has one.
