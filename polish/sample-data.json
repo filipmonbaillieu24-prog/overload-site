@@ -1,2075 +1,2076 @@
 {
-  "version": 5,
-  "exercises": [
-    {
-      "id": "x1",
-      "name": "Bench Press",
-      "group": "Chest",
-      "secondary": [
-        "Triceps",
-        "Front delts"
-      ],
-      "equip": "Barbell",
-      "unit": "kg",
-      "min": 20.0,
-      "inc": 2.5,
-      "load": "weighted",
-      "perSide": false,
-      "defLo": 5,
-      "defHi": 8,
-      "defRir": 2
-    },
-    {
-      "id": "x2",
-      "name": "Barbell Row",
-      "group": "Back",
-      "secondary": [
-        "Biceps"
-      ],
-      "equip": "Barbell",
-      "unit": "kg",
-      "min": 20.0,
-      "inc": 2.5,
-      "load": "weighted",
-      "perSide": false,
-      "defLo": 6,
-      "defHi": 10,
-      "defRir": 2
-    },
-    {
-      "id": "x3",
-      "name": "Overhead Press",
-      "group": "Shoulders",
-      "secondary": [
-        "Triceps"
-      ],
-      "equip": "Barbell",
-      "unit": "kg",
-      "min": 20.0,
-      "inc": 2.5,
-      "load": "weighted",
-      "perSide": false,
-      "defLo": 5,
-      "defHi": 8,
-      "defRir": 2
-    },
-    {
-      "id": "x4",
-      "name": "Weighted Pull-up",
-      "group": "Lats",
-      "secondary": [
-        "Biceps"
-      ],
-      "equip": "Bodyweight",
-      "unit": "kg",
-      "min": 0.0,
-      "inc": 2.5,
-      "load": "added",
-      "perSide": false,
-      "defLo": 5,
-      "defHi": 8,
-      "defRir": 2
-    },
-    {
-      "id": "x5",
-      "name": "Back Squat",
-      "group": "Quads",
-      "secondary": [
-        "Glutes"
-      ],
-      "equip": "Barbell",
-      "unit": "kg",
-      "min": 20.0,
-      "inc": 2.5,
-      "load": "weighted",
-      "perSide": false,
-      "defLo": 5,
-      "defHi": 8,
-      "defRir": 2
-    },
-    {
-      "id": "x6",
-      "name": "Romanian Deadlift",
-      "group": "Hamstrings",
-      "secondary": [
-        "Glutes",
-        "Lower back"
-      ],
-      "equip": "Barbell",
-      "unit": "kg",
-      "min": 20.0,
-      "inc": 2.5,
-      "load": "weighted",
-      "perSide": false,
-      "defLo": 6,
-      "defHi": 10,
-      "defRir": 2
-    },
-    {
-      "id": "x7",
-      "name": "Dumbbell Curl",
-      "group": "Biceps",
-      "secondary": [],
-      "equip": "Dumbbell",
-      "unit": "kg",
-      "min": 4.0,
-      "inc": 2.0,
-      "load": "weighted",
-      "perSide": true,
-      "defLo": 8,
-      "defHi": 12,
-      "defRir": 2
-    },
-    {
-      "id": "x8",
-      "name": "Plank",
-      "group": "Abs",
-      "secondary": [],
-      "equip": "Bodyweight",
-      "unit": "kg",
-      "min": 0.0,
-      "inc": 2.5,
-      "load": "added",
-      "perSide": false,
-      "defLo": 8,
-      "defHi": 10,
-      "defRir": 2
-    }
-  ],
-  "templates": [
-    {
-      "id": "t1",
-      "name": "Upper A",
-      "mode": "rir",
-      "items": [
-        {
-          "exId": "x1",
-          "warm": 2,
-          "sets": 4,
-          "lo": 5,
-          "hi": 8,
-          "rir": 2,
-          "style": "topBackoff",
-          "backoffPct": 10
-        },
-        {
-          "exId": "x2",
-          "warm": 2,
-          "sets": 3,
-          "lo": 6,
-          "hi": 10,
-          "rir": 2
-        },
-        {
-          "exId": "x3",
-          "warm": 2,
-          "sets": 3,
-          "lo": 5,
-          "hi": 8,
-          "rir": 2
-        },
-        {
-          "exId": "x7",
-          "warm": 1,
-          "sets": 3,
-          "lo": 8,
-          "hi": 12,
-          "rir": 1
-        }
-      ]
-    },
-    {
-      "id": "t2",
-      "name": "Lower A",
-      "mode": "rir",
-      "items": [
-        {
-          "exId": "x5",
-          "warm": 2,
-          "sets": 4,
-          "lo": 5,
-          "hi": 8,
-          "rir": 2
-        },
-        {
-          "exId": "x6",
-          "warm": 2,
-          "sets": 3,
-          "lo": 6,
-          "hi": 10,
-          "rir": 2
-        },
-        {
-          "exId": "x4",
-          "warm": 1,
-          "sets": 3,
-          "lo": 5,
-          "hi": 8,
-          "rir": 1
-        },
-        {
-          "exId": "x8",
-          "warm": 0,
-          "sets": 3,
-          "lo": 30,
-          "hi": 60,
-          "rir": 2,
-          "timed": true
-        }
-      ]
-    }
-  ],
-  "programs": [
-    {
-      "id": "p1",
-      "name": "Upper Lower 4",
-      "templateIds": [
-        "t1",
-        "t2"
-      ],
-      "accent": "#B79BFF",
-      "block": {
-        "startDay": 20700,
-        "weeks": 6,
-        "deload": true,
-        "rampStart": 0,
-        "rampEnd": -2,
-        "rirPerWeek": [
-          2,
-          2,
-          1,
-          1,
-          0,
-          0
-        ]
-      }
-    }
-  ],
-  "sessions": [
-    {
-      "id": "s11",
-      "templateId": "t2",
-      "name": "Lower A",
-      "dateEpochDay": 20738,
-      "dur": 58,
-      "createdAt": 1791828000000,
-      "items": [
-        {
-          "exId": "x5",
-          "name": "Back Squat",
-          "target": {
-            "exId": "x5",
-            "warm": 2,
-            "sets": 4,
-            "lo": 5,
-            "hi": 8,
-            "rir": 2
-          },
-          "sets": [
-            {
-              "w": 60,
-              "r": 8,
-              "rir": 5,
-              "warm": true
-            },
-            {
-              "w": 90,
-              "r": 5,
-              "rir": 4,
-              "warm": true
-            },
-            {
-              "w": 122.5,
-              "r": 6,
-              "rir": 2
-            },
-            {
-              "w": 122.5,
-              "r": 6,
-              "rir": 2
-            },
-            {
-              "w": 122.5,
-              "r": 5,
-              "rir": 1
-            },
-            {
-              "w": 122.5,
-              "r": 5,
-              "rir": 0
-            }
-          ]
-        },
-        {
-          "exId": "x6",
-          "name": "Romanian Deadlift",
-          "target": {
-            "exId": "x6",
-            "warm": 2,
-            "sets": 3,
-            "lo": 6,
-            "hi": 10,
-            "rir": 2
-          },
-          "sets": [
-            {
-              "w": 100,
-              "r": 9,
-              "rir": 2
-            },
-            {
-              "w": 100,
-              "r": 8,
-              "rir": 2
-            },
-            {
-              "w": 100,
-              "r": 8,
-              "rir": 1
-            }
-          ]
-        },
-        {
-          "exId": "x4",
-          "name": "Weighted Pull-up",
-          "target": {
-            "exId": "x4",
-            "warm": 1,
-            "sets": 3,
-            "lo": 5,
-            "hi": 8,
-            "rir": 1
-          },
-          "sets": [
-            {
-              "w": 10,
-              "r": 7,
-              "rir": 2
-            },
-            {
-              "w": 10,
-              "r": 6,
-              "rir": 1
-            },
-            {
-              "w": 10,
-              "r": 5,
-              "rir": 0
-            }
-          ]
-        },
-        {
-          "exId": "x8",
-          "name": "Plank",
-          "target": {
-            "exId": "x8",
-            "warm": 0,
-            "sets": 3,
-            "lo": 30,
-            "hi": 60,
-            "rir": 2,
-            "timed": true
-          },
-          "sets": [
-            {
-              "w": 0,
-              "r": 0,
-              "rir": 2,
-              "secs": 45
-            },
-            {
-              "w": 0,
-              "r": 0,
-              "rir": 2,
-              "secs": 45
-            },
-            {
-              "w": 0,
-              "r": 0,
-              "rir": 2,
-              "secs": 40
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "s10",
-      "templateId": "t1",
-      "name": "Upper A",
-      "dateEpochDay": 20735,
-      "dur": 52,
-      "createdAt": 1791568800000,
-      "items": [
-        {
-          "exId": "x1",
-          "name": "Bench Press",
-          "target": {
-            "exId": "x1",
-            "warm": 2,
-            "sets": 4,
-            "lo": 5,
-            "hi": 8,
-            "rir": 2,
-            "style": "topBackoff",
-            "backoffPct": 10
-          },
-          "sets": [
-            {
-              "w": 60,
-              "r": 8,
-              "rir": 5,
-              "warm": true
-            },
-            {
-              "w": 80,
-              "r": 5,
-              "rir": 4,
-              "warm": true
-            },
-            {
-              "w": 100.0,
-              "r": 6,
-              "rir": 2,
-              "kind": "top"
-            },
-            {
-              "w": 90.0,
-              "r": 8,
-              "rir": 2,
-              "kind": "backoff"
-            },
-            {
-              "w": 90.0,
-              "r": 8,
-              "rir": 2,
-              "kind": "backoff"
-            },
-            {
-              "w": 90.0,
-              "r": 7,
-              "rir": 1,
-              "kind": "backoff"
-            }
-          ]
-        },
-        {
-          "exId": "x2",
-          "name": "Barbell Row",
-          "target": {
-            "exId": "x2",
-            "warm": 2,
-            "sets": 3,
-            "lo": 6,
-            "hi": 10,
-            "rir": 2
-          },
-          "sets": [
-            {
-              "w": 70,
-              "r": 9,
-              "rir": 2
-            },
-            {
-              "w": 70,
-              "r": 9,
-              "rir": 2
-            },
-            {
-              "w": 70,
-              "r": 8,
-              "rir": 1
-            }
-          ]
-        },
-        {
-          "exId": "x3",
-          "name": "Overhead Press",
-          "target": {
-            "exId": "x3",
-            "warm": 2,
-            "sets": 3,
-            "lo": 5,
-            "hi": 8,
-            "rir": 2
-          },
-          "sets": [
-            {
-              "w": 47.5,
-              "r": 7,
-              "rir": 2
-            },
-            {
-              "w": 47.5,
-              "r": 6,
-              "rir": 1
-            },
-            {
-              "w": 47.5,
-              "r": 6,
-              "rir": 1
-            }
-          ]
-        },
-        {
-          "exId": "x7",
-          "name": "Dumbbell Curl",
-          "target": {
-            "exId": "x7",
-            "warm": 1,
-            "sets": 3,
-            "lo": 8,
-            "hi": 12,
-            "rir": 1
-          },
-          "sets": [
-            {
-              "w": 14,
-              "r": 11,
-              "rir": 1
-            },
-            {
-              "w": 14,
-              "r": 10,
-              "rir": 1
-            },
-            {
-              "w": 14,
-              "r": 9,
-              "rir": 0
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "s9",
-      "templateId": "t2",
-      "name": "Lower A",
-      "dateEpochDay": 20732,
-      "dur": 58,
-      "createdAt": 1791309600000,
-      "items": [
-        {
-          "exId": "x5",
-          "name": "Back Squat",
-          "target": {
-            "exId": "x5",
-            "warm": 2,
-            "sets": 4,
-            "lo": 5,
-            "hi": 8,
-            "rir": 2
-          },
-          "sets": [
-            {
-              "w": 60,
-              "r": 8,
-              "rir": 5,
-              "warm": true
-            },
-            {
-              "w": 90,
-              "r": 5,
-              "rir": 4,
-              "warm": true
-            },
-            {
-              "w": 122.5,
-              "r": 6,
-              "rir": 2
-            },
-            {
-              "w": 122.5,
-              "r": 6,
-              "rir": 2
-            },
-            {
-              "w": 122.5,
-              "r": 5,
-              "rir": 1
-            },
-            {
-              "w": 122.5,
-              "r": 5,
-              "rir": 0
-            }
-          ]
-        },
-        {
-          "exId": "x6",
-          "name": "Romanian Deadlift",
-          "target": {
-            "exId": "x6",
-            "warm": 2,
-            "sets": 3,
-            "lo": 6,
-            "hi": 10,
-            "rir": 2
-          },
-          "sets": [
-            {
-              "w": 100,
-              "r": 9,
-              "rir": 2
-            },
-            {
-              "w": 100,
-              "r": 8,
-              "rir": 2
-            },
-            {
-              "w": 100,
-              "r": 8,
-              "rir": 1
-            }
-          ]
-        },
-        {
-          "exId": "x4",
-          "name": "Weighted Pull-up",
-          "target": {
-            "exId": "x4",
-            "warm": 1,
-            "sets": 3,
-            "lo": 5,
-            "hi": 8,
-            "rir": 1
-          },
-          "sets": [
-            {
-              "w": 10,
-              "r": 7,
-              "rir": 2
-            },
-            {
-              "w": 10,
-              "r": 6,
-              "rir": 1
-            },
-            {
-              "w": 10,
-              "r": 5,
-              "rir": 0
-            }
-          ]
-        },
-        {
-          "exId": "x8",
-          "name": "Plank",
-          "target": {
-            "exId": "x8",
-            "warm": 0,
-            "sets": 3,
-            "lo": 30,
-            "hi": 60,
-            "rir": 2,
-            "timed": true
-          },
-          "sets": [
-            {
-              "w": 0,
-              "r": 0,
-              "rir": 2,
-              "secs": 45
-            },
-            {
-              "w": 0,
-              "r": 0,
-              "rir": 2,
-              "secs": 45
-            },
-            {
-              "w": 0,
-              "r": 0,
-              "rir": 2,
-              "secs": 40
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "s8",
-      "templateId": "t1",
-      "name": "Upper A",
-      "dateEpochDay": 20729,
-      "dur": 52,
-      "createdAt": 1791050400000,
-      "items": [
-        {
-          "exId": "x1",
-          "name": "Bench Press",
-          "target": {
-            "exId": "x1",
-            "warm": 2,
-            "sets": 4,
-            "lo": 5,
-            "hi": 8,
-            "rir": 2,
-            "style": "topBackoff",
-            "backoffPct": 10
-          },
-          "sets": [
-            {
-              "w": 60,
-              "r": 8,
-              "rir": 5,
-              "warm": true
-            },
-            {
-              "w": 80,
-              "r": 5,
-              "rir": 4,
-              "warm": true
-            },
-            {
-              "w": 100.0,
-              "r": 6,
-              "rir": 2,
-              "kind": "top"
-            },
-            {
-              "w": 90.0,
-              "r": 8,
-              "rir": 2,
-              "kind": "backoff"
-            },
-            {
-              "w": 90.0,
-              "r": 8,
-              "rir": 2,
-              "kind": "backoff"
-            },
-            {
-              "w": 90.0,
-              "r": 7,
-              "rir": 1,
-              "kind": "backoff"
-            }
-          ]
-        },
-        {
-          "exId": "x2",
-          "name": "Barbell Row",
-          "target": {
-            "exId": "x2",
-            "warm": 2,
-            "sets": 3,
-            "lo": 6,
-            "hi": 10,
-            "rir": 2
-          },
-          "sets": [
-            {
-              "w": 70,
-              "r": 9,
-              "rir": 2
-            },
-            {
-              "w": 70,
-              "r": 9,
-              "rir": 2
-            },
-            {
-              "w": 70,
-              "r": 8,
-              "rir": 1
-            }
-          ]
-        },
-        {
-          "exId": "x3",
-          "name": "Overhead Press",
-          "target": {
-            "exId": "x3",
-            "warm": 2,
-            "sets": 3,
-            "lo": 5,
-            "hi": 8,
-            "rir": 2
-          },
-          "sets": [
-            {
-              "w": 47.5,
-              "r": 7,
-              "rir": 2
-            },
-            {
-              "w": 47.5,
-              "r": 6,
-              "rir": 1
-            },
-            {
-              "w": 47.5,
-              "r": 6,
-              "rir": 1
-            }
-          ]
-        },
-        {
-          "exId": "x7",
-          "name": "Dumbbell Curl",
-          "target": {
-            "exId": "x7",
-            "warm": 1,
-            "sets": 3,
-            "lo": 8,
-            "hi": 12,
-            "rir": 1
-          },
-          "sets": [
-            {
-              "w": 14,
-              "r": 11,
-              "rir": 1
-            },
-            {
-              "w": 14,
-              "r": 10,
-              "rir": 1
-            },
-            {
-              "w": 14,
-              "r": 9,
-              "rir": 0
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "s7",
-      "templateId": "t2",
-      "name": "Lower A",
-      "dateEpochDay": 20726,
-      "dur": 58,
-      "createdAt": 1790791200000,
-      "items": [
-        {
-          "exId": "x5",
-          "name": "Back Squat",
-          "target": {
-            "exId": "x5",
-            "warm": 2,
-            "sets": 4,
-            "lo": 5,
-            "hi": 8,
-            "rir": 2
-          },
-          "sets": [
-            {
-              "w": 60,
-              "r": 8,
-              "rir": 5,
-              "warm": true
-            },
-            {
-              "w": 90,
-              "r": 5,
-              "rir": 4,
-              "warm": true
-            },
-            {
-              "w": 120.0,
-              "r": 6,
-              "rir": 2
-            },
-            {
-              "w": 120.0,
-              "r": 6,
-              "rir": 2
-            },
-            {
-              "w": 120.0,
-              "r": 5,
-              "rir": 1
-            },
-            {
-              "w": 120.0,
-              "r": 5,
-              "rir": 0
-            }
-          ]
-        },
-        {
-          "exId": "x6",
-          "name": "Romanian Deadlift",
-          "target": {
-            "exId": "x6",
-            "warm": 2,
-            "sets": 3,
-            "lo": 6,
-            "hi": 10,
-            "rir": 2
-          },
-          "sets": [
-            {
-              "w": 100,
-              "r": 9,
-              "rir": 2
-            },
-            {
-              "w": 100,
-              "r": 8,
-              "rir": 2
-            },
-            {
-              "w": 100,
-              "r": 8,
-              "rir": 1
-            }
-          ]
-        },
-        {
-          "exId": "x4",
-          "name": "Weighted Pull-up",
-          "target": {
-            "exId": "x4",
-            "warm": 1,
-            "sets": 3,
-            "lo": 5,
-            "hi": 8,
-            "rir": 1
-          },
-          "sets": [
-            {
-              "w": 10,
-              "r": 7,
-              "rir": 2
-            },
-            {
-              "w": 10,
-              "r": 6,
-              "rir": 1
-            },
-            {
-              "w": 10,
-              "r": 5,
-              "rir": 0
-            }
-          ]
-        },
-        {
-          "exId": "x8",
-          "name": "Plank",
-          "target": {
-            "exId": "x8",
-            "warm": 0,
-            "sets": 3,
-            "lo": 30,
-            "hi": 60,
-            "rir": 2,
-            "timed": true
-          },
-          "sets": [
-            {
-              "w": 0,
-              "r": 0,
-              "rir": 2,
-              "secs": 45
-            },
-            {
-              "w": 0,
-              "r": 0,
-              "rir": 2,
-              "secs": 45
-            },
-            {
-              "w": 0,
-              "r": 0,
-              "rir": 2,
-              "secs": 40
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "s6",
-      "templateId": "t1",
-      "name": "Upper A",
-      "dateEpochDay": 20723,
-      "dur": 52,
-      "createdAt": 1790532000000,
-      "items": [
-        {
-          "exId": "x1",
-          "name": "Bench Press",
-          "target": {
-            "exId": "x1",
-            "warm": 2,
-            "sets": 4,
-            "lo": 5,
-            "hi": 8,
-            "rir": 2,
-            "style": "topBackoff",
-            "backoffPct": 10
-          },
-          "sets": [
-            {
-              "w": 60,
-              "r": 8,
-              "rir": 5,
-              "warm": true
-            },
-            {
-              "w": 80,
-              "r": 5,
-              "rir": 4,
-              "warm": true
-            },
-            {
-              "w": 97.5,
-              "r": 6,
-              "rir": 2,
-              "kind": "top"
-            },
-            {
-              "w": 87.5,
-              "r": 8,
-              "rir": 2,
-              "kind": "backoff"
-            },
-            {
-              "w": 87.5,
-              "r": 8,
-              "rir": 2,
-              "kind": "backoff"
-            },
-            {
-              "w": 87.5,
-              "r": 7,
-              "rir": 1,
-              "kind": "backoff"
-            }
-          ]
-        },
-        {
-          "exId": "x2",
-          "name": "Barbell Row",
-          "target": {
-            "exId": "x2",
-            "warm": 2,
-            "sets": 3,
-            "lo": 6,
-            "hi": 10,
-            "rir": 2
-          },
-          "sets": [
-            {
-              "w": 70,
-              "r": 9,
-              "rir": 2
-            },
-            {
-              "w": 70,
-              "r": 9,
-              "rir": 2
-            },
-            {
-              "w": 70,
-              "r": 8,
-              "rir": 1
-            }
-          ]
-        },
-        {
-          "exId": "x3",
-          "name": "Overhead Press",
-          "target": {
-            "exId": "x3",
-            "warm": 2,
-            "sets": 3,
-            "lo": 5,
-            "hi": 8,
-            "rir": 2
-          },
-          "sets": [
-            {
-              "w": 47.5,
-              "r": 7,
-              "rir": 2
-            },
-            {
-              "w": 47.5,
-              "r": 6,
-              "rir": 1
-            },
-            {
-              "w": 47.5,
-              "r": 6,
-              "rir": 1
-            }
-          ]
-        },
-        {
-          "exId": "x7",
-          "name": "Dumbbell Curl",
-          "target": {
-            "exId": "x7",
-            "warm": 1,
-            "sets": 3,
-            "lo": 8,
-            "hi": 12,
-            "rir": 1
-          },
-          "sets": [
-            {
-              "w": 14,
-              "r": 11,
-              "rir": 1
-            },
-            {
-              "w": 14,
-              "r": 10,
-              "rir": 1
-            },
-            {
-              "w": 14,
-              "r": 9,
-              "rir": 0
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "s5",
-      "templateId": "t2",
-      "name": "Lower A",
-      "dateEpochDay": 20720,
-      "dur": 58,
-      "createdAt": 1790272800000,
-      "items": [
-        {
-          "exId": "x5",
-          "name": "Back Squat",
-          "target": {
-            "exId": "x5",
-            "warm": 2,
-            "sets": 4,
-            "lo": 5,
-            "hi": 8,
-            "rir": 2
-          },
-          "sets": [
-            {
-              "w": 60,
-              "r": 8,
-              "rir": 5,
-              "warm": true
-            },
-            {
-              "w": 90,
-              "r": 5,
-              "rir": 4,
-              "warm": true
-            },
-            {
-              "w": 120.0,
-              "r": 6,
-              "rir": 2
-            },
-            {
-              "w": 120.0,
-              "r": 6,
-              "rir": 2
-            },
-            {
-              "w": 120.0,
-              "r": 5,
-              "rir": 1
-            },
-            {
-              "w": 120.0,
-              "r": 5,
-              "rir": 0
-            }
-          ]
-        },
-        {
-          "exId": "x6",
-          "name": "Romanian Deadlift",
-          "target": {
-            "exId": "x6",
-            "warm": 2,
-            "sets": 3,
-            "lo": 6,
-            "hi": 10,
-            "rir": 2
-          },
-          "sets": [
-            {
-              "w": 100,
-              "r": 9,
-              "rir": 2
-            },
-            {
-              "w": 100,
-              "r": 8,
-              "rir": 2
-            },
-            {
-              "w": 100,
-              "r": 8,
-              "rir": 1
-            }
-          ]
-        },
-        {
-          "exId": "x4",
-          "name": "Weighted Pull-up",
-          "target": {
-            "exId": "x4",
-            "warm": 1,
-            "sets": 3,
-            "lo": 5,
-            "hi": 8,
-            "rir": 1
-          },
-          "sets": [
-            {
-              "w": 10,
-              "r": 7,
-              "rir": 2
-            },
-            {
-              "w": 10,
-              "r": 6,
-              "rir": 1
-            },
-            {
-              "w": 10,
-              "r": 5,
-              "rir": 0
-            }
-          ]
-        },
-        {
-          "exId": "x8",
-          "name": "Plank",
-          "target": {
-            "exId": "x8",
-            "warm": 0,
-            "sets": 3,
-            "lo": 30,
-            "hi": 60,
-            "rir": 2,
-            "timed": true
-          },
-          "sets": [
-            {
-              "w": 0,
-              "r": 0,
-              "rir": 2,
-              "secs": 45
-            },
-            {
-              "w": 0,
-              "r": 0,
-              "rir": 2,
-              "secs": 45
-            },
-            {
-              "w": 0,
-              "r": 0,
-              "rir": 2,
-              "secs": 40
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "s4",
-      "templateId": "t1",
-      "name": "Upper A",
-      "dateEpochDay": 20717,
-      "dur": 52,
-      "createdAt": 1790013600000,
-      "items": [
-        {
-          "exId": "x1",
-          "name": "Bench Press",
-          "target": {
-            "exId": "x1",
-            "warm": 2,
-            "sets": 4,
-            "lo": 5,
-            "hi": 8,
-            "rir": 2,
-            "style": "topBackoff",
-            "backoffPct": 10
-          },
-          "sets": [
-            {
-              "w": 60,
-              "r": 8,
-              "rir": 5,
-              "warm": true
-            },
-            {
-              "w": 80,
-              "r": 5,
-              "rir": 4,
-              "warm": true
-            },
-            {
-              "w": 97.5,
-              "r": 6,
-              "rir": 2,
-              "kind": "top"
-            },
-            {
-              "w": 87.5,
-              "r": 8,
-              "rir": 2,
-              "kind": "backoff"
-            },
-            {
-              "w": 87.5,
-              "r": 8,
-              "rir": 2,
-              "kind": "backoff"
-            },
-            {
-              "w": 87.5,
-              "r": 7,
-              "rir": 1,
-              "kind": "backoff"
-            }
-          ]
-        },
-        {
-          "exId": "x2",
-          "name": "Barbell Row",
-          "target": {
-            "exId": "x2",
-            "warm": 2,
-            "sets": 3,
-            "lo": 6,
-            "hi": 10,
-            "rir": 2
-          },
-          "sets": [
-            {
-              "w": 70,
-              "r": 9,
-              "rir": 2
-            },
-            {
-              "w": 70,
-              "r": 9,
-              "rir": 2
-            },
-            {
-              "w": 70,
-              "r": 8,
-              "rir": 1
-            }
-          ]
-        },
-        {
-          "exId": "x3",
-          "name": "Overhead Press",
-          "target": {
-            "exId": "x3",
-            "warm": 2,
-            "sets": 3,
-            "lo": 5,
-            "hi": 8,
-            "rir": 2
-          },
-          "sets": [
-            {
-              "w": 47.5,
-              "r": 7,
-              "rir": 2
-            },
-            {
-              "w": 47.5,
-              "r": 6,
-              "rir": 1
-            },
-            {
-              "w": 47.5,
-              "r": 6,
-              "rir": 1
-            }
-          ]
-        },
-        {
-          "exId": "x7",
-          "name": "Dumbbell Curl",
-          "target": {
-            "exId": "x7",
-            "warm": 1,
-            "sets": 3,
-            "lo": 8,
-            "hi": 12,
-            "rir": 1
-          },
-          "sets": [
-            {
-              "w": 14,
-              "r": 11,
-              "rir": 1
-            },
-            {
-              "w": 14,
-              "r": 10,
-              "rir": 1
-            },
-            {
-              "w": 14,
-              "r": 9,
-              "rir": 0
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "s3",
-      "templateId": "t2",
-      "name": "Lower A",
-      "dateEpochDay": 20714,
-      "dur": 58,
-      "createdAt": 1789754400000,
-      "items": [
-        {
-          "exId": "x5",
-          "name": "Back Squat",
-          "target": {
-            "exId": "x5",
-            "warm": 2,
-            "sets": 4,
-            "lo": 5,
-            "hi": 8,
-            "rir": 2
-          },
-          "sets": [
-            {
-              "w": 60,
-              "r": 8,
-              "rir": 5,
-              "warm": true
-            },
-            {
-              "w": 90,
-              "r": 5,
-              "rir": 4,
-              "warm": true
-            },
-            {
-              "w": 117.5,
-              "r": 6,
-              "rir": 2
-            },
-            {
-              "w": 117.5,
-              "r": 6,
-              "rir": 2
-            },
-            {
-              "w": 117.5,
-              "r": 5,
-              "rir": 1
-            },
-            {
-              "w": 117.5,
-              "r": 5,
-              "rir": 0
-            }
-          ]
-        },
-        {
-          "exId": "x6",
-          "name": "Romanian Deadlift",
-          "target": {
-            "exId": "x6",
-            "warm": 2,
-            "sets": 3,
-            "lo": 6,
-            "hi": 10,
-            "rir": 2
-          },
-          "sets": [
-            {
-              "w": 100,
-              "r": 9,
-              "rir": 2
-            },
-            {
-              "w": 100,
-              "r": 8,
-              "rir": 2
-            },
-            {
-              "w": 100,
-              "r": 8,
-              "rir": 1
-            }
-          ]
-        },
-        {
-          "exId": "x4",
-          "name": "Weighted Pull-up",
-          "target": {
-            "exId": "x4",
-            "warm": 1,
-            "sets": 3,
-            "lo": 5,
-            "hi": 8,
-            "rir": 1
-          },
-          "sets": [
-            {
-              "w": 10,
-              "r": 7,
-              "rir": 2
-            },
-            {
-              "w": 10,
-              "r": 6,
-              "rir": 1
-            },
-            {
-              "w": 10,
-              "r": 5,
-              "rir": 0
-            }
-          ]
-        },
-        {
-          "exId": "x8",
-          "name": "Plank",
-          "target": {
-            "exId": "x8",
-            "warm": 0,
-            "sets": 3,
-            "lo": 30,
-            "hi": 60,
-            "rir": 2,
-            "timed": true
-          },
-          "sets": [
-            {
-              "w": 0,
-              "r": 0,
-              "rir": 2,
-              "secs": 45
-            },
-            {
-              "w": 0,
-              "r": 0,
-              "rir": 2,
-              "secs": 45
-            },
-            {
-              "w": 0,
-              "r": 0,
-              "rir": 2,
-              "secs": 40
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "s2",
-      "templateId": "t1",
-      "name": "Upper A",
-      "dateEpochDay": 20711,
-      "dur": 52,
-      "createdAt": 1789495200000,
-      "items": [
-        {
-          "exId": "x1",
-          "name": "Bench Press",
-          "target": {
-            "exId": "x1",
-            "warm": 2,
-            "sets": 4,
-            "lo": 5,
-            "hi": 8,
-            "rir": 2,
-            "style": "topBackoff",
-            "backoffPct": 10
-          },
-          "sets": [
-            {
-              "w": 60,
-              "r": 8,
-              "rir": 5,
-              "warm": true
-            },
-            {
-              "w": 80,
-              "r": 5,
-              "rir": 4,
-              "warm": true
-            },
-            {
-              "w": 95.0,
-              "r": 6,
-              "rir": 2,
-              "kind": "top"
-            },
-            {
-              "w": 85.0,
-              "r": 8,
-              "rir": 2,
-              "kind": "backoff"
-            },
-            {
-              "w": 85.0,
-              "r": 8,
-              "rir": 2,
-              "kind": "backoff"
-            },
-            {
-              "w": 85.0,
-              "r": 7,
-              "rir": 1,
-              "kind": "backoff"
-            }
-          ]
-        },
-        {
-          "exId": "x2",
-          "name": "Barbell Row",
-          "target": {
-            "exId": "x2",
-            "warm": 2,
-            "sets": 3,
-            "lo": 6,
-            "hi": 10,
-            "rir": 2
-          },
-          "sets": [
-            {
-              "w": 70,
-              "r": 9,
-              "rir": 2
-            },
-            {
-              "w": 70,
-              "r": 9,
-              "rir": 2
-            },
-            {
-              "w": 70,
-              "r": 8,
-              "rir": 1
-            }
-          ]
-        },
-        {
-          "exId": "x3",
-          "name": "Overhead Press",
-          "target": {
-            "exId": "x3",
-            "warm": 2,
-            "sets": 3,
-            "lo": 5,
-            "hi": 8,
-            "rir": 2
-          },
-          "sets": [
-            {
-              "w": 47.5,
-              "r": 7,
-              "rir": 2
-            },
-            {
-              "w": 47.5,
-              "r": 6,
-              "rir": 1
-            },
-            {
-              "w": 47.5,
-              "r": 6,
-              "rir": 1
-            }
-          ]
-        },
-        {
-          "exId": "x7",
-          "name": "Dumbbell Curl",
-          "target": {
-            "exId": "x7",
-            "warm": 1,
-            "sets": 3,
-            "lo": 8,
-            "hi": 12,
-            "rir": 1
-          },
-          "sets": [
-            {
-              "w": 14,
-              "r": 11,
-              "rir": 1
-            },
-            {
-              "w": 14,
-              "r": 10,
-              "rir": 1
-            },
-            {
-              "w": 14,
-              "r": 9,
-              "rir": 0
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "s1",
-      "templateId": "t2",
-      "name": "Lower A",
-      "dateEpochDay": 20708,
-      "dur": 58,
-      "createdAt": 1789236000000,
-      "items": [
-        {
-          "exId": "x5",
-          "name": "Back Squat",
-          "target": {
-            "exId": "x5",
-            "warm": 2,
-            "sets": 4,
-            "lo": 5,
-            "hi": 8,
-            "rir": 2
-          },
-          "sets": [
-            {
-              "w": 60,
-              "r": 8,
-              "rir": 5,
-              "warm": true
-            },
-            {
-              "w": 90,
-              "r": 5,
-              "rir": 4,
-              "warm": true
-            },
-            {
-              "w": 117.5,
-              "r": 6,
-              "rir": 2
-            },
-            {
-              "w": 117.5,
-              "r": 6,
-              "rir": 2
-            },
-            {
-              "w": 117.5,
-              "r": 5,
-              "rir": 1
-            },
-            {
-              "w": 117.5,
-              "r": 5,
-              "rir": 0
-            }
-          ]
-        },
-        {
-          "exId": "x6",
-          "name": "Romanian Deadlift",
-          "target": {
-            "exId": "x6",
-            "warm": 2,
-            "sets": 3,
-            "lo": 6,
-            "hi": 10,
-            "rir": 2
-          },
-          "sets": [
-            {
-              "w": 100,
-              "r": 9,
-              "rir": 2
-            },
-            {
-              "w": 100,
-              "r": 8,
-              "rir": 2
-            },
-            {
-              "w": 100,
-              "r": 8,
-              "rir": 1
-            }
-          ]
-        },
-        {
-          "exId": "x4",
-          "name": "Weighted Pull-up",
-          "target": {
-            "exId": "x4",
-            "warm": 1,
-            "sets": 3,
-            "lo": 5,
-            "hi": 8,
-            "rir": 1
-          },
-          "sets": [
-            {
-              "w": 10,
-              "r": 7,
-              "rir": 2
-            },
-            {
-              "w": 10,
-              "r": 6,
-              "rir": 1
-            },
-            {
-              "w": 10,
-              "r": 5,
-              "rir": 0
-            }
-          ]
-        },
-        {
-          "exId": "x8",
-          "name": "Plank",
-          "target": {
-            "exId": "x8",
-            "warm": 0,
-            "sets": 3,
-            "lo": 30,
-            "hi": 60,
-            "rir": 2,
-            "timed": true
-          },
-          "sets": [
-            {
-              "w": 0,
-              "r": 0,
-              "rir": 2,
-              "secs": 45
-            },
-            {
-              "w": 0,
-              "r": 0,
-              "rir": 2,
-              "secs": 45
-            },
-            {
-              "w": 0,
-              "r": 0,
-              "rir": 2,
-              "secs": 40
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "s0",
-      "templateId": "t1",
-      "name": "Upper A",
-      "dateEpochDay": 20705,
-      "dur": 52,
-      "createdAt": 1788976800000,
-      "items": [
-        {
-          "exId": "x1",
-          "name": "Bench Press",
-          "target": {
-            "exId": "x1",
-            "warm": 2,
-            "sets": 4,
-            "lo": 5,
-            "hi": 8,
-            "rir": 2,
-            "style": "topBackoff",
-            "backoffPct": 10
-          },
-          "sets": [
-            {
-              "w": 60,
-              "r": 8,
-              "rir": 5,
-              "warm": true
-            },
-            {
-              "w": 80,
-              "r": 5,
-              "rir": 4,
-              "warm": true
-            },
-            {
-              "w": 95.0,
-              "r": 6,
-              "rir": 2,
-              "kind": "top"
-            },
-            {
-              "w": 85.0,
-              "r": 8,
-              "rir": 2,
-              "kind": "backoff"
-            },
-            {
-              "w": 85.0,
-              "r": 8,
-              "rir": 2,
-              "kind": "backoff"
-            },
-            {
-              "w": 85.0,
-              "r": 7,
-              "rir": 1,
-              "kind": "backoff"
-            }
-          ]
-        },
-        {
-          "exId": "x2",
-          "name": "Barbell Row",
-          "target": {
-            "exId": "x2",
-            "warm": 2,
-            "sets": 3,
-            "lo": 6,
-            "hi": 10,
-            "rir": 2
-          },
-          "sets": [
-            {
-              "w": 70,
-              "r": 9,
-              "rir": 2
-            },
-            {
-              "w": 70,
-              "r": 9,
-              "rir": 2
-            },
-            {
-              "w": 70,
-              "r": 8,
-              "rir": 1
-            }
-          ]
-        },
-        {
-          "exId": "x3",
-          "name": "Overhead Press",
-          "target": {
-            "exId": "x3",
-            "warm": 2,
-            "sets": 3,
-            "lo": 5,
-            "hi": 8,
-            "rir": 2
-          },
-          "sets": [
-            {
-              "w": 47.5,
-              "r": 7,
-              "rir": 2
-            },
-            {
-              "w": 47.5,
-              "r": 6,
-              "rir": 1
-            },
-            {
-              "w": 47.5,
-              "r": 6,
-              "rir": 1
-            }
-          ]
-        },
-        {
-          "exId": "x7",
-          "name": "Dumbbell Curl",
-          "target": {
-            "exId": "x7",
-            "warm": 1,
-            "sets": 3,
-            "lo": 8,
-            "hi": 12,
-            "rir": 1
-          },
-          "sets": [
-            {
-              "w": 14,
-              "r": 11,
-              "rir": 1
-            },
-            {
-              "w": 14,
-              "r": 10,
-              "rir": 1
-            },
-            {
-              "w": 14,
-              "r": 9,
-              "rir": 0
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "settings": {
-    "accent": 4292280126,
-    "mode": "rir",
-    "restSec": 150,
-    "warmPct": 60,
-    "theme": "dark",
-    "accentStrength": "full",
-    "cardFooter": "streak",
-    "recordMoment": "full",
-    "weeklyGoal": 4,
-    "activeProgram": "p1",
-    "bodyweight": [
-      {
-        "day": 20700,
-        "kg": 78.4
-      },
-      {
-        "day": 20707,
-        "kg": 78.2
-      },
-      {
-        "day": 20714,
-        "kg": 77.9
-      },
-      {
-        "day": 20721,
-        "kg": 77.7
-      },
-      {
-        "day": 20728,
-        "kg": 77.4
-      },
-      {
-        "day": 20735,
-        "kg": 77.2
-      },
-      {
-        "day": 20738,
-        "kg": 77.1
-      }
-    ],
-    "totalUnit": null,
-    "customHue": 90,
-    "customBright": 100,
-    "gymName": "",
-    "milestonesShown": {},
-    "streakOn": true
+ "version": 5,
+ "exercises": [
+  {
+   "id": "x1",
+   "name": "Bench Press",
+   "group": "Chest",
+   "secondary": [
+    "Triceps",
+    "Front delts"
+   ],
+   "equip": "Barbell",
+   "unit": "kg",
+   "min": 20.0,
+   "inc": 2.5,
+   "load": "weighted",
+   "perSide": false,
+   "defLo": 5,
+   "defHi": 8,
+   "defRir": 2
   },
-  "live": null
+  {
+   "id": "x2",
+   "name": "Barbell Row",
+   "group": "Back",
+   "secondary": [
+    "Biceps"
+   ],
+   "equip": "Barbell",
+   "unit": "kg",
+   "min": 20.0,
+   "inc": 2.5,
+   "load": "weighted",
+   "perSide": false,
+   "defLo": 6,
+   "defHi": 10,
+   "defRir": 2
+  },
+  {
+   "id": "x3",
+   "name": "Overhead Press",
+   "group": "Shoulders",
+   "secondary": [
+    "Triceps"
+   ],
+   "equip": "Barbell",
+   "unit": "kg",
+   "min": 20.0,
+   "inc": 2.5,
+   "load": "weighted",
+   "perSide": false,
+   "defLo": 5,
+   "defHi": 8,
+   "defRir": 2
+  },
+  {
+   "id": "x4",
+   "name": "Weighted Pull-up",
+   "group": "Lats",
+   "secondary": [
+    "Biceps"
+   ],
+   "equip": "Bodyweight",
+   "unit": "kg",
+   "min": 0.0,
+   "inc": 2.5,
+   "load": "added",
+   "perSide": false,
+   "defLo": 5,
+   "defHi": 8,
+   "defRir": 2
+  },
+  {
+   "id": "x5",
+   "name": "Back Squat",
+   "group": "Quads",
+   "secondary": [
+    "Glutes"
+   ],
+   "equip": "Barbell",
+   "unit": "kg",
+   "min": 20.0,
+   "inc": 2.5,
+   "load": "weighted",
+   "perSide": false,
+   "defLo": 5,
+   "defHi": 8,
+   "defRir": 2
+  },
+  {
+   "id": "x6",
+   "name": "Romanian Deadlift",
+   "group": "Hamstrings",
+   "secondary": [
+    "Glutes",
+    "Lower back"
+   ],
+   "equip": "Barbell",
+   "unit": "kg",
+   "min": 20.0,
+   "inc": 2.5,
+   "load": "weighted",
+   "perSide": false,
+   "defLo": 6,
+   "defHi": 10,
+   "defRir": 2
+  },
+  {
+   "id": "x7",
+   "name": "Dumbbell Curl",
+   "group": "Biceps",
+   "secondary": [],
+   "equip": "Dumbbell",
+   "unit": "kg",
+   "min": 4.0,
+   "inc": 2.0,
+   "load": "weighted",
+   "perSide": true,
+   "defLo": 8,
+   "defHi": 12,
+   "defRir": 2
+  },
+  {
+   "id": "x8",
+   "name": "Plank",
+   "group": "Abs",
+   "secondary": [],
+   "equip": "Bodyweight",
+   "unit": "kg",
+   "min": 0.0,
+   "inc": 2.5,
+   "load": "added",
+   "perSide": false,
+   "defLo": 8,
+   "defHi": 10,
+   "defRir": 2
+  }
+ ],
+ "templates": [
+  {
+   "id": "t1",
+   "name": "Upper A",
+   "mode": "rir",
+   "items": [
+    {
+     "exId": "x1",
+     "warm": 2,
+     "sets": 4,
+     "lo": 5,
+     "hi": 8,
+     "rir": 2,
+     "style": "topBackoff",
+     "backoffPct": 10
+    },
+    {
+     "exId": "x2",
+     "warm": 2,
+     "sets": 3,
+     "lo": 6,
+     "hi": 10,
+     "rir": 2
+    },
+    {
+     "exId": "x3",
+     "warm": 2,
+     "sets": 3,
+     "lo": 5,
+     "hi": 8,
+     "rir": 2
+    },
+    {
+     "exId": "x7",
+     "warm": 1,
+     "sets": 3,
+     "lo": 8,
+     "hi": 12,
+     "rir": 1
+    }
+   ]
+  },
+  {
+   "id": "t2",
+   "name": "Lower A",
+   "mode": "rir",
+   "items": [
+    {
+     "exId": "x5",
+     "warm": 2,
+     "sets": 4,
+     "lo": 5,
+     "hi": 8,
+     "rir": 2
+    },
+    {
+     "exId": "x6",
+     "warm": 2,
+     "sets": 3,
+     "lo": 6,
+     "hi": 10,
+     "rir": 2
+    },
+    {
+     "exId": "x4",
+     "warm": 1,
+     "sets": 3,
+     "lo": 5,
+     "hi": 8,
+     "rir": 1
+    },
+    {
+     "exId": "x8",
+     "warm": 0,
+     "sets": 3,
+     "lo": 30,
+     "hi": 60,
+     "rir": 2,
+     "timed": true
+    }
+   ]
+  }
+ ],
+ "programs": [
+  {
+   "id": "p1",
+   "name": "Upper Lower 4",
+   "templateIds": [
+    "t1",
+    "t2"
+   ],
+   "accent": "#B79BFF",
+   "block": {
+    "startDay": 20700,
+    "weeks": 6,
+    "deload": true,
+    "rampStart": 0,
+    "rampEnd": -2,
+    "rirPerWeek": [
+     2,
+     2,
+     1,
+     1,
+     0,
+     0
+    ]
+   }
+  }
+ ],
+ "sessions": [
+  {
+   "id": "s11",
+   "templateId": "t2",
+   "name": "Lower A",
+   "dateEpochDay": 20738,
+   "dur": 58,
+   "createdAt": 1791828000000,
+   "items": [
+    {
+     "exId": "x5",
+     "name": "Back Squat",
+     "target": {
+      "exId": "x5",
+      "warm": 2,
+      "sets": 4,
+      "lo": 5,
+      "hi": 8,
+      "rir": 2
+     },
+     "sets": [
+      {
+       "w": 60,
+       "r": 8,
+       "rir": 5,
+       "warm": true
+      },
+      {
+       "w": 90,
+       "r": 5,
+       "rir": 4,
+       "warm": true
+      },
+      {
+       "w": 122.5,
+       "r": 6,
+       "rir": 2
+      },
+      {
+       "w": 122.5,
+       "r": 6,
+       "rir": 2
+      },
+      {
+       "w": 122.5,
+       "r": 5,
+       "rir": 1
+      },
+      {
+       "w": 122.5,
+       "r": 5,
+       "rir": 0
+      }
+     ]
+    },
+    {
+     "exId": "x6",
+     "name": "Romanian Deadlift",
+     "target": {
+      "exId": "x6",
+      "warm": 2,
+      "sets": 3,
+      "lo": 6,
+      "hi": 10,
+      "rir": 2
+     },
+     "sets": [
+      {
+       "w": 100,
+       "r": 9,
+       "rir": 2
+      },
+      {
+       "w": 100,
+       "r": 8,
+       "rir": 2
+      },
+      {
+       "w": 100,
+       "r": 8,
+       "rir": 1
+      }
+     ]
+    },
+    {
+     "exId": "x4",
+     "name": "Weighted Pull-up",
+     "target": {
+      "exId": "x4",
+      "warm": 1,
+      "sets": 3,
+      "lo": 5,
+      "hi": 8,
+      "rir": 1
+     },
+     "sets": [
+      {
+       "w": 10,
+       "r": 7,
+       "rir": 2
+      },
+      {
+       "w": 10,
+       "r": 6,
+       "rir": 1
+      },
+      {
+       "w": 10,
+       "r": 5,
+       "rir": 0
+      }
+     ]
+    },
+    {
+     "exId": "x8",
+     "name": "Plank",
+     "target": {
+      "exId": "x8",
+      "warm": 0,
+      "sets": 3,
+      "lo": 30,
+      "hi": 60,
+      "rir": 2,
+      "timed": true
+     },
+     "sets": [
+      {
+       "w": 0,
+       "r": 0,
+       "rir": 2,
+       "secs": 45
+      },
+      {
+       "w": 0,
+       "r": 0,
+       "rir": 2,
+       "secs": 45
+      },
+      {
+       "w": 0,
+       "r": 0,
+       "rir": 2,
+       "secs": 40
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s10",
+   "templateId": "t1",
+   "name": "Upper A",
+   "dateEpochDay": 20735,
+   "dur": 52,
+   "createdAt": 1791568800000,
+   "items": [
+    {
+     "exId": "x1",
+     "name": "Bench Press",
+     "target": {
+      "exId": "x1",
+      "warm": 2,
+      "sets": 4,
+      "lo": 5,
+      "hi": 8,
+      "rir": 2,
+      "style": "topBackoff",
+      "backoffPct": 10
+     },
+     "sets": [
+      {
+       "w": 60,
+       "r": 8,
+       "rir": 5,
+       "warm": true
+      },
+      {
+       "w": 80,
+       "r": 5,
+       "rir": 4,
+       "warm": true
+      },
+      {
+       "w": 100.0,
+       "r": 6,
+       "rir": 2,
+       "kind": "top"
+      },
+      {
+       "w": 90.0,
+       "r": 8,
+       "rir": 2,
+       "kind": "backoff"
+      },
+      {
+       "w": 90.0,
+       "r": 8,
+       "rir": 2,
+       "kind": "backoff"
+      },
+      {
+       "w": 90.0,
+       "r": 7,
+       "rir": 1,
+       "kind": "backoff"
+      }
+     ]
+    },
+    {
+     "exId": "x2",
+     "name": "Barbell Row",
+     "target": {
+      "exId": "x2",
+      "warm": 2,
+      "sets": 3,
+      "lo": 6,
+      "hi": 10,
+      "rir": 2
+     },
+     "sets": [
+      {
+       "w": 70,
+       "r": 9,
+       "rir": 2
+      },
+      {
+       "w": 70,
+       "r": 9,
+       "rir": 2
+      },
+      {
+       "w": 70,
+       "r": 8,
+       "rir": 1
+      }
+     ]
+    },
+    {
+     "exId": "x3",
+     "name": "Overhead Press",
+     "target": {
+      "exId": "x3",
+      "warm": 2,
+      "sets": 3,
+      "lo": 5,
+      "hi": 8,
+      "rir": 2
+     },
+     "sets": [
+      {
+       "w": 47.5,
+       "r": 7,
+       "rir": 2
+      },
+      {
+       "w": 47.5,
+       "r": 6,
+       "rir": 1
+      },
+      {
+       "w": 47.5,
+       "r": 6,
+       "rir": 1
+      }
+     ]
+    },
+    {
+     "exId": "x7",
+     "name": "Dumbbell Curl",
+     "target": {
+      "exId": "x7",
+      "warm": 1,
+      "sets": 3,
+      "lo": 8,
+      "hi": 12,
+      "rir": 1
+     },
+     "sets": [
+      {
+       "w": 14,
+       "r": 11,
+       "rir": 1
+      },
+      {
+       "w": 14,
+       "r": 10,
+       "rir": 1
+      },
+      {
+       "w": 14,
+       "r": 9,
+       "rir": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s9",
+   "templateId": "t2",
+   "name": "Lower A",
+   "dateEpochDay": 20732,
+   "dur": 58,
+   "createdAt": 1791309600000,
+   "items": [
+    {
+     "exId": "x5",
+     "name": "Back Squat",
+     "target": {
+      "exId": "x5",
+      "warm": 2,
+      "sets": 4,
+      "lo": 5,
+      "hi": 8,
+      "rir": 2
+     },
+     "sets": [
+      {
+       "w": 60,
+       "r": 8,
+       "rir": 5,
+       "warm": true
+      },
+      {
+       "w": 90,
+       "r": 5,
+       "rir": 4,
+       "warm": true
+      },
+      {
+       "w": 122.5,
+       "r": 6,
+       "rir": 2
+      },
+      {
+       "w": 122.5,
+       "r": 6,
+       "rir": 2
+      },
+      {
+       "w": 122.5,
+       "r": 5,
+       "rir": 1
+      },
+      {
+       "w": 122.5,
+       "r": 5,
+       "rir": 0
+      }
+     ]
+    },
+    {
+     "exId": "x6",
+     "name": "Romanian Deadlift",
+     "target": {
+      "exId": "x6",
+      "warm": 2,
+      "sets": 3,
+      "lo": 6,
+      "hi": 10,
+      "rir": 2
+     },
+     "sets": [
+      {
+       "w": 100,
+       "r": 9,
+       "rir": 2
+      },
+      {
+       "w": 100,
+       "r": 8,
+       "rir": 2
+      },
+      {
+       "w": 100,
+       "r": 8,
+       "rir": 1
+      }
+     ]
+    },
+    {
+     "exId": "x4",
+     "name": "Weighted Pull-up",
+     "target": {
+      "exId": "x4",
+      "warm": 1,
+      "sets": 3,
+      "lo": 5,
+      "hi": 8,
+      "rir": 1
+     },
+     "sets": [
+      {
+       "w": 10,
+       "r": 7,
+       "rir": 2
+      },
+      {
+       "w": 10,
+       "r": 6,
+       "rir": 1
+      },
+      {
+       "w": 10,
+       "r": 5,
+       "rir": 0
+      }
+     ]
+    },
+    {
+     "exId": "x8",
+     "name": "Plank",
+     "target": {
+      "exId": "x8",
+      "warm": 0,
+      "sets": 3,
+      "lo": 30,
+      "hi": 60,
+      "rir": 2,
+      "timed": true
+     },
+     "sets": [
+      {
+       "w": 0,
+       "r": 0,
+       "rir": 2,
+       "secs": 45
+      },
+      {
+       "w": 0,
+       "r": 0,
+       "rir": 2,
+       "secs": 45
+      },
+      {
+       "w": 0,
+       "r": 0,
+       "rir": 2,
+       "secs": 40
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s8",
+   "templateId": "t1",
+   "name": "Upper A",
+   "dateEpochDay": 20729,
+   "dur": 52,
+   "createdAt": 1791050400000,
+   "items": [
+    {
+     "exId": "x1",
+     "name": "Bench Press",
+     "target": {
+      "exId": "x1",
+      "warm": 2,
+      "sets": 4,
+      "lo": 5,
+      "hi": 8,
+      "rir": 2,
+      "style": "topBackoff",
+      "backoffPct": 10
+     },
+     "sets": [
+      {
+       "w": 60,
+       "r": 8,
+       "rir": 5,
+       "warm": true
+      },
+      {
+       "w": 80,
+       "r": 5,
+       "rir": 4,
+       "warm": true
+      },
+      {
+       "w": 100.0,
+       "r": 6,
+       "rir": 2,
+       "kind": "top"
+      },
+      {
+       "w": 90.0,
+       "r": 8,
+       "rir": 2,
+       "kind": "backoff"
+      },
+      {
+       "w": 90.0,
+       "r": 8,
+       "rir": 2,
+       "kind": "backoff"
+      },
+      {
+       "w": 90.0,
+       "r": 7,
+       "rir": 1,
+       "kind": "backoff"
+      }
+     ]
+    },
+    {
+     "exId": "x2",
+     "name": "Barbell Row",
+     "target": {
+      "exId": "x2",
+      "warm": 2,
+      "sets": 3,
+      "lo": 6,
+      "hi": 10,
+      "rir": 2
+     },
+     "sets": [
+      {
+       "w": 70,
+       "r": 9,
+       "rir": 2
+      },
+      {
+       "w": 70,
+       "r": 9,
+       "rir": 2
+      },
+      {
+       "w": 70,
+       "r": 8,
+       "rir": 1
+      }
+     ]
+    },
+    {
+     "exId": "x3",
+     "name": "Overhead Press",
+     "target": {
+      "exId": "x3",
+      "warm": 2,
+      "sets": 3,
+      "lo": 5,
+      "hi": 8,
+      "rir": 2
+     },
+     "sets": [
+      {
+       "w": 47.5,
+       "r": 7,
+       "rir": 2
+      },
+      {
+       "w": 47.5,
+       "r": 6,
+       "rir": 1
+      },
+      {
+       "w": 47.5,
+       "r": 6,
+       "rir": 1
+      }
+     ]
+    },
+    {
+     "exId": "x7",
+     "name": "Dumbbell Curl",
+     "target": {
+      "exId": "x7",
+      "warm": 1,
+      "sets": 3,
+      "lo": 8,
+      "hi": 12,
+      "rir": 1
+     },
+     "sets": [
+      {
+       "w": 14,
+       "r": 11,
+       "rir": 1
+      },
+      {
+       "w": 14,
+       "r": 10,
+       "rir": 1
+      },
+      {
+       "w": 14,
+       "r": 9,
+       "rir": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s7",
+   "templateId": "t2",
+   "name": "Lower A",
+   "dateEpochDay": 20726,
+   "dur": 58,
+   "createdAt": 1790791200000,
+   "items": [
+    {
+     "exId": "x5",
+     "name": "Back Squat",
+     "target": {
+      "exId": "x5",
+      "warm": 2,
+      "sets": 4,
+      "lo": 5,
+      "hi": 8,
+      "rir": 2
+     },
+     "sets": [
+      {
+       "w": 60,
+       "r": 8,
+       "rir": 5,
+       "warm": true
+      },
+      {
+       "w": 90,
+       "r": 5,
+       "rir": 4,
+       "warm": true
+      },
+      {
+       "w": 120.0,
+       "r": 6,
+       "rir": 2
+      },
+      {
+       "w": 120.0,
+       "r": 6,
+       "rir": 2
+      },
+      {
+       "w": 120.0,
+       "r": 5,
+       "rir": 1
+      },
+      {
+       "w": 120.0,
+       "r": 5,
+       "rir": 0
+      }
+     ]
+    },
+    {
+     "exId": "x6",
+     "name": "Romanian Deadlift",
+     "target": {
+      "exId": "x6",
+      "warm": 2,
+      "sets": 3,
+      "lo": 6,
+      "hi": 10,
+      "rir": 2
+     },
+     "sets": [
+      {
+       "w": 100,
+       "r": 9,
+       "rir": 2
+      },
+      {
+       "w": 100,
+       "r": 8,
+       "rir": 2
+      },
+      {
+       "w": 100,
+       "r": 8,
+       "rir": 1
+      }
+     ]
+    },
+    {
+     "exId": "x4",
+     "name": "Weighted Pull-up",
+     "target": {
+      "exId": "x4",
+      "warm": 1,
+      "sets": 3,
+      "lo": 5,
+      "hi": 8,
+      "rir": 1
+     },
+     "sets": [
+      {
+       "w": 10,
+       "r": 7,
+       "rir": 2
+      },
+      {
+       "w": 10,
+       "r": 6,
+       "rir": 1
+      },
+      {
+       "w": 10,
+       "r": 5,
+       "rir": 0
+      }
+     ]
+    },
+    {
+     "exId": "x8",
+     "name": "Plank",
+     "target": {
+      "exId": "x8",
+      "warm": 0,
+      "sets": 3,
+      "lo": 30,
+      "hi": 60,
+      "rir": 2,
+      "timed": true
+     },
+     "sets": [
+      {
+       "w": 0,
+       "r": 0,
+       "rir": 2,
+       "secs": 45
+      },
+      {
+       "w": 0,
+       "r": 0,
+       "rir": 2,
+       "secs": 45
+      },
+      {
+       "w": 0,
+       "r": 0,
+       "rir": 2,
+       "secs": 40
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s6",
+   "templateId": "t1",
+   "name": "Upper A",
+   "dateEpochDay": 20723,
+   "dur": 52,
+   "createdAt": 1790532000000,
+   "items": [
+    {
+     "exId": "x1",
+     "name": "Bench Press",
+     "target": {
+      "exId": "x1",
+      "warm": 2,
+      "sets": 4,
+      "lo": 5,
+      "hi": 8,
+      "rir": 2,
+      "style": "topBackoff",
+      "backoffPct": 10
+     },
+     "sets": [
+      {
+       "w": 60,
+       "r": 8,
+       "rir": 5,
+       "warm": true
+      },
+      {
+       "w": 80,
+       "r": 5,
+       "rir": 4,
+       "warm": true
+      },
+      {
+       "w": 97.5,
+       "r": 6,
+       "rir": 2,
+       "kind": "top"
+      },
+      {
+       "w": 87.5,
+       "r": 8,
+       "rir": 2,
+       "kind": "backoff"
+      },
+      {
+       "w": 87.5,
+       "r": 8,
+       "rir": 2,
+       "kind": "backoff"
+      },
+      {
+       "w": 87.5,
+       "r": 7,
+       "rir": 1,
+       "kind": "backoff"
+      }
+     ]
+    },
+    {
+     "exId": "x2",
+     "name": "Barbell Row",
+     "target": {
+      "exId": "x2",
+      "warm": 2,
+      "sets": 3,
+      "lo": 6,
+      "hi": 10,
+      "rir": 2
+     },
+     "sets": [
+      {
+       "w": 70,
+       "r": 9,
+       "rir": 2
+      },
+      {
+       "w": 70,
+       "r": 9,
+       "rir": 2
+      },
+      {
+       "w": 70,
+       "r": 8,
+       "rir": 1
+      }
+     ]
+    },
+    {
+     "exId": "x3",
+     "name": "Overhead Press",
+     "target": {
+      "exId": "x3",
+      "warm": 2,
+      "sets": 3,
+      "lo": 5,
+      "hi": 8,
+      "rir": 2
+     },
+     "sets": [
+      {
+       "w": 47.5,
+       "r": 7,
+       "rir": 2
+      },
+      {
+       "w": 47.5,
+       "r": 6,
+       "rir": 1
+      },
+      {
+       "w": 47.5,
+       "r": 6,
+       "rir": 1
+      }
+     ]
+    },
+    {
+     "exId": "x7",
+     "name": "Dumbbell Curl",
+     "target": {
+      "exId": "x7",
+      "warm": 1,
+      "sets": 3,
+      "lo": 8,
+      "hi": 12,
+      "rir": 1
+     },
+     "sets": [
+      {
+       "w": 14,
+       "r": 11,
+       "rir": 1
+      },
+      {
+       "w": 14,
+       "r": 10,
+       "rir": 1
+      },
+      {
+       "w": 14,
+       "r": 9,
+       "rir": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s5",
+   "templateId": "t2",
+   "name": "Lower A",
+   "dateEpochDay": 20720,
+   "dur": 58,
+   "createdAt": 1790272800000,
+   "items": [
+    {
+     "exId": "x5",
+     "name": "Back Squat",
+     "target": {
+      "exId": "x5",
+      "warm": 2,
+      "sets": 4,
+      "lo": 5,
+      "hi": 8,
+      "rir": 2
+     },
+     "sets": [
+      {
+       "w": 60,
+       "r": 8,
+       "rir": 5,
+       "warm": true
+      },
+      {
+       "w": 90,
+       "r": 5,
+       "rir": 4,
+       "warm": true
+      },
+      {
+       "w": 120.0,
+       "r": 6,
+       "rir": 2
+      },
+      {
+       "w": 120.0,
+       "r": 6,
+       "rir": 2
+      },
+      {
+       "w": 120.0,
+       "r": 5,
+       "rir": 1
+      },
+      {
+       "w": 120.0,
+       "r": 5,
+       "rir": 0
+      }
+     ]
+    },
+    {
+     "exId": "x6",
+     "name": "Romanian Deadlift",
+     "target": {
+      "exId": "x6",
+      "warm": 2,
+      "sets": 3,
+      "lo": 6,
+      "hi": 10,
+      "rir": 2
+     },
+     "sets": [
+      {
+       "w": 100,
+       "r": 9,
+       "rir": 2
+      },
+      {
+       "w": 100,
+       "r": 8,
+       "rir": 2
+      },
+      {
+       "w": 100,
+       "r": 8,
+       "rir": 1
+      }
+     ]
+    },
+    {
+     "exId": "x4",
+     "name": "Weighted Pull-up",
+     "target": {
+      "exId": "x4",
+      "warm": 1,
+      "sets": 3,
+      "lo": 5,
+      "hi": 8,
+      "rir": 1
+     },
+     "sets": [
+      {
+       "w": 10,
+       "r": 7,
+       "rir": 2
+      },
+      {
+       "w": 10,
+       "r": 6,
+       "rir": 1
+      },
+      {
+       "w": 10,
+       "r": 5,
+       "rir": 0
+      }
+     ]
+    },
+    {
+     "exId": "x8",
+     "name": "Plank",
+     "target": {
+      "exId": "x8",
+      "warm": 0,
+      "sets": 3,
+      "lo": 30,
+      "hi": 60,
+      "rir": 2,
+      "timed": true
+     },
+     "sets": [
+      {
+       "w": 0,
+       "r": 0,
+       "rir": 2,
+       "secs": 45
+      },
+      {
+       "w": 0,
+       "r": 0,
+       "rir": 2,
+       "secs": 45
+      },
+      {
+       "w": 0,
+       "r": 0,
+       "rir": 2,
+       "secs": 40
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s4",
+   "templateId": "t1",
+   "name": "Upper A",
+   "dateEpochDay": 20717,
+   "dur": 52,
+   "createdAt": 1790013600000,
+   "items": [
+    {
+     "exId": "x1",
+     "name": "Bench Press",
+     "target": {
+      "exId": "x1",
+      "warm": 2,
+      "sets": 4,
+      "lo": 5,
+      "hi": 8,
+      "rir": 2,
+      "style": "topBackoff",
+      "backoffPct": 10
+     },
+     "sets": [
+      {
+       "w": 60,
+       "r": 8,
+       "rir": 5,
+       "warm": true
+      },
+      {
+       "w": 80,
+       "r": 5,
+       "rir": 4,
+       "warm": true
+      },
+      {
+       "w": 97.5,
+       "r": 6,
+       "rir": 2,
+       "kind": "top"
+      },
+      {
+       "w": 87.5,
+       "r": 8,
+       "rir": 2,
+       "kind": "backoff"
+      },
+      {
+       "w": 87.5,
+       "r": 8,
+       "rir": 2,
+       "kind": "backoff"
+      },
+      {
+       "w": 87.5,
+       "r": 7,
+       "rir": 1,
+       "kind": "backoff"
+      }
+     ]
+    },
+    {
+     "exId": "x2",
+     "name": "Barbell Row",
+     "target": {
+      "exId": "x2",
+      "warm": 2,
+      "sets": 3,
+      "lo": 6,
+      "hi": 10,
+      "rir": 2
+     },
+     "sets": [
+      {
+       "w": 70,
+       "r": 9,
+       "rir": 2
+      },
+      {
+       "w": 70,
+       "r": 9,
+       "rir": 2
+      },
+      {
+       "w": 70,
+       "r": 8,
+       "rir": 1
+      }
+     ]
+    },
+    {
+     "exId": "x3",
+     "name": "Overhead Press",
+     "target": {
+      "exId": "x3",
+      "warm": 2,
+      "sets": 3,
+      "lo": 5,
+      "hi": 8,
+      "rir": 2
+     },
+     "sets": [
+      {
+       "w": 47.5,
+       "r": 7,
+       "rir": 2
+      },
+      {
+       "w": 47.5,
+       "r": 6,
+       "rir": 1
+      },
+      {
+       "w": 47.5,
+       "r": 6,
+       "rir": 1
+      }
+     ]
+    },
+    {
+     "exId": "x7",
+     "name": "Dumbbell Curl",
+     "target": {
+      "exId": "x7",
+      "warm": 1,
+      "sets": 3,
+      "lo": 8,
+      "hi": 12,
+      "rir": 1
+     },
+     "sets": [
+      {
+       "w": 14,
+       "r": 11,
+       "rir": 1
+      },
+      {
+       "w": 14,
+       "r": 10,
+       "rir": 1
+      },
+      {
+       "w": 14,
+       "r": 9,
+       "rir": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s3",
+   "templateId": "t2",
+   "name": "Lower A",
+   "dateEpochDay": 20714,
+   "dur": 58,
+   "createdAt": 1789754400000,
+   "items": [
+    {
+     "exId": "x5",
+     "name": "Back Squat",
+     "target": {
+      "exId": "x5",
+      "warm": 2,
+      "sets": 4,
+      "lo": 5,
+      "hi": 8,
+      "rir": 2
+     },
+     "sets": [
+      {
+       "w": 60,
+       "r": 8,
+       "rir": 5,
+       "warm": true
+      },
+      {
+       "w": 90,
+       "r": 5,
+       "rir": 4,
+       "warm": true
+      },
+      {
+       "w": 117.5,
+       "r": 6,
+       "rir": 2
+      },
+      {
+       "w": 117.5,
+       "r": 6,
+       "rir": 2
+      },
+      {
+       "w": 117.5,
+       "r": 5,
+       "rir": 1
+      },
+      {
+       "w": 117.5,
+       "r": 5,
+       "rir": 0
+      }
+     ]
+    },
+    {
+     "exId": "x6",
+     "name": "Romanian Deadlift",
+     "target": {
+      "exId": "x6",
+      "warm": 2,
+      "sets": 3,
+      "lo": 6,
+      "hi": 10,
+      "rir": 2
+     },
+     "sets": [
+      {
+       "w": 100,
+       "r": 9,
+       "rir": 2
+      },
+      {
+       "w": 100,
+       "r": 8,
+       "rir": 2
+      },
+      {
+       "w": 100,
+       "r": 8,
+       "rir": 1
+      }
+     ]
+    },
+    {
+     "exId": "x4",
+     "name": "Weighted Pull-up",
+     "target": {
+      "exId": "x4",
+      "warm": 1,
+      "sets": 3,
+      "lo": 5,
+      "hi": 8,
+      "rir": 1
+     },
+     "sets": [
+      {
+       "w": 10,
+       "r": 7,
+       "rir": 2
+      },
+      {
+       "w": 10,
+       "r": 6,
+       "rir": 1
+      },
+      {
+       "w": 10,
+       "r": 5,
+       "rir": 0
+      }
+     ]
+    },
+    {
+     "exId": "x8",
+     "name": "Plank",
+     "target": {
+      "exId": "x8",
+      "warm": 0,
+      "sets": 3,
+      "lo": 30,
+      "hi": 60,
+      "rir": 2,
+      "timed": true
+     },
+     "sets": [
+      {
+       "w": 0,
+       "r": 0,
+       "rir": 2,
+       "secs": 45
+      },
+      {
+       "w": 0,
+       "r": 0,
+       "rir": 2,
+       "secs": 45
+      },
+      {
+       "w": 0,
+       "r": 0,
+       "rir": 2,
+       "secs": 40
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s2",
+   "templateId": "t1",
+   "name": "Upper A",
+   "dateEpochDay": 20711,
+   "dur": 52,
+   "createdAt": 1789495200000,
+   "items": [
+    {
+     "exId": "x1",
+     "name": "Bench Press",
+     "target": {
+      "exId": "x1",
+      "warm": 2,
+      "sets": 4,
+      "lo": 5,
+      "hi": 8,
+      "rir": 2,
+      "style": "topBackoff",
+      "backoffPct": 10
+     },
+     "sets": [
+      {
+       "w": 60,
+       "r": 8,
+       "rir": 5,
+       "warm": true
+      },
+      {
+       "w": 80,
+       "r": 5,
+       "rir": 4,
+       "warm": true
+      },
+      {
+       "w": 95.0,
+       "r": 6,
+       "rir": 2,
+       "kind": "top"
+      },
+      {
+       "w": 85.0,
+       "r": 8,
+       "rir": 2,
+       "kind": "backoff"
+      },
+      {
+       "w": 85.0,
+       "r": 8,
+       "rir": 2,
+       "kind": "backoff"
+      },
+      {
+       "w": 85.0,
+       "r": 7,
+       "rir": 1,
+       "kind": "backoff"
+      }
+     ]
+    },
+    {
+     "exId": "x2",
+     "name": "Barbell Row",
+     "target": {
+      "exId": "x2",
+      "warm": 2,
+      "sets": 3,
+      "lo": 6,
+      "hi": 10,
+      "rir": 2
+     },
+     "sets": [
+      {
+       "w": 70,
+       "r": 9,
+       "rir": 2
+      },
+      {
+       "w": 70,
+       "r": 9,
+       "rir": 2
+      },
+      {
+       "w": 70,
+       "r": 8,
+       "rir": 1
+      }
+     ]
+    },
+    {
+     "exId": "x3",
+     "name": "Overhead Press",
+     "target": {
+      "exId": "x3",
+      "warm": 2,
+      "sets": 3,
+      "lo": 5,
+      "hi": 8,
+      "rir": 2
+     },
+     "sets": [
+      {
+       "w": 47.5,
+       "r": 7,
+       "rir": 2
+      },
+      {
+       "w": 47.5,
+       "r": 6,
+       "rir": 1
+      },
+      {
+       "w": 47.5,
+       "r": 6,
+       "rir": 1
+      }
+     ]
+    },
+    {
+     "exId": "x7",
+     "name": "Dumbbell Curl",
+     "target": {
+      "exId": "x7",
+      "warm": 1,
+      "sets": 3,
+      "lo": 8,
+      "hi": 12,
+      "rir": 1
+     },
+     "sets": [
+      {
+       "w": 14,
+       "r": 11,
+       "rir": 1
+      },
+      {
+       "w": 14,
+       "r": 10,
+       "rir": 1
+      },
+      {
+       "w": 14,
+       "r": 9,
+       "rir": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s1",
+   "templateId": "t2",
+   "name": "Lower A",
+   "dateEpochDay": 20708,
+   "dur": 58,
+   "createdAt": 1789236000000,
+   "items": [
+    {
+     "exId": "x5",
+     "name": "Back Squat",
+     "target": {
+      "exId": "x5",
+      "warm": 2,
+      "sets": 4,
+      "lo": 5,
+      "hi": 8,
+      "rir": 2
+     },
+     "sets": [
+      {
+       "w": 60,
+       "r": 8,
+       "rir": 5,
+       "warm": true
+      },
+      {
+       "w": 90,
+       "r": 5,
+       "rir": 4,
+       "warm": true
+      },
+      {
+       "w": 117.5,
+       "r": 6,
+       "rir": 2
+      },
+      {
+       "w": 117.5,
+       "r": 6,
+       "rir": 2
+      },
+      {
+       "w": 117.5,
+       "r": 5,
+       "rir": 1
+      },
+      {
+       "w": 117.5,
+       "r": 5,
+       "rir": 0
+      }
+     ]
+    },
+    {
+     "exId": "x6",
+     "name": "Romanian Deadlift",
+     "target": {
+      "exId": "x6",
+      "warm": 2,
+      "sets": 3,
+      "lo": 6,
+      "hi": 10,
+      "rir": 2
+     },
+     "sets": [
+      {
+       "w": 100,
+       "r": 9,
+       "rir": 2
+      },
+      {
+       "w": 100,
+       "r": 8,
+       "rir": 2
+      },
+      {
+       "w": 100,
+       "r": 8,
+       "rir": 1
+      }
+     ]
+    },
+    {
+     "exId": "x4",
+     "name": "Weighted Pull-up",
+     "target": {
+      "exId": "x4",
+      "warm": 1,
+      "sets": 3,
+      "lo": 5,
+      "hi": 8,
+      "rir": 1
+     },
+     "sets": [
+      {
+       "w": 10,
+       "r": 7,
+       "rir": 2
+      },
+      {
+       "w": 10,
+       "r": 6,
+       "rir": 1
+      },
+      {
+       "w": 10,
+       "r": 5,
+       "rir": 0
+      }
+     ]
+    },
+    {
+     "exId": "x8",
+     "name": "Plank",
+     "target": {
+      "exId": "x8",
+      "warm": 0,
+      "sets": 3,
+      "lo": 30,
+      "hi": 60,
+      "rir": 2,
+      "timed": true
+     },
+     "sets": [
+      {
+       "w": 0,
+       "r": 0,
+       "rir": 2,
+       "secs": 45
+      },
+      {
+       "w": 0,
+       "r": 0,
+       "rir": 2,
+       "secs": 45
+      },
+      {
+       "w": 0,
+       "r": 0,
+       "rir": 2,
+       "secs": 40
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s0",
+   "templateId": "t1",
+   "name": "Upper A",
+   "dateEpochDay": 20705,
+   "dur": 52,
+   "createdAt": 1788976800000,
+   "items": [
+    {
+     "exId": "x1",
+     "name": "Bench Press",
+     "target": {
+      "exId": "x1",
+      "warm": 2,
+      "sets": 4,
+      "lo": 5,
+      "hi": 8,
+      "rir": 2,
+      "style": "topBackoff",
+      "backoffPct": 10
+     },
+     "sets": [
+      {
+       "w": 60,
+       "r": 8,
+       "rir": 5,
+       "warm": true
+      },
+      {
+       "w": 80,
+       "r": 5,
+       "rir": 4,
+       "warm": true
+      },
+      {
+       "w": 95.0,
+       "r": 6,
+       "rir": 2,
+       "kind": "top"
+      },
+      {
+       "w": 85.0,
+       "r": 8,
+       "rir": 2,
+       "kind": "backoff"
+      },
+      {
+       "w": 85.0,
+       "r": 8,
+       "rir": 2,
+       "kind": "backoff"
+      },
+      {
+       "w": 85.0,
+       "r": 7,
+       "rir": 1,
+       "kind": "backoff"
+      }
+     ]
+    },
+    {
+     "exId": "x2",
+     "name": "Barbell Row",
+     "target": {
+      "exId": "x2",
+      "warm": 2,
+      "sets": 3,
+      "lo": 6,
+      "hi": 10,
+      "rir": 2
+     },
+     "sets": [
+      {
+       "w": 70,
+       "r": 9,
+       "rir": 2
+      },
+      {
+       "w": 70,
+       "r": 9,
+       "rir": 2
+      },
+      {
+       "w": 70,
+       "r": 8,
+       "rir": 1
+      }
+     ]
+    },
+    {
+     "exId": "x3",
+     "name": "Overhead Press",
+     "target": {
+      "exId": "x3",
+      "warm": 2,
+      "sets": 3,
+      "lo": 5,
+      "hi": 8,
+      "rir": 2
+     },
+     "sets": [
+      {
+       "w": 47.5,
+       "r": 7,
+       "rir": 2
+      },
+      {
+       "w": 47.5,
+       "r": 6,
+       "rir": 1
+      },
+      {
+       "w": 47.5,
+       "r": 6,
+       "rir": 1
+      }
+     ]
+    },
+    {
+     "exId": "x7",
+     "name": "Dumbbell Curl",
+     "target": {
+      "exId": "x7",
+      "warm": 1,
+      "sets": 3,
+      "lo": 8,
+      "hi": 12,
+      "rir": 1
+     },
+     "sets": [
+      {
+       "w": 14,
+       "r": 11,
+       "rir": 1
+      },
+      {
+       "w": 14,
+       "r": 10,
+       "rir": 1
+      },
+      {
+       "w": 14,
+       "r": 9,
+       "rir": 0
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "settings": {
+  "accent": 4292280126,
+  "mode": "rir",
+  "restSec": 150,
+  "warmPct": 60,
+  "theme": "dark",
+  "accentStrength": "full",
+  "cardFooter": "streak",
+  "recordMoment": "full",
+  "weeklyGoal": 4,
+  "activeProgram": "p1",
+  "bodyweight": [
+   {
+    "day": 20700,
+    "kg": 78.4
+   },
+   {
+    "day": 20707,
+    "kg": 78.2
+   },
+   {
+    "day": 20714,
+    "kg": 77.9
+   },
+   {
+    "day": 20721,
+    "kg": 77.7
+   },
+   {
+    "day": 20728,
+    "kg": 77.4
+   },
+   {
+    "day": 20735,
+    "kg": 77.2
+   },
+   {
+    "day": 20738,
+    "kg": 77.1
+   }
+  ],
+  "totalUnit": null,
+  "customHue": 90,
+  "customBright": 100,
+  "gymName": "",
+  "milestonesShown": {},
+  "streakOn": true,
+  "backupAsked": true
+ },
+ "live": null
 }

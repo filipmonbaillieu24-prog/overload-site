@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>REGOL</title>
+<!--
+  REGOL itself, compiled to WebAssembly from the same source as the phone app.
+
+  This page is loaded in an iframe by try.html. It carries no chrome of its own: the whole body is
+  the Compose viewport, so what you see is the app's own layout at the iframe's size.
+-->
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #0C0C0C;
+    /* The app paints its own type; this is only for the loading line below. */
+    font: 500 14px/1.4 system-ui, sans-serif;
+    color: #929292;
+  }
+  /* Removed by main() as soon as the first frame is up. 16 MB of wasm is a wait on a cold
+     connection, and a blank black rectangle for several seconds reads as a page that failed. */
+  #boot {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 24px;
+  }
+</style>
+</head>
+<body>
+<div id="boot">Loading REGOL…</div>
+<!--
+  kotlinx-datetime's wasm build imports @js-joda/core by bare specifier, and a browser has no
+  resolver for bare names. Webpack would have bundled it; this page is served as plain files, so
+  the import map is what resolves it instead. Vendored rather than fetched from a CDN: the Try
+  page works offline-ish, loads nothing from a third party, and cannot be changed under us.
+-->
+<script type="importmap">
+{ "imports": { "@js-joda/core": "./js-joda.esm.js" } }
+</script>
+<script type="module">
+  import './Overload-shared.mjs';
+</script>
+</body>
+</html>

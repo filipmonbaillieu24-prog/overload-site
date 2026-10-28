@@ -1,9 +1,16 @@
 // Try it: the twelve-step tour over the embedded app, and the calculator that
 // asks the progression engine directly.
 //
-// The simulator is REGOL.dc.html (the 1.9 app prototype) in an iframe, driven through the
-// design runtime's own prop setter. engine() below is the app's RIR rule for a
-// flat target on a weighted lift, with the app's own sentences, ported as it is.
+// The simulator is REGOL ITSELF, compiled to WebAssembly from the app's own source and loaded in
+// an iframe. It used to be a hand-drawn HTML prototype, and the drawing drifted a whole version
+// behind without anything noticing - its Stats screen was missing the three tiles 1.9 opens with.
+// A picture of an app agrees with whatever you say about it; this one is built from the source.
+//
+// `?scene=` poses it. Only the scenes the sample log can actually reach: the drawing could show a
+// live workout nobody started, and the real app cannot, which is the honest version.
+//
+// engine() below is still the app's RIR rule ported into JS, for the calculator further down the
+// page - that one answers without loading the app at all.
 //
 // BUMP THIS WHENEVER REGOL.dc.html, regol-app.js OR polish/regol-core.js CHANGES.
 //
@@ -236,8 +243,7 @@ const PROTOTYPE = '20261028';
     // component once and will not take new props afterwards, so a step is a
     // fresh load rather than a prop change.
     function show() {
-      frame.src = 'REGOL.dc.html?embedded=1&fast=1&scene=' + TOUR[cur][3]
-        + '&seed=' + seed + '&v=' + PROTOTYPE;
+      frame.src = 'try-app/index.html?scene=' + TOUR[cur][3] + '&v=' + PROTOTYPE;
     }
 
     // The embedded page draws its own shell as soon as it has one.
