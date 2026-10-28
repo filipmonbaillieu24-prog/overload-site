@@ -12,14 +12,17 @@
 // engine() below is still the app's RIR rule ported into JS, for the calculator further down the
 // page - that one answers without loading the app at all.
 //
-// BUMP THIS WHENEVER REGOL.dc.html, regol-app.js OR polish/regol-core.js CHANGES.
+// BUMP THIS WHENEVER try-app/ IS REBUILT.
 //
 // It is a cache key and nothing else. The iframe URL used to carry no version, the pages ship
-// with `Cache-Control: max-age=600`, and the old prototype's engine (`overload-core.js`) is
-// still on the server - so a browser holding the previous REGOL.dc.html served it from cache,
-// found everything it asked for, and went on running the OLD app with nothing broken to show
-// for it. That is not a theory about what might happen; it is what happened on the 28 October
-// deploy, and the only reason it was noticed is that somebody knew what the new one looked like.
+// with `Cache-Control: max-age=600`, and the old prototype's engine was still on the server - so
+// a browser holding the previous page served it from cache, found everything it asked for, and
+// went on running the OLD app with nothing broken to show for it. That is not a theory; it is
+// what happened on the 28 October deploy, and the only reason it was noticed is that somebody
+// knew what the new one looked like.
+//
+// The prototype is gone now and so is its engine, so a stale cache would at least fail loudly.
+// This stays anyway: failing loudly is not the same as being right.
 const PROTOTYPE = '20261028';
 (function () {
   'use strict';
