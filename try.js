@@ -12,7 +12,10 @@
 // engine() below is still the app's RIR rule ported into JS, for the calculator further down the
 // page - that one answers without loading the app at all.
 //
-// BUMP THIS WHENEVER try-app/ IS REBUILT.
+// BUMP THIS WHENEVER try-app/ IS REBUILT - AND BUMP try.html:92 WITH IT. The same date is
+// written in both: this constant is only used when the tour advances, and the iframe's FIRST
+// src is hard-coded in the page. Bump one and the first thing every visitor loads is on the
+// stale key. Found on 5 November by reading the src back and finding it disagreed with this.
 //
 // It is a cache key and nothing else. The iframe URL used to carry no version, the pages ship
 // with `Cache-Control: max-age=600`, and the old prototype's engine was still on the server - so
@@ -21,8 +24,24 @@
 // what happened on the 28 October deploy, and the only reason it was noticed is that somebody
 // knew what the new one looked like.
 //
-// The prototype is gone now and so is its engine, so a stale cache would at least fail loudly.
-// This stays anyway: failing loudly is not the same as being right.
+// WHAT THIS KEY DOES NOT REACH, which was written here as a reassurance and was wrong. It said
+// a stale cache "would at least fail loudly" now that the prototype is gone. It would not. The
+// key is on the IFRAME's URL, so it busts `try-app/index.html` - and index.html is hand-written
+// here and is the one file a rebuild does not change. index.html then does a bare
+// `import './Overload-shared.mjs'`, which drops the query, and that glue fetches
+// `new URL('./Overload-shared.wasm', import.meta.url)` - no version, because import.meta.url has
+// none. The wasm is the ONLY file a rebuild changes, it keeps a fixed name, and it is overwritten
+// in place. So there is nothing to 404, every import resolves, and the old engine runs silently:
+// the 28 October symptom by a different route, still in the browser instead of still on the
+// server.
+//
+// What protects a deploy is the header, not this key: max-age=600, measured live on both files
+// on 5 November. Ten minutes from a visitor's OWN previous fetch, and nothing at all for a
+// first-timer. Filip's call on 5 November was to leave it there rather than version the wasm URL
+// (a Gradle task would have to rewrite generated glue) or content-hash the output name (the task
+// would have to rename the file and patch the reference inside the .mjs). Keep the key - it is
+// still what moves a returning visitor off a cached index.html - and keep this paragraph, because
+// the thing it replaced read as a guarantee.
 const PROTOTYPE = '20261105';
 (function () {
   'use strict';
