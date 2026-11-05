@@ -37,7 +37,9 @@
 // gone". 3c22b43 replaced that with its opposite - that the old engine would run on silently for
 // up to ten minutes, the 28 October symptom from the browser instead of the server. Neither was
 // measured. The second one was derived from a live `max-age=600` header and the URL trace above,
-// which is a sound-looking route to a conclusion the trace cannot actually carry.
+// which is a sound-looking route to a conclusion the trace cannot actually carry. Neither guess
+// survives what follows - the first is true of exactly one of the three cases below, and the
+// second is true of none.
 //
 // MEASURED 5 November by the tester session, and it refutes the ten minutes: three loads against
 // a local server answering max-age=600 with ETag and Last-Modified, both real engines on disk,
@@ -50,14 +52,30 @@
 // simply not retained. Limits worth knowing: one browser (Chromium), localhost rather than GitHub
 // Pages, and per-entry cache behaviour varies by browser and by disk-cache size.
 //
-// SO THE ORIGINAL INSTINCT WAS CLOSER THAN ITS CORRECTION, and for a reason it did not give. The
-// engine is too big to come from cache; the GLUE is small and is held for the full ten minutes,
-// and the key cannot reach it either. `Overload-shared.import-object.mjs` is generated against
-// the engine's own imports and exports - it builds the import object the instantiation needs - so
-// glue and engine are a matched pair. A toolchain bump that changes that object hands a returning
-// visitor NEW engine with OLD glue, and that throws rather than running quietly. The three glue
-// files came out byte-identical across this rebuild, which is a property of this rebuild and not
-// of rebuilds.
+// SO WHAT IS ACTUALLY EXPOSED IS THE GLUE, not the engine. The engine is too big to be retained;
+// `Overload-shared.import-object.mjs` is 34 KB and is held for the full ten minutes, and the key
+// reaches neither. That glue exists to satisfy the engine's IMPORTS - it assembles the import
+// object instantiation needs, and `setWasmExports` at its line 35 is the opposite direction, the
+// glue receiving the engine's exports afterwards. The two are a matched pair, and both engines'
+// import sets were parsed and compared across this rebuild: identical, nothing added or dropped,
+// so the glue coming out byte-identical is measured rather than assumed from the file not moving.
+//
+// THREE CASES, AND ONLY ONE OF THEM IS LOUD. The import names are fully-qualified Kotlin
+// declarations mapped to arrow bodies - `'app.overload.platform.jsNowMillis' : () => Date.now()`
+// is literally what is in there - not content hashes. So, with new engine against old glue:
+//
+//   1. the engine declares a name the glue lacks (a new external)  -> LinkError. Loud.
+//   2. the engine drops a name                                     -> unused key. Harmless.
+//   3. the BODY of an existing js(...) changes while its Kotlin name and signature do not
+//      -> the import name is identical, the old glue satisfies it, instantiation succeeds, and
+//         the engine runs the OLD JavaScript. Silent and wrong.
+//
+// Case 3 is the one a loud-failure guarantee does not cover, and it needs nothing exotic: edit
+// the body of an existing `js("...")` without renaming it. It is a consequence of the names being
+// declaration-derived, which is a thing to read in the file rather than a thing to assume. The
+// same shape applies to skiko's 253 imports. NOT RUN: nobody has built a mismatched pair and
+// watched any of the three happen - 1 and 2 are the instantiation contract, 3 follows from the
+// names.
 //
 // WHAT THE KEY STILL EARNS, now observed rather than argued: load 3 reused the cached
 // ?v=20261105 index.html, so bumping it is what moves a returning visitor off a cached page.
