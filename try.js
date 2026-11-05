@@ -12,7 +12,7 @@
 // engine() below is still the app's RIR rule ported into JS, for the calculator further down the
 // page - that one answers without loading the app at all.
 //
-// BUMP THIS WHENEVER try-app/ IS REBUILT - AND BUMP try.html:92 WITH IT. The same date is
+// BUMP THIS WHENEVER try-app/ IS REBUILT - AND BUMP THE COPY IN try.html WITH IT. The same date is
 // written in both: this constant is only used when the tour advances, and the iframe's FIRST
 // src is hard-coded in the page. Bump one and the first thing every visitor loads is on the
 // stale key. Found on 5 November by reading the src back and finding it disagreed with this.
@@ -24,24 +24,46 @@
 // what happened on the 28 October deploy, and the only reason it was noticed is that somebody
 // knew what the new one looked like.
 //
-// WHAT THIS KEY DOES NOT REACH, which was written here as a reassurance and was wrong. It said
-// a stale cache "would at least fail loudly" now that the prototype is gone. It would not. The
-// key is on the IFRAME's URL, so it busts `try-app/index.html` - and index.html is hand-written
-// here and is the one file a rebuild does not change. index.html then does a bare
-// `import './Overload-shared.mjs'`, which drops the query, and that glue fetches
-// `new URL('./Overload-shared.wasm', import.meta.url)` - no version, because import.meta.url has
-// none. The wasm is the ONLY file a rebuild changes, it keeps a fixed name, and it is overwritten
-// in place. So there is nothing to 404, every import resolves, and the old engine runs silently:
-// the 28 October symptom by a different route, still in the browser instead of still on the
-// server.
+// WHAT THIS KEY DOES NOT REACH. It is on the IFRAME's URL, so it busts `try-app/index.html` -
+// and index.html is hand-written here, which makes it the one file in try-app/ that a rebuild
+// does NOT change. index.html then does a bare `import './Overload-shared.mjs'` at line 49, and
+// a relative specifier resolved against a URL drops its query; that glue fetches
+// `new URL('./Overload-shared.wasm', import.meta.url)` at Overload-shared.mjs:33, with no version
+// because import.meta.url has none. So the key reaches neither the glue nor the engine, and the
+// engine is the only file a rebuild changed this time.
 //
-// What protects a deploy is the header, not this key: max-age=600, measured live on both files
-// on 5 November. Ten minutes from a visitor's OWN previous fetch, and nothing at all for a
-// first-timer. Filip's call on 5 November was to leave it there rather than version the wasm URL
-// (a Gradle task would have to rewrite generated glue) or content-hash the output name (the task
-// would have to rename the file and patch the reference inside the .mjs). Keep the key - it is
-// still what moves a returning visitor off a cached index.html - and keep this paragraph, because
-// the thing it replaced read as a guarantee.
+// WHAT HAPPENS THEN WAS GUESSED TWICE BEFORE ANYBODY RAN IT, and both guesses are in this file's
+// history. The original said a stale cache "would at least fail loudly, now that the prototype is
+// gone". 3c22b43 replaced that with its opposite - that the old engine would run on silently for
+// up to ten minutes, the 28 October symptom from the browser instead of the server. Neither was
+// measured. The second one was derived from a live `max-age=600` header and the URL trace above,
+// which is a sound-looking route to a conclusion the trace cannot actually carry.
+//
+// MEASURED 5 November by the tester session, and it refutes the ten minutes: three loads against
+// a local server answering max-age=600 with ETag and Last-Modified, both real engines on disk,
+// the SERVER LOG as the instrument rather than the browser's network panel - the panel lists what
+// the page asked for, the log what actually left for the network, and the gap between them is the
+// cache. Overload-shared.wasm was fetched on all three loads. So was skiko.wasm. Every .mjs,
+// js-joda and all five fonts went exactly once; index.html went twice, the third load reusing the
+// cached ?v=20261105 entry. The third load was a control - same URL, nothing changed on disk -
+// and the engine was fetched again anyway, so it is not the bump doing that. A 16 MB entry is
+// simply not retained. Limits worth knowing: one browser (Chromium), localhost rather than GitHub
+// Pages, and per-entry cache behaviour varies by browser and by disk-cache size.
+//
+// SO THE ORIGINAL INSTINCT WAS CLOSER THAN ITS CORRECTION, and for a reason it did not give. The
+// engine is too big to come from cache; the GLUE is small and is held for the full ten minutes,
+// and the key cannot reach it either. `Overload-shared.import-object.mjs` is generated against
+// the engine's own imports and exports - it builds the import object the instantiation needs - so
+// glue and engine are a matched pair. A toolchain bump that changes that object hands a returning
+// visitor NEW engine with OLD glue, and that throws rather than running quietly. The three glue
+// files came out byte-identical across this rebuild, which is a property of this rebuild and not
+// of rebuilds.
+//
+// WHAT THE KEY STILL EARNS, now observed rather than argued: load 3 reused the cached
+// ?v=20261105 index.html, so bumping it is what moves a returning visitor off a cached page.
+// Filip's call on 5 November was to leave it at that rather than version the wasm URL (a Gradle
+// task would have to rewrite generated glue) or content-hash the output name (the task would have
+// to rename the file and patch the reference inside the .mjs).
 const PROTOTYPE = '20261105';
 (function () {
   'use strict';
