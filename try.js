@@ -73,9 +73,24 @@
 // Case 3 is the one a loud-failure guarantee does not cover, and it needs nothing exotic: edit
 // the body of an existing `js("...")` without renaming it. It is a consequence of the names being
 // declaration-derived, which is a thing to read in the file rather than a thing to assume. The
-// same shape applies to skiko's 253 imports. NOT RUN: nobody has built a mismatched pair and
-// watched any of the three happen - 1 and 2 are the instantiation contract, 3 follows from the
-// names.
+// same shape applies to skiko's 253 imports.
+//
+// RUN on 5 November by the tester session, after this comment had spent a day asserting all three
+// without anybody building the pair. A copy of try-app/ served no-store so every load re-read the
+// glue, one line changed per load, the engine left at 47448cf3 throughout, and
+// `app.overload.platform.jsNowMillis` as the observable because the date header is drawn from it.
+// Case 1, the key deleted: `LinkError: ... "app.overload.platform.jsNowMillis": function import
+// requires a callable`, and nothing is drawn at all - no canvas, blank iframe. Case 2, an extra
+// key the engine never imports: ignored, the render character-identical to the control. Case 3,
+// same name and arity with the body returning a fixed 9 March 2021: instantiates clean, no error
+// of any kind, every row drawn correctly, and the app believes it is TUESDAY 9 MARCH - the tour
+// counter went 1 of 4 to 0 of 4 as well, so the wrong clock reached a second consumer on its own.
+// The controls before and after matched each other, so the three differences are the three edits.
+//
+// THE LIMIT OF THAT RUN, which is what a later reader will want from it: the glue was mismatched
+// on purpose, not left behind by a real rebuild. Same mechanism, not the same event. Nobody has
+// watched a toolchain change produce case 3 by itself, and the reason to keep bumping the key is
+// that nobody should have to.
 //
 // WHAT THE KEY STILL EARNS, now observed rather than argued: load 3 reused the cached
 // ?v=20261105 index.html, so bumping it is what moves a returning visitor off a cached page.
