@@ -73,7 +73,8 @@
 // Case 3 is the one a loud-failure guarantee does not cover, and it needs nothing exotic: edit
 // the body of an existing `js("...")` without renaming it. It is a consequence of the names being
 // declaration-derived, which is a thing to read in the file rather than a thing to assume. The
-// same shape applies to skiko's 253 imports.
+// same shape applies to skiko's 253 imports - a contract claim and not something anybody ran:
+// all four loads below were in `js_code`, and skiko's imports arrive under another module key.
 //
 // RUN on 5 November by the tester session, after this comment had spent a day asserting all three
 // without anybody building the pair. A copy of try-app/ served no-store so every load re-read the
