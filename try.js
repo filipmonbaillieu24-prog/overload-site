@@ -23,7 +23,7 @@
 //
 // The prototype is gone now and so is its engine, so a stale cache would at least fail loudly.
 // This stays anyway: failing loudly is not the same as being right.
-const PROTOTYPE = '20261028';
+const PROTOTYPE = '20261105';
 (function () {
   'use strict';
 
