@@ -129,7 +129,8 @@ const PROTOTYPE = '20261105';
 
   function engine(f, sets) {
     var repWord = function (n) { return n === 1 ? '1 rep' : n + ' reps'; };
-    var resWord = function (n) { return n <= 0 ? 'nothing left in reserve' : 'about ' + repWord(n) + ' left in reserve'; };
+    var resWord = function (n) { return n <= 0 ? 'nothing left in the tank' : 'about ' + repWord(n) + ' left in the tank'; };
+    var beyond = function (over, aim) { return aim <= 0 ? ' instead of going all the way' : ', ' + (over === 1 ? 'one more' : over + ' more') + ' than the ' + aim + ' you aim for'; };
     var clean = function (x) { return Math.round(x * 100) / 100; }, fmt = function (x) { return String(clean(x)); };
     var w = +f.w || 0, inc = +f.inc || 2.5, lo = Math.min(+f.lo, +f.hi), hi = Math.max(+f.lo, +f.hi), t = +f.t;
     var S = sets.map(function (s) { return [+s[0] || 0, +s[1] || 0]; });
@@ -160,27 +161,27 @@ const PROTOTYPE = '20261105';
       if (sized) {
         var fits = earned(k);
         if (fits === 0) return P('hold', 0, allAt
-          ? head + ', but a jump of ' + fmt(inc) + ' kg is more than that earns. Same weight, and one rep past ' + repWord(hi) + ' moves it.'
-          : head + ', but ' + fmt(inc) + ' kg more would leave you well short of ' + repWord(lo) + '. Same weight, and add a rep instead.');
+          ? 'Same weight. ' + head + ', but a jump of ' + fmt(inc) + ' kg is too big for that. Do more than ' + repWord(hi) + ' on a set and it goes up.'
+          : 'Same weight. ' + head + ', but ' + fmt(inc) + ' kg more would drop you well below ' + repWord(lo) + '. Add a rep first.');
         k = fits;
       }
-      return P('up', clean(k * inc), head + '. Up ' + fmt(k * inc) + ' kg to ' + fmt(w + k * inc) + ' kg.');
+      return P('up', clean(k * inc), 'Up ' + fmt(k * inc) + ' kg to ' + fmt(w + k * inc) + ' kg. ' + head + '.');
     };
-    if (allPast) return step(1, 'Every set went past ' + repWord(hi) + ', the top of your range. That earns the weight whatever the effort said', false);
-    if (shortIdx >= 0 && (shortBy > 1 || over <= 0)) return P('under', 0, 'One set dropped to ' + repWord(lowest) + ', below your range of ' + lo + '–' + hi + '. Same weight again rather than less, so give it another go.');
+    if (allPast) return step(1, 'You did more than ' + repWord(hi) + ' on every set, which is more than this weight asks of you', false);
+    if (shortIdx >= 0 && (shortBy > 1 || over <= 0)) return P('under', 0, 'Same weight. One set only got ' + repWord(lowest) + ', fewer than the ' + lo + ' to ' + hi + ' you aim for. One short session is no reason to go lighter, so try it again.');
     var fade = S[0][1] - S[S.length - 1][1];
-    if (fade >= 3 && over >= 0 && S.length >= 2) return P('hold', 0, 'You started with ' + resWord(S[0][1]) + ' and finished with ' + resWord(S[S.length - 1][1]) + '. That is fatigue across the session rather than a weight that is too heavy. Same weight, and try it with a longer rest.');
-    if (over >= 1 && reps.some(function (r) { return r + over <= hi; })) return P('hold', 0, 'You had ' + resWord(avg) + ', ' + (over === 1 ? 'one more' : over + ' more') + ' than the ' + t + ' you were aiming for, and ' + repWord(lowest + over) + ' still sits inside your range. Same weight, and take the reps instead.');
-    if (over >= 2) return step(2, 'You had ' + resWord(avg) + ' and were aiming for ' + t + ', so there is plenty of room', true);
-    if (over === 1) return step(1, 'You had ' + resWord(avg) + ', one more than the ' + t + ' you were aiming for', true);
+    if (fade >= 3 && over >= 0 && S.length >= 2) return P('hold', 0, 'Same weight. You started with ' + resWord(S[0][1]) + ' and finished with ' + resWord(S[S.length - 1][1]) + '. That is you getting tired during the session, not a weight that is too heavy. Try a longer rest between sets.');
+    if (over >= 1 && reps.some(function (r) { return r + over <= hi; })) return P('hold', 0, 'Same weight. You had ' + resWord(avg) + beyond(over, t) + ', so get more reps at this weight first. Reach ' + repWord(hi) + ' on every set and it goes up.');
+    if (over >= 2) return step(2, 'You had ' + resWord(avg) + (t === 0 ? ' and aim to go all the way' : ' and aim for ' + t) + ', so there is room for more', true);
+    if (over === 1) return step(1, 'You had ' + resWord(avg) + beyond(1, t), true);
     if (over < 0) {
-      if (allAt) return P('hold', 0, 'Every set reached ' + repWord(hi) + ', the top of your range, with ' + resWord(avg) + '. Same weight, and the next step comes when a set goes past it.');
-      return P('under', 0, 'You had ' + resWord(avg) + ', fewer than the ' + t + ' you were aiming for. Same weight again rather than less, so give it another go.');
+      if (allAt) return P('hold', 0, 'Same weight. You got ' + repWord(hi) + ' on every set, the most you aim for, with ' + resWord(avg) + '. That was harder than planned, so it goes up once a set gets more than ' + hi + '.');
+      return P('under', 0, 'Same weight. You had ' + resWord(avg) + ', less than the ' + t + ' you aim for, so it was harder than planned. One hard session is no reason to go lighter, so try it again.');
     }
-    if (allAt) return step(1, 'Every set reached ' + repWord(hi) + ', the top of your range, at the effort you were aiming for. That is the whole prescription', false);
+    if (allAt) return step(1, 'You got ' + repWord(hi) + ' on every set, the most you aim for, and it felt as hard as planned. That is everything this weight asks of you', false);
     return P('hold', 0, t === 0
-      ? 'Right on target. You took it to failure. Same weight, and try for another rep.'
-      : 'Right on target with ' + repWord(t) + ' left in reserve. Same weight, and try for another rep.');
+      ? 'Same weight. You went all the way on your sets, as planned. Try for one more rep.'
+      : 'Same weight. You stopped with ' + repWord(t) + ' left in the tank, as planned. Try for one more rep.');
   }
 
   /* ---------- the calculator ---------- */

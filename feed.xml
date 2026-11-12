@@ -6,7 +6,14 @@
 <atom:link href="https://regolapp.be/feed.xml" rel="self" type="application/rss+xml"/>
 <description>Every REGOL release, what it changes, and why it was worth doing.</description>
 <language>en</language>
-<lastBuildDate>Thu, 05 Nov 2026 09:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 10 Nov 2026 09:00:00 GMT</lastBuildDate>
+<item>
+<title>REGOL 2.0: two ways to run a workout</title>
+<link>https://regolapp.be/news-2-0.html</link>
+<guid isPermaLink="true">https://regolapp.be/news-2-0.html</guid>
+<pubDate>Tue, 10 Nov 2026 09:00:00 GMT</pubDate>
+<description>Focus is the screen you know, one set at a time; List puts every set in a table you tick off. Also: a rebuilt Focus screen, drop sets and rest-pause planned in a template, charts in reps for lifts with no weight, 86 more stretches, every reason in plain words with a "why?" beside the weight, warm-up and cool-down in a template, and a starting range for every lift.</description>
+</item>
 <item>
 <title>REGOL 1.9: six questions in your browser, and a week lands on your phone</title>
 <link>https://regolapp.be/news-1-9.html</link>
