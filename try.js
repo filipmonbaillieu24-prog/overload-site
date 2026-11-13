@@ -98,7 +98,7 @@
 // Filip's call on 5 November was to leave it at that rather than version the wasm URL (a Gradle
 // task would have to rewrite generated glue) or content-hash the output name (the task would have
 // to rename the file and patch the reference inside the .mjs).
-const PROTOTYPE = '20261105';
+const PROTOTYPE = '20261113';
 (function () {
   'use strict';
 
