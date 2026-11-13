@@ -441,6 +441,15 @@
           hov: '#161917', onclick: scratch,
         }, ['Start from scratch']),
       ]),
+      h('p', { style: 'margin:0;font:400 16px/1.6 Barlow;color:#9AA093;max-width:560px' }, [
+        'Not sure which shape to build? Read ',
+        h('a', { href: 'push-pull-legs.html', style: 'color:#C9CEC2;text-decoration:none;border-bottom:1px solid rgba(214,255,62,.35);padding-bottom:1px', hovc: '#D6FF3E', text: 'push, pull, legs' }),
+        ', ',
+        h('a', { href: 'upper-lower.html', style: 'color:#C9CEC2;text-decoration:none;border-bottom:1px solid rgba(214,255,62,.35);padding-bottom:1px', hovc: '#D6FF3E', text: 'upper / lower' }),
+        ' or ',
+        h('a', { href: 'full-body.html', style: 'color:#C9CEC2;text-decoration:none;border-bottom:1px solid rgba(214,255,62,.35);padding-bottom:1px', hovc: '#D6FF3E', text: 'full body' }),
+        ' first.',
+      ]),
       D && h('button', {
         style: 'border:0;cursor:pointer;align-self:flex-start;max-width:100%;min-height:64px;padding:12px 18px 12px 14px;border-radius:22px;background:#161917;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);display:flex;align-items:center;gap:14px;text-align:left;color:#F2F4EE',
         hov: '#1A1D1A',
