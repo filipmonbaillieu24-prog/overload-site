@@ -62,10 +62,16 @@
   <h1 class="h1" data-title>Reading the code…</h1>
   <p class="lead" data-sub>The whole program travels inside the link, so there is nothing to download and nothing to sign in to.</p>
 
-  <a class="btn" data-open hidden href="#">Open it in REGOL</a>
-
   <div data-ok hidden style="display:flex;flex-direction:column;gap:14px">
     <div data-workouts style="display:flex;flex-direction:column;gap:12px"></div>
+
+    <!-- For the visitor who already has REGOL, and only once the code has actually read.
+         It used to sit above the program and show for anybody with a d= in the address, which
+         made the first thing a stranger was offered a regol:// link their phone cannot open.
+         Since App Links were fixed on 13 November, regolapp.be/p.html opens the app by itself,
+         so the remaining job of this button is the in-app browsers - Instagram, WhatsApp - that
+         do not hand a verified link over. That is a second chance, not a first offer. -->
+    <a class="btn" data-open hidden href="#">Already have REGOL? Open it there</a>
 
     <div class="offer">
       <h2 class="h2">Train it in REGOL</h2>
