@@ -17,6 +17,7 @@
 .hv-inv:hover { background: #0C0E0B !important; color: #D6FF3E !important }
 .hv-onlime:hover { background: rgba(12, 14, 11, .06) !important; color: #0C0E0B !important }
 
+.hv-paper:hover { background: #FFFFFF !important; color: #0C0E0B !important }
 .hv-card:hover { background: #161917 !important; color: #F2F4EE !important }
 .hv-cardbg:hover { background: #161917 !important }
 .hv-tile:hover { background: #1A1D1A !important; color: #F2F4EE !important }
