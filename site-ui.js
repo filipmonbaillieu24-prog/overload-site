@@ -3,8 +3,44 @@
 (function () {
   'use strict';
   var narrow = matchMedia('(max-width: 940px)');
+
+  // Which store the header button should send this visitor to. Both are live since
+  // 19 Nov 2026, and the button existed before that, so on an iPhone it used to offer
+  // Google Play - a dead end for the one visitor most likely to tap it.
+  // iPadOS reports itself as a Mac, hence the touch-point test beside the user agent.
+  var APP_STORE = 'https://apps.apple.com/app/id6826528179';
+  var apple = /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var APPLE_PATH = 'M17.05 12.04c-.03-2.8 2.29-4.14 2.39-4.2-1.3-1.9-3.33-2.17-4.05-2.2-1.72-.17-3.36 1.01-4.23 1.01-.88 0-2.22-.98-3.65-.96-1.88.03-3.61 1.1-4.58 2.77-1.95 3.4-.5 8.42 1.4 11.18.93 1.35 2.04 2.86 3.5 2.8 1.4-.05 1.93-.9 3.63-.9 1.68 0 2.16.9 3.64.88 1.5-.03 2.45-1.37 3.37-2.73 1.06-1.58 1.5-3.1 1.52-3.18-.03-.01-2.92-1.12-2.95-4.44zM14.5 3.98c.77-.93 1.29-2.22 1.15-3.5-1.13.05-2.5.75-3.3 1.68-.72.83-1.34 2.14-1.17 3.4 1.26.1 2.55-.64 3.32-1.58z';
   var pad = function (n) { return n < 10 ? '0' + n : String(n); };
   var on = function (mq, fn) { mq.addEventListener ? mq.addEventListener('change', fn) : mq.addListener(fn); };
+
+  // Every store button on every page points at the store this visitor can actually
+  // install from. Both stores are live since 19 Nov 2026; before that the only button
+  // was Google Play, which is a dead end for an iPhone.
+  //
+  // Only BUTTONS are touched: an anchor whose visible label is "Get it on Google Play".
+  // The two links in prose that name Google Play are about Google Play and are left
+  // alone - rewriting those would make the sentence around them untrue.
+  function stores() {
+    if (!apple) return;
+    var links = document.querySelectorAll('a[href*="play.google.com"]');
+    for (var i = 0; i < links.length; i++) {
+      var a = links[i];
+      if (a.textContent.trim() !== 'Get it on Google Play') continue;
+      a.href = APP_STORE;
+      var glyph = a.querySelector('path');
+      if (glyph) glyph.setAttribute('d', APPLE_PATH);
+      for (var j = 0; j < a.childNodes.length; j++) {
+        var n = a.childNodes[j];
+        if (n.nodeType === 3 && n.nodeValue.indexOf('Google Play') > -1) {
+          n.nodeValue = 'Download on the App Store';
+        } else if (n.nodeType === 1 && n.hasAttribute('data-cta-label')) {
+          n.textContent = 'Download on the App Store';
+        }
+      }
+    }
+  }
 
   function header() {
     var h = document.querySelector('[data-site-header]');
@@ -16,7 +52,8 @@
     var cta = h.querySelector('[data-cta-label]');
     var open = false;
     function paint() {
-      if (cta) cta.textContent = narrow.matches ? 'Get the app' : 'Get it on Google Play';
+      if (cta) cta.textContent = narrow.matches ? 'Get the app'
+        : (apple ? 'Download on the App Store' : 'Get it on Google Play');
       if (!btn || !nav) return;
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
       if (label) label.textContent = open ? 'Close' : 'Menu';
@@ -130,7 +167,7 @@
     });
   }
 
-  function start() { header(); rail(); below(); window.REGOL && window.REGOL.reveal(); }
+  function start() { stores(); header(); rail(); below(); window.REGOL && window.REGOL.reveal(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
   else start();
 })();
